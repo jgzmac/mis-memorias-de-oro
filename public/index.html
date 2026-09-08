@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mis Memorias de Oro</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    header {
+      text-align: center;
+      color: white;
+      margin-bottom: 40px;
+    }
+
+    h1 {
+      font-size: 2.5em;
+      margin-bottom: 10px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .subtitle {
+      font-size: 1.1em;
+      opacity: 0.9;
+    }
+
+    .main-content {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 10px;
+      padding: 25px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      color: #333;
+      font-weight: 500;
+      font-size: 0.9em;
+    }
+
+    input, textarea, select {
+      width: 100%;
+      padding: 10px;
+      border: 2px solid #e0e0e0;
+      border-radius: 5px;
+      font-size: 0.95em;
+      font-family: inherit;
+      transition: border-color 0.3s;
+    }
+
+    input:focus, textarea:focus, select:focus {
+      outline: none;
+      border-color: #667eea;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .tag-input {
+      display: flex;
+      gap: 5px;
+      flex-wrap: wrap;
+      margin-top: 5px;
+    }
+
+    .tag {
+      background: #667eea;
+      color: white;
+      padding: 5px 10px;
+      border-radius: 20px;
+      font-size: 0.85em;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .tag button {
+      background: none;
+      border: none;
+      color: white;
+      cursor: pointer;
+      font-size: 1.1em;
+      padding: 0;
+    }
+
+    .button-group {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    button {
+      flex: 1;
+      padding: 12px;
+      border: none;
+      border-radius: 5px;
+      font-size: 1em;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .btn-primary {
+      background: #667eea;
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: #5568d3;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+    }
+
+    .btn-secondary {
+      background: #f0f0f0;
+      color: #333;
+    }
+
+    .btn-secondary:hover {
+      background: #e0e0e0;
+    }
+
+    .btn-danger {
+      background: #ff6b6b;
+      color: white;
+      flex: 0.5;
+    }
+
+    .btn-danger:hover {
+      background: #ff5252;
+    }
+
+    .btn-edit {
+      background: #4ecdc4;
+      color: white;
+      flex: 0.5;
+    }
+
+    .btn-edit:hover {
+      background: #45b7aa;
+    }
+
+    .memories-list {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .memory-item {
+      background: #f9f9f9;
+      border-left: 4px solid #667eea;
+      padding: 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .memory-item:hover {
+      background: #f0f0f0;
+      transform: translateX(5px);
+    }
+
+    .memory-item.active {
+      background: #e8eef7;
+      border-left-color: #764ba2;
+    }
+
+    .memory-title {
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 5px;
+      font-size: 1.05em;
+    }
+
+    .memory-meta {
+      font-size: 0.85em;
+      color: #666;
+      display: flex;
+      gap: 15px;
+    }
+
+    .memory-category {
+      background: #667eea;
+      color: white;
+      padding: 3px 8px;
+      border-radius: 3px;
+    }
+
+    .memory-detail {
+      margin-top: 15px;
+      padding-top: 15px;
+      border-top: 1px solid #e0e0e0;
+    }
+
+    .memory-detail h3 {
+      margin-bottom: 10px;
+      color: #333;
+    }
+
+    .memory-detail p {
+      color: #555;
+      line-height: 1.6;
+      margin-bottom: 10px;
+    }
+
+    .memory-tags {
+      display: flex;
+      gap: 5px;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+
+    .memory-tag {
+      background: #e0e0e0;
+      color: #333;
+      padding: 3px 8px;
+      border-radius: 3px;
+      font-size: 0.85em;
+    }
+
+    .stats {
+      background: white;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      margin-bottom: 20px;
+    }
+
+    .stats h3 {
+      color: #333;
+      margin-bottom: 15px;
+    }
+
+    .stat-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 0;
+      border-bottom: 1px solid #f0f0f0;
+    }
+
+    .stat-label {
+      color: #666;
+    }
+
+    .stat-value {
+      font-weight: 600;
+      color: #667eea;
+    }
+
+    .empty-state {
+      text-align: center;
+      color: #999;
+      padding: 40px 20px;
+    }
+
+    .error {
+      background: #ffe0e0;
+      color: #c00;
+      padding: 15px;
+      border-radius: 5px;
+      margin-bottom: 15px;
+    }
+
+    .success {
+      background: #e0ffe0;
+      color: #0a0;
+      padding: 15px;
+      border-radius: 5px;
+      margin-bottom: 15px;
+    }
+
+    @media (max-width: 768px) {
+      .main-content {
+        grid-template-columns: 1fr;
+      }
+
+      h1 {
+        font-size: 1.8em;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>✨ Mis Memorias de Oro</h1>
+      <p class="subtitle">Guarda tus recuerdos más preciosos</p>
+    </header>
+
+    <div class="stats" id="stats">
+      <h3>📊 Estadísticas</h3>
+      <div class="stat-item">
+        <span class="stat-label">Total de memorias:</span>
+        <span class="stat-value" id="stat-total">0</span>
+      </div>
+    </div>
+
+    <div class="main-content">
+      <!-- FORMULARIO -->
+      <div class="card">
+        <h2 style="margin-bottom: 20px; color: #333;">Crear Memoria</h2>
+
+        <div id="message"></div>
+
+        <form id="memoryForm">
+          <div class="form-group">
+            <label for="title">Título *</label>
+            <input type="text" id="title" name="title" required placeholder="Ej: Mi viaje a Madrid">
+          </div>
+
+          <div class="form-group">
+            <label for="content">Contenido *</label>
+            <textarea id="content" name="content" required placeholder="Escribe tu recuerdo aquí..."></textarea>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="date">Fecha</label>
+              <input type="date" id="date" name="date">
+            </div>
+            <div class="form-group">
+              <label for="category">Categoría</label>
+              <select id="category" name="category">
+                <option value="General">General</option>
+                <option value="Viajes">Viajes</option>
+                <option value="Personal">Personal</option>
+                <option value="Familia">Familia</option>
+                <option value="Trabajo">Trabajo</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="mood">Estado de ánimo</label>
+              <select id="mood" name="mood">
+                <option value="neutral">Neutral</option>
+                <option value="feliz">Feliz 😊</option>
+                <option value="muy feliz">Muy Feliz 😄</option>
+                <option value="triste">Triste 😢</option>
+                <option value="emocionado">Emocionado 🤩</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="tagInput">Etiquetas</label>
+              <input type="text" id="tagInput" placeholder="Escribe y presiona Enter" style="margin-bottom: 5px;">
+              <div class="tag-input" id="tagsContainer"></div>
+            </div>
+          </div>
+
+          <div class="button-group">
+            <button type="submit" class="btn-primary">Guardar Memoria</button>
+            <button type="reset" class="btn-secondary">Limpiar</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- LISTA DE MEMORIAS -->
+      <div class="card">
+        <h2 style="margin-bottom: 20px; color: #333;">Tus Memorias</h2>
+        <div class="memories-list" id="memoriesList">
+          <div class="empty-state">No hay memorias aún. ¡Crea tu primera memoria!</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const API_URL = '/api';
+    let tags = [];
+    let memories = [];
+    let currentMemoryId = null;
+
+    // ===== ELEMENTOS DEL DOM =====
+    const form = document.getElementById('memoryForm');
+    const titleInput = document.getElementById('title');
+    const contentInput = document.getElementById('content');
+    const dateInput = document.getElementById('date');
+    const categorySelect = document.getElementById('category');
+    const moodSelect = document.getElementById('mood');
+    const tagInput = document.getElementById('tagInput');
+    const tagsContainer = document.getElementById('tagsContainer');
+    const memoriesList = document.getElementById('memoriesList');
+    const messageDiv = document.getElementById('message');
+    const statTotal = document.getElementById('stat-total');
+
+    // ===== FUNCIONES HELPER =====
+    function showMessage(text, type = 'success') {
+      messageDiv.innerHTML = `<div class="${type}">${text}</div>`;
+      setTimeout(() => {
+        messageDiv.innerHTML = '';
+      }, 3000);
+    }
+
+    function addTag(tag) {
+      if (tag && !tags.includes(tag)) {
+        tags.push(tag);
+        renderTags();
+      }
+    }
+
+    function removeTag(tag) {
+      tags = tags.filter(t => t !== tag);
+      renderTags();
+    }
+
+    function renderTags() {
+      tagsContainer.innerHTML = tags.map(tag => `
+        <div class="tag">
+          ${tag}
+          <button type="button" onclick="removeTag('${tag}')">×</button>
+        </div>
+      `).join('');
+    }
+
+    // ===== API CALLS =====
+    async function createMemory(data) {
+      try {
+        const response = await fetch(`${API_URL}/memories`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+        const result = await response.json();
+        if (result.success) {
+          showMessage('✅ Memoria guardada exitosamente');
+          form.reset();
+          tags = [];
+          renderTags();
+          currentMemoryId = null;
+          loadMemories();
+        } else {
+          showMessage(`❌ ${result.error}`, 'error');
+        }
+      } catch (err) {
+        showMessage(`❌ Error: ${err.message}`, 'error');
+      }
+    }
+
+    async function loadMemories() {
+      try {
+        const response = await fetch(`${API_URL}/memories`);
+        const result = await response.json();
+        memories = result.data || [];
+        renderMemories();
+        loadStats();
+      } catch (err) {
+        console.error('Error cargando memorias:', err);
+      }
+    }
+
+    async function updateMemory(id, data) {
+      try {
+        const response = await fetch(`${API_URL}/memories/${id}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+        const result = await response.json();
+        if (result.success) {
+          showMessage('✅ Memoria actualizada');
+          form.reset();
+          tags = [];
+          renderTags();
+          currentMemoryId = null;
+          loadMemories();
+        }
+      } catch (err) {
+        showMessage(`❌ Error: ${err.message}`, 'error');
+      }
+    }
+
+    async function deleteMemory(id) {
+      if (!confirm('¿Deseas eliminar esta memoria?')) return;
+      try {
+        const response = await fetch(`${API_URL}/memories/${id}`, { method: 'DELETE' });
+        const result = await response.json();
+        if (result.success) {
+          showMessage('✅ Memoria eliminada');
+          currentMemoryId = null;
+          form.reset();
+          tags = [];
+          renderTags();
+          loadMemories();
+        }
+      } catch (err) {
+        showMessage(`❌ Error: ${err.message}`, 'error');
+      }
+    }
+
+    async function loadStats() {
+      try {
+        const response = await fetch(`${API_URL}/stats`);
+        const result = await response.json();
+        statTotal.textContent = result.data.total;
+      } catch (err) {
+        console.error('Error cargando stats:', err);
+      }
+    }
+
+    // ===== RENDER =====
+    function renderMemories() {
+      if (memories.length === 0) {
+        memoriesList.innerHTML = '<div class="empty-state">No hay memorias aún. ¡Crea tu primera memoria!</div>';
+        return;
+      }
+
+      memoriesList.innerHTML = memories.map(memory => `
+        <div class="memory-item ${currentMemoryId === memory.id ? 'active' : ''}" onclick="selectMemory(${memory.id})">
+          <div class="memory-title">${memory.title}</div>
+          <div class="memory-meta">
+            <span class="memory-category">${memory.category}</span>
+            <span>${new Date(memory.date_happened).toLocaleDateString('es-ES')}</span>
+            <span>${memory.mood}</span>
+          </div>
+          ${currentMemoryId === memory.id ? `
+            <div class="memory-detail">
+              <p>${memory.content}</p>
+              ${memory.tags && memory.tags.length > 0 ? `
+                <div class="memory-tags">
+                  ${memory.tags.map(tag => `<span class="memory-tag">${tag}</span>`).join('')}
+                </div>
+              ` : ''}
+              <div class="button-group" style="margin-top: 10px;">
+                <button onclick="editMemory(${memory.id})" class="btn-edit">Editar</button>
+                <button onclick="deleteMemory(${memory.id})" class="btn-danger">Eliminar</button>
+              </div>
+            </div>
+          ` : ''}
+        </div>
+      `).join('');
+    }
+
+    function selectMemory(id) {
+      currentMemoryId = currentMemoryId === id ? null : id;
+      renderMemories();
+    }
+
+    function editMemory(id) {
+      const memory = memories.find(m => m.id === id);
+      if (memory) {
+        titleInput.value = memory.title;
+        contentInput.value = memory.content;
+        dateInput.value = memory.date_happened;
+        categorySelect.value = memory.category;
+        moodSelect.value = memory.mood;
+        tags = memory.tags || [];
+        renderTags();
+        currentMemoryId = id;
+        titleInput.focus();
+      }
+    }
+
+    // ===== EVENT LISTENERS =====
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const data = {
+        title: titleInput.value,
+        content: contentInput.value,
+        date_happened: dateInput.value,
+        category: categorySelect.value,
+        mood: moodSelect.value,
+        tags: tags
+      };
+
+      if (currentMemoryId) {
+        updateMemory(currentMemoryId, data);
+      } else {
+        createMemory(data);
+      }
+    });
+
+    tagInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        addTag(tagInput.value.trim());
+        tagInput.value = '';
+      }
+    });
+
+    // ===== INICIALIZACIÓN =====
+    window.addEventListener('load', () => {
+      const today = new Date().toISOString().split('T')[0];
+      dateInput.value = today;
+      loadMemories();
+    });
+
+    // Exponer funciones globalmente
+    window.removeTag = removeTag;
+    window.selectMemory = selectMemory;
+    window.editMemory = editMemory;
+    window.deleteMemory = deleteMemory;
+  </script>
+</body>
+</html>

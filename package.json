@@ -1,0 +1,21 @@
+{
+  "name": "mis-memorias-de-oro",
+  "version": "0.1.0",
+  "description": "Aplicación para gestionar y consultar recuerdos personales con timelines interactivas",
+  "main": "src/server.js",
+  "scripts": {
+    "dev": "node src/server.js",
+    "start": "node src/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.111.0",
+    "bcryptjs": "^2.4.3",
+    "better-sqlite3": "^13.0.3",
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "multer": "^1.4.5-lts.1"
+  }
+}
