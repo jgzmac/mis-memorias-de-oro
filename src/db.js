@@ -4,15 +4,41 @@
 
 const Database = require('better-sqlite3');
 const path = require('path');
+const fs = require('fs');
 const os = require('os');
 
-// Usar /tmp para evitar problemas de permisos en sandbox
-const DB_PATH = path.join(os.tmpdir(), 'memorias.db');
+// La BD vive en data/ (ignorada por git) para que sobreviva a reinicios.
+// DB_PATH permite sobrescribirla (tests, despliegues) sin tocar el código.
+const DEFAULT_DB_PATH = path.join(__dirname, '..', 'data', 'memorias.db');
+const DB_PATH = process.env.DB_PATH || DEFAULT_DB_PATH;
 
-// Crear/conectar a la base de datos
-const db = new Database(DB_PATH);
+function openDatabase(dbPath) {
+  fs.mkdirSync(path.dirname(dbPath), { recursive: true });
+  return new Database(dbPath);
+}
 
-console.log(`📁 Base de datos: ${DB_PATH}`);
+let db;
+let activePath = DB_PATH;
+try {
+  db = openDatabase(DB_PATH);
+} catch (err) {
+  // Último recurso (p. ej. sandbox sin permisos de escritura): usar tmp,
+  // avisando claramente porque estos datos NO son persistentes.
+  activePath = path.join(os.tmpdir(), 'memorias.db');
+  console.warn(`⚠️  No se pudo abrir ${DB_PATH} (${err.message}). Usando ${activePath}: los datos se perderán al reiniciar.`);
+  db = openDatabase(activePath);
+}
+
+// WAL mejora la concurrencia y reduce el riesgo de corrupción ante cierres bruscos,
+// pero algunos sistemas de archivos (carpetas montadas en sandbox/red) no lo
+// soportan: en ese caso seguimos con el modo de journal por defecto.
+try {
+  db.pragma('journal_mode = WAL');
+} catch (err) {
+  console.warn(`⚠️  WAL no disponible (${err.message}); usando journal por defecto.`);
+}
+
+console.log(`📁 Base de datos: ${activePath}`);
 
 // Habilitar claves foráneas
 db.pragma('foreign_keys = ON');

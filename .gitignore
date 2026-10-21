@@ -60,3 +60,5 @@ jest-coverage/
 *.zip
 *.tar.gz
 *.rar
+.instalado-mac
+.node/
