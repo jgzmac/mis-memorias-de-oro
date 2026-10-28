@@ -22,8 +22,8 @@ function createMemory(req, res) {
     const dateHappened = date_happened || new Date().toISOString().split('T')[0];
 
     const stmt = db.prepare(`
-      INSERT INTO memories (title, content, date_happened, category, tags, mood)
-      VALUES (?, ?, ?, ?, ?, ?)
+      INSERT INTO memories (title, content, date_happened, category, tags, mood, user_id)
+      VALUES (?, ?, ?, ?, ?, ?, ?)
     `);
 
     const result = stmt.run(
@@ -32,10 +32,11 @@ function createMemory(req, res) {
       dateHappened,
       category || 'General',
       tagsJson,
-      mood
+      mood,
+      req.user.id
     );
 
-    const memory = db.prepare('SELECT * FROM memories WHERE id = ?').get(result.lastInsertRowid);
+    const memory = db.prepare('SELECT * FROM memories WHERE id = ? AND user_id = ?').get(result.lastInsertRowid, req.user.id);
 
     res.status(201).json({
       success: true,
@@ -50,7 +51,6 @@ function createMemory(req, res) {
     res.status(500).json({
       success: false,
       error: 'Error al crear memoria',
-      details: err.message
     });
   }
 }
@@ -60,8 +60,8 @@ function listMemories(req, res) {
   try {
     const { category, limit = 50, offset = 0 } = req.query;
 
-    let query = 'SELECT * FROM memories WHERE 1=1';
-    const params = [];
+    let query = 'SELECT * FROM memories WHERE user_id = ?';
+    const params = [req.user.id];
 
     if (category) {
       query += ' AND category = ?';
@@ -74,8 +74,8 @@ function listMemories(req, res) {
     const memories = db.prepare(query).all(...params);
 
     // Contar total
-    let countQuery = 'SELECT COUNT(*) as count FROM memories WHERE 1=1';
-    const countParams = [];
+    let countQuery = 'SELECT COUNT(*) as count FROM memories WHERE user_id = ?';
+    const countParams = [req.user.id];
 
     if (category) {
       countQuery += ' AND category = ?';
@@ -101,7 +101,6 @@ function listMemories(req, res) {
     res.status(500).json({
       success: false,
       error: 'Error al listar memorias',
-      details: err.message
     });
   }
 }
@@ -111,7 +110,7 @@ function getMemory(req, res) {
   try {
     const { id } = req.params;
 
-    const memory = db.prepare('SELECT * FROM memories WHERE id = ?').get(id);
+    const memory = db.prepare('SELECT * FROM memories WHERE id = ? AND user_id = ?').get(id, req.user.id);
 
     if (!memory) {
       return res.status(404).json({ success: false, error: 'Memoria no encontrada' });
@@ -129,7 +128,6 @@ function getMemory(req, res) {
     res.status(500).json({
       success: false,
       error: 'Error al obtener memoria',
-      details: err.message
     });
   }
 }
@@ -141,13 +139,13 @@ function updateMemory(req, res) {
     const { title, content, date_happened, category, tags, mood } = req.body;
 
     // Verificar que existe
-    const existing = db.prepare('SELECT id FROM memories WHERE id = ?').get(id);
+    const existing = db.prepare('SELECT id FROM memories WHERE id = ? AND user_id = ?').get(id, req.user.id);
     if (!existing) {
       return res.status(404).json({ success: false, error: 'Memoria no encontrada' });
     }
 
     // Obtener datos actuales
-    const current = db.prepare('SELECT * FROM memories WHERE id = ?').get(id);
+    const current = db.prepare('SELECT * FROM memories WHERE id = ? AND user_id = ?').get(id, req.user.id);
 
     // Actualizar solo campos proporcionados
     const updateFields = [];
@@ -184,12 +182,12 @@ function updateMemory(req, res) {
       return res.json({ success: true, data: { ...current, tags: JSON.parse(current.tags || '[]') } });
     }
 
-    updateValues.push(id);
+    updateValues.push(id, req.user.id);
 
-    const stmt = db.prepare(`UPDATE memories SET ${updateFields.join(', ')} WHERE id = ?`);
+    const stmt = db.prepare(`UPDATE memories SET ${updateFields.join(', ')} WHERE id = ? AND user_id = ?`);
     stmt.run(...updateValues);
 
-    const updated = db.prepare('SELECT * FROM memories WHERE id = ?').get(id);
+    const updated = db.prepare('SELECT * FROM memories WHERE id = ? AND user_id = ?').get(id, req.user.id);
 
     res.json({
       success: true,
@@ -204,7 +202,6 @@ function updateMemory(req, res) {
     res.status(500).json({
       success: false,
       error: 'Error al actualizar memoria',
-      details: err.message
     });
   }
 }
@@ -215,12 +212,12 @@ function deleteMemory(req, res) {
     const { id } = req.params;
 
     // Verificar que existe
-    const existing = db.prepare('SELECT id FROM memories WHERE id = ?').get(id);
+    const existing = db.prepare('SELECT id FROM memories WHERE id = ? AND user_id = ?').get(id, req.user.id);
     if (!existing) {
       return res.status(404).json({ success: false, error: 'Memoria no encontrada' });
     }
 
-    db.prepare('DELETE FROM memories WHERE id = ?').run(id);
+    db.prepare('DELETE FROM memories WHERE id = ? AND user_id = ?').run(id, req.user.id);
 
     res.json({
       success: true,
@@ -231,7 +228,6 @@ function deleteMemory(req, res) {
     res.status(500).json({
       success: false,
       error: 'Error al eliminar memoria',
-      details: err.message
     });
   }
 }
@@ -239,7 +235,7 @@ function deleteMemory(req, res) {
 // ===== STATS =====
 function getStats(req, res) {
   try {
-    const memories = db.prepare('SELECT category, mood FROM memories').all();
+    const memories = db.prepare('SELECT category, mood FROM memories WHERE user_id = ?').all(req.user.id);
 
     const stats = {
       total: memories.length,
@@ -265,7 +261,6 @@ function getStats(req, res) {
     res.status(500).json({
       success: false,
       error: 'Error al obtener estadísticas',
-      details: err.message
     });
   }
 }

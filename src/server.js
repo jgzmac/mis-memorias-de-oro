@@ -13,12 +13,13 @@ const {
   deleteMemory,
   getStats
 } = require('./api/handlers');
+const { requireAuth, register, login, logout, me } = require('./auth');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
 
 // ===== MIDDLEWARE =====
-app.use(cors());
+app.use(cors({ origin: false }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, '../public')));
@@ -34,60 +35,31 @@ app.get('/api/health', (req, res) => {
   });
 });
 
-// ===== AUTENTICACIÓN (TEMPORAL - PARA PRUEBAS) =====
-app.post('/api/login', (req, res) => {
-  const { username, password } = req.body;
-
-  if (!username || !password) {
-    return res.status(400).json({ error: 'Usuario y contraseña requeridos' });
-  }
-
-  if (username === 'test' && password === 'test') {
-    res.json({
-      id: 1,
-      username: 'test',
-      email: 'test@example.com',
-      token: Buffer.from('1:test').toString('base64')
-    });
-  } else {
-    res.status(401).json({ error: 'Credenciales inválidas' });
-  }
-});
-
-app.post('/api/register', (req, res) => {
-  const { username, password, email } = req.body;
-
-  if (!username || !password) {
-    return res.status(400).json({ error: 'Usuario y contraseña requeridos' });
-  }
-
-  res.status(201).json({
-    id: 2,
-    username: username,
-    email: email || '',
-    token: Buffer.from(`2:${username}`).toString('base64')
-  });
-});
+// ===== CUENTAS DE USUARIO =====
+app.post('/api/auth/register', register);
+app.post('/api/auth/login', login);
+app.post('/api/auth/logout', logout);
+app.get('/api/auth/me', requireAuth, me);
 
 // ===== API ROUTES - MEMORIAS =====
 
 // POST - Crear memoria
-app.post('/api/memories', createMemory);
+app.post('/api/memories', requireAuth, createMemory);
 
 // GET - Listar memorias (con filtros)
-app.get('/api/memories', listMemories);
+app.get('/api/memories', requireAuth, listMemories);
 
 // GET - Estadísticas
-app.get('/api/stats', getStats);
+app.get('/api/stats', requireAuth, getStats);
 
 // GET - Detalle de una memoria
-app.get('/api/memories/:id', getMemory);
+app.get('/api/memories/:id', requireAuth, getMemory);
 
 // PUT - Actualizar memoria
-app.put('/api/memories/:id', updateMemory);
+app.put('/api/memories/:id', requireAuth, updateMemory);
 
 // DELETE - Eliminar memoria
-app.delete('/api/memories/:id', deleteMemory);
+app.delete('/api/memories/:id', requireAuth, deleteMemory);
 
 // ===== FALLBACK PARA SPA =====
 app.get('*', (req, res) => {
@@ -97,7 +69,6 @@ app.get('*', (req, res) => {
 // ===== INICIAR SERVIDOR =====
 app.listen(PORT, () => {
   console.log(`🚀 Servidor ejecutándose en http://localhost:${PORT}`);
-  console.log(`📝 Usuario de prueba: test/test`);
   console.log(`💾 Base de datos: SQLite Local`);
   console.log(`📊 Documentación: http://localhost:${PORT}/docs`);
 });

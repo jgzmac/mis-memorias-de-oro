@@ -73,6 +73,32 @@ function initializeDatabase() {
     )
   `);
 
+  // Cuentas de usuario y sesiones
+  db.exec(`
+    CREATE TABLE IF NOT EXISTS users (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      email TEXT NOT NULL UNIQUE,
+      name TEXT NOT NULL,
+      password_hash TEXT NOT NULL,
+      created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+    )
+  `);
+  db.exec(`
+    CREATE TABLE IF NOT EXISTS sessions (
+      token_hash TEXT PRIMARY KEY,
+      user_id INTEGER NOT NULL,
+      expires_at TEXT NOT NULL,
+      FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+    )
+  `);
+
+  // Cada recuerdo pertenece a un usuario (migración para bases ya existentes)
+  const cols = db.prepare('PRAGMA table_info(memories)').all().map(c => c.name);
+  if (!cols.includes('user_id')) {
+    db.exec('ALTER TABLE memories ADD COLUMN user_id INTEGER REFERENCES users(id) ON DELETE CASCADE');
+  }
+  db.exec('CREATE INDEX IF NOT EXISTS idx_memories_user ON memories(user_id)');
+
   console.log('✅ Base de datos SQLite inicializada');
 }
 

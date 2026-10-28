@@ -318,6 +318,17 @@
         grid-template-columns: 1fr;
       }
     }
+
+    /* ===== Acceso / cuentas ===== */
+    #authScreen { max-width: 420px; margin: 0 auto; }
+    #authScreen .tabs { display: flex; gap: 8px; margin-bottom: 20px; }
+    #authScreen .tabs button { flex: 1; padding: 10px; border: none; border-radius: 6px; cursor: pointer; background: #eee; font-size: 1em; }
+    #authScreen .tabs button.active { background: #667eea; color: white; }
+    #authScreen .hint { font-size: 0.85em; color: #666; margin-top: 5px; }
+    #authScreen input { width: 100%; }
+    .userbar { display: flex; justify-content: flex-end; align-items: center; gap: 12px; color: white; margin-bottom: 10px; }
+    .userbar button { background: rgba(255,255,255,0.2); color: white; border: 1px solid rgba(255,255,255,0.5); border-radius: 6px; padding: 6px 14px; cursor: pointer; }
+    .hidden { display: none !important; }
   </style>
 </head>
 <body>
@@ -327,6 +338,35 @@
       <p class="subtitle">Guarda tus recuerdos más preciosos</p>
     </header>
 
+    <div id="authScreen" class="card hidden">
+      <h2 style="margin-bottom: 20px; color: #333;">Bienvenido</h2>
+      <div class="tabs">
+        <button type="button" id="tabLogin" class="active">Entrar</button>
+        <button type="button" id="tabRegister">Crear cuenta</button>
+      </div>
+      <div id="authMessage"></div>
+      <form id="authForm">
+        <div class="form-group" id="nameGroup" style="display:none;">
+          <label for="authName">Nombre</label>
+          <input type="text" id="authName" autocomplete="name" maxlength="80">
+        </div>
+        <div class="form-group">
+          <label for="authEmail">Correo electrónico</label>
+          <input type="email" id="authEmail" autocomplete="email" required>
+        </div>
+        <div class="form-group">
+          <label for="authPassword">Contraseña</label>
+          <input type="password" id="authPassword" autocomplete="current-password" required>
+          <div class="hint" id="pwHint" style="display:none;">Mínimo 8 caracteres, con mayúscula, minúscula y número.</div>
+        </div>
+        <div class="button-group">
+          <button type="submit" class="btn-primary" id="authSubmit">Entrar</button>
+        </div>
+      </form>
+    </div>
+
+    <div id="appScreen" class="hidden">
+    <div class="userbar"><span id="userName"></span><button type="button" id="logoutBtn">Salir</button></div>
     <div class="stats" id="stats">
       <h3>📊 Estadísticas</h3>
       <div class="stat-item">
@@ -402,6 +442,7 @@
           <div class="empty-state">No hay memorias aún. ¡Crea tu primera memoria!</div>
         </div>
       </div>
+    </div>
     </div>
   </div>
 
@@ -618,11 +659,85 @@
       }
     });
 
-    // ===== INICIALIZACIÓN =====
-    window.addEventListener('load', () => {
+    // ===== CUENTAS =====
+    const authScreen = document.getElementById('authScreen');
+    const appScreen = document.getElementById('appScreen');
+    let authMode = 'login';
+
+    function setAuthMode(mode) {
+      authMode = mode;
+      const reg = mode === 'register';
+      document.getElementById('tabLogin').classList.toggle('active', !reg);
+      document.getElementById('tabRegister').classList.toggle('active', reg);
+      document.getElementById('nameGroup').style.display = reg ? '' : 'none';
+      document.getElementById('pwHint').style.display = reg ? '' : 'none';
+      document.getElementById('authSubmit').textContent = reg ? 'Crear cuenta' : 'Entrar';
+      document.getElementById('authPassword').autocomplete = reg ? 'new-password' : 'current-password';
+      document.getElementById('authMessage').innerHTML = '';
+    }
+
+    function showApp(user) {
+      authScreen.classList.add('hidden');
+      appScreen.classList.remove('hidden');
+      document.getElementById('userName').textContent = user.name;
       const today = new Date().toISOString().split('T')[0];
       dateInput.value = today;
       loadMemories();
+    }
+
+    function showAuth() {
+      appScreen.classList.add('hidden');
+      authScreen.classList.remove('hidden');
+      memories = [];
+    }
+
+    document.getElementById('tabLogin').onclick = () => setAuthMode('login');
+    document.getElementById('tabRegister').onclick = () => setAuthMode('register');
+
+    document.getElementById('authForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const body = {
+        email: document.getElementById('authEmail').value,
+        password: document.getElementById('authPassword').value
+      };
+      if (authMode === 'register') body.name = document.getElementById('authName').value;
+      try {
+        const r = await fetch(`${API_URL}/auth/${authMode}`, {
+          method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body)
+        });
+        const result = await r.json();
+        if (result.success) {
+          document.getElementById('authPassword').value = '';
+          showApp(result.data);
+        } else {
+          document.getElementById('authMessage').innerHTML = `<div class="error">${result.error}</div>`;
+        }
+      } catch (err) {
+        document.getElementById('authMessage').innerHTML = `<div class="error">No se pudo conectar</div>`;
+      }
+    });
+
+    document.getElementById('logoutBtn').onclick = async () => {
+      await fetch(`${API_URL}/auth/logout`, { method: 'POST' });
+      showAuth();
+    };
+
+    // Si la sesión caduca, volver a la pantalla de acceso
+    const originalFetch = window.fetch;
+    window.fetch = async (...args) => {
+      const r = await originalFetch(...args);
+      if (r.status === 401 && !String(args[0]).includes('/auth/')) showAuth();
+      return r;
+    };
+
+    // ===== INICIALIZACIÓN =====
+    window.addEventListener('load', async () => {
+      try {
+        const r = await fetch(`${API_URL}/auth/me`);
+        const result = await r.json();
+        if (result.success) return showApp(result.data);
+      } catch (e) {}
+      showAuth();
     });
 
     // Exponer funciones globalmente
