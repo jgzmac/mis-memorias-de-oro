@@ -99,6 +99,42 @@ function initializeDatabase() {
   }
   db.exec('CREATE INDEX IF NOT EXISTS idx_memories_user ON memories(user_id)');
 
+  // Datos extraídos de audio/foto/vídeo: periodo, lugar y tipo de recuerdo
+  for (const [col, type] of [['date_end', 'TEXT'], ['place', 'TEXT'], ['event_type', 'TEXT']]) {
+    if (!cols.includes(col)) db.exec(`ALTER TABLE memories ADD COLUMN ${col} ${type}`);
+  }
+
+  // Personas que participan en un recuerdo y relación con el usuario
+  db.exec(`
+    CREATE TABLE IF NOT EXISTS memory_people (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      memory_id INTEGER NOT NULL,
+      name TEXT NOT NULL DEFAULT '',
+      relation TEXT NOT NULL DEFAULT '',
+      FOREIGN KEY (memory_id) REFERENCES memories(id) ON DELETE CASCADE
+    )
+  `);
+  db.exec('CREATE INDEX IF NOT EXISTS idx_people_memory ON memory_people(memory_id)');
+
+  // Material audiovisual. memory_id vacío = subido pero aún sin confirmar
+  db.exec(`
+    CREATE TABLE IF NOT EXISTS media (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      user_id INTEGER NOT NULL,
+      memory_id INTEGER,
+      kind TEXT NOT NULL,
+      mime TEXT NOT NULL,
+      original_name TEXT,
+      file_path TEXT NOT NULL,
+      size INTEGER,
+      duration_s REAL,
+      created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+      FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+      FOREIGN KEY (memory_id) REFERENCES memories(id) ON DELETE CASCADE
+    )
+  `);
+  db.exec('CREATE INDEX IF NOT EXISTS idx_media_memory ON media(memory_id)');
+
   console.log('✅ Base de datos SQLite inicializada');
 }
 

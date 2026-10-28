@@ -329,6 +329,31 @@
     .userbar { display: flex; justify-content: flex-end; align-items: center; gap: 12px; color: white; margin-bottom: 10px; }
     .userbar button { background: rgba(255,255,255,0.2); color: white; border: 1px solid rgba(255,255,255,0.5); border-radius: 6px; padding: 6px 14px; cursor: pointer; }
     .hidden { display: none !important; }
+
+    /* ===== Audio ===== */
+    .audio-box { border: 2px dashed #c9cdf5; border-radius: 10px; padding: 15px; margin-bottom: 20px; background: #f7f8ff; }
+    .audio-box h3 { font-size: 1em; color: #333; margin-bottom: 10px; }
+    .audio-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+    .audio-actions button, .audio-actions label.btn-file { flex: 1; min-width: 120px; padding: 10px; border: none; border-radius: 6px; cursor: pointer; background: #667eea; color: white; font-size: 0.95em; text-align: center; }
+    .audio-actions button.recording { background: #e53e3e; animation: pulse 1s infinite; }
+    .audio-actions label.btn-file input { display: none; }
+    @keyframes pulse { 50% { opacity: 0.6; } }
+    .audio-status { margin-top: 10px; font-size: 0.9em; color: #555; }
+    .review-field { margin-bottom: 12px; }
+    .review-field label { display: block; font-weight: 600; font-size: 0.85em; margin-bottom: 4px; color: #444; }
+    .review-field input, .review-field select, .review-field textarea { width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 6px; font-size: 0.95em; font-family: inherit; }
+    .review-field textarea { min-height: 110px; }
+    .person-row { display: grid; grid-template-columns: 1fr 1fr auto; gap: 6px; margin-bottom: 6px; }
+    .person-row input { padding: 7px; border: 1px solid #ccc; border-radius: 6px; }
+    .person-row button { background: #eee; border: none; border-radius: 6px; padding: 0 10px; cursor: pointer; }
+    .notice { background: #fff8e1; color: #7a5b00; padding: 10px; border-radius: 6px; font-size: 0.85em; margin-bottom: 12px; }
+    .memory-audio { margin-top: 10px; }
+    .memory-audio audio { width: 100%; }
+    .memory-audio a { font-size: 0.85em; }
+    .memory-people { margin-top: 8px; font-size: 0.9em; color: #444; }
+    .memory-extra { margin-top: 6px; font-size: 0.9em; color: #555; }
+    .modal-bg { position: fixed; inset: 0; background: rgba(0,0,0,0.55); display: flex; align-items: flex-start; justify-content: center; padding: 20px; overflow-y: auto; z-index: 50; }
+    .modal { background: white; border-radius: 10px; padding: 25px; max-width: 620px; width: 100%; }
   </style>
 </head>
 <body>
@@ -378,6 +403,14 @@
     <div class="main-content">
       <!-- FORMULARIO -->
       <div class="card">
+        <div class="audio-box">
+          <h3>🎙️ Crear un recuerdo con tu voz</h3>
+          <div class="audio-actions">
+            <button type="button" id="recBtn">⏺ Grabar</button>
+            <label class="btn-file">📁 Subir audio<input type="file" id="audioFile" accept="audio/*"></label>
+          </div>
+          <div class="audio-status" id="audioStatus">Cuenta tu recuerdo: cuándo fue, con quién, dónde. Después podrás revisarlo.</div>
+        </div>
         <h2 style="margin-bottom: 20px; color: #333;">Crear Memoria</h2>
 
         <div id="message"></div>
@@ -446,6 +479,40 @@
     </div>
   </div>
 
+
+  <div id="reviewModal" class="modal-bg hidden">
+    <div class="modal">
+      <h2 style="margin-bottom: 8px; color: #333;">Revisa tu recuerdo</h2>
+      <div class="notice">Esto es lo que he entendido del audio. Corrige lo que haga falta; todo es opcional. No se guardará hasta que confirmes.</div>
+      <div id="reviewMsg"></div>
+      <div class="review-field"><label for="rvTitle">Título</label><input id="rvTitle" maxlength="200"></div>
+      <div class="review-field"><label for="rvContent">Lo que contaste</label><textarea id="rvContent"></textarea></div>
+      <div class="form-row">
+        <div class="review-field"><label for="rvDate">Fecha (o inicio del periodo)</label><input type="date" id="rvDate"></div>
+        <div class="review-field"><label for="rvDateEnd">Fin del periodo (si aplica)</label><input type="date" id="rvDateEnd"></div>
+      </div>
+      <div class="form-row">
+        <div class="review-field"><label for="rvPlace">Lugar</label><input id="rvPlace" maxlength="200"></div>
+        <div class="review-field"><label for="rvType">Tipo de recuerdo</label><input id="rvType" maxlength="80" placeholder="Cumpleaños, viaje, boda..."></div>
+      </div>
+      <div class="form-row">
+        <div class="review-field"><label for="rvCategory">Categoría</label>
+          <select id="rvCategory"><option>General</option><option>Viajes</option><option>Personal</option><option>Familia</option><option>Trabajo</option></select></div>
+        <div class="review-field"><label for="rvMood">Estado de ánimo</label>
+          <select id="rvMood"><option value="neutral">Neutral</option><option value="feliz">Feliz 😊</option><option value="muy feliz">Muy Feliz 😄</option><option value="triste">Triste 😢</option><option value="emocionado">Emocionado 🤩</option></select></div>
+      </div>
+      <div class="review-field"><label>Personas y tu relación con ellas</label>
+        <div id="rvPeople"></div>
+        <button type="button" class="btn-secondary" id="rvAddPerson" style="margin-top:4px;">+ Añadir persona</button>
+      </div>
+      <div class="review-field"><label>Audio original</label><audio id="rvAudio" controls style="width:100%"></audio></div>
+      <div class="button-group">
+        <button type="button" class="btn-primary" id="rvConfirm">Confirmar y guardar</button>
+        <button type="button" class="btn-secondary" id="rvCancel">Descartar</button>
+      </div>
+    </div>
+  </div>
+
   <script>
     const API_URL = '/api';
     let tags = [];
@@ -488,8 +555,8 @@
     function renderTags() {
       tagsContainer.innerHTML = tags.map(tag => `
         <div class="tag">
-          ${tag}
-          <button type="button" onclick="removeTag('${tag}')">×</button>
+          ${esc(tag)}
+          <button type="button" data-tag="${esc(tag)}" onclick="removeTag(this.dataset.tag)">×</button>
         </div>
       `).join('');
     }
@@ -586,30 +653,45 @@
         return;
       }
 
-      memoriesList.innerHTML = memories.map(memory => `
-        <div class="memory-item ${currentMemoryId === memory.id ? 'active' : ''}" onclick="selectMemory(${memory.id})">
-          <div class="memory-title">${memory.title}</div>
+      memoriesList.innerHTML = memories.map(memory => {
+        const open = currentMemoryId === memory.id;
+        const fmt = (d) => new Date(d + 'T00:00:00').toLocaleDateString('es-ES');
+        const when = memory.date_happened
+          ? (memory.date_end && memory.date_end !== memory.date_happened ? `${fmt(memory.date_happened)} – ${fmt(memory.date_end)}` : fmt(memory.date_happened))
+          : '';
+        const people = (memory.people || []).map(p => esc([p.name, p.relation ? `(${p.relation})` : ''].filter(Boolean).join(' '))).join(', ');
+        const audios = (memory.media || []).filter(m => m.kind === 'audio');
+        return `
+        <div class="memory-item ${open ? 'active' : ''}" onclick="selectMemory(${memory.id})">
+          <div class="memory-title">${esc(memory.title)}${audios.length ? ' 🎙️' : ''}</div>
           <div class="memory-meta">
-            <span class="memory-category">${memory.category}</span>
-            <span>${new Date(memory.date_happened).toLocaleDateString('es-ES')}</span>
-            <span>${memory.mood}</span>
+            <span class="memory-category">${esc(memory.category)}</span>
+            <span>${esc(when)}</span>
+            <span>${esc(memory.mood)}</span>
           </div>
-          ${currentMemoryId === memory.id ? `
-            <div class="memory-detail">
-              <p>${memory.content}</p>
+          ${open ? `
+            <div class="memory-detail" onclick="event.stopPropagation()">
+              <p>${esc(memory.content)}</p>
+              ${memory.place || memory.event_type ? `<div class="memory-extra">${memory.event_type ? '🏷️ ' + esc(memory.event_type) + ' ' : ''}${memory.place ? '📍 ' + esc(memory.place) : ''}</div>` : ''}
+              ${people ? `<div class="memory-people">👥 ${people}</div>` : ''}
               ${memory.tags && memory.tags.length > 0 ? `
                 <div class="memory-tags">
-                  ${memory.tags.map(tag => `<span class="memory-tag">${tag}</span>`).join('')}
+                  ${memory.tags.map(tag => `<span class="memory-tag">${esc(tag)}</span>`).join('')}
                 </div>
               ` : ''}
+              ${audios.map(a => `
+                <div class="memory-audio">
+                  <audio controls preload="none" src="${a.url}"></audio>
+                  <a href="${a.url}" target="_blank" rel="noopener">Abrir audio en otra pestaña</a>
+                </div>`).join('')}
               <div class="button-group" style="margin-top: 10px;">
                 <button onclick="editMemory(${memory.id})" class="btn-edit">Editar</button>
                 <button onclick="deleteMemory(${memory.id})" class="btn-danger">Eliminar</button>
               </div>
             </div>
           ` : ''}
-        </div>
-      `).join('');
+        </div>`;
+      }).join('');
     }
 
     function selectMemory(id) {
@@ -658,6 +740,175 @@
         tagInput.value = '';
       }
     });
+
+
+    // ===== AUDIO =====
+    const SAMPLE_RATE = 16000;
+    const recBtn = document.getElementById('recBtn');
+    const audioFile = document.getElementById('audioFile');
+    const audioStatus = document.getElementById('audioStatus');
+    let recorder = null, recChunks = [], recStream = null, recTimer = null, recStart = 0;
+    let draft = null; // {media_id, ...datos propuestos}
+
+    const esc = (t) => String(t == null ? '' : t).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+    function setAudioStatus(t) { audioStatus.textContent = t; }
+
+    async function decodeTo16kMono(blob) {
+      const arr = await blob.arrayBuffer();
+      const ctx = new (window.AudioContext || window.webkitAudioContext)();
+      let buf;
+      try { buf = await ctx.decodeAudioData(arr); } finally { ctx.close(); }
+      const frames = Math.ceil(buf.duration * SAMPLE_RATE);
+      const off = new OfflineAudioContext(1, frames, SAMPLE_RATE);
+      const src = off.createBufferSource();
+      src.buffer = buf; src.connect(off.destination); src.start();
+      const rendered = await off.startRendering();
+      return rendered.getChannelData(0);
+    }
+
+    async function analyzeAudioBlob(blob, filename) {
+      setAudioStatus('Preparando el audio…');
+      let pcm;
+      try { pcm = await decodeTo16kMono(blob); }
+      catch (e) { setAudioStatus('❌ No se pudo leer ese audio. Prueba con otro archivo o graba de nuevo.'); return; }
+      if (pcm.length < SAMPLE_RATE * 0.5) { setAudioStatus('❌ El audio es demasiado corto.'); return; }
+
+      const fd = new FormData();
+      fd.append('audio', blob, filename);
+      fd.append('pcm', new Blob([pcm.buffer], { type: 'application/octet-stream' }), 'audio.pcm');
+      setAudioStatus('Subiendo el audio…');
+      let r;
+      try {
+        r = await (await fetch(`${API_URL}/audio/analyze`, { method: 'POST', body: fd })).json();
+      } catch (e) { setAudioStatus('❌ No se pudo conectar con el servidor.'); return; }
+      if (!r.success) { setAudioStatus('❌ ' + r.error); return; }
+
+      const started = Date.now();
+      const poll = async () => {
+        let j;
+        try { j = (await (await fetch(`${API_URL}/audio/jobs/${r.data.jobId}`)).json()); }
+        catch (e) { setAudioStatus('❌ Se perdió la conexión.'); return; }
+        if (!j.success) { setAudioStatus('❌ ' + j.error); return; }
+        const d = j.data;
+        if (d.status === 'processing') {
+          const secs = Math.round((Date.now() - started) / 1000);
+          setAudioStatus(d.engine === 'loading'
+            ? `Preparando el reconocimiento de voz (solo la primera vez, puede tardar unos minutos)… ${secs}s`
+            : `Escuchando tu recuerdo… ${secs}s`);
+          return setTimeout(poll, 2000);
+        }
+        if (d.status === 'error') { setAudioStatus('❌ ' + d.error); return; }
+        setAudioStatus('Listo. Revisa lo que he entendido.');
+        openReview(d.result);
+      };
+      poll();
+    }
+
+    // --- grabar ---
+    recBtn.addEventListener('click', async () => {
+      if (recorder && recorder.state === 'recording') { recorder.stop(); return; }
+      if (!navigator.mediaDevices || !window.MediaRecorder) {
+        setAudioStatus('Tu navegador no permite grabar. Usa "Subir audio".'); return;
+      }
+      try { recStream = await navigator.mediaDevices.getUserMedia({ audio: true }); }
+      catch (e) { setAudioStatus('No se pudo acceder al micrófono. Revisa el permiso del navegador o usa "Subir audio".'); return; }
+      recChunks = [];
+      recorder = new MediaRecorder(recStream);
+      recorder.ondataavailable = (e) => { if (e.data.size) recChunks.push(e.data); };
+      recorder.onstop = () => {
+        clearInterval(recTimer);
+        recStream.getTracks().forEach(t => t.stop());
+        recBtn.classList.remove('recording');
+        recBtn.textContent = '⏺ Grabar';
+        const type = recorder.mimeType || 'audio/webm';
+        const ext = type.includes('mp4') ? 'm4a' : type.includes('ogg') ? 'ogg' : 'webm';
+        analyzeAudioBlob(new Blob(recChunks, { type }), `grabacion.${ext}`);
+      };
+      recorder.start();
+      recStart = Date.now();
+      recBtn.classList.add('recording');
+      recTimer = setInterval(() => {
+        const s = Math.floor((Date.now() - recStart) / 1000);
+        recBtn.textContent = `⏹ Parar (${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')})`;
+        if (s >= 15 * 60) recorder.stop();
+      }, 500);
+      setAudioStatus('Grabando… pulsa "Parar" cuando termines.');
+    });
+
+    // --- subir ---
+    audioFile.addEventListener('change', () => {
+      const f = audioFile.files[0];
+      audioFile.value = '';
+      if (f) analyzeAudioBlob(f, f.name);
+    });
+
+    // --- pantalla de revisión ---
+    const reviewModal = document.getElementById('reviewModal');
+    const rv = (id) => document.getElementById(id);
+
+    function personRow(p = {}) {
+      const row = document.createElement('div');
+      row.className = 'person-row';
+      row.innerHTML = `<input placeholder="Nombre" maxlength="80" value="${esc(p.name)}"><input placeholder="Relación (abuela, amigo...)" maxlength="60" value="${esc(p.relation)}"><button type="button" title="Quitar">×</button>`;
+      row.querySelector('button').onclick = () => row.remove();
+      return row;
+    }
+
+    function openReview(d) {
+      draft = d;
+      rv('rvTitle').value = d.title || '';
+      rv('rvContent').value = d.content || '';
+      rv('rvDate').value = d.date_happened || '';
+      rv('rvDateEnd').value = d.date_end || '';
+      rv('rvPlace').value = d.place || '';
+      rv('rvType').value = d.event_type || '';
+      rv('rvCategory').value = d.category || 'General';
+      rv('rvMood').value = d.mood || 'neutral';
+      rv('rvPeople').innerHTML = '';
+      (d.people || []).forEach(p => rv('rvPeople').appendChild(personRow(p)));
+      rv('rvAudio').src = `${API_URL}/media/${d.media_id}`;
+      rv('reviewMsg').innerHTML = '';
+      reviewModal.classList.remove('hidden');
+    }
+
+    function closeReview() {
+      reviewModal.classList.add('hidden');
+      rv('rvAudio').pause();
+      rv('rvAudio').removeAttribute('src');
+    }
+
+    rv('rvAddPerson').onclick = () => rv('rvPeople').appendChild(personRow());
+
+    rv('rvCancel').onclick = async () => {
+      if (!confirm('¿Descartar este recuerdo? Se borrará también el audio.')) return;
+      if (draft) await fetch(`${API_URL}/media/${draft.media_id}`, { method: 'DELETE' });
+      draft = null; closeReview(); setAudioStatus('Descartado.');
+    };
+
+    rv('rvConfirm').onclick = async () => {
+      const people = [...rv('rvPeople').children].map(row => {
+        const [n, r] = row.querySelectorAll('input');
+        return { name: n.value, relation: r.value };
+      });
+      const body = {
+        title: rv('rvTitle').value, content: rv('rvContent').value,
+        date_happened: rv('rvDate').value, date_end: rv('rvDateEnd').value,
+        place: rv('rvPlace').value, event_type: rv('rvType').value,
+        category: rv('rvCategory').value, mood: rv('rvMood').value,
+        people, media_ids: [draft.media_id]
+      };
+      try {
+        const res = await (await fetch(`${API_URL}/memories`, {
+          method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body)
+        })).json();
+        if (!res.success) { rv('reviewMsg').innerHTML = `<div class="error">${esc(res.error)}</div>`; return; }
+        draft = null; closeReview();
+        setAudioStatus('✅ Recuerdo guardado.');
+        showMessage('✅ Recuerdo guardado con tu audio');
+        loadMemories();
+      } catch (e) { rv('reviewMsg').innerHTML = '<div class="error">No se pudo guardar. Inténtalo de nuevo.</div>'; }
+    };
 
     // ===== CUENTAS =====
     const authScreen = document.getElementById('authScreen');

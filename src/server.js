@@ -14,6 +14,9 @@ const {
   getStats
 } = require('./api/handlers');
 const { requireAuth, register, login, logout, me } = require('./auth');
+const { serveMedia, discardMedia } = require('./api/media');
+const { receive, analyzeAudio, getJob } = require('./api/audio');
+const provider = require('./providers');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -61,6 +64,12 @@ app.put('/api/memories/:id', requireAuth, updateMemory);
 // DELETE - Eliminar memoria
 app.delete('/api/memories/:id', requireAuth, deleteMemory);
 
+// ===== ARCHIVOS Y ANÁLISIS DE AUDIO =====
+app.post('/api/audio/analyze', requireAuth, receive, analyzeAudio);
+app.get('/api/audio/jobs/:id', requireAuth, getJob);
+app.get('/api/media/:id', requireAuth, serveMedia);
+app.delete('/api/media/:id', requireAuth, discardMedia);
+
 // ===== FALLBACK PARA SPA =====
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../public/index.html'));
@@ -70,5 +79,6 @@ app.get('*', (req, res) => {
 app.listen(PORT, () => {
   console.log(`🚀 Servidor ejecutándose en http://localhost:${PORT}`);
   console.log(`💾 Base de datos: SQLite Local`);
-  console.log(`📊 Documentación: http://localhost:${PORT}/docs`);
+  // Descargar/cargar el motor de voz en segundo plano para que el primer audio no espere
+  provider.warmUp();
 });

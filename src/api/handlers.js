@@ -1,134 +1,122 @@
 /**
- * api/handlers.js - Manejadores para endpoints de memorias
- * Usa SQLite como backend
+ * api/handlers.js - Recuerdos (CRUD). Cada usuario solo accede a los suyos.
  */
 
+const fs = require('fs');
 const db = require('../db');
+const { absPath } = require('./media');
+
+const DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
+const clean = (v, max) => String(v == null ? '' : v).trim().slice(0, max);
+
+function hydrate(m) {
+  let tags = [];
+  try { tags = JSON.parse(m.tags || '[]'); } catch (e) { /* etiquetas dañadas: se ignoran */ }
+  return {
+    ...m,
+    tags,
+    people: db.prepare('SELECT name, relation FROM memory_people WHERE memory_id = ? ORDER BY id').all(m.id),
+    media: db.prepare('SELECT id, kind, mime, original_name, duration_s FROM media WHERE memory_id = ? ORDER BY id')
+      .all(m.id).map(x => ({ ...x, url: `/api/media/${x.id}` }))
+  };
+}
+
+function normalizePeople(people) {
+  if (!Array.isArray(people)) return null;
+  return people
+    .map(p => ({ name: clean(p && p.name, 80), relation: clean(p && p.relation, 60) }))
+    .filter(p => p.name || p.relation)
+    .slice(0, 30);
+}
+
+function validDate(v) {
+  return v === undefined || v === null || v === '' || DATE_RE.test(v);
+}
+
+function fail(res, status, error) {
+  return res.status(status).json({ success: false, error });
+}
+
+function serverError(res, where, err, msg) {
+  console.error(`Error en ${where}:`, err.message);
+  return res.status(500).json({ success: false, error: msg });
+}
 
 // ===== CREATE =====
 function createMemory(req, res) {
   try {
-    const { title, content, date_happened, category, tags = [], mood = 'neutral' } = req.body;
+    const b = req.body;
+    let title = clean(b.title, 200);
+    let content = clean(b.content, 20000);
+    if (!title && !content) return fail(res, 400, 'Escribe al menos un título o un contenido');
+    if (!title) title = content.length > 60 ? content.slice(0, 57) + '…' : content;
+    if (!content) content = title;
 
-    // Validación
-    if (!title || !title.trim()) {
-      return res.status(400).json({ success: false, error: 'Título es requerido' });
-    }
-    if (!content || !content.trim()) {
-      return res.status(400).json({ success: false, error: 'Contenido es requerido' });
-    }
+    if (!validDate(b.date_happened) || !validDate(b.date_end)) return fail(res, 400, 'Fecha no válida');
+    const tags = Array.isArray(b.tags) ? b.tags.map(t => clean(t, 40)).filter(Boolean).slice(0, 30) : [];
+    const people = normalizePeople(b.people) || [];
+    const mediaIds = Array.isArray(b.media_ids) ? b.media_ids.map(Number).filter(Number.isInteger) : [];
 
-    const tagsJson = JSON.stringify(tags);
-    const dateHappened = date_happened || new Date().toISOString().split('T')[0];
-
-    const stmt = db.prepare(`
-      INSERT INTO memories (title, content, date_happened, category, tags, mood, user_id)
-      VALUES (?, ?, ?, ?, ?, ?, ?)
-    `);
-
-    const result = stmt.run(
-      title.trim(),
-      content.trim(),
-      dateHappened,
-      category || 'General',
-      tagsJson,
-      mood,
-      req.user.id
-    );
-
-    const memory = db.prepare('SELECT * FROM memories WHERE id = ? AND user_id = ?').get(result.lastInsertRowid, req.user.id);
-
-    res.status(201).json({
-      success: true,
-      data: {
-        ...memory,
-        tags: JSON.parse(memory.tags)
-      },
-      message: 'Memoria creada exitosamente'
+    const create = db.transaction(() => {
+      const r = db.prepare(`
+        INSERT INTO memories (title, content, date_happened, date_end, place, event_type, category, tags, mood, user_id)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`).run(
+        title, content,
+        b.date_happened || new Date().toISOString().split('T')[0],
+        b.date_end || null,
+        clean(b.place, 200) || null,
+        clean(b.event_type, 80) || null,
+        clean(b.category, 40) || 'General',
+        JSON.stringify(tags),
+        clean(b.mood, 20) || 'neutral',
+        req.user.id
+      );
+      const id = r.lastInsertRowid;
+      const addPerson = db.prepare('INSERT INTO memory_people (memory_id, name, relation) VALUES (?, ?, ?)');
+      people.forEach(p => addPerson.run(id, p.name, p.relation));
+      // Solo se vinculan archivos propios y aún sin asignar
+      const link = db.prepare('UPDATE media SET memory_id = ? WHERE id = ? AND user_id = ? AND memory_id IS NULL');
+      mediaIds.forEach(mid => link.run(id, mid, req.user.id));
+      return id;
     });
+    const id = create();
+
+    const memory = db.prepare('SELECT * FROM memories WHERE id = ? AND user_id = ?').get(id, req.user.id);
+    res.status(201).json({ success: true, data: hydrate(memory), message: 'Memoria creada exitosamente' });
   } catch (err) {
-    console.error('Error en createMemory:', err.message);
-    res.status(500).json({
-      success: false,
-      error: 'Error al crear memoria',
-    });
+    serverError(res, 'createMemory', err, 'Error al crear memoria');
   }
 }
 
 // ===== READ - LIST =====
 function listMemories(req, res) {
   try {
-    const { category, limit = 50, offset = 0 } = req.query;
+    const { category } = req.query;
+    const limit = Math.min(Math.max(parseInt(req.query.limit) || 50, 1), 200);
+    const offset = Math.max(parseInt(req.query.offset) || 0, 0);
 
-    let query = 'SELECT * FROM memories WHERE user_id = ?';
+    let where = 'user_id = ?';
     const params = [req.user.id];
+    if (category) { where += ' AND category = ?'; params.push(category); }
 
-    if (category) {
-      query += ' AND category = ?';
-      params.push(category);
-    }
+    const rows = db.prepare(`SELECT * FROM memories WHERE ${where} ORDER BY created_at DESC, id DESC LIMIT ? OFFSET ?`)
+      .all(...params, limit, offset);
+    const total = db.prepare(`SELECT COUNT(*) AS count FROM memories WHERE ${where}`).get(...params).count;
 
-    query += ' ORDER BY created_at DESC LIMIT ? OFFSET ?';
-    params.push(parseInt(limit), parseInt(offset));
-
-    const memories = db.prepare(query).all(...params);
-
-    // Contar total
-    let countQuery = 'SELECT COUNT(*) as count FROM memories WHERE user_id = ?';
-    const countParams = [req.user.id];
-
-    if (category) {
-      countQuery += ' AND category = ?';
-      countParams.push(category);
-    }
-
-    const countResult = db.prepare(countQuery).get(...countParams);
-
-    res.json({
-      success: true,
-      data: memories.map(m => ({
-        ...m,
-        tags: JSON.parse(m.tags || '[]')
-      })),
-      pagination: {
-        total: countResult.count,
-        limit: parseInt(limit),
-        offset: parseInt(offset)
-      }
-    });
+    res.json({ success: true, data: rows.map(hydrate), pagination: { total, limit, offset } });
   } catch (err) {
-    console.error('Error en listMemories:', err.message);
-    res.status(500).json({
-      success: false,
-      error: 'Error al listar memorias',
-    });
+    serverError(res, 'listMemories', err, 'Error al listar memorias');
   }
 }
 
 // ===== READ - DETAIL =====
 function getMemory(req, res) {
   try {
-    const { id } = req.params;
-
-    const memory = db.prepare('SELECT * FROM memories WHERE id = ? AND user_id = ?').get(id, req.user.id);
-
-    if (!memory) {
-      return res.status(404).json({ success: false, error: 'Memoria no encontrada' });
-    }
-
-    res.json({
-      success: true,
-      data: {
-        ...memory,
-        tags: JSON.parse(memory.tags || '[]')
-      }
-    });
+    const memory = db.prepare('SELECT * FROM memories WHERE id = ? AND user_id = ?').get(req.params.id, req.user.id);
+    if (!memory) return fail(res, 404, 'Memoria no encontrada');
+    res.json({ success: true, data: hydrate(memory) });
   } catch (err) {
-    console.error('Error en getMemory:', err.message);
-    res.status(500).json({
-      success: false,
-      error: 'Error al obtener memoria',
-    });
+    serverError(res, 'getMemory', err, 'Error al obtener memoria');
   }
 }
 
@@ -136,73 +124,52 @@ function getMemory(req, res) {
 function updateMemory(req, res) {
   try {
     const { id } = req.params;
-    const { title, content, date_happened, category, tags, mood } = req.body;
-
-    // Verificar que existe
-    const existing = db.prepare('SELECT id FROM memories WHERE id = ? AND user_id = ?').get(id, req.user.id);
-    if (!existing) {
-      return res.status(404).json({ success: false, error: 'Memoria no encontrada' });
-    }
-
-    // Obtener datos actuales
     const current = db.prepare('SELECT * FROM memories WHERE id = ? AND user_id = ?').get(id, req.user.id);
+    if (!current) return fail(res, 404, 'Memoria no encontrada');
 
-    // Actualizar solo campos proporcionados
-    const updateFields = [];
-    const updateValues = [];
+    const b = req.body;
+    if (!validDate(b.date_happened) || !validDate(b.date_end)) return fail(res, 400, 'Fecha no válida');
 
-    if (title !== undefined) {
-      updateFields.push('title = ?');
-      updateValues.push(title.trim());
-    }
-    if (content !== undefined) {
-      updateFields.push('content = ?');
-      updateValues.push(content.trim());
-    }
-    if (date_happened !== undefined) {
-      updateFields.push('date_happened = ?');
-      updateValues.push(date_happened);
-    }
-    if (category !== undefined) {
-      updateFields.push('category = ?');
-      updateValues.push(category);
-    }
-    if (tags !== undefined) {
-      updateFields.push('tags = ?');
-      updateValues.push(JSON.stringify(tags));
-    }
-    if (mood !== undefined) {
-      updateFields.push('mood = ?');
-      updateValues.push(mood);
-    }
+    const sets = [];
+    const vals = [];
+    const set = (col, val) => { sets.push(`${col} = ?`); vals.push(val); };
 
-    updateFields.push('updated_at = CURRENT_TIMESTAMP');
-
-    if (updateFields.length === 0) {
-      return res.json({ success: true, data: { ...current, tags: JSON.parse(current.tags || '[]') } });
+    if (b.title !== undefined) {
+      const t = clean(b.title, 200);
+      if (!t) return fail(res, 400, 'Título es requerido');
+      set('title', t);
     }
+    if (b.content !== undefined) {
+      const c = clean(b.content, 20000);
+      if (!c) return fail(res, 400, 'Contenido es requerido');
+      set('content', c);
+    }
+    if (b.date_happened !== undefined) set('date_happened', b.date_happened || null);
+    if (b.date_end !== undefined) set('date_end', b.date_end || null);
+    if (b.place !== undefined) set('place', clean(b.place, 200) || null);
+    if (b.event_type !== undefined) set('event_type', clean(b.event_type, 80) || null);
+    if (b.category !== undefined) set('category', clean(b.category, 40) || 'General');
+    if (b.mood !== undefined) set('mood', clean(b.mood, 20) || 'neutral');
+    if (b.tags !== undefined) {
+      const tags = Array.isArray(b.tags) ? b.tags.map(t => clean(t, 40)).filter(Boolean).slice(0, 30) : [];
+      set('tags', JSON.stringify(tags));
+    }
+    sets.push('updated_at = CURRENT_TIMESTAMP');
 
-    updateValues.push(id, req.user.id);
-
-    const stmt = db.prepare(`UPDATE memories SET ${updateFields.join(', ')} WHERE id = ? AND user_id = ?`);
-    stmt.run(...updateValues);
+    const people = normalizePeople(b.people);
+    db.transaction(() => {
+      db.prepare(`UPDATE memories SET ${sets.join(', ')} WHERE id = ? AND user_id = ?`).run(...vals, id, req.user.id);
+      if (people) {
+        db.prepare('DELETE FROM memory_people WHERE memory_id = ?').run(id);
+        const add = db.prepare('INSERT INTO memory_people (memory_id, name, relation) VALUES (?, ?, ?)');
+        people.forEach(p => add.run(id, p.name, p.relation));
+      }
+    })();
 
     const updated = db.prepare('SELECT * FROM memories WHERE id = ? AND user_id = ?').get(id, req.user.id);
-
-    res.json({
-      success: true,
-      data: {
-        ...updated,
-        tags: JSON.parse(updated.tags || '[]')
-      },
-      message: 'Memoria actualizada exitosamente'
-    });
+    res.json({ success: true, data: hydrate(updated), message: 'Memoria actualizada exitosamente' });
   } catch (err) {
-    console.error('Error en updateMemory:', err.message);
-    res.status(500).json({
-      success: false,
-      error: 'Error al actualizar memoria',
-    });
+    serverError(res, 'updateMemory', err, 'Error al actualizar memoria');
   }
 }
 
@@ -210,66 +177,33 @@ function updateMemory(req, res) {
 function deleteMemory(req, res) {
   try {
     const { id } = req.params;
-
-    // Verificar que existe
     const existing = db.prepare('SELECT id FROM memories WHERE id = ? AND user_id = ?').get(id, req.user.id);
-    if (!existing) {
-      return res.status(404).json({ success: false, error: 'Memoria no encontrada' });
-    }
+    if (!existing) return fail(res, 404, 'Memoria no encontrada');
 
+    // Los archivos no se borran solos con la fila: se eliminan aquí
+    const files = db.prepare('SELECT file_path FROM media WHERE memory_id = ?').all(id);
     db.prepare('DELETE FROM memories WHERE id = ? AND user_id = ?').run(id, req.user.id);
+    files.forEach(f => { try { fs.unlinkSync(absPath(f.file_path)); } catch (e) { /* ya no existía */ } });
 
-    res.json({
-      success: true,
-      message: 'Memoria eliminada exitosamente'
-    });
+    res.json({ success: true, message: 'Memoria eliminada exitosamente' });
   } catch (err) {
-    console.error('Error en deleteMemory:', err.message);
-    res.status(500).json({
-      success: false,
-      error: 'Error al eliminar memoria',
-    });
+    serverError(res, 'deleteMemory', err, 'Error al eliminar memoria');
   }
 }
 
 // ===== STATS =====
 function getStats(req, res) {
   try {
-    const memories = db.prepare('SELECT category, mood FROM memories WHERE user_id = ?').all(req.user.id);
-
-    const stats = {
-      total: memories.length,
-      byCategory: {},
-      byMood: {}
-    };
-
-    memories.forEach(m => {
-      if (m.category) {
-        stats.byCategory[m.category] = (stats.byCategory[m.category] || 0) + 1;
-      }
-      if (m.mood) {
-        stats.byMood[m.mood] = (stats.byMood[m.mood] || 0) + 1;
-      }
+    const rows = db.prepare('SELECT category, mood FROM memories WHERE user_id = ?').all(req.user.id);
+    const stats = { total: rows.length, byCategory: {}, byMood: {} };
+    rows.forEach(m => {
+      if (m.category) stats.byCategory[m.category] = (stats.byCategory[m.category] || 0) + 1;
+      if (m.mood) stats.byMood[m.mood] = (stats.byMood[m.mood] || 0) + 1;
     });
-
-    res.json({
-      success: true,
-      data: stats
-    });
+    res.json({ success: true, data: stats });
   } catch (err) {
-    console.error('Error en getStats:', err.message);
-    res.status(500).json({
-      success: false,
-      error: 'Error al obtener estadísticas',
-    });
+    serverError(res, 'getStats', err, 'Error al obtener estadísticas');
   }
 }
 
-module.exports = {
-  createMemory,
-  listMemories,
-  getMemory,
-  updateMemory,
-  deleteMemory,
-  getStats
-};
+module.exports = { createMemory, listMemories, getMemory, updateMemory, deleteMemory, getStats };

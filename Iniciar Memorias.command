@@ -23,9 +23,10 @@ elif ! command -v node >/dev/null 2>&1; then
 fi
 
 # 2. Preparar la aplicación en este Mac (solo la primera vez)
-if [ ! -f ".instalado-mac" ]; then
-  echo "Preparando la aplicación (solo la primera vez)..."
-  rm -rf node_modules/better-sqlite3
+# Se repite si aparecen componentes nuevos (package.json más reciente que la marca)
+if [ ! -f ".instalado-mac" ] || [ "package.json" -nt ".instalado-mac" ]; then
+  echo "Preparando la aplicación (puede tardar unos minutos)..."
+  [ -f ".instalado-mac" ] || rm -rf node_modules/better-sqlite3
   npm install --no-audit --no-fund || { echo "Error al preparar la aplicación."; pausa; exit 1; }
   touch .instalado-mac
 fi
