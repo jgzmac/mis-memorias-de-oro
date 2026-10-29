@@ -135,6 +135,28 @@ function initializeDatabase() {
   `);
   db.exec('CREATE INDEX IF NOT EXISTS idx_media_memory ON media(memory_id)');
 
+  // Perfil: nacimiento (punto de partida de la línea de vida)
+  const ucols = db.prepare('PRAGMA table_info(users)').all().map(c => c.name);
+  for (const col of ['birth_date', 'birth_place']) {
+    if (!ucols.includes(col)) db.exec(`ALTER TABLE users ADD COLUMN ${col} TEXT`);
+  }
+
+  // Etapas de la vida: escolar, profesional o residencia (varias del mismo tipo, con huecos si hace falta)
+  db.exec(`
+    CREATE TABLE IF NOT EXISTS life_stages (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      user_id INTEGER NOT NULL,
+      kind TEXT NOT NULL,
+      title TEXT NOT NULL DEFAULT '',
+      place TEXT NOT NULL DEFAULT '',
+      start_date TEXT NOT NULL,
+      end_date TEXT,
+      created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+      FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+    )
+  `);
+  db.exec('CREATE INDEX IF NOT EXISTS idx_stages_user ON life_stages(user_id)');
+
   console.log('✅ Base de datos SQLite inicializada');
 }
 

@@ -371,6 +371,41 @@
     .main-tabs button { flex: none; padding: 10px 22px; border-radius: 20px; background: transparent; color: var(--salvia-hover); border: 1px solid var(--salvia); font-weight: 500; }
     .main-tabs button.active { background: var(--salvia-fuerte); color: white; border-color: var(--salvia-fuerte); }
     .life-placeholder { text-align: center; padding: 50px 20px; color: #6b7a70; line-height: 1.7; }
+
+    /* ===== Línea de vida ===== */
+    #viewLife { --c-school: #8FA9B8; --c-work: #C9A66B; --c-personal: #5E8F6E; --c-res: #C98F7A; --c-hist: #8E8E7E; padding: 14px; }
+    .tl-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 10px; flex-wrap: wrap; }
+    .tl-head h2 { color: var(--salvia-hover); font-size: 1.2em; }
+    .tl-zoom { display: flex; gap: 6px; }
+    .tl-zoom button { flex: none; min-height: 40px; min-width: 40px; padding: 0 12px; border-radius: 20px; background: var(--salvia-claro); color: var(--salvia-hover); border: 1px solid var(--salvia); font-size: 1.1em; }
+    .tl-birth { background: var(--salvia-claro); border-radius: 12px; padding: 14px; margin-bottom: 12px; }
+    .tl-birth .row { display: grid; gap: 8px; margin-top: 8px; }
+    .tl-wrap { display: flex; border: 1px solid var(--fondo-2); border-radius: 12px; overflow: hidden; background: white; }
+    .tl-labels { flex: none; width: 74px; background: var(--fondo-1); border-right: 1px solid var(--fondo-2); }
+    .tl-axis-sp { height: 28px; }
+    .tl-label { height: 46px; display: flex; align-items: center; padding: 0 8px; font-size: 0.78em; font-weight: 600; border-top: 1px solid var(--fondo-2); }
+    .tl-scroll { flex: 1; overflow-x: auto; overflow-y: hidden; touch-action: pan-x; -webkit-overflow-scrolling: touch; }
+    .tl-inner { position: relative; }
+    .tl-axis { position: relative; height: 28px; }
+    .tl-tick { position: absolute; top: 0; height: 100%; border-left: 1px solid var(--fondo-2); font-size: 0.72em; color: #6b7a70; padding: 6px 0 0 3px; white-space: nowrap; }
+    .tl-row { position: relative; height: 46px; border-top: 1px solid var(--fondo-2); cursor: crosshair; }
+    .tl-gridline { position: absolute; top: 0; bottom: 0; border-left: 1px dashed #eef3ee; pointer-events: none; }
+    .tl-seg { position: absolute; top: 9px; height: 28px; border-radius: 8px; opacity: 0.75; font-size: 0.7em; color: #fff; padding: 0 6px; line-height: 28px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; cursor: pointer; }
+    .tl-mark { position: absolute; top: 14px; height: 18px; min-width: 18px; border-radius: 9px; border: 2px solid white; box-shadow: 0 0 0 1px rgba(0,0,0,.2); cursor: pointer; }
+    .tl-hist { position: absolute; top: 15px; width: 14px; height: 14px; margin-left: -7px; transform: rotate(45deg); background: var(--c-hist); border: 2px solid white; box-shadow: 0 0 0 1px rgba(0,0,0,.2); }
+    .tl-sel { position: absolute; top: 28px; bottom: 0; background: rgba(94,143,110,.18); border-left: 2px solid var(--salvia-fuerte); pointer-events: none; min-width: 2px; }
+    .tl-hint { font-size: 0.82em; color: #6b7a70; margin: 8px 2px; }
+    .tl-detail { margin-top: 14px; }
+    .tl-detail h3 { color: var(--salvia-hover); font-size: 1.05em; margin-bottom: 8px; }
+    .tl-detail h4 { font-size: 0.9em; margin: 12px 0 6px; color: var(--tinta); }
+    .tl-item { background: var(--fondo-1); border-radius: 10px; padding: 10px 12px; margin-bottom: 6px; font-size: 0.92em; line-height: 1.4; }
+    .tl-item small { color: #6b7a70; display: block; }
+    .tl-item .btns { display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap; }
+    .tl-item .btns button { flex: none; min-height: 38px; padding: 0 14px; font-size: 0.9em; }
+    .tl-dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; }
+    .tl-stage-form { background: var(--salvia-claro); border-radius: 12px; padding: 14px; margin-top: 10px; display: grid; gap: 8px; }
+    .tl-stage-form label { font-size: 0.85em; font-weight: 600; }
+    .tl-prop { border: 1px dashed var(--salvia); }
     .footer-stats { text-align: center; font-size: 0.85em; color: #6b7a70; margin: 10px 0 30px; }
     .footer-stats button { flex: none; background: none; border: none; color: var(--salvia-hover); text-decoration: underline; padding: 0 4px; font-size: 1em; font-weight: 400; cursor: pointer; }
     .stats-detail { background: white; border-radius: 10px; padding: 14px 18px; max-width: 420px; margin: 10px auto 0; text-align: left; box-shadow: 0 6px 24px rgba(60,90,70,0.10); }
@@ -469,11 +504,18 @@
     </nav>
 
     <div id="viewLife" class="card hidden">
-      <div class="life-placeholder">
-        <h2 style="color: var(--salvia-hover); margin-bottom: 10px;">Tu línea de vida</h2>
-        <p>Aquí verás tu vida en una línea horizontal con tus recuerdos, tus etapas<br>escolares y profesionales, dónde vivías y qué ocurría en el mundo.</p>
-        <p style="margin-top: 14px;"><em>Próximamente.</em></p>
+      <div class="tl-head">
+        <h2>Tu línea de vida</h2>
+        <div class="tl-zoom"><button type="button" id="tlZoomOut" aria-label="Alejar">−</button><button type="button" id="tlZoomIn" aria-label="Acercar">+</button></div>
       </div>
+      <div id="tlBirth" class="tl-birth hidden"></div>
+      <div id="tlMsg"></div>
+      <div id="tlWrap" class="tl-wrap hidden">
+        <div class="tl-labels" id="tlLabels"></div>
+        <div class="tl-scroll" id="tlScroll"><div class="tl-inner" id="tlInner"></div></div>
+      </div>
+      <div class="tl-hint" id="tlHint">Toca un punto de la línea para ver qué recuerdos tienes y qué ocurría en el mundo. Desliza para moverte; pellizca o usa + y − para acercar.</div>
+      <div id="tlDetail" class="tl-detail"></div>
     </div>
 
     <div id="viewMem">
@@ -873,7 +915,9 @@
         vm.classList.toggle('hidden', life); vl.classList.toggle('hidden', !life);
         tm.classList.toggle('active', !life); tl.classList.toggle('active', life);
       };
-      tm.onclick = () => show(false); tl.onclick = () => show(true);
+      tm.onclick = () => show(false);
+      tl.onclick = () => { show(true); if (window.openTimeline) window.openTimeline(); };
+      window.showTab = (life) => { show(life); if (life && window.openTimeline) window.openTimeline(); };
       document.getElementById('statsToggle').onclick = () => {
         const d = document.getElementById('stats'); d.classList.toggle('hidden');
         document.getElementById('statsToggle').textContent = d.classList.contains('hidden') ? 'Ver resumen' : 'Ocultar resumen';
@@ -1118,6 +1162,292 @@
       if (r.status === 401 && !String(args[0]).includes('/auth/')) showAuth();
       return r;
     };
+
+    // ===== LÍNEA DE VIDA =====
+    (function () {
+      const KINDS = {
+        school:    { label: 'Escolar',     color: '#8FA9B8' },
+        work:      { label: 'Profesional', color: '#C9A66B' },
+        personal:  { label: 'Personal',    color: '#5E8F6E' },
+        residence: { label: 'Residencia',  color: '#C98F7A' },
+        history:   { label: 'Historia',    color: '#8E8E7E' }
+      };
+      const ROWS = ['history', 'school', 'work', 'personal', 'residence'];
+      const DAY = 86400000;
+      const $ = (id) => document.getElementById(id);
+      let profile = null, stages = [], histEvents = [], sel = null, ppy = 16, editing = null, draftStage = null, startMs = 0, endMs = 0;
+
+      const ms = (s) => Date.UTC(+s.slice(0, 4), +s.slice(5, 7) - 1, +s.slice(8, 10));
+      const iso = (m) => new Date(m).toISOString().slice(0, 10);
+      const fmt = (s) => s ? new Date(s + 'T00:00:00').toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' }) : '';
+      const xOf = (m) => (m - startMs) / DAY / 365.25 * ppy;
+      const mOf = (x) => startMs + x / ppy * 365.25 * DAY;
+      const memKind = (m) => m.event_type === 'Estudios' ? 'school' : m.event_type === 'Trabajo' ? 'work' : 'personal';
+
+      async function api(path, opts) {
+        const r = await fetch('/api' + path, opts && opts.body ? { ...opts, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(opts.body) } : opts);
+        return r.json();
+      }
+
+      window.openTimeline = async function () {
+        try {
+          const [p, s] = await Promise.all([api('/profile'), api('/stages')]);
+          profile = p.data; stages = s.data || [];
+          await loadMemories();
+        } catch (e) {
+          $('tlMsg').innerHTML = '<div class="error">No se pudo cargar tu línea de vida. Inténtalo de nuevo.</div>'; return;
+        }
+        render();
+      };
+
+      function say(text, ok) { $('tlMsg').innerHTML = text ? `<div class="${ok ? 'success' : 'error'}">${esc(text)}</div>` : ''; }
+
+      function range() {
+        const today = Date.now();
+        const years = [];
+        if (profile && profile.birth_date) years.push(+profile.birth_date.slice(0, 4));
+        memories.forEach(m => m.date_happened && years.push(+m.date_happened.slice(0, 4)));
+        stages.forEach(s => years.push(+s.start_date.slice(0, 4)));
+        const first = years.length ? Math.min(...years) : new Date().getFullYear() - 10;
+        startMs = Date.UTC(first, 0, 1);
+        endMs = Date.UTC(new Date(today).getUTCFullYear() + 1, 0, 1);
+      }
+
+      function render() {
+        say('');
+        const hasBirth = profile && profile.birth_date;
+        const b = $('tlBirth');
+        if (!hasBirth) {
+          b.classList.remove('hidden');
+          b.innerHTML = `<strong>¿Cuándo naciste?</strong><div class="hint" style="margin-top:4px">Es el punto de partida de tu línea. Puedes cambiarlo cuando quieras.</div>
+            <div class="row"><input type="date" id="tlBirthDate" max="${new Date().toISOString().slice(0, 10)}">
+            <input type="text" id="tlBirthPlace" placeholder="Lugar de nacimiento (opcional)" maxlength="120">
+            <button type="button" class="btn-primary" id="tlBirthSave">Guardar</button></div>`;
+          $('tlBirthSave').onclick = saveBirth;
+        } else b.classList.add('hidden');
+
+        range();
+        drawTimeline();
+        drawDetail();
+      }
+
+      async function saveBirth() {
+        const r = await api('/profile', { method: 'PUT', body: { birth_date: $('tlBirthDate').value, birth_place: $('tlBirthPlace').value } });
+        if (!r.success) return say(r.error);
+        profile = r.data; render();
+      }
+
+      function drawTimeline() {
+        const W = Math.max(300, Math.ceil(xOf(endMs)));
+        $('tlWrap').classList.remove('hidden');
+        $('tlLabels').innerHTML = '<div class="tl-axis-sp"></div>' + ROWS.map(k => `<div class="tl-label" style="color:${KINDS[k].color}">${KINDS[k].label}</div>`).join('');
+
+        // Marcas de años: más o menos densas según el zoom
+        const step = ppy >= 80 ? 1 : ppy >= 32 ? 2 : ppy >= 14 ? 5 : 10;
+        let ticks = '', grid = '';
+        const y0 = new Date(startMs).getUTCFullYear(), y1 = new Date(endMs).getUTCFullYear();
+        for (let y = Math.ceil(y0 / step) * step; y <= y1; y += step) {
+          const x = xOf(Date.UTC(y, 0, 1));
+          ticks += `<div class="tl-tick" style="left:${x}px">${y}</div>`;
+          grid += `<div class="tl-gridline" style="left:${x}px"></div>`;
+        }
+
+        const rows = {};
+        ROWS.forEach(k => rows[k] = '');
+        stages.forEach(s => {
+          const a = xOf(ms(s.start_date)), e = s.end_date ? xOf(ms(s.end_date)) : xOf(Date.now());
+          rows[s.kind] += `<div class="tl-seg" data-stage="${s.id}" style="left:${a}px;width:${Math.max(8, e - a)}px;background:${KINDS[s.kind].color}" title="${esc(s.title || s.place)}">${esc(s.title || s.place)}</div>`;
+        });
+        memories.forEach(m => {
+          if (!m.date_happened) return;
+          const k = memKind(m), a = xOf(ms(m.date_happened));
+          const e = m.date_end && m.date_end > m.date_happened ? xOf(ms(m.date_end)) : a;
+          const w = Math.max(18, e - a);
+          rows[k] += `<div class="tl-mark" data-mem="${m.id}" style="left:${a - (w === 18 ? 9 : 0)}px;width:${w}px;background:${KINDS[k].color}" title="${esc(m.title)}"></div>`;
+        });
+        histEvents.forEach(h => {
+          rows.history += `<div class="tl-hist" style="left:${xOf(ms(h.date))}px" title="${esc(h.text)}"></div>`;
+        });
+
+        let selBox = '';
+        if (sel) {
+          const a = xOf(sel.from), w = Math.max(2, xOf(sel.to) - a);
+          selBox = `<div class="tl-sel" style="left:${a}px;width:${w}px"></div>`;
+        }
+        $('tlInner').style.width = W + 'px';
+        $('tlInner').innerHTML = `<div class="tl-axis">${ticks}</div>` +
+          ROWS.map(k => `<div class="tl-row" data-row="${k}">${grid}${rows[k]}</div>`).join('') + selBox;
+        bindTimeline();
+      }
+
+      function bindTimeline() {
+        $('tlInner').onclick = (ev) => {
+          const stage = ev.target.closest('[data-stage]');
+          const mark = ev.target.closest('[data-mem]');
+          if (mark) {
+            const m = memories.find(x => x.id == mark.dataset.mem);
+            return select(ms(m.date_happened), ms(m.date_end || m.date_happened));
+          }
+          if (stage) {
+            const s = stages.find(x => x.id == stage.dataset.stage);
+            return select(ms(s.start_date), s.end_date ? ms(s.end_date) : Date.now(), s.id);
+          }
+          const rect = $('tlInner').getBoundingClientRect();
+          const m = mOf(ev.clientX - rect.left);
+          const w = 12 / ppy * 365.25 * DAY / 2; // margen de toque ≈ 12 píxeles
+          select(Math.max(startMs, m - w), Math.min(Date.now(), m + w));
+        };
+      }
+
+      async function select(from, to, stageId) {
+        sel = { from, to, stageId: stageId || null, events: [], level: '' };
+        try {
+          const r = await api(`/history?from=${iso(from)}&to=${iso(to)}`);
+          if (r.success) { sel.events = r.data.events; sel.level = r.data.level; }
+        } catch (e) {}
+        // Los hechos históricos mostrados también se marcan en su fila
+        const seen = new Set(histEvents.map(h => h.date + h.text));
+        sel.events.forEach(h => { if (!seen.has(h.date + h.text)) histEvents.push(h); });
+        drawTimeline(); drawDetail();
+        $('tlDetail').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+
+      function proposals() {
+        const out = [];
+        const covered = (kind, dateStr, place) => stages.some(s => s.kind === kind && s.start_date <= dateStr && (!s.end_date || s.end_date >= dateStr) && (kind !== 'residence' || !place || s.place.toLowerCase() === place.toLowerCase()));
+        const places = {};
+        memories.forEach(m => {
+          if (!m.date_happened) return;
+          const k = memKind(m);
+          if (k === 'personal') return;
+          if (!covered(k, m.date_happened)) out.push({ kind: k, title: m.event_type === 'Estudios' ? '' : '', place: m.place || '', start_date: m.date_happened.slice(0, 4) + '-01-01', end_date: '', why: `Tienes el recuerdo «${m.title}» (${fmt(m.date_happened)}) pero esta etapa no está en tu línea.` });
+        });
+        memories.forEach(m => {
+          if (!m.date_happened || !m.place) return;
+          const key = m.place.toLowerCase();
+          if (!places[key] || m.date_happened < places[key].date) places[key] = { place: m.place, date: m.date_happened };
+        });
+        Object.values(places).forEach(p => {
+          if (!covered('residence', p.date, p.place) && !stages.some(s => s.kind === 'residence' && s.place.toLowerCase() === p.place.toLowerCase()))
+            out.push({ kind: 'residence', title: '', place: p.place, start_date: p.date.slice(0, 4) + '-01-01', end_date: '', why: `Hablas de «${p.place}» en tus recuerdos. ¿Viviste allí?` });
+        });
+        return out.slice(0, 4);
+      }
+
+      function stageForm(s) {
+        const v = s || { kind: 'residence', title: '', place: '', start_date: '', end_date: '' };
+        return `<div class="tl-stage-form" id="tlStageForm">
+          <label>Tipo</label>
+          <select id="sfKind">${['residence', 'school', 'work'].map(k => `<option value="${k}" ${v.kind === k ? 'selected' : ''}>${KINDS[k].label}</option>`).join('')}</select>
+          <label>Nombre (colegio, empresa…)</label><input type="text" id="sfTitle" maxlength="120" value="${esc(v.title)}">
+          <label>Lugar</label><input type="text" id="sfPlace" maxlength="120" value="${esc(v.place)}">
+          <label>Desde</label><input type="date" id="sfStart" value="${esc(v.start_date)}">
+          <label>Hasta (vacío si continúa)</label><input type="date" id="sfEnd" value="${esc(v.end_date || '')}">
+          <div class="button-group"><button type="button" class="btn-primary" id="sfSave">Guardar</button><button type="button" class="btn-secondary" id="sfCancel">Cancelar</button></div>
+        </div>`;
+      }
+
+      function drawDetail() {
+        const d = $('tlDetail');
+        let html = '';
+
+        if (sel) {
+          const same = iso(sel.from) === iso(sel.to);
+          const title = same ? fmt(iso(sel.from)) : `${fmt(iso(sel.from))} – ${fmt(iso(sel.to))}`;
+          const ms0 = sel.from - 0, ms1 = sel.to + DAY - 1;
+          const mems = memories.filter(m => m.date_happened && ms(m.date_happened) <= ms1 && ms(m.date_end || m.date_happened) >= ms0);
+          const active = stages.filter(s => ms(s.start_date) <= ms1 && (!s.end_date || ms(s.end_date) >= ms0));
+          const lead = { dia: 'Ese día', mes: 'Ese mes', 'año': 'Ese año', periodo: 'En ese periodo', cercano: 'Por aquellos años' }[sel.level] || '';
+
+          html += `<h3>📅 ${esc(title)}</h3>`;
+          html += `<h4>🌍 ${esc(lead)} en el mundo y en España</h4>`;
+          html += sel.events.length
+            ? sel.events.map(e => `<div class="tl-item"><small>${esc(fmt(e.date))} · ${e.scope === 'españa' ? 'España' : 'Mundo'}</small>${esc(e.text)}</div>`).join('')
+            : '<div class="tl-item">No tenemos hechos destacados para estas fechas.</div>';
+
+          html += '<h4>📖 Tus recuerdos</h4>';
+          html += mems.length ? mems.map(m => {
+            const audios = (m.media || []).filter(x => x.kind === 'audio');
+            return `<div class="tl-item"><strong>${esc(m.title)}</strong><small>${esc(fmt(m.date_happened))}${m.place ? ' · 📍 ' + esc(m.place) : ''}</small>
+              ${audios.map(a => `<audio controls preload="none" src="${a.url}" style="width:100%;margin-top:6px"></audio>`).join('')}
+              <div class="btns"><button type="button" class="btn-secondary" data-open="${m.id}">Abrir recuerdo</button></div></div>`;
+          }).join('') : '<div class="tl-item">No hay recuerdos en estas fechas.</div>';
+
+          html += '<h4>🧭 Tus etapas</h4>';
+          html += active.length ? active.map(s => stageItem(s)).join('') : '<div class="tl-item">Ninguna etapa registrada en estas fechas.</div>';
+        }
+
+        const props = proposals();
+        if (props.length) {
+          html += '<h4>💡 Te proponemos añadir</h4>' + props.map((p, i) => `<div class="tl-item tl-prop"><span class="tl-dot" style="background:${KINDS[p.kind].color}"></span><strong>${KINDS[p.kind].label}</strong><small>${esc(p.why)}</small><div class="btns"><button type="button" class="btn-primary" data-prop="${i}">Completar datos</button></div></div>`).join('');
+        }
+
+        html += '<div class="button-group" style="margin-top:12px"><button type="button" class="btn-secondary" id="tlAddStage">+ Añadir una etapa (colegio, trabajo, casa)</button></div>';
+        if (editing !== null) html += stageForm(editing === 'new' ? draftStage : stages.find(s => s.id === editing));
+        d.innerHTML = html;
+
+        d.querySelectorAll('[data-open]').forEach(b => b.onclick = () => { window.showTab(false); selectMemory(+b.dataset.open); });
+        d.querySelectorAll('[data-prop]').forEach(b => b.onclick = () => { draftStage = props[+b.dataset.prop]; editing = 'new'; drawDetail(); $('tlStageForm').scrollIntoView({ block: 'center' }); });
+        d.querySelectorAll('[data-edit]').forEach(b => b.onclick = () => { editing = +b.dataset.edit; drawDetail(); $('tlStageForm').scrollIntoView({ block: 'center' }); });
+        d.querySelectorAll('[data-del]').forEach(b => b.onclick = () => removeStage(+b.dataset.del));
+        $('tlAddStage').onclick = () => { draftStage = null; editing = 'new'; drawDetail(); $('tlStageForm').scrollIntoView({ block: 'center' }); };
+        if (editing !== null) {
+          $('sfCancel').onclick = () => { editing = null; drawDetail(); };
+          $('sfSave').onclick = saveStage;
+        }
+      }
+
+      function stageItem(s) {
+        const k = KINDS[s.kind];
+        return `<div class="tl-item"><span class="tl-dot" style="background:${k.color}"></span><strong>${esc(s.title || s.place)}</strong>
+          <small>${k.label}${s.title && s.place ? ' · 📍 ' + esc(s.place) : ''} · ${esc(fmt(s.start_date))} – ${s.end_date ? esc(fmt(s.end_date)) : 'actualidad'}</small>
+          <div class="btns"><button type="button" class="btn-edit" data-edit="${s.id}">Editar</button><button type="button" class="btn-danger" data-del="${s.id}">Eliminar</button></div></div>`;
+      }
+
+      async function saveStage() {
+        const body = { kind: $('sfKind').value, title: $('sfTitle').value, place: $('sfPlace').value, start_date: $('sfStart').value, end_date: $('sfEnd').value };
+        const isNew = editing === 'new';
+        const r = isNew ? await api('/stages', { method: 'POST', body }) : await api('/stages/' + editing, { method: 'PUT', body });
+        if (!r.success) return say(r.error);
+        const s = await api('/stages'); stages = s.data || [];
+        editing = null; draftStage = null; say('Etapa guardada', true);
+        render();
+      }
+
+      async function removeStage(id) {
+        if (!confirm('¿Eliminar esta etapa? Tus recuerdos no se borran.')) return;
+        const r = await api('/stages/' + id, { method: 'DELETE' });
+        if (!r.success) return say(r.error);
+        stages = stages.filter(s => s.id !== id);
+        render();
+      }
+
+      // Zoom con botones y con dos dedos, manteniendo el punto central
+      function setZoom(next, anchorPx) {
+        const sc = $('tlScroll');
+        const a = anchorPx == null ? sc.clientWidth / 2 : anchorPx;
+        const m = mOf(sc.scrollLeft + a);
+        ppy = Math.min(160, Math.max(3, next));
+        drawTimeline();
+        sc.scrollLeft = xOf(m) - a;
+      }
+      $('tlZoomIn').onclick = () => setZoom(ppy * 1.5);
+      $('tlZoomOut').onclick = () => setZoom(ppy / 1.5);
+      (function pinch() {
+        const sc = $('tlScroll');
+        let d0 = 0, p0 = 0;
+        const dist = (t) => Math.hypot(t[0].clientX - t[1].clientX, t[0].clientY - t[1].clientY);
+        sc.addEventListener('touchstart', (e) => { if (e.touches.length === 2) { d0 = dist(e.touches); p0 = ppy; } }, { passive: true });
+        sc.addEventListener('touchmove', (e) => {
+          if (e.touches.length !== 2 || !d0) return;
+          e.preventDefault();
+          const rect = sc.getBoundingClientRect();
+          setZoom(p0 * dist(e.touches) / d0, (e.touches[0].clientX + e.touches[1].clientX) / 2 - rect.left);
+        }, { passive: false });
+        sc.addEventListener('touchend', () => { d0 = 0; });
+        sc.addEventListener('wheel', (e) => { if (e.ctrlKey) { e.preventDefault(); setZoom(ppy * (e.deltaY < 0 ? 1.15 : 0.87), e.clientX - sc.getBoundingClientRect().left); } }, { passive: false });
+      })();
+    })();
 
     // ===== INICIALIZACIÓN =====
     window.addEventListener('load', async () => {

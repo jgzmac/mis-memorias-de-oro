@@ -16,6 +16,7 @@ const {
 const { requireAuth, register, login, logout, me } = require('./auth');
 const { serveMedia, discardMedia } = require('./api/media');
 const { receive, analyzeAudio, getJob } = require('./api/audio');
+const { getProfile, updateProfile, listStages, createStage, updateStage, deleteStage, getHistory } = require('./api/life');
 const provider = require('./providers');
 
 const app = express();
@@ -69,6 +70,15 @@ app.post('/api/audio/analyze', requireAuth, receive, analyzeAudio);
 app.get('/api/audio/jobs/:id', requireAuth, getJob);
 app.get('/api/media/:id', requireAuth, serveMedia);
 app.delete('/api/media/:id', requireAuth, discardMedia);
+
+// ===== LÍNEA DE VIDA =====
+app.get('/api/profile', requireAuth, getProfile);
+app.put('/api/profile', requireAuth, updateProfile);
+app.get('/api/stages', requireAuth, listStages);
+app.post('/api/stages', requireAuth, createStage);
+app.put('/api/stages/:id', requireAuth, updateStage);
+app.delete('/api/stages/:id', requireAuth, deleteStage);
+app.get('/api/history', requireAuth, getHistory);
 
 // ===== FALLBACK PARA SPA =====
 app.get('*', (req, res) => {
