@@ -5,6 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mis Memorias de Oro</title>
   <style>
+    :root {
+      --salvia: #7FA88B;          /* verde elegido */
+      --salvia-fuerte: #5E8F6E;   /* botones y textos sobre blanco (mejor lectura) */
+      --salvia-hover: #4E7D5D;
+      --salvia-claro: #E6EFE8;
+      --fondo-1: #F4F7F2;
+      --fondo-2: #DCE8DF;
+      --azul-calma: #8FA9B8;      /* acento secundario sereno */
+      --tinta: #33423A;
+    }
     * {
       margin: 0;
       padding: 0;
@@ -13,7 +23,8 @@
 
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      background: linear-gradient(160deg, var(--fondo-1) 0%, var(--fondo-2) 100%);
+      color: var(--tinta);
       min-height: 100vh;
       padding: 20px;
     }
@@ -25,14 +36,14 @@
 
     header {
       text-align: center;
-      color: white;
-      margin-bottom: 40px;
+      color: var(--salvia-hover);
+      margin-bottom: 24px;
     }
 
     h1 {
       font-size: 2.5em;
       margin-bottom: 10px;
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+      font-weight: 600;
     }
 
     .subtitle {
@@ -51,7 +62,7 @@
       background: white;
       border-radius: 10px;
       padding: 25px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 6px 24px rgba(60, 90, 70, 0.10);
     }
 
     .form-group {
@@ -78,7 +89,7 @@
 
     input:focus, textarea:focus, select:focus {
       outline: none;
-      border-color: #667eea;
+      border-color: var(--salvia);
     }
 
     textarea {
@@ -100,7 +111,7 @@
     }
 
     .tag {
-      background: #667eea;
+      background: var(--salvia-fuerte);
       color: white;
       padding: 5px 10px;
       border-radius: 20px;
@@ -137,14 +148,14 @@
     }
 
     .btn-primary {
-      background: #667eea;
+      background: var(--salvia-fuerte);
       color: white;
     }
 
     .btn-primary:hover {
-      background: #5568d3;
+      background: var(--salvia-hover);
       transform: translateY(-2px);
-      box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+      box-shadow: 0 5px 15px rgba(94, 143, 110, 0.35);
     }
 
     .btn-secondary {
@@ -157,23 +168,23 @@
     }
 
     .btn-danger {
-      background: #ff6b6b;
+      background: #C98B84;
       color: white;
       flex: 0.5;
     }
 
     .btn-danger:hover {
-      background: #ff5252;
+      background: #B87870;
     }
 
     .btn-edit {
-      background: #4ecdc4;
+      background: var(--azul-calma);
       color: white;
       flex: 0.5;
     }
 
     .btn-edit:hover {
-      background: #45b7aa;
+      background: #7893A3;
     }
 
     .memories-list {
@@ -184,7 +195,7 @@
 
     .memory-item {
       background: #f9f9f9;
-      border-left: 4px solid #667eea;
+      border-left: 4px solid var(--salvia);
       padding: 15px;
       border-radius: 5px;
       cursor: pointer;
@@ -197,8 +208,8 @@
     }
 
     .memory-item.active {
-      background: #e8eef7;
-      border-left-color: #764ba2;
+      background: var(--salvia-claro);
+      border-left-color: var(--salvia-hover);
     }
 
     .memory-title {
@@ -216,7 +227,7 @@
     }
 
     .memory-category {
-      background: #667eea;
+      background: var(--salvia-fuerte);
       color: white;
       padding: 3px 8px;
       border-radius: 3px;
@@ -258,7 +269,7 @@
       background: white;
       border-radius: 10px;
       padding: 20px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 6px 24px rgba(60, 90, 70, 0.10);
       margin-bottom: 20px;
     }
 
@@ -280,7 +291,7 @@
 
     .stat-value {
       font-weight: 600;
-      color: #667eea;
+      color: var(--salvia-fuerte);
     }
 
     .empty-state {
@@ -323,18 +334,18 @@
     #authScreen { max-width: 420px; margin: 0 auto; }
     #authScreen .tabs { display: flex; gap: 8px; margin-bottom: 20px; }
     #authScreen .tabs button { flex: 1; padding: 10px; border: none; border-radius: 6px; cursor: pointer; background: #eee; font-size: 1em; }
-    #authScreen .tabs button.active { background: #667eea; color: white; }
+    #authScreen .tabs button.active { background: var(--salvia-fuerte); color: white; }
     #authScreen .hint { font-size: 0.85em; color: #666; margin-top: 5px; }
     #authScreen input { width: 100%; }
-    .userbar { display: flex; justify-content: flex-end; align-items: center; gap: 12px; color: white; margin-bottom: 10px; }
-    .userbar button { background: rgba(255,255,255,0.2); color: white; border: 1px solid rgba(255,255,255,0.5); border-radius: 6px; padding: 6px 14px; cursor: pointer; }
+    .userbar { display: flex; justify-content: flex-end; align-items: center; gap: 12px; color: var(--salvia-hover); margin-bottom: 10px; }
+    .userbar button { flex: none; background: transparent; color: var(--salvia-hover); border: 1px solid var(--salvia); border-radius: 6px; padding: 6px 14px; cursor: pointer; }
     .hidden { display: none !important; }
 
     /* ===== Audio ===== */
-    .audio-box { border: 2px dashed #c9cdf5; border-radius: 10px; padding: 15px; margin-bottom: 20px; background: #f7f8ff; }
+    .audio-box { border: 2px dashed var(--salvia); border-radius: 10px; padding: 15px; margin-bottom: 20px; background: #F3F8F4; }
     .audio-box h3 { font-size: 1em; color: #333; margin-bottom: 10px; }
     .audio-actions { display: flex; gap: 8px; flex-wrap: wrap; }
-    .audio-actions button, .audio-actions label.btn-file { flex: 1; min-width: 120px; padding: 10px; border: none; border-radius: 6px; cursor: pointer; background: #667eea; color: white; font-size: 0.95em; text-align: center; }
+    .audio-actions button, .audio-actions label.btn-file { flex: 1; min-width: 120px; padding: 10px; border: none; border-radius: 6px; cursor: pointer; background: var(--salvia-fuerte); color: white; font-size: 0.95em; text-align: center; }
     .audio-actions button.recording { background: #e53e3e; animation: pulse 1s infinite; }
     .audio-actions label.btn-file input { display: none; }
     @keyframes pulse { 50% { opacity: 0.6; } }
@@ -346,7 +357,7 @@
     .person-row { display: grid; grid-template-columns: 1fr 1fr auto; gap: 6px; margin-bottom: 6px; }
     .person-row input { padding: 7px; border: 1px solid #ccc; border-radius: 6px; }
     .person-row button { background: #eee; border: none; border-radius: 6px; padding: 0 10px; cursor: pointer; }
-    .notice { background: #fff8e1; color: #7a5b00; padding: 10px; border-radius: 6px; font-size: 0.85em; margin-bottom: 12px; }
+    .notice { background: #F6F3E4; color: #6B5F2E; padding: 10px; border-radius: 6px; font-size: 0.85em; margin-bottom: 12px; }
     .memory-audio { margin-top: 10px; }
     .memory-audio audio { width: 100%; }
     .memory-audio a { font-size: 0.85em; }
@@ -354,6 +365,66 @@
     .memory-extra { margin-top: 6px; font-size: 0.9em; color: #555; }
     .modal-bg { position: fixed; inset: 0; background: rgba(0,0,0,0.55); display: flex; align-items: flex-start; justify-content: center; padding: 20px; overflow-y: auto; z-index: 50; }
     .modal { background: white; border-radius: 10px; padding: 25px; max-width: 620px; width: 100%; }
+
+    /* ===== Pestañas y pie ===== */
+    .main-tabs { display: flex; gap: 6px; justify-content: center; margin-bottom: 20px; }
+    .main-tabs button { flex: none; padding: 10px 22px; border-radius: 20px; background: transparent; color: var(--salvia-hover); border: 1px solid var(--salvia); font-weight: 500; }
+    .main-tabs button.active { background: var(--salvia-fuerte); color: white; border-color: var(--salvia-fuerte); }
+    .life-placeholder { text-align: center; padding: 50px 20px; color: #6b7a70; line-height: 1.7; }
+    .footer-stats { text-align: center; font-size: 0.85em; color: #6b7a70; margin: 10px 0 30px; }
+    .footer-stats button { flex: none; background: none; border: none; color: var(--salvia-hover); text-decoration: underline; padding: 0 4px; font-size: 1em; font-weight: 400; cursor: pointer; }
+    .stats-detail { background: white; border-radius: 10px; padding: 14px 18px; max-width: 420px; margin: 10px auto 0; text-align: left; box-shadow: 0 6px 24px rgba(60,90,70,0.10); }
+    .stats-detail .stat-item:last-child { border-bottom: none; }
+
+    /* ===== Móvil primero ===== */
+    body { padding: 14px 14px 90px; }
+    .container { max-width: 720px; }
+    h1 { font-size: 1.7em; }
+    .subtitle { font-size: 1em; }
+    header { margin-bottom: 14px; }
+    .main-content { display: flex; flex-direction: column; gap: 16px; margin-bottom: 20px; }
+    .card { padding: 18px; }
+    input, textarea, select { font-size: 16px; padding: 12px; }   /* 16px evita el zoom automático en iPhone */
+    button, .audio-actions label.btn-file { min-height: 48px; }
+    .form-row { grid-template-columns: 1fr; gap: 0; }
+    .create-actions { display: grid; grid-template-columns: 1fr; gap: 12px; margin-bottom: 18px; }
+    .big-btn { display: flex; align-items: center; justify-content: center; gap: 12px; min-height: 72px; font-size: 1.2em; border-radius: 16px; box-shadow: 0 6px 18px rgba(60,90,70,0.14); }
+    .big-ico { font-size: 1.5em; }
+    .big-voice { background: var(--salvia-fuerte); color: white; }
+    .big-voice:hover { background: var(--salvia-hover); }
+    .big-write { background: white; color: var(--salvia-hover); border: 2px solid var(--salvia); }
+    .big-write:hover { background: var(--salvia-claro); }
+    .big-btn.on { outline: 3px solid var(--azul-calma); outline-offset: 2px; }
+    .panel-close { width: 100%; margin-top: 12px; }
+    .audio-box { margin-bottom: 0; }
+    .audio-actions button, .audio-actions label.btn-file { display: flex; align-items: center; justify-content: center; }
+    .memory-item:hover { transform: none; }
+    .button-group { flex-wrap: wrap; }
+    .button-group button { min-width: 120px; }
+    .modal-bg { padding: 0; align-items: stretch; }
+    .modal { border-radius: 0; min-height: 100%; padding: 18px; }
+    .person-row { grid-template-columns: 1fr auto; }
+    .person-row input:nth-child(2) { grid-column: 1 / 2; }
+    .person-row button { grid-row: 1 / span 2; grid-column: 2; }
+
+    /* Navegación inferior en móvil */
+    .main-tabs { position: fixed; left: 0; right: 0; bottom: 0; z-index: 40; margin: 0; padding: 8px 10px calc(8px + env(safe-area-inset-bottom)); background: rgba(255,255,255,0.96); border-top: 1px solid var(--salvia-claro); gap: 8px; }
+    .main-tabs button { flex: 1; min-height: 48px; border-radius: 14px; }
+
+    @media (min-width: 700px) {
+      body { padding: 24px 24px 40px; }
+      h1 { font-size: 2.3em; }
+      .create-actions { grid-template-columns: 1fr 1fr; }
+      .form-row { grid-template-columns: 1fr 1fr; gap: 10px; }
+      .card { padding: 25px; }
+      .main-tabs { position: static; background: none; border: none; padding: 0; margin-bottom: 20px; justify-content: center; }
+      .main-tabs button { flex: none; min-height: 0; border-radius: 20px; }
+      .modal-bg { padding: 20px; align-items: flex-start; }
+      .modal { border-radius: 10px; min-height: 0; padding: 25px; }
+      .person-row { grid-template-columns: 1fr 1fr auto; }
+      .person-row input:nth-child(2) { grid-column: auto; }
+      .person-row button { grid-row: auto; grid-column: auto; }
+    }
   </style>
 </head>
 <body>
@@ -392,28 +463,42 @@
 
     <div id="appScreen" class="hidden">
     <div class="userbar"><span id="userName"></span><button type="button" id="logoutBtn">Salir</button></div>
-    <div class="stats" id="stats">
-      <h3>📊 Estadísticas</h3>
-      <div class="stat-item">
-        <span class="stat-label">Total de memorias:</span>
-        <span class="stat-value" id="stat-total">0</span>
+    <nav class="main-tabs">
+      <button type="button" id="tabMem" class="active">Recuerdos</button>
+      <button type="button" id="tabLife">Línea de vida</button>
+    </nav>
+
+    <div id="viewLife" class="card hidden">
+      <div class="life-placeholder">
+        <h2 style="color: var(--salvia-hover); margin-bottom: 10px;">Tu línea de vida</h2>
+        <p>Aquí verás tu vida en una línea horizontal con tus recuerdos, tus etapas<br>escolares y profesionales, dónde vivías y qué ocurría en el mundo.</p>
+        <p style="margin-top: 14px;"><em>Próximamente.</em></p>
       </div>
     </div>
 
+    <div id="viewMem">
+    <div id="message"></div>
+    <div class="create-actions">
+      <button type="button" class="big-btn big-voice" id="btnVoice"><span class="big-ico">🎙️</span><span>Contar con mi voz</span></button>
+      <button type="button" class="big-btn big-write" id="btnWrite"><span class="big-ico">✍️</span><span>Escribir</span></button>
+    </div>
+
     <div class="main-content">
-      <!-- FORMULARIO -->
-      <div class="card">
+      <div class="card hidden" id="voicePanel">
         <div class="audio-box">
-          <h3>🎙️ Crear un recuerdo con tu voz</h3>
+          <h3>🎙️ Cuenta tu recuerdo</h3>
           <div class="audio-actions">
             <button type="button" id="recBtn">⏺ Grabar</button>
             <label class="btn-file">📁 Subir audio<input type="file" id="audioFile" accept="audio/*"></label>
           </div>
           <div class="audio-status" id="audioStatus">Cuenta tu recuerdo: cuándo fue, con quién, dónde. Después podrás revisarlo.</div>
         </div>
-        <h2 style="margin-bottom: 20px; color: #333;">Crear Memoria</h2>
+        <button type="button" class="btn-secondary panel-close" data-close="voicePanel">Cerrar</button>
+      </div>
 
-        <div id="message"></div>
+      <div class="card hidden" id="writePanel">
+        <h2 style="margin-bottom: 16px; color: var(--tinta);" id="writeTitle">Escribir un recuerdo</h2>
+
 
         <form id="memoryForm">
           <div class="form-group">
@@ -463,7 +548,7 @@
 
           <div class="button-group">
             <button type="submit" class="btn-primary">Guardar Memoria</button>
-            <button type="reset" class="btn-secondary">Limpiar</button>
+            <button type="button" class="btn-secondary" id="cancelWrite">Cancelar</button>
           </div>
         </form>
       </div>
@@ -474,6 +559,15 @@
         <div class="memories-list" id="memoriesList">
           <div class="empty-state">No hay memorias aún. ¡Crea tu primera memoria!</div>
         </div>
+      </div>
+    </div>
+    </div>
+
+    <div class="footer-stats">
+      <span id="footerCount">0 recuerdos</span> ·
+      <button type="button" id="statsToggle">Ver resumen</button>
+      <div class="stats-detail hidden" id="stats">
+        <div class="stat-item"><span class="stat-label">Total de memorias:</span><span class="stat-value" id="stat-total">0</span></div>
       </div>
     </div>
     </div>
@@ -572,10 +666,7 @@
         const result = await response.json();
         if (result.success) {
           showMessage('✅ Memoria guardada exitosamente');
-          form.reset();
-          tags = [];
-          renderTags();
-          currentMemoryId = null;
+          resetWriteForm(); closePanels();
           loadMemories();
         } else {
           showMessage(`❌ ${result.error}`, 'error');
@@ -607,10 +698,7 @@
         const result = await response.json();
         if (result.success) {
           showMessage('✅ Memoria actualizada');
-          form.reset();
-          tags = [];
-          renderTags();
-          currentMemoryId = null;
+          resetWriteForm(); closePanels();
           loadMemories();
         }
       } catch (err) {
@@ -641,6 +729,7 @@
         const response = await fetch(`${API_URL}/stats`);
         const result = await response.json();
         statTotal.textContent = result.data.total;
+        document.getElementById('footerCount').textContent = result.data.total === 1 ? '1 recuerdo' : `${result.data.total} recuerdos`;
       } catch (err) {
         console.error('Error cargando stats:', err);
       }
@@ -710,7 +799,9 @@
         tags = memory.tags || [];
         renderTags();
         currentMemoryId = id;
-        titleInput.focus();
+        document.getElementById('writeTitle').textContent = 'Editar recuerdo';
+        renderMemories();
+        openPanel('write');
       }
     }
 
@@ -741,6 +832,53 @@
       }
     });
 
+
+
+
+    // ===== PANELES: voz / escribir =====
+    const voicePanel = document.getElementById('voicePanel');
+    const writePanel = document.getElementById('writePanel');
+    const btnVoice = document.getElementById('btnVoice');
+    const btnWrite = document.getElementById('btnWrite');
+
+    function openPanel(which) {
+      const w = which === 'write';
+      writePanel.classList.toggle('hidden', !w);
+      voicePanel.classList.toggle('hidden', w ? true : false);
+      btnWrite.classList.toggle('on', w);
+      btnVoice.classList.toggle('on', !w);
+      (w ? writePanel : voicePanel).scrollIntoView({ behavior: 'smooth', block: 'start' });
+      if (w) titleInput.focus({ preventScroll: true });
+    }
+    function closePanels() {
+      writePanel.classList.add('hidden'); voicePanel.classList.add('hidden');
+      btnWrite.classList.remove('on'); btnVoice.classList.remove('on');
+    }
+    btnVoice.onclick = () => { if (!voicePanel.classList.contains('hidden')) return closePanels(); resetWriteForm(); openPanel('voice'); };
+    btnWrite.onclick = () => { if (!writePanel.classList.contains('hidden') && !currentMemoryId) return closePanels(); resetWriteForm(); openPanel('write'); };
+    document.querySelectorAll('[data-close]').forEach(b => b.onclick = closePanels);
+    document.getElementById('cancelWrite').onclick = () => { resetWriteForm(); closePanels(); };
+
+    function resetWriteForm() {
+      form.reset(); tags = []; renderTags(); currentMemoryId = null;
+      document.getElementById('writeTitle').textContent = 'Escribir un recuerdo';
+      renderMemories();
+    }
+
+    // ===== PESTAÑAS Y RESUMEN =====
+    (function () {
+      const tm = document.getElementById('tabMem'), tl = document.getElementById('tabLife');
+      const vm = document.getElementById('viewMem'), vl = document.getElementById('viewLife');
+      const show = (life) => {
+        vm.classList.toggle('hidden', life); vl.classList.toggle('hidden', !life);
+        tm.classList.toggle('active', !life); tl.classList.toggle('active', life);
+      };
+      tm.onclick = () => show(false); tl.onclick = () => show(true);
+      document.getElementById('statsToggle').onclick = () => {
+        const d = document.getElementById('stats'); d.classList.toggle('hidden');
+        document.getElementById('statsToggle').textContent = d.classList.contains('hidden') ? 'Ver resumen' : 'Ocultar resumen';
+      };
+    })();
 
     // ===== AUDIO =====
     const SAMPLE_RATE = 16000;
@@ -903,8 +1041,8 @@
           method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body)
         })).json();
         if (!res.success) { rv('reviewMsg').innerHTML = `<div class="error">${esc(res.error)}</div>`; return; }
-        draft = null; closeReview();
-        setAudioStatus('✅ Recuerdo guardado.');
+        draft = null; closeReview(); closePanels();
+        setAudioStatus('Cuenta tu recuerdo: cuándo fue, con quién, dónde. Después podrás revisarlo.');
         showMessage('✅ Recuerdo guardado con tu audio');
         loadMemories();
       } catch (e) { rv('reviewMsg').innerHTML = '<div class="error">No se pudo guardar. Inténtalo de nuevo.</div>'; }
