@@ -451,18 +451,33 @@
     .person-row input:nth-child(2) { grid-column: 1 / 2; }
     .person-row button { grid-row: 1 / span 2; grid-column: 2; }
 
-    /* Navegación inferior en móvil */
-    .main-tabs { position: fixed; left: 0; right: 0; bottom: 0; z-index: 40; margin: 0; padding: 8px 10px calc(8px + env(safe-area-inset-bottom)); background: rgba(255,255,255,0.96); border-top: 1px solid var(--salvia-claro); gap: 8px; }
-    .main-tabs button { flex: 1; min-height: 48px; border-radius: 14px; }
+    /* Menú inferior con iconos (móvil y escritorio) */
+    .bottom-nav { position: fixed; left: 0; right: 0; bottom: 0; z-index: 40; display: flex; justify-content: center; padding: 6px 6px calc(6px + env(safe-area-inset-bottom)); background: rgba(255,255,255,0.97); border-top: 1px solid var(--salvia-claro); box-shadow: 0 -4px 16px rgba(60,90,70,0.08); }
+    .bottom-nav .nav-inner { display: flex; width: 100%; max-width: 720px; gap: 2px; }
+    .bottom-nav button { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; min-height: 56px; padding: 4px 2px; border: none; border-radius: 14px; background: transparent; color: #6b7a70; font-size: 0.72em; font-weight: 500; cursor: pointer; }
+    .bottom-nav button .ico { font-size: 1.7em; line-height: 1; }
+    .bottom-nav button.active { background: var(--salvia-claro); color: var(--salvia-hover); font-weight: 700; }
+    .bottom-nav button.nav-create .ico { background: var(--salvia-fuerte); color: white; border-radius: 50%; width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; font-size: 1.5em; box-shadow: 0 3px 10px rgba(60,90,70,0.3); }
+    .bottom-nav button.nav-create.active { background: transparent; }
+
+    /* Inicio, perfil, buscador */
+    .home-hello { font-size: 1.4em; color: var(--salvia-hover); margin-bottom: 4px; }
+    .home-sub { color: #6b7a70; margin-bottom: 18px; }
+    .home-recent h3 { font-size: 1em; color: var(--tinta); margin: 20px 0 8px; }
+    .home-item { background: var(--fondo-1); border-radius: 12px; padding: 12px 14px; margin-bottom: 8px; cursor: pointer; }
+    .home-item small { display: block; color: #6b7a70; }
+    .searchbar { display: grid; grid-template-columns: 1fr; gap: 8px; margin-bottom: 14px; }
+    .searchbar .sort-row { display: flex; align-items: center; gap: 8px; font-size: 0.9em; color: #6b7a70; }
+    .searchbar .sort-row select { flex: 1; }
+    .profile-row { display: grid; gap: 8px; margin: 10px 0 16px; }
+    .logout-big { width: 100%; margin-top: 10px; background: white; color: #b14a3a; border: 2px solid #e3b5ab; border-radius: 14px; font-size: 1.05em; }
 
     @media (min-width: 700px) {
-      body { padding: 24px 24px 40px; }
+      body { padding: 24px 24px 100px; }
       h1 { font-size: 2.3em; }
       .create-actions { grid-template-columns: 1fr 1fr; }
       .form-row { grid-template-columns: 1fr 1fr; gap: 10px; }
       .card { padding: 25px; }
-      .main-tabs { position: static; background: none; border: none; padding: 0; margin-bottom: 20px; justify-content: center; }
-      .main-tabs button { flex: none; min-height: 0; border-radius: 20px; }
       .modal-bg { padding: 20px; align-items: flex-start; }
       .modal { border-radius: 10px; min-height: 0; padding: 25px; }
       .person-row { grid-template-columns: 1fr 1fr auto; }
@@ -506,16 +521,55 @@
     </div>
 
     <div id="appScreen" class="hidden">
-    <div class="userbar"><span id="userName"></span><button type="button" id="logoutBtn">Salir</button></div>
-    <nav class="main-tabs">
-      <button type="button" id="tabMem" class="active">Recuerdos</button>
-      <button type="button" id="tabLife">Línea de vida</button>
-    </nav>
+    <nav class="bottom-nav" id="bottomNav"><div class="nav-inner">
+      <button type="button" data-view="home" class="active"><span class="ico">🏠</span><span>Inicio</span></button>
+      <button type="button" data-view="mem"><span class="ico">📖</span><span>Recuerdos</span></button>
+      <button type="button" data-view="create" class="nav-create"><span class="ico">＋</span><span>Crear</span></button>
+      <button type="button" data-view="life"><span class="ico">🕰️</span><span>Línea de vida</span></button>
+      <button type="button" data-view="profile"><span class="ico">👤</span><span>Perfil</span></button>
+    </div></nav>
+
+    <div id="message"></div>
+
+    <div id="viewHome" class="card">
+      <h2 class="home-hello" id="homeHello">Hola</h2>
+      <p class="home-sub">¿Qué recuerdo quieres guardar hoy?</p>
+      <div class="create-actions">
+        <button type="button" class="big-btn big-voice" id="homeVoice"><span class="big-ico">🎙️</span><span>Contar con mi voz</span></button>
+        <button type="button" class="big-btn big-write" id="homeWrite"><span class="big-ico">✍️</span><span>Escribir</span></button>
+      </div>
+      <div class="home-recent" id="homeRecent"></div>
+    </div>
+
+    <div id="viewProfile" class="card hidden">
+      <h2 style="color: var(--salvia-hover);" id="profName">Tu perfil</h2>
+      <div class="hint" id="profEmail"></div>
+      <div id="profMsg"></div>
+      <div class="profile-row">
+        <label for="profBirth" style="font-weight:600">Fecha de nacimiento</label>
+        <input type="date" id="profBirth">
+        <label for="profPlace" style="font-weight:600">Lugar de nacimiento</label>
+        <input type="text" id="profPlace" maxlength="120">
+        <button type="button" class="btn-primary" id="profSave">Guardar</button>
+      </div>
+      <div class="footer-stats" style="margin: 10px 0 0;">
+        <span id="footerCount">0 recuerdos</span> ·
+        <button type="button" id="statsToggle">Ver resumen</button>
+        <div class="stats-detail hidden" id="stats">
+          <div class="stat-item"><span class="stat-label">Total de memorias:</span><span class="stat-value" id="stat-total">0</span></div>
+        </div>
+      </div>
+      <button type="button" class="logout-big" id="logoutBtn">🚪 Cerrar sesión y salir</button>
+    </div>
 
     <div id="viewLife" class="card hidden">
       <div class="tl-head">
         <h2>Tu línea de vida</h2>
         <div class="tl-zoom"><button type="button" id="tlZoomOut" aria-label="Alejar">−</button><button type="button" id="tlZoomIn" aria-label="Acercar">+</button></div>
+      </div>
+      <div class="searchbar">
+        <input type="search" id="tlSearch" placeholder="🔍 Buscar en tu línea de vida" autocomplete="off">
+        <div class="sort-row"><span>Orden:</span><select id="tlSort"><option value="desc">Más reciente primero</option><option value="asc">Más antiguo primero</option></select></div>
       </div>
       <div id="tlBirth" class="tl-birth hidden"></div>
       <div id="tlMsg"></div>
@@ -527,8 +581,7 @@
       <div id="tlDetail" class="tl-detail"></div>
     </div>
 
-    <div id="viewMem">
-    <div id="message"></div>
+    <div id="viewCreate" class="hidden">
     <div class="create-actions">
       <button type="button" class="big-btn big-voice" id="btnVoice"><span class="big-ico">🎙️</span><span>Contar con mi voz</span></button>
       <button type="button" class="big-btn big-write" id="btnWrite"><span class="big-ico">✍️</span><span>Escribir</span></button>
@@ -610,21 +663,20 @@
         </form>
       </div>
 
-      <!-- LISTA DE MEMORIAS -->
-      <div class="card">
-        <h2 style="margin-bottom: 20px; color: #333;">Tus Memorias</h2>
-        <div class="memories-list" id="memoriesList">
-          <div class="empty-state">No hay memorias aún. ¡Crea tu primera memoria!</div>
-        </div>
-      </div>
     </div>
     </div>
 
-    <div class="footer-stats">
-      <span id="footerCount">0 recuerdos</span> ·
-      <button type="button" id="statsToggle">Ver resumen</button>
-      <div class="stats-detail hidden" id="stats">
-        <div class="stat-item"><span class="stat-label">Total de memorias:</span><span class="stat-value" id="stat-total">0</span></div>
+    <!-- LISTA DE MEMORIAS -->
+    <div id="viewMem" class="hidden">
+      <div class="card">
+        <h2 style="margin-bottom: 14px; color: #333;">Tus Memorias</h2>
+        <div class="searchbar">
+          <input type="search" id="memSearch" placeholder="🔍 Buscar por título, texto, persona o lugar" autocomplete="off">
+          <div class="sort-row"><span>Orden:</span><select id="memSort"><option value="desc">Más reciente primero</option><option value="asc">Más antiguo primero</option></select></div>
+        </div>
+        <div class="memories-list" id="memoriesList">
+          <div class="empty-state">No hay memorias aún. ¡Crea tu primera memoria!</div>
+        </div>
       </div>
     </div>
     </div>
@@ -683,6 +735,10 @@
     const memoriesList = document.getElementById('memoriesList');
     const messageDiv = document.getElementById('message');
     const statTotal = document.getElementById('stat-total');
+    const memSearch = document.getElementById('memSearch');
+    const memSort = document.getElementById('memSort');
+    memSearch.addEventListener('input', () => renderMemories());
+    memSort.addEventListener('change', () => renderMemories());
 
     // ===== FUNCIONES HELPER =====
     function showMessage(text, type = 'success') {
@@ -725,7 +781,7 @@
         if (result.success) {
           showMessage('✅ Memoria guardada exitosamente');
           resetWriteForm(); closePanels();
-          loadMemories();
+          window.goTo('mem');
         } else {
           showMessage(`❌ ${result.error}`, 'error');
         }
@@ -757,7 +813,7 @@
         if (result.success) {
           showMessage('✅ Memoria actualizada');
           resetWriteForm(); closePanels();
-          loadMemories();
+          window.goTo('mem');
         }
       } catch (err) {
         showMessage(`❌ Error: ${err.message}`, 'error');
@@ -794,13 +850,48 @@
     }
 
     // ===== RENDER =====
+    // Búsqueda sin tildes ni mayúsculas, sobre título, texto, lugar, tipo, etiquetas y personas
+    const norm = (t) => String(t || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
+    function memText(m) {
+      return norm([m.title, m.content, m.place, m.event_type, m.category, (m.tags || []).join(' '),
+        (m.people || []).map(p => p.name + ' ' + (p.relation || '')).join(' ')].join(' '));
+    }
+    // Orden por fecha del suceso (no por cuándo se subió); sin fecha, siempre al final
+    function filterSort(list, query, dir) {
+      const q = norm(query).split(/\s+/).filter(Boolean);
+      const out = list.filter(m => { const t = memText(m); return q.every(w => t.includes(w)); });
+      const sgn = dir === 'asc' ? 1 : -1;
+      return out.sort((a, b) => {
+        if (!a.date_happened && !b.date_happened) return 0;
+        if (!a.date_happened) return 1;
+        if (!b.date_happened) return -1;
+        return sgn * (a.date_happened < b.date_happened ? -1 : a.date_happened > b.date_happened ? 1 : 0);
+      });
+    }
+    window.filterSort = filterSort;
+
+    function renderHome() {
+      const el = document.getElementById('homeRecent');
+      const recent = filterSort(memories, '', 'desc').slice(0, 3);
+      el.innerHTML = recent.length
+        ? '<h3>Tus últimos recuerdos</h3>' + recent.map(m => `<div class="home-item" data-id="${m.id}"><strong>${esc(m.title)}</strong><small>${esc(m.date_happened ? new Date(m.date_happened + 'T00:00:00').toLocaleDateString('es-ES') : 'Sin fecha')}${m.place ? ' · 📍 ' + esc(m.place) : ''}</small></div>`).join('')
+        : '<p class="home-sub" style="margin-top:18px">Aún no tienes recuerdos. ¡Cuenta el primero!</p>';
+      el.querySelectorAll('[data-id]').forEach(d => d.onclick = () => { window.goTo('mem'); currentMemoryId = null; selectMemory(+d.dataset.id); });
+    }
+
     function renderMemories() {
+      renderHome();
       if (memories.length === 0) {
         memoriesList.innerHTML = '<div class="empty-state">No hay memorias aún. ¡Crea tu primera memoria!</div>';
         return;
       }
+      const shown = filterSort(memories, memSearch.value, memSort.value);
+      if (shown.length === 0) {
+        memoriesList.innerHTML = '<div class="empty-state">No he encontrado ningún recuerdo con esa búsqueda.</div>';
+        return;
+      }
 
-      memoriesList.innerHTML = memories.map(memory => {
+      memoriesList.innerHTML = shown.map(memory => {
         const open = currentMemoryId === memory.id;
         const fmt = (d) => new Date(d + 'T00:00:00').toLocaleDateString('es-ES');
         const when = memory.date_happened
@@ -863,6 +954,7 @@
         currentMemoryId = id;
         document.getElementById('writeTitle').textContent = 'Editar recuerdo';
         renderMemories();
+        window.goTo('create');
         openPanel('write');
       }
     }
@@ -929,15 +1021,20 @@
 
     // ===== PESTAÑAS Y RESUMEN =====
     (function () {
-      const tm = document.getElementById('tabMem'), tl = document.getElementById('tabLife');
-      const vm = document.getElementById('viewMem'), vl = document.getElementById('viewLife');
-      const show = (life) => {
-        vm.classList.toggle('hidden', life); vl.classList.toggle('hidden', !life);
-        tm.classList.toggle('active', !life); tl.classList.toggle('active', life);
+      const views = { home: 'viewHome', mem: 'viewMem', create: 'viewCreate', life: 'viewLife', profile: 'viewProfile' };
+      const navBtns = document.querySelectorAll('#bottomNav button');
+      window.goTo = (name) => {
+        Object.entries(views).forEach(([k, id]) => document.getElementById(id).classList.toggle('hidden', k !== name));
+        navBtns.forEach(b => b.classList.toggle('active', b.dataset.view === name));
+        if (name !== 'create') closePanels();
+        if (name === 'life' && window.openTimeline) window.openTimeline();
+        if (name === 'home' || name === 'mem') loadMemories();
+        if (name === 'profile') { loadStats(); if (window.fillProfile) window.fillProfile(); }
+        window.scrollTo({ top: 0 });
       };
-      tm.onclick = () => show(false);
-      tl.onclick = () => { show(true); if (window.openTimeline) window.openTimeline(); };
-      window.showTab = (life) => { show(life); if (life && window.openTimeline) window.openTimeline(); };
+      navBtns.forEach(b => b.onclick = () => window.goTo(b.dataset.view));
+      document.getElementById('homeVoice').onclick = () => { window.goTo('create'); resetWriteForm(); openPanel('voice'); };
+      document.getElementById('homeWrite').onclick = () => { window.goTo('create'); resetWriteForm(); openPanel('write'); };
       document.getElementById('statsToggle').onclick = () => {
         const d = document.getElementById('stats'); d.classList.toggle('hidden');
         document.getElementById('statsToggle').textContent = d.classList.contains('hidden') ? 'Ver resumen' : 'Ocultar resumen';
@@ -1206,8 +1303,8 @@
         if (!res.success) { rv('reviewMsg').innerHTML = `<div class="error">${esc(res.error)}</div>`; return; }
         draft = null; closeReview(); closePanels();
         setAudioStatus('Cuenta tu recuerdo: cuándo fue, con quién, dónde. Después podrás revisarlo.');
+        window.goTo('mem');
         showMessage('✅ Recuerdo guardado con tu ' + ({ image: 'foto', video: 'vídeo' }[savedKind] || 'audio'));
-        loadMemories();
       } catch (e) { rv('reviewMsg').innerHTML = '<div class="error">No se pudo guardar. Inténtalo de nuevo.</div>'; }
     };
 
@@ -1215,6 +1312,7 @@
     const authScreen = document.getElementById('authScreen');
     const appScreen = document.getElementById('appScreen');
     let authMode = 'login';
+    let currentUser = null;
 
     function setAuthMode(mode) {
       authMode = mode;
@@ -1231,16 +1329,39 @@
     function showApp(user) {
       authScreen.classList.add('hidden');
       appScreen.classList.remove('hidden');
-      document.getElementById('userName').textContent = user.name;
+      currentUser = user;
+      document.getElementById('homeHello').textContent = `Hola, ${user.name}`;
+      document.getElementById('profName').textContent = user.name;
+      document.getElementById('profEmail').textContent = user.email || '';
       const today = new Date().toISOString().split('T')[0];
       dateInput.value = today;
-      loadMemories();
+      window.goTo('home');
     }
+
+    // Perfil: datos de nacimiento (los mismos que usa la línea de vida)
+    window.fillProfile = async function () {
+      try {
+        const r = await (await fetch(`${API_URL}/profile`)).json();
+        if (r.success) { document.getElementById('profBirth').value = r.data.birth_date || ''; document.getElementById('profPlace').value = r.data.birth_place || ''; }
+      } catch (e) {}
+    };
+    document.getElementById('profSave').onclick = async () => {
+      const box = document.getElementById('profMsg');
+      try {
+        const r = await (await fetch(`${API_URL}/profile`, {
+          method: 'PUT', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ birth_date: document.getElementById('profBirth').value, birth_place: document.getElementById('profPlace').value })
+        })).json();
+        box.innerHTML = r.success ? '<div class="success">✅ Perfil guardado</div>' : `<div class="error">${esc(r.error)}</div>`;
+      } catch (e) { box.innerHTML = '<div class="error">No se pudo guardar. Inténtalo de nuevo.</div>'; }
+      setTimeout(() => { box.innerHTML = ''; }, 3000);
+    };
 
     function showAuth() {
       appScreen.classList.add('hidden');
       authScreen.classList.remove('hidden');
-      memories = [];
+      memories = []; currentUser = null; currentMemoryId = null;
+      memSearch.value = '';
     }
 
     document.getElementById('tabLogin').onclick = () => setAuthMode('login');
@@ -1301,6 +1422,8 @@
       const fmt = (s) => s ? new Date(s + 'T00:00:00').toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' }) : '';
       const xOf = (m) => (m - startMs) / DAY / 365.25 * ppy;
       const mOf = (x) => startMs + x / ppy * 365.25 * DAY;
+      // Recuerdos que cumplen la búsqueda; el orden elegido se aplica a las listas
+      const visibleMems = () => window.filterSort(memories, $('tlSearch').value, $('tlSort').value);
       const memKind = (m) => m.event_type === 'Estudios' ? 'school' : m.event_type === 'Trabajo' ? 'work' : 'personal';
 
       async function api(path, opts) {
@@ -1377,7 +1500,7 @@
           const a = xOf(ms(s.start_date)), e = s.end_date ? xOf(ms(s.end_date)) : xOf(Date.now());
           rows[s.kind] += `<div class="tl-seg" data-stage="${s.id}" style="left:${a}px;width:${Math.max(8, e - a)}px;background:${KINDS[s.kind].color}" title="${esc(s.title || s.place)}">${esc(s.title || s.place)}</div>`;
         });
-        memories.forEach(m => {
+        visibleMems().forEach(m => {
           if (!m.date_happened) return;
           const k = memKind(m), a = xOf(ms(m.date_happened));
           const e = m.date_end && m.date_end > m.date_happened ? xOf(ms(m.date_end)) : a;
@@ -1474,14 +1597,16 @@
           const same = iso(sel.from) === iso(sel.to);
           const title = same ? fmt(iso(sel.from)) : `${fmt(iso(sel.from))} – ${fmt(iso(sel.to))}`;
           const ms0 = sel.from - 0, ms1 = sel.to + DAY - 1;
-          const mems = memories.filter(m => m.date_happened && ms(m.date_happened) <= ms1 && ms(m.date_end || m.date_happened) >= ms0);
+          const mems = visibleMems().filter(m => m.date_happened && ms(m.date_happened) <= ms1 && ms(m.date_end || m.date_happened) >= ms0);
           const active = stages.filter(s => ms(s.start_date) <= ms1 && (!s.end_date || ms(s.end_date) >= ms0));
           const lead = { dia: 'Ese día', mes: 'Ese mes', 'año': 'Ese año', periodo: 'En ese periodo', cercano: 'Por aquellos años' }[sel.level] || '';
 
           html += `<h3>📅 ${esc(title)}</h3>`;
           html += `<h4>🌍 ${esc(lead)} en el mundo y en España</h4>`;
-          html += sel.events.length
-            ? sel.events.map(e => `<div class="tl-item"><small>${esc(fmt(e.date))} · ${e.scope === 'españa' ? 'España' : 'Mundo'}</small>${esc(e.text)}</div>`).join('')
+          const dirSgn = $('tlSort').value === 'asc' ? 1 : -1;
+          const evs = [...sel.events].sort((a, b) => dirSgn * a.date.localeCompare(b.date));
+          html += evs.length
+            ? evs.map(e => `<div class="tl-item"><small>${esc(fmt(e.date))} · ${e.scope === 'españa' ? 'España' : 'Mundo'}</small>${esc(e.text)}</div>`).join('')
             : '<div class="tl-item">No tenemos hechos destacados para estas fechas.</div>';
 
           html += '<h4>📖 Tus recuerdos</h4>';
@@ -1507,7 +1632,7 @@
         if (editing !== null) html += stageForm(editing === 'new' ? draftStage : stages.find(s => s.id === editing));
         d.innerHTML = html;
 
-        d.querySelectorAll('[data-open]').forEach(b => b.onclick = () => { window.showTab(false); selectMemory(+b.dataset.open); });
+        d.querySelectorAll('[data-open]').forEach(b => b.onclick = () => { window.goTo('mem'); memSearch.value = ''; currentMemoryId = null; selectMemory(+b.dataset.open); });
         d.querySelectorAll('[data-prop]').forEach(b => b.onclick = () => { draftStage = props[+b.dataset.prop]; editing = 'new'; drawDetail(); $('tlStageForm').scrollIntoView({ block: 'center' }); });
         d.querySelectorAll('[data-edit]').forEach(b => b.onclick = () => { editing = +b.dataset.edit; drawDetail(); $('tlStageForm').scrollIntoView({ block: 'center' }); });
         d.querySelectorAll('[data-del]').forEach(b => b.onclick = () => removeStage(+b.dataset.del));
@@ -1552,6 +1677,8 @@
         drawTimeline();
         sc.scrollLeft = xOf(m) - a;
       }
+      $('tlSearch').addEventListener('input', () => { drawTimeline(); drawDetail(); });
+      $('tlSort').addEventListener('change', () => drawDetail());
       $('tlZoomIn').onclick = () => setZoom(ppy * 1.5);
       $('tlZoomOut').onclick = () => setZoom(ppy / 1.5);
       (function pinch() {
