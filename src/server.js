@@ -17,6 +17,8 @@ const { requireAuth, register, login, logout, me } = require('./auth');
 const { serveMedia, discardMedia } = require('./api/media');
 const { receive, analyzeAudio, getJob } = require('./api/audio');
 const { getProfile, updateProfile, listStages, createStage, updateStage, deleteStage, getHistory } = require('./api/life');
+const visual = require('./api/visual');
+const vision = require('./providers/vision');
 const provider = require('./providers');
 
 const app = express();
@@ -68,6 +70,7 @@ app.delete('/api/memories/:id', requireAuth, deleteMemory);
 // ===== ARCHIVOS Y ANÁLISIS DE AUDIO =====
 app.post('/api/audio/analyze', requireAuth, receive, analyzeAudio);
 app.get('/api/audio/jobs/:id', requireAuth, getJob);
+app.post('/api/visual/analyze', requireAuth, visual.receive, visual.analyze);
 app.get('/api/media/:id', requireAuth, serveMedia);
 app.delete('/api/media/:id', requireAuth, discardMedia);
 
@@ -91,4 +94,5 @@ app.listen(PORT, () => {
   console.log(`💾 Base de datos: SQLite Local`);
   // Descargar/cargar el motor de voz en segundo plano para que el primer audio no espere
   provider.warmUp();
+  vision.warmUp();
 });

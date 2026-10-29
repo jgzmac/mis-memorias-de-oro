@@ -104,4 +104,23 @@ function getJob(req, res) {
   });
 }
 
-module.exports = { receive, analyzeAudio, getJob };
+// Para que fotos y vídeos reutilicen el mismo sistema de trabajos en segundo plano
+function startJob(userId, mediaId, work) {
+  const jobId = crypto.randomBytes(12).toString('hex');
+  const job = { userId, status: 'processing', mediaId, createdAt: Date.now() };
+  jobs.set(jobId, job);
+  (async () => {
+    try {
+      job.result = await work();
+      job.status = 'done';
+    } catch (err) {
+      console.error('Error analizando archivo:', err.message);
+      logError('analizar archivo', err);
+      job.status = 'error';
+      job.error = 'No se pudo analizar el archivo. Puedes escribir el recuerdo a mano.';
+    }
+  })();
+  return jobId;
+}
+
+module.exports = { receive, analyzeAudio, getJob, startJob, logError };

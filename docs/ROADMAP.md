@@ -78,3 +78,9 @@ Pantalla:
 - Fase B2: ESTILOS positivos que quiere ver (amable, alegre, entusiasta...). Servicio de IA ya decidido para el MVP: local y sin coste, con opción de cambiar a pago por uso más adelante.
 - Residencias: decidido, las propone la aplicación y el usuario completa lo que falte.
 - Fase B: ¿las etapas de residencia se escriben a mano, o se prefiere que la IA las proponga desde los audios?
+
+## Fotos y vídeos (analizados en local, gratis)
+- Botones "Subir una foto" / "Subir un vídeo": metadatos (fecha, GPS→ciudad, cámara), reconocimiento de escenas con CLIP y, en vídeo, transcripción del audio.
+- El resultado pasa por la pantalla de revisión antes de guardarse; las fotos/vídeos se ven en la lista de recuerdos y en la línea de vida.
+- Requisito en una máquina nueva: modelo CLIP (~150 MB) en `data/models/Xenova/clip-vit-base-patch32/onnx/model_quantized.onnx`; dependencia `exifr`.
+- Pendiente: fotos HEIC (el navegador puede no decodificarlas), mejorar lista de ciudades/escenas.

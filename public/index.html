@@ -429,6 +429,15 @@
     .big-voice:hover { background: var(--salvia-hover); }
     .big-write { background: white; color: var(--salvia-hover); border: 2px solid var(--salvia); }
     .big-write:hover { background: var(--salvia-claro); }
+    .big-media { background: var(--salvia-claro); color: var(--salvia-hover); border: 2px dashed var(--salvia); min-height: 60px; font-size: 1.05em; cursor: pointer; }
+    .big-media:hover { background: #d8e6dc; }
+    .create-media { margin-top: -6px; }
+    .media-status { background: var(--salvia-claro); border-radius: 12px; padding: 12px 14px; margin-bottom: 16px; font-size: 0.95em; }
+    .rv-notes { background: var(--fondo-1); border-left: 4px solid var(--azul-calma); border-radius: 8px; padding: 10px 12px; font-size: 0.88em; line-height: 1.5; margin-bottom: 12px; }
+    .rv-notes div::before { content: '• '; }
+    .rv-media img, .rv-media video { width: 100%; max-height: 320px; object-fit: contain; border-radius: 10px; background: #000; }
+    .memory-photo { margin-top: 10px; }
+    .memory-photo img, .memory-photo video { width: 100%; max-height: 360px; object-fit: contain; border-radius: 10px; background: #000; }
     .big-btn.on { outline: 3px solid var(--azul-calma); outline-offset: 2px; }
     .panel-close { width: 100%; margin-top: 12px; }
     .audio-box { margin-bottom: 0; }
@@ -525,6 +534,12 @@
       <button type="button" class="big-btn big-write" id="btnWrite"><span class="big-ico">✍️</span><span>Escribir</span></button>
     </div>
 
+    <div class="create-actions create-media">
+      <label class="big-btn big-media"><span class="big-ico">📷</span><span>Subir una foto</span><input type="file" id="photoFile" accept="image/*" hidden></label>
+      <label class="big-btn big-media"><span class="big-ico">🎬</span><span>Subir un vídeo</span><input type="file" id="videoFile" accept="video/*" hidden></label>
+    </div>
+    <div class="media-status hidden" id="mediaStatus"></div>
+
     <div class="main-content">
       <div class="card hidden" id="voicePanel">
         <div class="audio-box">
@@ -619,8 +634,9 @@
   <div id="reviewModal" class="modal-bg hidden">
     <div class="modal">
       <h2 style="margin-bottom: 8px; color: #333;">Revisa tu recuerdo</h2>
-      <div class="notice">Esto es lo que he entendido del audio. Corrige lo que haga falta; todo es opcional. No se guardará hasta que confirmes.</div>
+      <div class="notice" id="rvNotice">Esto es lo que he entendido del audio. Corrige lo que haga falta; todo es opcional. No se guardará hasta que confirmes.</div>
       <div id="reviewMsg"></div>
+      <div class="rv-notes hidden" id="rvNotes"></div>
       <div class="review-field"><label for="rvTitle">Título</label><input id="rvTitle" maxlength="200"></div>
       <div class="review-field"><label for="rvContent">Lo que contaste</label><textarea id="rvContent"></textarea></div>
       <div class="form-row">
@@ -641,7 +657,7 @@
         <div id="rvPeople"></div>
         <button type="button" class="btn-secondary" id="rvAddPerson" style="margin-top:4px;">+ Añadir persona</button>
       </div>
-      <div class="review-field"><label>Audio original</label><audio id="rvAudio" controls style="width:100%"></audio></div>
+      <div class="review-field"><label id="rvMediaLabel">Audio original</label><div class="rv-media" id="rvMedia"></div></div>
       <div class="button-group">
         <button type="button" class="btn-primary" id="rvConfirm">Confirmar y guardar</button>
         <button type="button" class="btn-secondary" id="rvCancel">Descartar</button>
@@ -792,9 +808,10 @@
           : '';
         const people = (memory.people || []).map(p => esc([p.name, p.relation ? `(${p.relation})` : ''].filter(Boolean).join(' '))).join(', ');
         const audios = (memory.media || []).filter(m => m.kind === 'audio');
+        const visuals = (memory.media || []).filter(m => m.kind === 'image' || m.kind === 'video');
         return `
         <div class="memory-item ${open ? 'active' : ''}" onclick="selectMemory(${memory.id})">
-          <div class="memory-title">${esc(memory.title)}${audios.length ? ' 🎙️' : ''}</div>
+          <div class="memory-title">${esc(memory.title)}${audios.length ? ' 🎙️' : ''}${visuals.some(v => v.kind === 'image') ? ' 📷' : ''}${visuals.some(v => v.kind === 'video') ? ' 🎬' : ''}</div>
           <div class="memory-meta">
             <span class="memory-category">${esc(memory.category)}</span>
             <span>${esc(when)}</span>
@@ -810,6 +827,9 @@
                   ${memory.tags.map(tag => `<span class="memory-tag">${esc(tag)}</span>`).join('')}
                 </div>
               ` : ''}
+              ${visuals.map(v => `<div class="memory-photo">${v.kind === 'image'
+                ? `<a href="${v.url}" target="_blank" rel="noopener"><img loading="lazy" src="${v.url}" alt="${esc(memory.title)}"></a>`
+                : `<video controls playsinline preload="none" src="${v.url}"></video>`}</div>`).join('')}
               ${audios.map(a => `
                 <div class="memory-audio">
                   <audio controls preload="none" src="${a.url}"></audio>
@@ -1049,23 +1069,121 @@
       rv('rvMood').value = d.mood || 'neutral';
       rv('rvPeople').innerHTML = '';
       (d.people || []).forEach(p => rv('rvPeople').appendChild(personRow(p)));
-      rv('rvAudio').src = `${API_URL}/media/${d.media_id}`;
+      const kind = d.kind || 'audio';
+      const url = `${API_URL}/media/${d.media_id}`;
+      rv('rvMedia').innerHTML = kind === 'image' ? `<img src="${url}" alt="Tu foto">`
+        : kind === 'video' ? `<video controls playsinline src="${url}"></video>`
+        : `<audio controls style="width:100%" src="${url}"></audio>`;
+      rv('rvMediaLabel').textContent = { image: 'Tu foto', video: 'Tu vídeo', audio: 'Audio original' }[kind];
+      rv('rvNotice').textContent = { image: 'Esto es lo que he sacado de la foto (sus datos y lo que creo ver). Corrige lo que haga falta; todo es opcional. No se guardará hasta que confirmes.',
+        video: 'Esto es lo que he sacado del vídeo (sus datos, lo que se dice y lo que creo ver). Corrige lo que haga falta; todo es opcional. No se guardará hasta que confirmes.',
+        audio: 'Esto es lo que he entendido del audio. Corrige lo que haga falta; todo es opcional. No se guardará hasta que confirmes.' }[kind];
+      const notes = d.notes || [];
+      rv('rvNotes').innerHTML = notes.map(n => `<div>${esc(n)}</div>`).join('') + (d.camera ? `<div>Cámara: ${esc(d.camera)}</div>` : '');
+      rv('rvNotes').classList.toggle('hidden', !notes.length && !d.camera);
       rv('reviewMsg').innerHTML = '';
       reviewModal.classList.remove('hidden');
     }
 
     function closeReview() {
       reviewModal.classList.add('hidden');
-      rv('rvAudio').pause();
-      rv('rvAudio').removeAttribute('src');
+      rv('rvMedia').innerHTML = ''; // detiene la reproducción
     }
+
+    // ===== FOTOS Y VÍDEOS =====
+    const mediaStatus = document.getElementById('mediaStatus');
+    function setMediaStatus(t) { mediaStatus.textContent = t || ''; mediaStatus.classList.toggle('hidden', !t); }
+
+    // Reduce una imagen a JPEG pequeño para analizarla (el original se guarda aparte, sin tocar)
+    function toJpegBlob(source, w, h, max = 448) {
+      const k = Math.min(1, max / Math.max(w, h));
+      const c = document.createElement('canvas');
+      c.width = Math.max(1, Math.round(w * k)); c.height = Math.max(1, Math.round(h * k));
+      c.getContext('2d').drawImage(source, 0, 0, c.width, c.height);
+      return new Promise(res => c.toBlob(res, 'image/jpeg', 0.85));
+    }
+
+    async function imageFrame(file) {
+      const url = URL.createObjectURL(file);
+      try {
+        const img = new Image();
+        await new Promise((ok, ko) => { img.onload = ok; img.onerror = ko; img.src = url; });
+        return [await toJpegBlob(img, img.naturalWidth, img.naturalHeight)];
+      } catch (e) { return []; } finally { URL.revokeObjectURL(url); }
+    }
+
+    // Hasta 3 fotogramas repartidos por el vídeo + duración
+    async function videoFrames(file) {
+      const url = URL.createObjectURL(file);
+      const v = document.createElement('video');
+      v.muted = true; v.playsInline = true; v.preload = 'auto';
+      try {
+        await new Promise((ok, ko) => { v.onloadedmetadata = ok; v.onerror = ko; v.src = url; setTimeout(() => ko(new Error('tiempo')), 15000); });
+        const dur = isFinite(v.duration) ? v.duration : 0;
+        const frames = [];
+        for (const f of dur > 3 ? [0.15, 0.5, 0.85] : [0.5]) {
+          await new Promise((ok, ko) => { v.onseeked = ok; v.onerror = ko; v.currentTime = dur * f; setTimeout(ok, 8000); });
+          if (v.videoWidth) frames.push(await toJpegBlob(v, v.videoWidth, v.videoHeight));
+        }
+        return { frames, duration: dur };
+      } catch (e) { return { frames: [], duration: 0 }; } finally { URL.revokeObjectURL(url); }
+    }
+
+    async function analyzeVisual(file, isVideo) {
+      const label = isVideo ? 'vídeo' : 'foto';
+      if (file.size > 300 * 1024 * 1024) return setMediaStatus('❌ El archivo es demasiado grande (máximo 300 MB).');
+      setMediaStatus(`Preparando tu ${label}…`);
+      const fd = new FormData();
+      fd.append('file', file, file.name);
+      fd.append('lastModified', String(file.lastModified || ''));
+      let frames = [];
+      if (isVideo) {
+        const r = await videoFrames(file);
+        frames = r.frames; fd.append('duration', String(r.duration || ''));
+        // El audio del vídeo se decodifica aquí, igual que un audio normal (si no se puede, se sigue sin él)
+        if (file.size < 120 * 1024 * 1024) {
+          try {
+            const pcm = await decodeTo16kMono(file);
+            if (pcm.length >= SAMPLE_RATE * 0.5 && pcm.length <= SAMPLE_RATE * 20 * 60) fd.append('pcm', new Blob([pcm.buffer], { type: 'application/octet-stream' }), 'audio.pcm');
+          } catch (e) { /* vídeo sin audio o formato no legible */ }
+        }
+      } else frames = await imageFrame(file);
+      frames.forEach((b, i) => fd.append('frames', b, `f${i}.jpg`));
+
+      setMediaStatus(`Subiendo tu ${label}…`);
+      let r;
+      try { r = await (await fetch(`${API_URL}/visual/analyze`, { method: 'POST', body: fd })).json(); }
+      catch (e) { return setMediaStatus('❌ No se pudo conectar con el servidor.'); }
+      if (!r.success) return setMediaStatus('❌ ' + r.error);
+
+      const started = Date.now();
+      const poll = async () => {
+        let j;
+        try { j = await (await fetch(`${API_URL}/audio/jobs/${r.data.jobId}`)).json(); }
+        catch (e) { return setMediaStatus('❌ Se perdió la conexión.'); }
+        if (!j.success) return setMediaStatus('❌ ' + j.error);
+        const d = j.data;
+        if (d.status === 'processing') {
+          const secs = Math.round((Date.now() - started) / 1000);
+          setMediaStatus(`Mirando tu ${label}… ${secs}s${d.engine === 'loading' ? ' (la primera vez tarda más)' : ''}`);
+          return setTimeout(poll, 2000);
+        }
+        if (d.status === 'error') return setMediaStatus('❌ ' + d.error);
+        setMediaStatus('');
+        openReview(d.result);
+      };
+      poll();
+    }
+
+    document.getElementById('photoFile').addEventListener('change', (e) => { const f = e.target.files[0]; e.target.value = ''; if (f) analyzeVisual(f, false); });
+    document.getElementById('videoFile').addEventListener('change', (e) => { const f = e.target.files[0]; e.target.value = ''; if (f) analyzeVisual(f, true); });
 
     rv('rvAddPerson').onclick = () => rv('rvPeople').appendChild(personRow());
 
     rv('rvCancel').onclick = async () => {
-      if (!confirm('¿Descartar este recuerdo? Se borrará también el audio.')) return;
+      if (!confirm('¿Descartar este recuerdo? Se borrará también el archivo subido.')) return;
       if (draft) await fetch(`${API_URL}/media/${draft.media_id}`, { method: 'DELETE' });
-      draft = null; closeReview(); setAudioStatus('Descartado.');
+      draft = null; closeReview(); setAudioStatus('Descartado.'); setMediaStatus('');
     };
 
     rv('rvConfirm').onclick = async () => {
@@ -1080,6 +1198,7 @@
         category: rv('rvCategory').value, mood: rv('rvMood').value,
         people, media_ids: [draft.media_id]
       };
+      const savedKind = draft.kind;
       try {
         const res = await (await fetch(`${API_URL}/memories`, {
           method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body)
@@ -1087,7 +1206,7 @@
         if (!res.success) { rv('reviewMsg').innerHTML = `<div class="error">${esc(res.error)}</div>`; return; }
         draft = null; closeReview(); closePanels();
         setAudioStatus('Cuenta tu recuerdo: cuándo fue, con quién, dónde. Después podrás revisarlo.');
-        showMessage('✅ Recuerdo guardado con tu audio');
+        showMessage('✅ Recuerdo guardado con tu ' + ({ image: 'foto', video: 'vídeo' }[savedKind] || 'audio'));
         loadMemories();
       } catch (e) { rv('reviewMsg').innerHTML = '<div class="error">No se pudo guardar. Inténtalo de nuevo.</div>'; }
     };
@@ -1369,6 +1488,8 @@
           html += mems.length ? mems.map(m => {
             const audios = (m.media || []).filter(x => x.kind === 'audio');
             return `<div class="tl-item"><strong>${esc(m.title)}</strong><small>${esc(fmt(m.date_happened))}${m.place ? ' · 📍 ' + esc(m.place) : ''}</small>
+              ${(m.media || []).filter(x => x.kind === 'image').map(a => `<img loading="lazy" src="${a.url}" style="width:100%;max-height:220px;object-fit:contain;border-radius:8px;margin-top:6px;background:#000" alt="">`).join('')}
+              ${(m.media || []).filter(x => x.kind === 'video').map(a => `<video controls playsinline preload="none" src="${a.url}" style="width:100%;max-height:220px;margin-top:6px;border-radius:8px;background:#000"></video>`).join('')}
               ${audios.map(a => `<audio controls preload="none" src="${a.url}" style="width:100%;margin-top:6px"></audio>`).join('')}
               <div class="btns"><button type="button" class="btn-secondary" data-open="${m.id}">Abrir recuerdo</button></div></div>`;
           }).join('') : '<div class="tl-item">No hay recuerdos en estas fechas.</div>';
