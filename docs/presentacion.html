@@ -62,6 +62,25 @@ section{padding:clamp(64px,10vw,120px) 0}
 .truths h3{font-size:1.35rem;margin-bottom:4px}
 .truths p{color:var(--gris)}
 
+/* ===== Propósito ===== */
+.purpose{background:var(--bosque);color:#fff}
+.purpose h2{color:#fff;max-width:20ch}
+.purpose-lead{font-family:var(--serif);font-size:clamp(1.3rem,2.6vw,1.8rem);line-height:1.4;color:var(--oro-claro);max-width:34ch;margin-top:22px}
+.rings{display:grid;grid-template-columns:repeat(3,1fr);margin-top:52px;border-top:1px solid rgba(255,255,255,.2)}
+.ring{padding:28px 28px 8px 0}
+.ring+.ring{padding-left:28px;border-left:1px solid rgba(255,255,255,.2)}
+.ring h3{font-size:1.5rem}
+.ring .who{color:var(--salvia);font-size:.95rem;margin:4px 0 16px}
+.ring ul{list-style:none;display:grid;gap:12px;color:#d3e2d8}
+.ring li{padding-left:20px;position:relative}
+.ring li::before{content:"";position:absolute;left:0;top:.7em;width:8px;height:8px;border-radius:50%;background:var(--oro)}
+.purpose-note{margin-top:48px;font-family:var(--serif);font-style:italic;font-size:1.2rem;color:#b9cfc0;max-width:52ch}
+@media (max-width:860px){
+  .rings{grid-template-columns:1fr}
+  .ring,.ring+.ring{padding:24px 0 8px;border-left:0}
+  .ring+.ring{border-top:1px solid rgba(255,255,255,.2)}
+}
+
 /* ===== Cómo funciona ===== */
 .how{background:var(--bruma)}
 .steps{list-style:none;display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:48px;counter-reset:s}
@@ -195,6 +214,47 @@ footer{background:var(--bosque);color:#8fa89a;padding:0 0 40px;font-size:.88rem}
       <div><h3>Todo está disperso</h3><p>Fotos en el móvil, vídeos en un cajón, historias solo en la memoria de quien las vivió.</p></div>
       <div><h3>Para la familia, es un legado</h3><p>Una historia bien contada es lo que se hereda y se vuelve a leer.</p></div>
     </div>
+  </div>
+</section>
+
+<!-- ===== PROPÓSITO Y BENEFICIOS ===== -->
+<section class="purpose">
+  <div class="wrap">
+    <h2>Cuidar los recuerdos es cuidar a las personas</h2>
+    <p class="purpose-lead">Nuestro propósito: que ninguna vida se quede sin contar, y que contarla sea tan fácil como hablar.</p>
+    <div class="rings">
+      <div class="ring">
+        <h3>Para quien cuenta</h3>
+        <p class="who">Las personas mayores</p>
+        <ul>
+          <li>Sentirse escuchadas y valoradas: su historia importa.</li>
+          <li>Repasar su vida con orgullo y en positivo.</li>
+          <li>Mantener la mente activa al recordar fechas, lugares y personas.</li>
+          <li>Autonomía: lo hacen con su voz, sin depender del teclado.</li>
+        </ul>
+      </div>
+      <div class="ring">
+        <h3>Para su familia</h3>
+        <p class="who">Hijos, nietos y allegados</p>
+        <ul>
+          <li>Un legado que se puede leer, escuchar y volver a visitar.</li>
+          <li>Un motivo para conversar juntos y conocer mejor a sus mayores.</li>
+          <li>Fotos y vídeos ordenados, con nombre, fecha y lugar.</li>
+          <li>Que los nietos conozcan de dónde vienen.</li>
+        </ul>
+      </div>
+      <div class="ring">
+        <h3>Para la sociedad</h3>
+        <p class="who">Todos nosotros</p>
+        <ul>
+          <li>Memoria colectiva: cada vida es un trozo de la historia de un pueblo, un oficio o una época.</li>
+          <li>Vínculo entre generaciones y menos soledad no deseada.</li>
+          <li>Una mirada de respeto hacia el envejecimiento.</li>
+          <li>Tecnología útil y cercana, pensada para quienes suelen quedar fuera.</li>
+        </ul>
+      </div>
+    </div>
+    <p class="purpose-note">Lo que se pierde cuando alguien se va no son solo datos: son maneras de vivir que ya nadie podrá preguntar.</p>
   </div>
 </section>
 
