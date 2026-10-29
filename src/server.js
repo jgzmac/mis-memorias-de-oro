@@ -13,11 +13,12 @@ const {
   deleteMemory,
   getStats
 } = require('./api/handlers');
-const { requireAuth, register, login, logout, me } = require('./auth');
+const { requireAuth, register, login, logout, me, updateName, changePassword } = require('./auth');
 const { serveMedia, discardMedia } = require('./api/media');
 const { receive, analyzeAudio, getJob } = require('./api/audio');
 const { getProfile, updateProfile, listStages, createStage, updateStage, deleteStage, getHistory } = require('./api/life');
 const visual = require('./api/visual');
+const summaryApi = require('./api/summary');
 const vision = require('./providers/vision');
 const provider = require('./providers');
 
@@ -46,6 +47,8 @@ app.post('/api/auth/register', register);
 app.post('/api/auth/login', login);
 app.post('/api/auth/logout', logout);
 app.get('/api/auth/me', requireAuth, me);
+app.put('/api/auth/name', requireAuth, updateName);
+app.put('/api/auth/password', requireAuth, changePassword);
 
 // ===== API ROUTES - MEMORIAS =====
 
@@ -82,6 +85,10 @@ app.post('/api/stages', requireAuth, createStage);
 app.put('/api/stages/:id', requireAuth, updateStage);
 app.delete('/api/stages/:id', requireAuth, deleteStage);
 app.get('/api/history', requireAuth, getHistory);
+
+// ===== RESUMEN DE VIDA =====
+app.get('/api/summary/styles', requireAuth, (req, res) => res.json({ success: true, data: summaryApi.styles() }));
+app.post('/api/summary', requireAuth, summaryApi.summary);
 
 // ===== FALLBACK PARA SPA =====
 app.get('*', (req, res) => {

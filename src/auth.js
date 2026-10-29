@@ -146,7 +146,37 @@ function me(req, res) {
   res.json({ success: true, data: req.user });
 }
 
+// Cambiar nombre
+function updateName(req, res) {
+  const name = String((req.body || {}).name || '').trim();
+  if (!name || name.length > 80) return res.status(400).json({ success: false, error: 'Indica tu nombre (máximo 80 caracteres)' });
+  db.prepare('UPDATE users SET name = ? WHERE id = ?').run(name, req.user.id);
+  res.json({ success: true, data: { ...req.user, name } });
+}
+
+// Cambiar contraseña: exige la actual; cierra las demás sesiones abiertas (otros dispositivos)
+async function changePassword(req, res) {
+  try {
+    const { current, next } = req.body || {};
+    const user = db.prepare('SELECT * FROM users WHERE id = ?').get(req.user.id);
+    if (!(await bcrypt.compare(String(current || ''), user.password_hash))) {
+      return res.status(400).json({ success: false, error: 'La contraseña actual no es correcta' });
+    }
+    const pwError = validatePassword(next, user.email);
+    if (pwError) return res.status(400).json({ success: false, error: pwError });
+    if (next === current) return res.status(400).json({ success: false, error: 'La nueva contraseña debe ser distinta de la actual' });
+
+    db.prepare('UPDATE users SET password_hash = ? WHERE id = ?').run(await bcrypt.hash(next, 10), user.id);
+    const keep = readToken(req);
+    db.prepare('DELETE FROM sessions WHERE user_id = ? AND token_hash != ?').run(user.id, sha256(keep || ''));
+    res.json({ success: true });
+  } catch (err) {
+    console.error('Error en changePassword:', err.message);
+    res.status(500).json({ success: false, error: 'No se pudo cambiar la contraseña' });
+  }
+}
+
 // Limpieza de sesiones caducadas al arrancar
 db.prepare('DELETE FROM sessions WHERE expires_at < ?').run(new Date().toISOString());
 
-module.exports = { requireAuth, register, login, logout, me, validatePassword };
+module.exports = { requireAuth, register, login, logout, me, validatePassword, updateName, changePassword };

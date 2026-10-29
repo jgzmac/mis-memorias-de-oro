@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mis Memorias de Oro · Presentación del piloto</title>
+<style>
+:root{
+  --bosque:#1F2E26; --bosque-2:#2E4437; --salvia:#7FA88B; --salvia-f:#4E7D5D; --bruma:#E6EFE8; --papel:#FBFCFA;
+  --oro:#B88A2E; --oro-claro:#E9D49A; --tinta:#26342C; --gris:#5F6F65;
+  --serif:'Iowan Old Style','Palatino Linotype',Palatino,'Book Antiqua',Georgia,serif;
+  --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);color:var(--tinta);background:var(--papel);line-height:1.6;font-size:17px;-webkit-font-smoothing:antialiased}
+a,button{font:inherit}
+:focus-visible{outline:3px solid var(--oro);outline-offset:3px;border-radius:6px}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:1.1;letter-spacing:-0.01em}
+h2{font-size:clamp(2rem,4.6vw,3.4rem);max-width:16ch}
+.lead{font-size:1.15rem;color:var(--gris);max-width:56ch;margin-top:18px}
+section{padding:clamp(64px,10vw,120px) 0}
+
+/* ===== Portada ===== */
+.hero{background:linear-gradient(180deg,var(--bruma) 0%,var(--papel) 100%);padding:28px 0 clamp(56px,8vw,96px)}
+.brand{display:flex;align-items:center;gap:10px;font-family:var(--serif);font-weight:600;font-size:1.05rem;color:var(--bosque)}
+.brand svg{width:26px;height:26px}
+.hero-grid{display:grid;grid-template-columns:1.05fr 1fr;gap:clamp(28px,5vw,64px);align-items:center;margin-top:clamp(36px,7vw,84px)}
+.hero h1{font-size:clamp(2.6rem,6.4vw,4.9rem);color:var(--bosque)}
+.hero .lead{font-size:1.25rem}
+.pill-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:28px}
+.pill{border:1px solid var(--salvia);color:var(--salvia-f);padding:6px 14px;border-radius:999px;font-size:.92rem;background:#fff}
+
+/* Demo de voz */
+.demo{background:#fff;border-radius:22px;padding:26px;box-shadow:0 30px 60px -28px rgba(31,46,38,.35);border:1px solid #dbe6de}
+.demo-top{display:flex;align-items:center;gap:14px}
+.mic{width:48px;height:48px;border-radius:50%;background:var(--bosque);display:grid;place-items:center;flex:none}
+.mic svg{width:22px;height:22px;stroke:#fff;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.wave{display:flex;align-items:center;gap:3px;height:36px;flex:1}
+.wave i{display:block;width:4px;height:6px;border-radius:2px;background:var(--salvia);transition:height .12s}
+.demo-state{font-size:.9rem;color:var(--gris);min-width:92px;text-align:right}
+.said{font-family:var(--serif);font-size:1.35rem;line-height:1.4;margin:20px 0 4px;min-height:5.6em;color:var(--bosque)}
+.said .caret{display:inline-block;width:2px;height:1.1em;background:var(--oro);vertical-align:-0.15em;margin-left:2px;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.found{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:6px}
+.field{border:1px dashed #c7d6cb;border-radius:12px;padding:10px 12px;min-height:62px;transition:all .35s}
+.field small{display:block;color:var(--gris);font-size:.8rem}
+.field b{display:block;font-weight:600;color:var(--bosque);opacity:0;transform:translateY(4px);transition:all .35s}
+.field.on{border:1px solid var(--salvia);background:var(--bruma)}
+.field.on b{opacity:1;transform:none}
+.confirm{margin-top:14px;display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:.92rem;color:var(--gris);min-height:44px}
+.btn{background:var(--salvia-f);color:#fff;border:0;border-radius:12px;padding:10px 18px;font-weight:600;cursor:pointer;opacity:0;transition:opacity .35s}
+.btn.on{opacity:1}
+.replay{background:none;border:0;color:var(--salvia-f);text-decoration:underline;cursor:pointer;font-size:.9rem}
+
+/* ===== Problema ===== */
+.problem{background:var(--papel)}
+.problem-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,5vw,72px);align-items:start}
+.truths{display:grid;gap:26px}
+.truths div{padding-left:18px;border-left:2px solid var(--oro-claro)}
+.truths h3{font-size:1.35rem;margin-bottom:4px}
+.truths p{color:var(--gris)}
+
+/* ===== Cómo funciona ===== */
+.how{background:var(--bruma)}
+.steps{list-style:none;display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:48px;counter-reset:s}
+.steps li{position:relative;padding:0 22px 0 0}
+.steps li::before{counter-increment:s;content:counter(s);display:grid;place-items:center;width:44px;height:44px;border-radius:50%;background:var(--bosque);color:#fff;font-family:var(--serif);font-size:1.2rem;margin-bottom:18px;position:relative;z-index:1}
+.steps li::after{content:"";position:absolute;top:22px;left:44px;right:0;height:1px;background:var(--salvia)}
+.steps li:last-child::after{display:none}
+.steps h3{font-size:1.25rem;margin-bottom:6px}
+.steps p{color:var(--gris);font-size:.98rem}
+
+/* ===== Línea de vida ===== */
+.life{background:var(--bosque);color:#fff}
+.life h2{color:#fff}
+.life .lead{color:#b9cfc0}
+.tl{margin-top:44px;background:var(--bosque-2);border-radius:20px;padding:18px 18px 8px;overflow-x:auto}
+.tl-in{min-width:760px}
+.tl-axis{position:relative;height:26px;margin-left:104px;font-size:.78rem;color:#9db8a7}
+.tl-axis span{position:absolute;transform:translateX(-50%)}
+.tl-row{display:flex;align-items:center;height:48px;border-top:1px solid rgba(255,255,255,.1)}
+.tl-name{width:104px;flex:none;font-size:.88rem;color:#cfe0d4}
+.tl-track{position:relative;flex:1;height:100%}
+.mk{position:absolute;top:50%;width:16px;height:16px;margin:-8px 0 0 -8px;border-radius:50%;background:var(--salvia);border:2px solid var(--bosque-2);cursor:pointer;padding:0}
+.mk.gen{background:var(--oro-claro);width:10px;height:26px;margin:-13px 0 0 -5px;border-radius:5px}
+.mk.hist{background:none;border:2px solid #8fa89a;border-radius:2px;transform:rotate(45deg);width:11px;height:11px;margin:-5px 0 0 -5px}
+.mk.sel{outline:3px solid var(--oro);outline-offset:2px}
+.seg{position:absolute;top:12px;height:24px;border-radius:7px;background:rgba(127,168,139,.55);font-size:.74rem;padding:0 8px;line-height:24px;white-space:nowrap;overflow:hidden;color:#fff}
+.tl-detail{margin:16px 0 8px;padding:16px 18px;background:rgba(255,255,255,.07);border-radius:14px;min-height:76px}
+.tl-detail strong{font-family:var(--serif);font-size:1.25rem;font-weight:600}
+.tl-detail p{color:#c4d6ca;font-size:.96rem}
+.hint{font-size:.9rem;color:#9db8a7;margin-top:12px}
+
+/* ===== Resumen ===== */
+.summary-wrap{display:grid;grid-template-columns:.8fr 1.2fr;gap:clamp(24px,5vw,64px);margin-top:44px;align-items:start}
+.styles{display:grid;gap:8px}
+.styles button{text-align:left;border:1px solid #cfdcd3;background:#fff;border-radius:14px;padding:14px 16px;cursor:pointer;color:var(--tinta);transition:all .2s}
+.styles button b{display:block;font-family:var(--serif);font-size:1.15rem;font-weight:600}
+.styles button span{font-size:.9rem;color:var(--gris)}
+.styles button[aria-pressed=true]{background:var(--bosque);border-color:var(--bosque);color:#fff}
+.styles button[aria-pressed=true] span{color:#b9cfc0}
+.book{background:#fff;border:1px solid #dbe6de;border-radius:6px 22px 22px 6px;padding:clamp(22px,4vw,40px);box-shadow:0 26px 50px -30px rgba(31,46,38,.4);font-family:var(--serif);font-size:1.15rem;line-height:1.75;min-height:340px}
+.book p+p{margin-top:14px}
+.book .src{display:block;margin-top:20px;font-family:var(--sans);font-size:.82rem;color:var(--gris)}
+
+/* ===== Privacidad ===== */
+.trust{background:var(--bruma)}
+.trust-list{margin-top:44px;display:grid;gap:0}
+.trust-list div{display:grid;grid-template-columns:minmax(180px,.5fr) 1fr;gap:24px;padding:22px 0;border-top:1px solid #c5d6ca}
+.trust-list div:last-child{border-bottom:1px solid #c5d6ca}
+.trust-list h3{font-size:1.4rem}
+.trust-list p{color:var(--gris)}
+
+/* ===== Camino ===== */
+.road{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:44px}
+.road>div{border-radius:20px;padding:26px}
+.road h3{font-size:1.5rem;margin-bottom:12px}
+.road ul{list-style:none;display:grid;gap:8px}
+.road li{padding-left:22px;position:relative}
+.road li::before{content:"";position:absolute;left:0;top:.65em;width:10px;height:2px;background:currentColor;opacity:.6}
+.road .done{background:var(--salvia-f);color:#fff}
+.road .next{background:var(--bruma)}
+.road .later{border:1px dashed var(--salvia)}
+
+/* ===== Petición ===== */
+.ask{background:var(--bosque);color:#fff}
+.ask h2{color:#fff;max-width:20ch}
+.ask-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(20px,4vw,48px);margin-top:48px}
+.ask-grid h3{font-size:1.5rem;margin-bottom:8px;color:var(--oro-claro)}
+.ask-grid p{color:#c4d6ca}
+.honest{margin-top:56px;padding:20px 24px;border:1px solid rgba(233,212,154,.5);border-radius:16px;max-width:70ch;color:#e9efe9}
+footer{background:var(--bosque);color:#8fa89a;padding:0 0 40px;font-size:.88rem}
+
+@media (max-width:860px){
+  .hero-grid,.problem-grid,.summary-wrap{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr 1fr;row-gap:36px}
+  .steps li::after{display:none}
+  .road,.ask-grid{grid-template-columns:1fr}
+  .trust-list div{grid-template-columns:1fr;gap:6px}
+}
+@media (max-width:520px){ .steps{grid-template-columns:1fr} .found{grid-template-columns:1fr} }
+@media (prefers-reduced-motion:reduce){ html{scroll-behavior:auto} .caret{animation:none!important} *{transition:none!important} }
+</style>
+</head>
+<body>
+
+<!-- ===== PORTADA ===== -->
+<header class="hero">
+  <div class="wrap">
+    <div class="brand">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#B88A2E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+      Mis Memorias de Oro
+    </div>
+    <div class="hero-grid">
+      <div>
+        <h1>Cuéntalo con tu voz. Nosotros lo guardamos.</h1>
+        <p class="lead">Una aplicación para que las personas mayores y sus familias conviertan recuerdos hablados, fotos y vídeos en la historia de una vida.</p>
+        <div class="pill-row"><span class="pill">Proyecto piloto</span><span class="pill">Coste cero en esta fase</span><span class="pill">Los datos se quedan en el equipo</span></div>
+      </div>
+
+      <div class="demo" aria-label="Demostración: de la voz a un recuerdo organizado">
+        <div class="demo-top">
+          <div class="mic"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></div>
+          <div class="wave" id="wave" aria-hidden="true"></div>
+          <div class="demo-state" id="state">Escuchando…</div>
+        </div>
+        <p class="said" id="said"></p>
+        <div class="found">
+          <div class="field" data-f="0"><small>Cuándo</small><b>Verano de 1998</b></div>
+          <div class="field" data-f="1"><small>Dónde</small><b>Sevilla</b></div>
+          <div class="field" data-f="2"><small>Con quién</small><b>Pedro</b></div>
+          <div class="field" data-f="3"><small>Tipo</small><b>Viaje</b></div>
+        </div>
+        <div class="confirm">
+          <span id="confirmText">La app entiende lo que cuentas y tú lo revisas.</span>
+          <button class="btn" id="saveBtn" type="button" tabindex="-1">Guardar recuerdo</button>
+        </div>
+        <button class="replay" id="replay" type="button">Ver de nuevo</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ===== PROBLEMA ===== -->
+<section class="problem">
+  <div class="wrap problem-grid">
+    <div>
+      <h2>Los mejores recuerdos se pierden por no contarse</h2>
+      <p class="lead">Nadie se sienta a escribir su vida. Pero casi todos podemos contar una anécdota en voz alta.</p>
+    </div>
+    <div class="truths">
+      <div><h3>Escribir cuesta, hablar no</h3><p>Para muchas personas mayores, el teclado es una barrera. La voz es natural.</p></div>
+      <div><h3>Todo está disperso</h3><p>Fotos en el móvil, vídeos en un cajón, historias solo en la memoria de quien las vivió.</p></div>
+      <div><h3>Para la familia, es un legado</h3><p>Una historia bien contada es lo que se hereda y se vuelve a leer.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CÓMO FUNCIONA ===== -->
+<section class="how">
+  <div class="wrap">
+    <h2>Hablar, revisar y conservar</h2>
+    <ol class="steps">
+      <li><h3>Cuenta</h3><p>Con la voz, escribiendo, o subiendo una foto o un vídeo.</p></li>
+      <li><h3>La app entiende</h3><p>Transcribe y detecta fecha, lugar, personas y tipo de recuerdo.</p></li>
+      <li><h3>Tú confirmas</h3><p>Revisas y corriges. Nada se guarda sin tu visto bueno.</p></li>
+      <li><h3>Se hace historia</h3><p>Los recuerdos forman una línea de vida y un resumen con tono positivo.</p></li>
+    </ol>
+  </div>
+</section>
+
+<!-- ===== LÍNEA DE VIDA ===== -->
+<section class="life">
+  <div class="wrap">
+    <h2>Una vida entera en una sola línea</h2>
+    <p class="lead">Los recuerdos se colocan solos en el tiempo, junto a las etapas de la persona y lo que ocurría en el mundo. Prueba a tocar los puntos.</p>
+    <div class="tl"><div class="tl-in" id="tl"></div></div>
+    <div class="tl-detail" id="tlDetail" aria-live="polite"><p>Toca un punto de la línea para ver el recuerdo.</p></div>
+    <p class="hint">Datos de ejemplo. La fila "General" marca cada fecha con algún recuerdo.</p>
+  </div>
+</section>
+
+<!-- ===== RESUMEN ===== -->
+<section class="summary">
+  <div class="wrap">
+    <h2>Con tus recuerdos, la app escribe tu historia</h2>
+    <p class="lead">Siempre en tono positivo. La persona elige el estilo y si quiere contar toda su vida, un año o a alguien en concreto.</p>
+    <div class="summary-wrap">
+      <div class="styles" id="styles" role="group" aria-label="Estilo del resumen"></div>
+      <div class="book" id="book" aria-live="polite"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PRIVACIDAD Y COSTE ===== -->
+<section class="trust">
+  <div class="wrap">
+    <h2>Privada y sin coste desde el primer día</h2>
+    <div class="trust-list">
+      <div><h3>Tus datos son tuyos</h3><p>La información se guarda en el propio equipo. Cada persona ve solo sus recuerdos y las contraseñas van cifradas.</p></div>
+      <div><h3>IA que no se paga</h3><p>La transcripción de voz y el reconocimiento de fotos funcionan con modelos gratuitos que se ejecutan en local.</p></div>
+      <div><h3>Preparada para crecer</h3><p>Cada servicio de IA se puede cambiar por otro de pago, como OpenAI, si hace falta más calidad. Siempre pidiendo consentimiento antes de enviar nada fuera.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CAMINO ===== -->
+<section>
+  <div class="wrap">
+    <h2>Dónde estamos y hacia dónde vamos</h2>
+    <div class="road">
+      <div class="done"><h3>Hecho</h3><ul><li>Cuentas y perfil</li><li>Recuerdos por voz, foto y vídeo</li><li>Línea de vida con historia del mundo y de España</li><li>Resumen de vida en cuatro estilos</li><li>Menú móvil, búsqueda y filtros</li></ul></div>
+      <div class="next"><h3>Siguiente</h3><ul><li>Pruebas con personas reales</li><li>Vídeo con voz y fotos de iPhone</li><li>Bienvenida guiada</li><li>Pruebas automáticas y documentación</li></ul></div>
+      <div class="later"><h3>Después</h3><ul><li>Resumen con IA de pago, opcional</li><li>Más ciudades y escenas reconocidas</li><li>Hechos históricos más recientes</li><li>Alojamiento en la nube</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PETICIÓN ===== -->
+<section class="ask">
+  <div class="wrap">
+    <h2>Qué necesitamos para el siguiente paso</h2>
+    <div class="ask-grid">
+      <div><h3>Un grupo piloto</h3><p>Unas pocas personas reales que prueben con sus propias fotos, vídeos y audios.</p></div>
+      <div><h3>Opiniones sinceras</h3><p>Qué les emociona, qué les confunde y qué echan en falta.</p></div>
+      <div><h3>Una decisión</h3><p>Con los resultados, decidir si se amplía y con qué servicios.</p></div>
+    </div>
+    <p class="honest">Estado actual: el piloto está probado con simulaciones y una foto de ejemplo. Falta la prueba con material real, y es justo lo que pedimos.</p>
+  </div>
+</section>
+<footer><div class="wrap">Mis Memorias de Oro · Proyecto piloto</div></footer>
+
+<script>
+(function(){
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const $ = (id) => document.getElementById(id);
+
+  /* ---------- Demo de voz ---------- */
+  const phrase = 'El verano del noventa y ocho fuimos a Sevilla con Pedro. Fue el mejor viaje de mi vida.';
+  const wave = $('wave'), said = $('said'), state = $('state');
+  const fields = [...document.querySelectorAll('.field')];
+  const bars = [];
+  for (let i = 0; i < 28; i++) { const b = document.createElement('i'); wave.appendChild(b); bars.push(b); }
+  let timers = [], waveTimer = null;
+  const later = (fn, ms) => timers.push(setTimeout(fn, ms));
+  function animateWave(on) {
+    clearInterval(waveTimer);
+    if (!on || reduce) { bars.forEach(b => b.style.height = '6px'); return; }
+    waveTimer = setInterval(() => bars.forEach(b => b.style.height = (6 + Math.random() * 28) + 'px'), 130);
+  }
+  function reset() {
+    timers.forEach(clearTimeout); timers = [];
+    said.textContent = ''; fields.forEach(f => f.classList.remove('on'));
+    $('saveBtn').classList.remove('on'); $('confirmText').textContent = 'La app entiende lo que cuentas y tú lo revisas.';
+    state.textContent = 'Escuchando…';
+  }
+  function play() {
+    reset();
+    if (reduce) {
+      said.textContent = phrase; fields.forEach(f => f.classList.add('on'));
+      $('saveBtn').classList.add('on'); state.textContent = 'Listo';
+      $('confirmText').textContent = 'Revisa los datos antes de guardar.'; return;
+    }
+    animateWave(true);
+    let i = 0;
+    const type = () => {
+      said.innerHTML = phrase.slice(0, i) + '<span class="caret"></span>';
+      if (i++ < phrase.length) { later(type, 55); } else {
+        animateWave(false); state.textContent = 'Entendido'; said.textContent = phrase;
+        fields.forEach((f, k) => later(() => f.classList.add('on'), 450 + k * 450));
+        later(() => { $('confirmText').textContent = 'Revisa los datos antes de guardar.'; $('saveBtn').classList.add('on'); }, 450 + fields.length * 450 + 300);
+      }
+    };
+    later(type, 700);
+  }
+  $('replay').onclick = play;
+  $('saveBtn').onclick = () => { $('confirmText').textContent = 'Guardado en tu línea de vida.'; $('saveBtn').classList.remove('on'); };
+  play();
+
+  /* ---------- Línea de vida de ejemplo ---------- */
+  const Y0 = 1960, Y1 = 2026;
+  const pct = (d) => ((+d.slice(0, 4) + (+d.slice(5, 7) - 1) / 12) - Y0) / (Y1 - Y0) * 100;
+  const rows = [
+    ['General', 'gen'], ['Historia', 'hist'], ['Escolar', 'school'], ['Profesional', 'work'], ['Personal', 'personal'], ['Residencia', 'res']
+  ];
+  const mems = [
+    { d: '1978-09', k: 'school', t: 'Primer día en la universidad', x: 'Madrid · Con Lucía, que sería su amiga para siempre.' },
+    { d: '1986-06', k: 'work', t: 'Mi primer trabajo', x: 'Madrid · «Cobré el primer sueldo y lo gasté en invitar a mis padres.»' },
+    { d: '1998-08', k: 'personal', t: 'Viaje a Sevilla', x: 'Sevilla · Con Pedro. El mejor viaje de su vida.' },
+    { d: '2005-06', k: 'personal', t: 'Mi boda', x: 'Madrid · Con Lucía y Pedro.' },
+    { d: '2010-05', k: 'personal', t: 'Nace mi primer nieto', x: 'Bilbao · Toda la familia reunida.' }
+  ];
+  const stages = [
+    { k: 'school', a: '1974-09', b: '1982-06', n: 'Colegio y universidad' },
+    { k: 'work', a: '1984-01', b: '2018-12', n: 'Empresa de transportes' },
+    { k: 'res', a: '1960-01', b: '1984-01', n: 'Bilbao' },
+    { k: 'res', a: '1984-01', b: '2026-01', n: 'Madrid' }
+  ];
+  const hist = [
+    { d: '1975-11', t: 'Fin de una etapa política en España' }, { d: '1992-07', t: 'Juegos Olímpicos de Barcelona' },
+    { d: '2002-01', t: 'Llega el euro' }, { d: '2010-07', t: 'España gana el Mundial de fútbol' }
+  ];
+  const tl = $('tl'), detail = $('tlDetail');
+  let html = '<div class="tl-axis">' + [1960, 1980, 2000, 2020].map(y => `<span style="left:${(y - Y0) / (Y1 - Y0) * 100}%">${y}</span>`).join('') + '</div>';
+  rows.forEach(([name, key]) => {
+    let inner = '';
+    if (key === 'gen') [...new Set(mems.map(m => m.d))].forEach(d => { const m = mems.find(x => x.d === d); inner += `<button type="button" class="mk gen" data-i="${mems.indexOf(m)}" style="left:${pct(d + '-01')}%" aria-label="${m.t}"></button>`; });
+    else if (key === 'hist') hist.forEach((h, i) => inner += `<button type="button" class="mk hist" data-h="${i}" style="left:${pct(h.d + '-01')}%" aria-label="${h.t}"></button>`);
+    else {
+      stages.filter(s => s.k === key).forEach(s => inner += `<div class="seg" style="left:${pct(s.a + '-01')}%;width:${pct(s.b + '-01') - pct(s.a + '-01')}%">${s.n}</div>`);
+      mems.forEach((m, i) => { if (m.k === key) inner += `<button type="button" class="mk" data-i="${i}" style="left:${pct(m.d + '-01')}%" aria-label="${m.t}"></button>`; });
+    }
+    html += `<div class="tl-row"><div class="tl-name">${name}</div><div class="tl-track">${inner}</div></div>`;
+  });
+  tl.innerHTML = html;
+  const mo = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+  const nice = (d) => mo[+d.slice(5, 7) - 1] + ' de ' + d.slice(0, 4);
+  tl.addEventListener('click', (e) => {
+    const b = e.target.closest('.mk'); if (!b) return;
+    tl.querySelectorAll('.mk').forEach(x => x.classList.remove('sel'));
+    if (b.dataset.h !== undefined) {
+      const h = hist[+b.dataset.h]; b.classList.add('sel');
+      detail.innerHTML = `<strong>${h.t}</strong><p>${nice(h.d)} · Esto ocurría en el mundo y en España.</p>`;
+    } else {
+      const m = mems[+b.dataset.i];
+      tl.querySelectorAll(`[data-i="${b.dataset.i}"]`).forEach(x => x.classList.add('sel'));
+      detail.innerHTML = `<strong>${m.t}</strong><p>${nice(m.d)} · ${m.x}</p>`;
+    }
+  });
+
+  /* ---------- Estilos de resumen ---------- */
+  const styles = [
+    { k: 'Amable', s: 'Cercano y sereno', p: ['Ana, esta es la historia de tu vida, contada con cariño.', 'En 1998, guardaste «Viaje a Sevilla» en Sevilla con Pedro.', 'En 2005, viviste «Mi boda» en Madrid con Lucía y Pedro.', 'Cada recuerdo es un tesoro que merece ser contado. Gracias por compartirlos.'] },
+    { k: 'Alegre', s: 'Vivo y optimista', p: ['¡Qué vida tan bonita, Ana! Mira todo lo que has vivido.', 'En 1998, disfrutaste de «Viaje a Sevilla» en Sevilla con Pedro.', 'En 2005, celebraste «Mi boda» en Madrid con Lucía y Pedro.', '¡Y lo mejor es que la historia sigue! Cada día trae nuevos motivos para sonreír.'] },
+    { k: 'Nostálgico-cálido', s: 'Recuerda con cariño', p: ['Hay vidas que se recuerdan como un álbum antiguo; la tuya, Ana, huele a hogar.', 'Corría 1998, atesoraste «Viaje a Sevilla» en Sevilla con Pedro.', 'Con el tiempo, en 2005, guardaste en el corazón «Mi boda» en Madrid con Lucía y Pedro.', 'Los años pasan, pero lo vivido queda dentro, cálido y brillante.'] },
+    { k: 'Entusiasta', s: 'Celebra los logros', p: ['Ana, tu trayectoria está llena de momentos que celebrar.', 'En 1998, protagonizaste «Viaje a Sevilla» en Sevilla con Pedro.', 'Pero hay más: en 2005, viviste con intensidad «Mi boda» en Madrid con Lucía y Pedro.', '¡Una vida llena de experiencias! Y todavía quedan muchas por escribir.'] }
+  ];
+  const sBox = $('styles'), book = $('book');
+  styles.forEach((st, i) => {
+    const b = document.createElement('button'); b.type = 'button'; b.setAttribute('aria-pressed', i === 0);
+    b.innerHTML = `<b>${st.k}</b><span>${st.s}</span>`;
+    b.onclick = () => { sBox.querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', 'false')); b.setAttribute('aria-pressed', 'true'); show(i); };
+    sBox.appendChild(b);
+  });
+  function show(i) { book.innerHTML = styles[i].p.map(t => `<p>${t}</p>`).join('') + '<span class="src">Resumen de ejemplo generado por la app a partir de los recuerdos.</span>'; }
+  show(0);
+})();
+</script>
+</body>
+</html>

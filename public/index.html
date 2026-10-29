@@ -472,6 +472,26 @@
     .profile-row { display: grid; gap: 8px; margin: 10px 0 16px; }
     .logout-big { width: 100%; margin-top: 10px; background: white; color: #b14a3a; border: 2px solid #e3b5ab; border-radius: 14px; font-size: 1.05em; }
 
+
+    /* Iconos minimalistas: trazo fino, un solo color (el del texto) */
+    .i { width: 1.15em; height: 1.15em; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; vertical-align: -0.2em; flex: none; }
+    .bottom-nav button .ico .i { width: 1.5rem; height: 1.5rem; stroke-width: 1.4; }
+    .bottom-nav button.nav-create .ico .i { width: 1.4rem; height: 1.4rem; stroke-width: 1.8; }
+    .big-ico .i { width: 1.6rem; height: 1.6rem; stroke-width: 1.3; }
+    .pw-meter { height: 6px; border-radius: 3px; background: #e6ebe7; margin-top: 8px; overflow: hidden; }
+    .pw-meter span { display: block; height: 100%; width: 0; background: #9aa79f; transition: width .25s; }
+    .pw-meter.l1 span { width: 33%; } .pw-meter.l2 span { width: 66%; background: #7f8f86; } .pw-meter.l3 span { width: 100%; background: var(--salvia-hover); }
+    .pw-label { font-size: 0.82em; color: #6b7a70; margin-top: 4px; min-height: 1.2em; }
+    .pw-box { background: var(--fondo-1); border-radius: 12px; padding: 14px; margin: 14px 0; display: grid; gap: 8px; }
+    .pw-box h3 { font-size: 1em; color: var(--tinta); }
+    .tl-gen { position: absolute; top: 12px; width: 8px; height: 22px; margin-left: -4px; border-radius: 4px; background: var(--salvia-hover); opacity: .85; cursor: pointer; }
+
+    .sum-out { background: var(--fondo-1); border-radius: 12px; padding: 16px; line-height: 1.7; white-space: pre-wrap; margin: 12px 0; }
+    .adv { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 14px; }
+    .adv select { font-size: 14px; padding: 10px; }
+    .adv .adv-clear { grid-column: 1 / -1; min-height: 40px; background: transparent; color: var(--salvia-hover); border: 1px solid var(--salvia); border-radius: 10px; }
+    .bottom-nav button { font-size: 0.68em; }
+
     @media (min-width: 700px) {
       body { padding: 24px 24px 100px; }
       h1 { font-size: 2.3em; }
@@ -487,9 +507,33 @@
   </style>
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="i-home" viewBox="0 0 24 24"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/></symbol>
+<symbol id="i-book" viewBox="0 0 24 24"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 19V5"/><path d="M9 7h6"/></symbol>
+<symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+<symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+<symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></symbol>
+<symbol id="i-mic" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></symbol>
+<symbol id="i-pen" viewBox="0 0 24 24"><path d="M4 20l4-1 11-11-3-3L5 16z"/><path d="M14 7l3 3"/></symbol>
+<symbol id="i-camera" viewBox="0 0 24 24"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></symbol>
+<symbol id="i-film" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M10 9.5v5l4-2.5z"/></symbol>
+<symbol id="i-logout" viewBox="0 0 24 24"><path d="M9 4H5v16h4"/><path d="M16 8l4 4-4 4M20 12H9"/></symbol>
+<symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6"/><path d="M20 20l-4-4"/></symbol>
+<symbol id="i-cal" viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M8 3v4M16 3v4"/></symbol>
+<symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></symbol>
+<symbol id="i-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/></symbol>
+<symbol id="i-bulb" viewBox="0 0 24 24"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2.1h5c0-.9.4-1.6 1-2.1A6 6 0 0 0 12 3z"/></symbol>
+<symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s7-6 7-11a7 7 0 0 0-14 0c0 5 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></symbol>
+<symbol id="i-tag" viewBox="0 0 24 24"><path d="M3 12V4h8l10 10-8 8z"/><circle cx="7.5" cy="8.5" r="1"/></symbol>
+<symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2 20c0-3.5 3-5.5 7-5.5s7 2 7 5.5"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7M18 15c2.5.7 4 2.3 4 5"/></symbol>
+<symbol id="i-folder" viewBox="0 0 24 24"><path d="M3 6h7l2 2h9v11H3z"/></symbol>
+<symbol id="i-rec" viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="2.5"/></symbol>
+<symbol id="i-sparkle" viewBox="0 0 24 24"><path d="M12 3l1.8 5.200L19 10l-5.200 1.800L12 17l-1.800-5.200L5 10l5.200-1.800z"/><path d="M19 16l.7 2 2 .7-2 .7-.7 2-.7-2-2-.7 2-.7z"/></symbol>
+<symbol id="i-filter" viewBox="0 0 24 24"><path d="M3 5h18l-7 8v6l-4 2v-8z"/></symbol>
+</defs></svg>
   <div class="container">
     <header>
-      <h1>✨ Mis Memorias de Oro</h1>
+      <h1>Mis Memorias de Oro</h1>
       <p class="subtitle">Guarda tus recuerdos más preciosos</p>
     </header>
 
@@ -513,6 +557,11 @@
           <label for="authPassword">Contraseña</label>
           <input type="password" id="authPassword" autocomplete="current-password" required>
           <div class="hint" id="pwHint" style="display:none;">Mínimo 8 caracteres, con mayúscula, minúscula y número.</div>
+          <div id="regMeter" style="display:none;"><div class="pw-meter" id="authMeter"><span></span></div><div class="pw-label" id="authMeterLabel"></div></div>
+        </div>
+        <div class="form-group" id="repeatGroup" style="display:none;">
+          <label for="authPassword2">Repite la contraseña</label>
+          <input type="password" id="authPassword2" autocomplete="new-password">
         </div>
         <div class="button-group">
           <button type="submit" class="btn-primary" id="authSubmit">Entrar</button>
@@ -522,11 +571,12 @@
 
     <div id="appScreen" class="hidden">
     <nav class="bottom-nav" id="bottomNav"><div class="nav-inner">
-      <button type="button" data-view="home" class="active"><span class="ico">🏠</span><span>Inicio</span></button>
-      <button type="button" data-view="mem"><span class="ico">📖</span><span>Recuerdos</span></button>
-      <button type="button" data-view="create" class="nav-create"><span class="ico">＋</span><span>Crear</span></button>
-      <button type="button" data-view="life"><span class="ico">🕰️</span><span>Línea de vida</span></button>
-      <button type="button" data-view="profile"><span class="ico">👤</span><span>Perfil</span></button>
+      <button type="button" data-view="home" class="active"><span class="ico"><svg class="i"><use href="#i-home"/></svg></span><span>Inicio</span></button>
+      <button type="button" data-view="mem"><span class="ico"><svg class="i"><use href="#i-book"/></svg></span><span>Recuerdos</span></button>
+      <button type="button" data-view="create" class="nav-create"><span class="ico"><svg class="i"><use href="#i-plus"/></svg></span><span>Crear</span></button>
+      <button type="button" data-view="life"><span class="ico"><svg class="i"><use href="#i-clock"/></svg></span><span>Línea de vida</span></button>
+      <button type="button" data-view="summary"><span class="ico"><svg class="i"><use href="#i-sparkle"/></svg></span><span>Resumen</span></button>
+      <button type="button" data-view="profile"><span class="ico"><svg class="i"><use href="#i-user"/></svg></span><span>Perfil</span></button>
     </div></nav>
 
     <div id="message"></div>
@@ -535,8 +585,8 @@
       <h2 class="home-hello" id="homeHello">Hola</h2>
       <p class="home-sub">¿Qué recuerdo quieres guardar hoy?</p>
       <div class="create-actions">
-        <button type="button" class="big-btn big-voice" id="homeVoice"><span class="big-ico">🎙️</span><span>Contar con mi voz</span></button>
-        <button type="button" class="big-btn big-write" id="homeWrite"><span class="big-ico">✍️</span><span>Escribir</span></button>
+        <button type="button" class="big-btn big-voice" id="homeVoice"><span class="big-ico"><svg class="i"><use href="#i-mic"/></svg></span><span>Contar con mi voz</span></button>
+        <button type="button" class="big-btn big-write" id="homeWrite"><span class="big-ico"><svg class="i"><use href="#i-pen"/></svg></span><span>Escribir</span></button>
       </div>
       <div class="home-recent" id="homeRecent"></div>
     </div>
@@ -545,12 +595,27 @@
       <h2 style="color: var(--salvia-hover);" id="profName">Tu perfil</h2>
       <div class="hint" id="profEmail"></div>
       <div id="profMsg"></div>
+      <div class="pw-box">
+        <h3>Tu nombre</h3>
+        <input type="text" id="profNameInput" maxlength="80" autocomplete="name">
+        <button type="button" class="btn-secondary" id="profNameSave">Cambiar nombre</button>
+      </div>
+      <h3 style="font-size:1em;margin-top:6px;">Tus datos de nacimiento</h3>
       <div class="profile-row">
         <label for="profBirth" style="font-weight:600">Fecha de nacimiento</label>
         <input type="date" id="profBirth">
         <label for="profPlace" style="font-weight:600">Lugar de nacimiento</label>
         <input type="text" id="profPlace" maxlength="120">
         <button type="button" class="btn-primary" id="profSave">Guardar</button>
+      </div>
+      <div class="pw-box">
+        <h3>Cambiar contraseña</h3>
+        <div id="pwMsg"></div>
+        <input type="password" id="pwCurrent" placeholder="Contraseña actual" autocomplete="current-password">
+        <input type="password" id="pwNew" placeholder="Contraseña nueva" autocomplete="new-password">
+        <div class="pw-meter" id="pwNewMeter"><span></span></div><div class="pw-label" id="pwNewLabel"></div>
+        <input type="password" id="pwNew2" placeholder="Repite la contraseña nueva" autocomplete="new-password">
+        <button type="button" class="btn-primary" id="pwSave">Cambiar contraseña</button>
       </div>
       <div class="footer-stats" style="margin: 10px 0 0;">
         <span id="footerCount">0 recuerdos</span> ·
@@ -559,7 +624,23 @@
           <div class="stat-item"><span class="stat-label">Total de memorias:</span><span class="stat-value" id="stat-total">0</span></div>
         </div>
       </div>
-      <button type="button" class="logout-big" id="logoutBtn">🚪 Cerrar sesión y salir</button>
+      <button type="button" class="logout-big" id="logoutBtn"><svg class="i"><use href="#i-logout"/></svg> Cerrar sesión y salir</button>
+    </div>
+
+    <div id="viewSummary" class="card hidden">
+      <h2 style="color: var(--salvia-hover); margin-bottom: 6px;">Tu resumen de vida</h2>
+      <p class="home-sub" style="margin-bottom:12px">Tu historia en palabras, con un tono siempre positivo, a partir de tus recuerdos.</p>
+      <div class="profile-row">
+        <label for="sumStyle" style="font-weight:600">Estilo</label>
+        <select id="sumStyle"></select>
+        <label for="sumScope" style="font-weight:600">Sobre qué</label>
+        <select id="sumScope"><option value="all">Toda mi vida</option><option value="year">Un año</option><option value="person">Una persona</option></select>
+        <select id="sumValue" class="hidden"></select>
+        <button type="button" class="btn-primary" id="sumGo">Crear resumen</button>
+      </div>
+      <div id="sumMsg"></div>
+      <div id="sumOut" class="sum-out hidden"></div>
+      <div class="button-group hidden" id="sumActions"><button type="button" class="btn-secondary" id="sumCopy">Copiar</button><button type="button" class="btn-secondary" id="sumDownload">Descargar</button></div>
     </div>
 
     <div id="viewLife" class="card hidden">
@@ -568,7 +649,8 @@
         <div class="tl-zoom"><button type="button" id="tlZoomOut" aria-label="Alejar">−</button><button type="button" id="tlZoomIn" aria-label="Acercar">+</button></div>
       </div>
       <div class="searchbar">
-        <input type="search" id="tlSearch" placeholder="🔍 Buscar en tu línea de vida" autocomplete="off">
+        <input type="search" id="tlSearch" placeholder="Buscar en tu línea de vida" autocomplete="off">
+        <div class="adv" id="tlAdv"></div>
         <div class="sort-row"><span>Orden:</span><select id="tlSort"><option value="desc">Más reciente primero</option><option value="asc">Más antiguo primero</option></select></div>
       </div>
       <div id="tlBirth" class="tl-birth hidden"></div>
@@ -583,23 +665,23 @@
 
     <div id="viewCreate" class="hidden">
     <div class="create-actions">
-      <button type="button" class="big-btn big-voice" id="btnVoice"><span class="big-ico">🎙️</span><span>Contar con mi voz</span></button>
-      <button type="button" class="big-btn big-write" id="btnWrite"><span class="big-ico">✍️</span><span>Escribir</span></button>
+      <button type="button" class="big-btn big-voice" id="btnVoice"><span class="big-ico"><svg class="i"><use href="#i-mic"/></svg></span><span>Contar con mi voz</span></button>
+      <button type="button" class="big-btn big-write" id="btnWrite"><span class="big-ico"><svg class="i"><use href="#i-pen"/></svg></span><span>Escribir</span></button>
     </div>
 
     <div class="create-actions create-media">
-      <label class="big-btn big-media"><span class="big-ico">📷</span><span>Subir una foto</span><input type="file" id="photoFile" accept="image/*" hidden></label>
-      <label class="big-btn big-media"><span class="big-ico">🎬</span><span>Subir un vídeo</span><input type="file" id="videoFile" accept="video/*" hidden></label>
+      <label class="big-btn big-media"><span class="big-ico"><svg class="i"><use href="#i-camera"/></svg></span><span>Subir una foto</span><input type="file" id="photoFile" accept="image/*" hidden></label>
+      <label class="big-btn big-media"><span class="big-ico"><svg class="i"><use href="#i-film"/></svg></span><span>Subir un vídeo</span><input type="file" id="videoFile" accept="video/*" hidden></label>
     </div>
     <div class="media-status hidden" id="mediaStatus"></div>
 
     <div class="main-content">
       <div class="card hidden" id="voicePanel">
         <div class="audio-box">
-          <h3>🎙️ Cuenta tu recuerdo</h3>
+          <h3><svg class="i"><use href="#i-mic"/></svg> Cuenta tu recuerdo</h3>
           <div class="audio-actions">
-            <button type="button" id="recBtn">⏺ Grabar</button>
-            <label class="btn-file">📁 Subir audio<input type="file" id="audioFile" accept="audio/*"></label>
+            <button type="button" id="recBtn"><svg class="i"><use href="#i-rec"/></svg> Grabar</button>
+            <label class="btn-file"><svg class="i"><use href="#i-folder"/></svg> Subir audio<input type="file" id="audioFile" accept="audio/*"></label>
           </div>
           <div class="audio-status" id="audioStatus">Cuenta tu recuerdo: cuándo fue, con quién, dónde. Después podrás revisarlo.</div>
         </div>
@@ -643,10 +725,10 @@
               <label for="mood">Estado de ánimo</label>
               <select id="mood" name="mood">
                 <option value="neutral">Neutral</option>
-                <option value="feliz">Feliz 😊</option>
-                <option value="muy feliz">Muy Feliz 😄</option>
-                <option value="triste">Triste 😢</option>
-                <option value="emocionado">Emocionado 🤩</option>
+                <option value="feliz">Feliz</option>
+                <option value="muy feliz">Muy Feliz</option>
+                <option value="triste">Triste</option>
+                <option value="emocionado">Emocionado</option>
               </select>
             </div>
             <div class="form-group">
@@ -671,7 +753,8 @@
       <div class="card">
         <h2 style="margin-bottom: 14px; color: #333;">Tus Memorias</h2>
         <div class="searchbar">
-          <input type="search" id="memSearch" placeholder="🔍 Buscar por título, texto, persona o lugar" autocomplete="off">
+          <input type="search" id="memSearch" placeholder="Buscar por título, texto, persona o lugar" autocomplete="off">
+          <div class="adv" id="memAdv"></div>
           <div class="sort-row"><span>Orden:</span><select id="memSort"><option value="desc">Más reciente primero</option><option value="asc">Más antiguo primero</option></select></div>
         </div>
         <div class="memories-list" id="memoriesList">
@@ -703,7 +786,7 @@
         <div class="review-field"><label for="rvCategory">Categoría</label>
           <select id="rvCategory"><option>General</option><option>Viajes</option><option>Personal</option><option>Familia</option><option>Trabajo</option></select></div>
         <div class="review-field"><label for="rvMood">Estado de ánimo</label>
-          <select id="rvMood"><option value="neutral">Neutral</option><option value="feliz">Feliz 😊</option><option value="muy feliz">Muy Feliz 😄</option><option value="triste">Triste 😢</option><option value="emocionado">Emocionado 🤩</option></select></div>
+          <select id="rvMood"><option value="neutral">Neutral</option><option value="feliz">Feliz</option><option value="muy feliz">Muy Feliz</option><option value="triste">Triste</option><option value="emocionado">Emocionado</option></select></div>
       </div>
       <div class="review-field"><label>Personas y tu relación con ellas</label>
         <div id="rvPeople"></div>
@@ -718,6 +801,8 @@
   </div>
 
   <script>
+    // Icono de trazo fino desde el sprite
+    const ic = (n) => `<svg class="i"><use href="#i-${n}"/></svg>`;
     const API_URL = '/api';
     let tags = [];
     let memories = [];
@@ -779,14 +864,14 @@
         });
         const result = await response.json();
         if (result.success) {
-          showMessage('✅ Memoria guardada exitosamente');
+          showMessage('Memoria guardada exitosamente');
           resetWriteForm(); closePanels();
           window.goTo('mem');
         } else {
-          showMessage(`❌ ${result.error}`, 'error');
+          showMessage(`${result.error}`, 'error');
         }
       } catch (err) {
-        showMessage(`❌ Error: ${err.message}`, 'error');
+        showMessage(`Error: ${err.message}`, 'error');
       }
     }
 
@@ -811,12 +896,12 @@
         });
         const result = await response.json();
         if (result.success) {
-          showMessage('✅ Memoria actualizada');
+          showMessage('Memoria actualizada');
           resetWriteForm(); closePanels();
           window.goTo('mem');
         }
       } catch (err) {
-        showMessage(`❌ Error: ${err.message}`, 'error');
+        showMessage(`Error: ${err.message}`, 'error');
       }
     }
 
@@ -826,7 +911,7 @@
         const response = await fetch(`${API_URL}/memories/${id}`, { method: 'DELETE' });
         const result = await response.json();
         if (result.success) {
-          showMessage('✅ Memoria eliminada');
+          showMessage('Memoria eliminada');
           currentMemoryId = null;
           form.reset();
           tags = [];
@@ -834,7 +919,7 @@
           loadMemories();
         }
       } catch (err) {
-        showMessage(`❌ Error: ${err.message}`, 'error');
+        showMessage(`Error: ${err.message}`, 'error');
       }
     }
 
@@ -857,9 +942,18 @@
         (m.people || []).map(p => p.name + ' ' + (p.relation || '')).join(' ')].join(' '));
     }
     // Orden por fecha del suceso (no por cuándo se subió); sin fecha, siempre al final
-    function filterSort(list, query, dir) {
+    function filterSort(list, query, dir, f) {
       const q = norm(query).split(/\s+/).filter(Boolean);
-      const out = list.filter(m => { const t = memText(m); return q.every(w => t.includes(w)); });
+      f = f || {};
+      const out = list.filter(m => {
+        const t = memText(m);
+        if (!q.every(w => t.includes(w))) return false;
+        if (f.year && (m.date_happened || '').slice(0, 4) !== f.year) return false;
+        if (f.type && (m.event_type || '') !== f.type) return false;
+        if (f.place && norm(m.place) !== norm(f.place)) return false;
+        if (f.person && !(m.people || []).some(p => norm(p.name) === norm(f.person))) return false;
+        return true;
+      });
       const sgn = dir === 'asc' ? 1 : -1;
       return out.sort((a, b) => {
         if (!a.date_happened && !b.date_happened) return 0;
@@ -870,22 +964,56 @@
     }
     window.filterSort = filterSort;
 
+    // Filtros avanzados (año, tipo, lugar, persona): las opciones salen de los propios recuerdos
+    function setupFilters(boxId, onChange) {
+      const box = document.getElementById(boxId);
+      const state = {};
+      const defs = [['year', 'Año'], ['type', 'Tipo'], ['place', 'Lugar'], ['person', 'Persona']];
+      function options(key) {
+        const set = new Set();
+        memories.forEach(m => {
+          if (key === 'year' && m.date_happened) set.add(m.date_happened.slice(0, 4));
+          if (key === 'type' && m.event_type) set.add(m.event_type);
+          if (key === 'place' && m.place) set.add(m.place);
+          if (key === 'person') (m.people || []).forEach(p => p.name && set.add(p.name));
+        });
+        return [...set].sort((a, b) => key === 'year' ? b.localeCompare(a) : a.localeCompare(b, 'es'));
+      }
+      function build() {
+        box.innerHTML = defs.map(([k, label]) => {
+          const opts = options(k);
+          if (state[k] && !opts.includes(state[k])) state[k] = '';
+          return `<select data-f="${k}" aria-label="${label}"><option value="">${label}: todos</option>${opts.map(o => `<option value="${esc(o)}" ${state[k] === o ? 'selected' : ''}>${esc(o)}</option>`).join('')}</select>`;
+        }).join('') + '<button type="button" class="adv-clear">Quitar filtros</button>';
+        box.querySelectorAll('select').forEach(sel => sel.onchange = () => { state[sel.dataset.f] = sel.value; onChange(); });
+        box.querySelector('.adv-clear').onclick = () => { defs.forEach(([k]) => state[k] = ''); build(); onChange(); };
+      }
+      build();
+      return { get: () => ({ ...state }), refresh: build };
+    }
+    window.setupFilters = setupFilters;
+
     function renderHome() {
       const el = document.getElementById('homeRecent');
       const recent = filterSort(memories, '', 'desc').slice(0, 3);
       el.innerHTML = recent.length
-        ? '<h3>Tus últimos recuerdos</h3>' + recent.map(m => `<div class="home-item" data-id="${m.id}"><strong>${esc(m.title)}</strong><small>${esc(m.date_happened ? new Date(m.date_happened + 'T00:00:00').toLocaleDateString('es-ES') : 'Sin fecha')}${m.place ? ' · 📍 ' + esc(m.place) : ''}</small></div>`).join('')
+        ? '<h3>Tus últimos recuerdos</h3>' + recent.map(m => `<div class="home-item" data-id="${m.id}"><strong>${esc(m.title)}</strong><small>${esc(m.date_happened ? new Date(m.date_happened + 'T00:00:00').toLocaleDateString('es-ES') : 'Sin fecha')}${m.place ? ' · ' + esc(m.place) : ''}</small></div>`).join('')
         : '<p class="home-sub" style="margin-top:18px">Aún no tienes recuerdos. ¡Cuenta el primero!</p>';
       el.querySelectorAll('[data-id]').forEach(d => d.onclick = () => { window.goTo('mem'); currentMemoryId = null; selectMemory(+d.dataset.id); });
     }
 
+    let memFilters = null;
+    const memSig = () => memories.map(m => m.id + (m.date_happened || '') + (m.place || '') + (m.event_type || '') + (m.people || []).length).join('|');
     function renderMemories() {
       renderHome();
       if (memories.length === 0) {
         memoriesList.innerHTML = '<div class="empty-state">No hay memorias aún. ¡Crea tu primera memoria!</div>';
         return;
       }
-      const shown = filterSort(memories, memSearch.value, memSort.value);
+      if (!memFilters) memFilters = setupFilters('memAdv', () => renderMemories());
+      else if (memFilters.sig !== memSig()) { memFilters.refresh(); }
+      memFilters.sig = memSig();
+      const shown = filterSort(memories, memSearch.value, memSort.value, memFilters.get());
       if (shown.length === 0) {
         memoriesList.innerHTML = '<div class="empty-state">No he encontrado ningún recuerdo con esa búsqueda.</div>';
         return;
@@ -902,7 +1030,7 @@
         const visuals = (memory.media || []).filter(m => m.kind === 'image' || m.kind === 'video');
         return `
         <div class="memory-item ${open ? 'active' : ''}" onclick="selectMemory(${memory.id})">
-          <div class="memory-title">${esc(memory.title)}${audios.length ? ' 🎙️' : ''}${visuals.some(v => v.kind === 'image') ? ' 📷' : ''}${visuals.some(v => v.kind === 'video') ? ' 🎬' : ''}</div>
+          <div class="memory-title">${esc(memory.title)}${audios.length ? ' ' + ic('mic') : ''}${visuals.some(v => v.kind === 'image') ? ' ' + ic('camera') : ''}${visuals.some(v => v.kind === 'video') ? ' ' + ic('film') : ''}</div>
           <div class="memory-meta">
             <span class="memory-category">${esc(memory.category)}</span>
             <span>${esc(when)}</span>
@@ -911,8 +1039,8 @@
           ${open ? `
             <div class="memory-detail" onclick="event.stopPropagation()">
               <p>${esc(memory.content)}</p>
-              ${memory.place || memory.event_type ? `<div class="memory-extra">${memory.event_type ? '🏷️ ' + esc(memory.event_type) + ' ' : ''}${memory.place ? '📍 ' + esc(memory.place) : ''}</div>` : ''}
-              ${people ? `<div class="memory-people">👥 ${people}</div>` : ''}
+              ${memory.place || memory.event_type ? `<div class="memory-extra">${memory.event_type ? ic('tag') + ' ' + esc(memory.event_type) + ' ' : ''}${memory.place ? ic('pin') + ' ' + esc(memory.place) : ''}</div>` : ''}
+              ${people ? `<div class="memory-people">${ic('users')} ${people}</div>` : ''}
               ${memory.tags && memory.tags.length > 0 ? `
                 <div class="memory-tags">
                   ${memory.tags.map(tag => `<span class="memory-tag">${esc(tag)}</span>`).join('')}
@@ -1021,7 +1149,7 @@
 
     // ===== PESTAÑAS Y RESUMEN =====
     (function () {
-      const views = { home: 'viewHome', mem: 'viewMem', create: 'viewCreate', life: 'viewLife', profile: 'viewProfile' };
+      const views = { home: 'viewHome', mem: 'viewMem', create: 'viewCreate', life: 'viewLife', summary: 'viewSummary', profile: 'viewProfile' };
       const navBtns = document.querySelectorAll('#bottomNav button');
       window.goTo = (name) => {
         Object.entries(views).forEach(([k, id]) => document.getElementById(id).classList.toggle('hidden', k !== name));
@@ -1029,6 +1157,7 @@
         if (name !== 'create') closePanels();
         if (name === 'life' && window.openTimeline) window.openTimeline();
         if (name === 'home' || name === 'mem') loadMemories();
+        if (name === 'summary' && window.openSummary) window.openSummary();
         if (name === 'profile') { loadStats(); if (window.fillProfile) window.fillProfile(); }
         window.scrollTo({ top: 0 });
       };
@@ -1070,8 +1199,8 @@
       setAudioStatus('Preparando el audio…');
       let pcm;
       try { pcm = await decodeTo16kMono(blob); }
-      catch (e) { setAudioStatus('❌ No se pudo leer ese audio. Prueba con otro archivo o graba de nuevo.'); return; }
-      if (pcm.length < SAMPLE_RATE * 0.5) { setAudioStatus('❌ El audio es demasiado corto.'); return; }
+      catch (e) { setAudioStatus('No se pudo leer ese audio. Prueba con otro archivo o graba de nuevo.'); return; }
+      if (pcm.length < SAMPLE_RATE * 0.5) { setAudioStatus('El audio es demasiado corto.'); return; }
 
       const fd = new FormData();
       fd.append('audio', blob, filename);
@@ -1080,15 +1209,15 @@
       let r;
       try {
         r = await (await fetch(`${API_URL}/audio/analyze`, { method: 'POST', body: fd })).json();
-      } catch (e) { setAudioStatus('❌ No se pudo conectar con el servidor.'); return; }
-      if (!r.success) { setAudioStatus('❌ ' + r.error); return; }
+      } catch (e) { setAudioStatus('No se pudo conectar con el servidor.'); return; }
+      if (!r.success) { setAudioStatus('' + r.error); return; }
 
       const started = Date.now();
       const poll = async () => {
         let j;
         try { j = (await (await fetch(`${API_URL}/audio/jobs/${r.data.jobId}`)).json()); }
-        catch (e) { setAudioStatus('❌ Se perdió la conexión.'); return; }
-        if (!j.success) { setAudioStatus('❌ ' + j.error); return; }
+        catch (e) { setAudioStatus('Se perdió la conexión.'); return; }
+        if (!j.success) { setAudioStatus('' + j.error); return; }
         const d = j.data;
         if (d.status === 'processing') {
           const secs = Math.round((Date.now() - started) / 1000);
@@ -1097,7 +1226,7 @@
             : `Escuchando tu recuerdo… ${secs}s`);
           return setTimeout(poll, 2000);
         }
-        if (d.status === 'error') { setAudioStatus('❌ ' + d.error); return; }
+        if (d.status === 'error') { setAudioStatus('' + d.error); return; }
         setAudioStatus('Listo. Revisa lo que he entendido.');
         openReview(d.result);
       };
@@ -1119,7 +1248,7 @@
         clearInterval(recTimer);
         recStream.getTracks().forEach(t => t.stop());
         recBtn.classList.remove('recording');
-        recBtn.textContent = '⏺ Grabar';
+        recBtn.innerHTML = ic('rec') + ' Grabar';
         const type = recorder.mimeType || 'audio/webm';
         const ext = type.includes('mp4') ? 'm4a' : type.includes('ogg') ? 'ogg' : 'webm';
         analyzeAudioBlob(new Blob(recChunks, { type }), `grabacion.${ext}`);
@@ -1129,7 +1258,7 @@
       recBtn.classList.add('recording');
       recTimer = setInterval(() => {
         const s = Math.floor((Date.now() - recStart) / 1000);
-        recBtn.textContent = `⏹ Parar (${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')})`;
+        recBtn.textContent = `Parar (${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')})`;
         if (s >= 15 * 60) recorder.stop();
       }, 500);
       setAudioStatus('Grabando… pulsa "Parar" cuando termines.');
@@ -1228,7 +1357,7 @@
 
     async function analyzeVisual(file, isVideo) {
       const label = isVideo ? 'vídeo' : 'foto';
-      if (file.size > 300 * 1024 * 1024) return setMediaStatus('❌ El archivo es demasiado grande (máximo 300 MB).');
+      if (file.size > 300 * 1024 * 1024) return setMediaStatus('El archivo es demasiado grande (máximo 300 MB).');
       setMediaStatus(`Preparando tu ${label}…`);
       const fd = new FormData();
       fd.append('file', file, file.name);
@@ -1250,22 +1379,22 @@
       setMediaStatus(`Subiendo tu ${label}…`);
       let r;
       try { r = await (await fetch(`${API_URL}/visual/analyze`, { method: 'POST', body: fd })).json(); }
-      catch (e) { return setMediaStatus('❌ No se pudo conectar con el servidor.'); }
-      if (!r.success) return setMediaStatus('❌ ' + r.error);
+      catch (e) { return setMediaStatus('No se pudo conectar con el servidor.'); }
+      if (!r.success) return setMediaStatus('' + r.error);
 
       const started = Date.now();
       const poll = async () => {
         let j;
         try { j = await (await fetch(`${API_URL}/audio/jobs/${r.data.jobId}`)).json(); }
-        catch (e) { return setMediaStatus('❌ Se perdió la conexión.'); }
-        if (!j.success) return setMediaStatus('❌ ' + j.error);
+        catch (e) { return setMediaStatus('Se perdió la conexión.'); }
+        if (!j.success) return setMediaStatus('' + j.error);
         const d = j.data;
         if (d.status === 'processing') {
           const secs = Math.round((Date.now() - started) / 1000);
           setMediaStatus(`Mirando tu ${label}… ${secs}s${d.engine === 'loading' ? ' (la primera vez tarda más)' : ''}`);
           return setTimeout(poll, 2000);
         }
-        if (d.status === 'error') return setMediaStatus('❌ ' + d.error);
+        if (d.status === 'error') return setMediaStatus('' + d.error);
         setMediaStatus('');
         openReview(d.result);
       };
@@ -1304,7 +1433,7 @@
         draft = null; closeReview(); closePanels();
         setAudioStatus('Cuenta tu recuerdo: cuándo fue, con quién, dónde. Después podrás revisarlo.');
         window.goTo('mem');
-        showMessage('✅ Recuerdo guardado con tu ' + ({ image: 'foto', video: 'vídeo' }[savedKind] || 'audio'));
+        showMessage('Recuerdo guardado con tu ' + ({ image: 'foto', video: 'vídeo' }[savedKind] || 'audio'));
       } catch (e) { rv('reviewMsg').innerHTML = '<div class="error">No se pudo guardar. Inténtalo de nuevo.</div>'; }
     };
 
@@ -1314,6 +1443,26 @@
     let authMode = 'login';
     let currentUser = null;
 
+    // Medidor de seguridad: puntúa longitud y variedad de caracteres
+    function pwScore(p) {
+      if (!p) return 0;
+      let pts = 0;
+      if (p.length >= 8) pts++;
+      if (p.length >= 12) pts++;
+      if (/[a-z]/.test(p) && /[A-Z]/.test(p)) pts++;
+      if (/[0-9]/.test(p)) pts++;
+      if (/[^A-Za-z0-9]/.test(p)) pts++;
+      if (p.length < 8 || !/[a-z]/.test(p) || !/[A-Z]/.test(p) || !/[0-9]/.test(p)) return 1;
+      return pts >= 5 ? 3 : 2;
+    }
+    function updateMeter(inputId, meterId, labelId) {
+      const p = document.getElementById(inputId).value;
+      const lvl = pwScore(p);
+      document.getElementById(meterId).className = 'pw-meter' + (p ? ' l' + lvl : '');
+      document.getElementById(labelId).textContent = p ? ['', 'Seguridad: débil', 'Seguridad: media', 'Seguridad: fuerte'][lvl] : '';
+    }
+    document.getElementById('authPassword').addEventListener('input', () => updateMeter('authPassword', 'authMeter', 'authMeterLabel'));
+
     function setAuthMode(mode) {
       authMode = mode;
       const reg = mode === 'register';
@@ -1321,18 +1470,25 @@
       document.getElementById('tabRegister').classList.toggle('active', reg);
       document.getElementById('nameGroup').style.display = reg ? '' : 'none';
       document.getElementById('pwHint').style.display = reg ? '' : 'none';
+      document.getElementById('regMeter').style.display = reg ? '' : 'none';
+      document.getElementById('repeatGroup').style.display = reg ? '' : 'none';
       document.getElementById('authSubmit').textContent = reg ? 'Crear cuenta' : 'Entrar';
       document.getElementById('authPassword').autocomplete = reg ? 'new-password' : 'current-password';
       document.getElementById('authMessage').innerHTML = '';
+    }
+
+    function showUserData(user) {
+      document.getElementById('homeHello').textContent = `Hola, ${user.name}`;
+      document.getElementById('profName').textContent = user.name;
+      document.getElementById('profNameInput').value = user.name;
+      document.getElementById('profEmail').textContent = user.email || '';
     }
 
     function showApp(user) {
       authScreen.classList.add('hidden');
       appScreen.classList.remove('hidden');
       currentUser = user;
-      document.getElementById('homeHello').textContent = `Hola, ${user.name}`;
-      document.getElementById('profName').textContent = user.name;
-      document.getElementById('profEmail').textContent = user.email || '';
+      showUserData(user);
       const today = new Date().toISOString().split('T')[0];
       dateInput.value = today;
       window.goTo('home');
@@ -1352,9 +1508,31 @@
           method: 'PUT', headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ birth_date: document.getElementById('profBirth').value, birth_place: document.getElementById('profPlace').value })
         })).json();
-        box.innerHTML = r.success ? '<div class="success">✅ Perfil guardado</div>' : `<div class="error">${esc(r.error)}</div>`;
+        box.innerHTML = r.success ? '<div class="success">Perfil guardado</div>' : `<div class="error">${esc(r.error)}</div>`;
       } catch (e) { box.innerHTML = '<div class="error">No se pudo guardar. Inténtalo de nuevo.</div>'; }
       setTimeout(() => { box.innerHTML = ''; }, 3000);
+    };
+
+    document.getElementById('pwNew').addEventListener('input', () => updateMeter('pwNew', 'pwNewMeter', 'pwNewLabel'));
+    function flash(boxId, html) { const b = document.getElementById(boxId); b.innerHTML = html; setTimeout(() => { b.innerHTML = ''; }, 4000); }
+    document.getElementById('profNameSave').onclick = async () => {
+      try {
+        const r = await (await fetch(`${API_URL}/auth/name`, { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: document.getElementById('profNameInput').value }) })).json();
+        if (r.success) { currentUser = r.data; showUserData(r.data); flash('profMsg', '<div class="success">Nombre actualizado</div>'); }
+        else flash('profMsg', `<div class="error">${esc(r.error)}</div>`);
+      } catch (e) { flash('profMsg', '<div class="error">No se pudo guardar. Inténtalo de nuevo.</div>'); }
+    };
+    document.getElementById('pwSave').onclick = async () => {
+      const cur = document.getElementById('pwCurrent').value, n1 = document.getElementById('pwNew').value, n2 = document.getElementById('pwNew2').value;
+      if (n1 !== n2) return flash('pwMsg', '<div class="error">Las contraseñas nuevas no coinciden</div>');
+      try {
+        const r = await (await fetch(`${API_URL}/auth/password`, { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ current: cur, next: n1 }) })).json();
+        if (r.success) {
+          ['pwCurrent', 'pwNew', 'pwNew2'].forEach(id => document.getElementById(id).value = '');
+          updateMeter('pwNew', 'pwNewMeter', 'pwNewLabel');
+          flash('pwMsg', '<div class="success">Contraseña cambiada. Se han cerrado tus sesiones en otros dispositivos.</div>');
+        } else flash('pwMsg', `<div class="error">${esc(r.error)}</div>`);
+      } catch (e) { flash('pwMsg', '<div class="error">No se pudo cambiar. Inténtalo de nuevo.</div>'); }
     };
 
     function showAuth() {
@@ -1373,14 +1551,20 @@
         email: document.getElementById('authEmail').value,
         password: document.getElementById('authPassword').value
       };
-      if (authMode === 'register') body.name = document.getElementById('authName').value;
+      if (authMode === 'register') {
+        body.name = document.getElementById('authName').value;
+        if (document.getElementById('authPassword2').value !== body.password) {
+          document.getElementById('authMessage').innerHTML = '<div class="error">Las contraseñas no coinciden</div>';
+          return;
+        }
+      }
       try {
         const r = await fetch(`${API_URL}/auth/${authMode}`, {
           method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body)
         });
         const result = await r.json();
         if (result.success) {
-          document.getElementById('authPassword').value = '';
+          document.getElementById('authPassword').value = ''; document.getElementById('authPassword2').value = ''; updateMeter('authPassword', 'authMeter', 'authMeterLabel');
           showApp(result.data);
         } else {
           document.getElementById('authMessage').innerHTML = `<div class="error">${result.error}</div>`;
@@ -1403,16 +1587,67 @@
       return r;
     };
 
+    // ===== RESUMEN DE VIDA =====
+    (function () {
+      const $ = (id) => document.getElementById(id);
+      let loaded = false;
+      window.openSummary = async function () {
+        if (!loaded) {
+          try {
+            const r = await (await fetch(`${API_URL}/summary/styles`)).json();
+            $('sumStyle').innerHTML = r.data.map(s => `<option value="${s.key}">${esc(s.label)}</option>`).join('');
+            loaded = true;
+          } catch (e) { $('sumMsg').innerHTML = '<div class="error">No se pudo cargar. Inténtalo de nuevo.</div>'; return; }
+        }
+        await loadMemories();
+        fillValue();
+      };
+      function fillValue() {
+        const sc = $('sumScope').value, sel = $('sumValue');
+        sel.classList.toggle('hidden', sc === 'all');
+        if (sc === 'year') {
+          const ys = [...new Set(memories.filter(m => m.date_happened).map(m => m.date_happened.slice(0, 4)))].sort().reverse();
+          sel.innerHTML = ys.map(y => `<option>${y}</option>`).join('') || '<option value="">Sin años</option>';
+        } else if (sc === 'person') {
+          const ps = [...new Set(memories.flatMap(m => (m.people || []).map(p => p.name).filter(Boolean)))].sort((a, b) => a.localeCompare(b, 'es'));
+          sel.innerHTML = ps.map(p => `<option>${esc(p)}</option>`).join('') || '<option value="">Sin personas</option>';
+        }
+      }
+      $('sumScope').onchange = fillValue;
+      $('sumGo').onclick = async () => {
+        $('sumMsg').innerHTML = '<div class="media-status">Escribiendo tu historia…</div>';
+        try {
+          const r = await (await fetch(`${API_URL}/summary`, { method: 'POST', headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ style: $('sumStyle').value, scope: $('sumScope').value, value: $('sumValue').value }) })).json();
+          if (!r.success) { $('sumMsg').innerHTML = `<div class="error">${esc(r.error)}</div>`; return; }
+          $('sumMsg').innerHTML = '';
+          $('sumOut').textContent = r.data.text;
+          $('sumOut').classList.remove('hidden'); $('sumActions').classList.remove('hidden');
+        } catch (e) { $('sumMsg').innerHTML = '<div class="error">No se pudo crear el resumen.</div>'; }
+      };
+      $('sumCopy').onclick = async () => {
+        try { await navigator.clipboard.writeText($('sumOut').textContent); $('sumMsg').innerHTML = '<div class="success">Copiado</div>'; }
+        catch (e) { $('sumMsg').innerHTML = '<div class="error">No se pudo copiar. Selecciona el texto a mano.</div>'; }
+        setTimeout(() => { $('sumMsg').innerHTML = ''; }, 2500);
+      };
+      $('sumDownload').onclick = () => {
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(new Blob([$('sumOut').textContent], { type: 'text/plain;charset=utf-8' }));
+        a.download = 'mi-resumen-de-vida.txt'; a.click();
+      };
+    })();
+
     // ===== LÍNEA DE VIDA =====
     (function () {
       const KINDS = {
-        school:    { label: 'Escolar',     color: '#8FA9B8' },
-        work:      { label: 'Profesional', color: '#C9A66B' },
+        general:   { label: 'General',     color: '#33423A' },
+        school:    { label: 'Escolar',     color: '#7F938A' },
+        work:      { label: 'Profesional', color: '#6E8277' },
         personal:  { label: 'Personal',    color: '#5E8F6E' },
-        residence: { label: 'Residencia',  color: '#C98F7A' },
+        residence: { label: 'Residencia',  color: '#9AA79F' },
         history:   { label: 'Historia',    color: '#8E8E7E' }
       };
-      const ROWS = ['history', 'school', 'work', 'personal', 'residence'];
+      const ROWS = ['general', 'history', 'school', 'work', 'personal', 'residence'];
       const DAY = 86400000;
       const $ = (id) => document.getElementById(id);
       let profile = null, stages = [], histEvents = [], sel = null, ppy = 16, editing = null, draftStage = null, startMs = 0, endMs = 0;
@@ -1423,7 +1658,8 @@
       const xOf = (m) => (m - startMs) / DAY / 365.25 * ppy;
       const mOf = (x) => startMs + x / ppy * 365.25 * DAY;
       // Recuerdos que cumplen la búsqueda; el orden elegido se aplica a las listas
-      const visibleMems = () => window.filterSort(memories, $('tlSearch').value, $('tlSort').value);
+      let tlFilters = null;
+      const visibleMems = () => window.filterSort(memories, $('tlSearch').value, $('tlSort').value, tlFilters ? tlFilters.get() : {});
       const memKind = (m) => m.event_type === 'Estudios' ? 'school' : m.event_type === 'Trabajo' ? 'work' : 'personal';
 
       async function api(path, opts) {
@@ -1439,6 +1675,7 @@
         } catch (e) {
           $('tlMsg').innerHTML = '<div class="error">No se pudo cargar tu línea de vida. Inténtalo de nuevo.</div>'; return;
         }
+        if (!tlFilters) tlFilters = window.setupFilters('tlAdv', () => { drawTimeline(); drawDetail(); }); else tlFilters.refresh();
         render();
       };
 
@@ -1500,8 +1737,14 @@
           const a = xOf(ms(s.start_date)), e = s.end_date ? xOf(ms(s.end_date)) : xOf(Date.now());
           rows[s.kind] += `<div class="tl-seg" data-stage="${s.id}" style="left:${a}px;width:${Math.max(8, e - a)}px;background:${KINDS[s.kind].color}" title="${esc(s.title || s.place)}">${esc(s.title || s.place)}</div>`;
         });
+        // Fila general: una marca por cada fecha con algún recuerdo (de cualquier tema)
+        const genDates = new Set();
         visibleMems().forEach(m => {
           if (!m.date_happened) return;
+          if (!genDates.has(m.date_happened)) {
+            genDates.add(m.date_happened);
+            rows.general += `<div class="tl-gen" data-gen="${m.date_happened}" style="left:${xOf(ms(m.date_happened))}px" title="${esc(fmt(m.date_happened))}"></div>`;
+          }
           const k = memKind(m), a = xOf(ms(m.date_happened));
           const e = m.date_end && m.date_end > m.date_happened ? xOf(ms(m.date_end)) : a;
           const w = Math.max(18, e - a);
@@ -1524,6 +1767,8 @@
 
       function bindTimeline() {
         $('tlInner').onclick = (ev) => {
+          const gen = ev.target.closest('[data-gen]');
+          if (gen) return select(ms(gen.dataset.gen), ms(gen.dataset.gen));
           const stage = ev.target.closest('[data-stage]');
           const mark = ev.target.closest('[data-mem]');
           if (mark) {
@@ -1601,31 +1846,31 @@
           const active = stages.filter(s => ms(s.start_date) <= ms1 && (!s.end_date || ms(s.end_date) >= ms0));
           const lead = { dia: 'Ese día', mes: 'Ese mes', 'año': 'Ese año', periodo: 'En ese periodo', cercano: 'Por aquellos años' }[sel.level] || '';
 
-          html += `<h3>📅 ${esc(title)}</h3>`;
-          html += `<h4>🌍 ${esc(lead)} en el mundo y en España</h4>`;
+          html += `<h3>${ic('cal')} ${esc(title)}</h3>`;
+          html += `<h4>${ic('globe')} ${esc(lead)} en el mundo y en España</h4>`;
           const dirSgn = $('tlSort').value === 'asc' ? 1 : -1;
           const evs = [...sel.events].sort((a, b) => dirSgn * a.date.localeCompare(b.date));
           html += evs.length
             ? evs.map(e => `<div class="tl-item"><small>${esc(fmt(e.date))} · ${e.scope === 'españa' ? 'España' : 'Mundo'}</small>${esc(e.text)}</div>`).join('')
             : '<div class="tl-item">No tenemos hechos destacados para estas fechas.</div>';
 
-          html += '<h4>📖 Tus recuerdos</h4>';
+          html += '<h4>' + ic('book') + ' Tus recuerdos</h4>';
           html += mems.length ? mems.map(m => {
             const audios = (m.media || []).filter(x => x.kind === 'audio');
-            return `<div class="tl-item"><strong>${esc(m.title)}</strong><small>${esc(fmt(m.date_happened))}${m.place ? ' · 📍 ' + esc(m.place) : ''}</small>
+            return `<div class="tl-item"><strong>${esc(m.title)}</strong><small>${esc(fmt(m.date_happened))}${m.place ? ' · ' + esc(m.place) : ''}</small>
               ${(m.media || []).filter(x => x.kind === 'image').map(a => `<img loading="lazy" src="${a.url}" style="width:100%;max-height:220px;object-fit:contain;border-radius:8px;margin-top:6px;background:#000" alt="">`).join('')}
               ${(m.media || []).filter(x => x.kind === 'video').map(a => `<video controls playsinline preload="none" src="${a.url}" style="width:100%;max-height:220px;margin-top:6px;border-radius:8px;background:#000"></video>`).join('')}
               ${audios.map(a => `<audio controls preload="none" src="${a.url}" style="width:100%;margin-top:6px"></audio>`).join('')}
               <div class="btns"><button type="button" class="btn-secondary" data-open="${m.id}">Abrir recuerdo</button></div></div>`;
           }).join('') : '<div class="tl-item">No hay recuerdos en estas fechas.</div>';
 
-          html += '<h4>🧭 Tus etapas</h4>';
+          html += '<h4>' + ic('compass') + ' Tus etapas</h4>';
           html += active.length ? active.map(s => stageItem(s)).join('') : '<div class="tl-item">Ninguna etapa registrada en estas fechas.</div>';
         }
 
         const props = proposals();
         if (props.length) {
-          html += '<h4>💡 Te proponemos añadir</h4>' + props.map((p, i) => `<div class="tl-item tl-prop"><span class="tl-dot" style="background:${KINDS[p.kind].color}"></span><strong>${KINDS[p.kind].label}</strong><small>${esc(p.why)}</small><div class="btns"><button type="button" class="btn-primary" data-prop="${i}">Completar datos</button></div></div>`).join('');
+          html += '<h4>' + ic('bulb') + ' Te proponemos añadir</h4>' + props.map((p, i) => `<div class="tl-item tl-prop"><span class="tl-dot" style="background:${KINDS[p.kind].color}"></span><strong>${KINDS[p.kind].label}</strong><small>${esc(p.why)}</small><div class="btns"><button type="button" class="btn-primary" data-prop="${i}">Completar datos</button></div></div>`).join('');
         }
 
         html += '<div class="button-group" style="margin-top:12px"><button type="button" class="btn-secondary" id="tlAddStage">+ Añadir una etapa (colegio, trabajo, casa)</button></div>';
@@ -1646,7 +1891,7 @@
       function stageItem(s) {
         const k = KINDS[s.kind];
         return `<div class="tl-item"><span class="tl-dot" style="background:${k.color}"></span><strong>${esc(s.title || s.place)}</strong>
-          <small>${k.label}${s.title && s.place ? ' · 📍 ' + esc(s.place) : ''} · ${esc(fmt(s.start_date))} – ${s.end_date ? esc(fmt(s.end_date)) : 'actualidad'}</small>
+          <small>${k.label}${s.title && s.place ? ' · ' + esc(s.place) : ''} · ${esc(fmt(s.start_date))} – ${s.end_date ? esc(fmt(s.end_date)) : 'actualidad'}</small>
           <div class="btns"><button type="button" class="btn-edit" data-edit="${s.id}">Editar</button><button type="button" class="btn-danger" data-del="${s.id}">Eliminar</button></div></div>`;
       }
 

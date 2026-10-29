@@ -13,6 +13,11 @@ Actualizada: 2026-10-29. Orden propuesto (se puede cambiar).
 
 - Menú inferior con iconos (Inicio, Recuerdos, Crear, Línea de vida, Perfil con salir), buscador y orden (más reciente primero por defecto) en Recuerdos y Línea de vida; probado con simulación del navegador, pendiente de que el usuario lo vea en pantalla
 
+- Resumen de vida (B2): sección "Resumen" en el menú; 4 estilos positivos (amable, alegre, nostálgico-cálido, entusiasta); de toda la vida, un año o una persona; copiar y descargar. Redacción local con plantillas (gratis); proveedor intercambiable en `src/providers/summary.js`.
+- Filtros avanzados (año, tipo, lugar, persona) en Recuerdos y Línea de vida.
+- Presentación web para Dirección/patrocinadores: `docs/presentacion.html` (autocontenida, con demo de voz, línea de vida y resúmenes interactivos). También existe `docs/Mis-Memorias-de-Oro-presentacion.pptx`.
+- Onboarding (A0): en pausa, el usuario aún no lo tiene claro.
+
 ## Principios de diseño
 - **Mobile-first:** se diseña primero para el móvil. Botones grandes, una acción principal por pantalla, formularios cortos.
 - **Coste cero en el MVP, con opción de cambiar:** motores locales/gratuitos; cada servicio de IA detrás de un "proveedor" intercambiable.
@@ -30,6 +35,12 @@ Actualizada: 2026-10-29. Orden propuesto (se puede cambiar).
 - **Orden elegible** en la línea de vida y en sus listas de recuerdos: por defecto del **más reciente al más antiguo** (según la fecha en que ocurrió, no cuando se subió); se puede cambiar a más antiguo primero.
 - **Buscador** (texto libre: título, contenido, personas, lugar) dentro de la línea de vida y de la lista de recuerdos; después filtros por persona, lugar, año y tipo.
 - Encaja con la Fase N: el buscador y el orden irían en la parte superior de Recuerdos y Línea de vida. Se hace junto a la navegación o justo después.
+
+## Ajustes 2026-10-29 (hechos en local, pendiente de commit y de que el usuario los vea)
+- Perfil: cambiar nombre y contraseña (pide la actual y la nueva dos veces; cierra otras sesiones).
+- Registro: contraseña repetida e indicador de seguridad (débil / media / fuerte), también al cambiarla.
+- Iconos de trazo fino monocromo (sprite SVG) en lugar de emojis; el usuario dirá si le gusta el estilo.
+- Línea de vida: fila "General" con una marca en cada fecha que tiene algún recuerdo.
 
 ## Fases pendientes (orden propuesto)
 1. **Fase N - Navegación inferior** (arriba). Tamaño medio, solo interfaz.
