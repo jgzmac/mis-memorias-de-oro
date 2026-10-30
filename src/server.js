@@ -78,6 +78,8 @@ app.post('/api/visual/analyze', requireAuth, visual.receive, visual.analyze);
 app.get('/api/media/:id', requireAuth, serveMedia);
 app.delete('/api/media/:id', requireAuth, discardMedia);
 
+app.get('/api/places', (req, res) => res.json(require('./data/places.json')));
+
 // ===== LÍNEA DE VIDA =====
 app.get('/api/profile', requireAuth, getProfile);
 app.put('/api/profile', requireAuth, updateProfile);

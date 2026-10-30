@@ -1,0 +1,1010 @@
+[
+{
+"n": "A Coruña",
+"f": "A Coruña, España"
+},
+{
+"n": "Albacete",
+"f": "Albacete, España"
+},
+{
+"n": "Alcalá de Henares",
+"f": "Alcalá de Henares, España"
+},
+{
+"n": "Alcobendas",
+"f": "Alcobendas, España"
+},
+{
+"n": "Alcorcón",
+"f": "Alcorcón, España"
+},
+{
+"n": "Algeciras",
+"f": "Algeciras, España"
+},
+{
+"n": "Alicante",
+"f": "Alicante, España"
+},
+{
+"n": "Almería",
+"f": "Almería, España"
+},
+{
+"n": "Ávila",
+"f": "Ávila, España"
+},
+{
+"n": "Badajoz",
+"f": "Badajoz, España"
+},
+{
+"n": "Badalona",
+"f": "Badalona, España"
+},
+{
+"n": "Barcelona",
+"f": "Barcelona, España"
+},
+{
+"n": "Bilbao",
+"f": "Bilbao, España"
+},
+{
+"n": "Burgos",
+"f": "Burgos, España"
+},
+{
+"n": "Cáceres",
+"f": "Cáceres, España"
+},
+{
+"n": "Cádiz",
+"f": "Cádiz, España"
+},
+{
+"n": "Cartagena",
+"f": "Cartagena, España"
+},
+{
+"n": "Castellón de la Plana",
+"f": "Castellón de la Plana, España"
+},
+{
+"n": "Ceuta",
+"f": "Ceuta, España"
+},
+{
+"n": "Ciudad Real",
+"f": "Ciudad Real, España"
+},
+{
+"n": "Córdoba",
+"f": "Córdoba, España"
+},
+{
+"n": "Cuenca",
+"f": "Cuenca, España"
+},
+{
+"n": "Donostia",
+"f": "Donostia, España"
+},
+{
+"n": "San Sebastián",
+"f": "San Sebastián, España"
+},
+{
+"n": "Elche",
+"f": "Elche, España"
+},
+{
+"n": "Ferrol",
+"f": "Ferrol, España"
+},
+{
+"n": "Fuenlabrada",
+"f": "Fuenlabrada, España"
+},
+{
+"n": "Getafe",
+"f": "Getafe, España"
+},
+{
+"n": "Gijón",
+"f": "Gijón, España"
+},
+{
+"n": "Girona",
+"f": "Girona, España"
+},
+{
+"n": "Granada",
+"f": "Granada, España"
+},
+{
+"n": "Guadalajara",
+"f": "Guadalajara, España"
+},
+{
+"n": "Huelva",
+"f": "Huelva, España"
+},
+{
+"n": "Huesca",
+"f": "Huesca, España"
+},
+{
+"n": "Ibiza",
+"f": "Ibiza, España"
+},
+{
+"n": "Jaén",
+"f": "Jaén, España"
+},
+{
+"n": "Jerez de la Frontera",
+"f": "Jerez de la Frontera, España"
+},
+{
+"n": "Las Palmas de Gran Canaria",
+"f": "Las Palmas de Gran Canaria, España"
+},
+{
+"n": "La Laguna",
+"f": "La Laguna, España"
+},
+{
+"n": "Leganés",
+"f": "Leganés, España"
+},
+{
+"n": "León",
+"f": "León, España"
+},
+{
+"n": "Lleida",
+"f": "Lleida, España"
+},
+{
+"n": "Logroño",
+"f": "Logroño, España"
+},
+{
+"n": "Lugo",
+"f": "Lugo, España"
+},
+{
+"n": "Madrid",
+"f": "Madrid, España"
+},
+{
+"n": "Málaga",
+"f": "Málaga, España"
+},
+{
+"n": "Marbella",
+"f": "Marbella, España"
+},
+{
+"n": "Mataró",
+"f": "Mataró, España"
+},
+{
+"n": "Melilla",
+"f": "Melilla, España"
+},
+{
+"n": "Mérida",
+"f": "Mérida, España"
+},
+{
+"n": "Mislata",
+"f": "Mislata, España"
+},
+{
+"n": "Móstoles",
+"f": "Móstoles, España"
+},
+{
+"n": "Murcia",
+"f": "Murcia, España"
+},
+{
+"n": "Ourense",
+"f": "Ourense, España"
+},
+{
+"n": "Oviedo",
+"f": "Oviedo, España"
+},
+{
+"n": "Palencia",
+"f": "Palencia, España"
+},
+{
+"n": "Palma de Mallorca",
+"f": "Palma de Mallorca, España"
+},
+{
+"n": "Pamplona",
+"f": "Pamplona, España"
+},
+{
+"n": "Ponferrada",
+"f": "Ponferrada, España"
+},
+{
+"n": "Pontevedra",
+"f": "Pontevedra, España"
+},
+{
+"n": "Reus",
+"f": "Reus, España"
+},
+{
+"n": "Sabadell",
+"f": "Sabadell, España"
+},
+{
+"n": "Salamanca",
+"f": "Salamanca, España"
+},
+{
+"n": "San Sebastián de los Reyes",
+"f": "San Sebastián de los Reyes, España"
+},
+{
+"n": "Santander",
+"f": "Santander, España"
+},
+{
+"n": "Santiago de Compostela",
+"f": "Santiago de Compostela, España"
+},
+{
+"n": "Segovia",
+"f": "Segovia, España"
+},
+{
+"n": "Sevilla",
+"f": "Sevilla, España"
+},
+{
+"n": "Soria",
+"f": "Soria, España"
+},
+{
+"n": "Tarragona",
+"f": "Tarragona, España"
+},
+{
+"n": "Tenerife",
+"f": "Tenerife, España"
+},
+{
+"n": "Santa Cruz de Tenerife",
+"f": "Santa Cruz de Tenerife, España"
+},
+{
+"n": "Teruel",
+"f": "Teruel, España"
+},
+{
+"n": "Toledo",
+"f": "Toledo, España"
+},
+{
+"n": "Torrejón de Ardoz",
+"f": "Torrejón de Ardoz, España"
+},
+{
+"n": "Valencia",
+"f": "Valencia, España"
+},
+{
+"n": "Valladolid",
+"f": "Valladolid, España"
+},
+{
+"n": "Vigo",
+"f": "Vigo, España"
+},
+{
+"n": "Vitoria",
+"f": "Vitoria, España"
+},
+{
+"n": "Zamora",
+"f": "Zamora, España"
+},
+{
+"n": "Zaragoza",
+"f": "Zaragoza, España"
+},
+{
+"n": "Aranjuez",
+"f": "Aranjuez, España"
+},
+{
+"n": "Alcalá de Guadaíra",
+"f": "Alcalá de Guadaíra, España"
+},
+{
+"n": "Dos Hermanas",
+"f": "Dos Hermanas, España"
+},
+{
+"n": "Benidorm",
+"f": "Benidorm, España"
+},
+{
+"n": "Gandía",
+"f": "Gandía, España"
+},
+{
+"n": "Lorca",
+"f": "Lorca, España"
+},
+{
+"n": "Linares",
+"f": "Linares, España"
+},
+{
+"n": "Talavera de la Reina",
+"f": "Talavera de la Reina, España"
+},
+{
+"n": "Menorca",
+"f": "Menorca, España"
+},
+{
+"n": "Mallorca",
+"f": "Mallorca, España"
+},
+{
+"n": "Gran Canaria",
+"f": "Gran Canaria, España"
+},
+{
+"n": "Lanzarote",
+"f": "Lanzarote, España"
+},
+{
+"n": "Fuerteventura",
+"f": "Fuerteventura, España"
+},
+{
+"n": "Plasencia",
+"f": "Plasencia, España"
+},
+{
+"n": "Ronda",
+"f": "Ronda, España"
+},
+{
+"n": "Úbeda",
+"f": "Úbeda, España"
+},
+{
+"n": "Baeza",
+"f": "Baeza, España"
+},
+{
+"n": "Almendralejo",
+"f": "Almendralejo, España"
+},
+{
+"n": "París",
+"f": "París, Francia"
+},
+{
+"n": "Marsella",
+"f": "Marsella, Francia"
+},
+{
+"n": "Lyon",
+"f": "Lyon, Francia"
+},
+{
+"n": "Niza",
+"f": "Niza, Francia"
+},
+{
+"n": "Burdeos",
+"f": "Burdeos, Francia"
+},
+{
+"n": "Toulouse",
+"f": "Toulouse, Francia"
+},
+{
+"n": "Estrasburgo",
+"f": "Estrasburgo, Francia"
+},
+{
+"n": "Lille",
+"f": "Lille, Francia"
+},
+{
+"n": "Lisboa",
+"f": "Lisboa, Portugal"
+},
+{
+"n": "Oporto",
+"f": "Oporto, Portugal"
+},
+{
+"n": "Faro",
+"f": "Faro, Portugal"
+},
+{
+"n": "Coímbra",
+"f": "Coímbra, Portugal"
+},
+{
+"n": "Braga",
+"f": "Braga, Portugal"
+},
+{
+"n": "Roma",
+"f": "Roma, Italia"
+},
+{
+"n": "Milán",
+"f": "Milán, Italia"
+},
+{
+"n": "Nápoles",
+"f": "Nápoles, Italia"
+},
+{
+"n": "Venecia",
+"f": "Venecia, Italia"
+},
+{
+"n": "Florencia",
+"f": "Florencia, Italia"
+},
+{
+"n": "Turín",
+"f": "Turín, Italia"
+},
+{
+"n": "Bolonia",
+"f": "Bolonia, Italia"
+},
+{
+"n": "Génova",
+"f": "Génova, Italia"
+},
+{
+"n": "Palermo",
+"f": "Palermo, Italia"
+},
+{
+"n": "Pisa",
+"f": "Pisa, Italia"
+},
+{
+"n": "Londres",
+"f": "Londres, Reino Unido"
+},
+{
+"n": "Edimburgo",
+"f": "Edimburgo, Reino Unido"
+},
+{
+"n": "Manchester",
+"f": "Manchester, Reino Unido"
+},
+{
+"n": "Liverpool",
+"f": "Liverpool, Reino Unido"
+},
+{
+"n": "Birmingham",
+"f": "Birmingham, Reino Unido"
+},
+{
+"n": "Glasgow",
+"f": "Glasgow, Reino Unido"
+},
+{
+"n": "Cardiff",
+"f": "Cardiff, Reino Unido"
+},
+{
+"n": "Dublín",
+"f": "Dublín, Irlanda"
+},
+{
+"n": "Cork",
+"f": "Cork, Irlanda"
+},
+{
+"n": "Berlín",
+"f": "Berlín, Alemania"
+},
+{
+"n": "Múnich",
+"f": "Múnich, Alemania"
+},
+{
+"n": "Hamburgo",
+"f": "Hamburgo, Alemania"
+},
+{
+"n": "Fráncfort",
+"f": "Fráncfort, Alemania"
+},
+{
+"n": "Colonia",
+"f": "Colonia, Alemania"
+},
+{
+"n": "Stuttgart",
+"f": "Stuttgart, Alemania"
+},
+{
+"n": "Düsseldorf",
+"f": "Düsseldorf, Alemania"
+},
+{
+"n": "Ámsterdam",
+"f": "Ámsterdam, Países Bajos"
+},
+{
+"n": "Róterdam",
+"f": "Róterdam, Países Bajos"
+},
+{
+"n": "La Haya",
+"f": "La Haya, Países Bajos"
+},
+{
+"n": "Bruselas",
+"f": "Bruselas, Bélgica"
+},
+{
+"n": "Brujas",
+"f": "Brujas, Bélgica"
+},
+{
+"n": "Amberes",
+"f": "Amberes, Bélgica"
+},
+{
+"n": "Zúrich",
+"f": "Zúrich, Suiza"
+},
+{
+"n": "Ginebra",
+"f": "Ginebra, Suiza"
+},
+{
+"n": "Berna",
+"f": "Berna, Suiza"
+},
+{
+"n": "Viena",
+"f": "Viena, Austria"
+},
+{
+"n": "Salzburgo",
+"f": "Salzburgo, Austria"
+},
+{
+"n": "Atenas",
+"f": "Atenas, Grecia"
+},
+{
+"n": "Salónica",
+"f": "Salónica, Grecia"
+},
+{
+"n": "Varsovia",
+"f": "Varsovia, Polonia"
+},
+{
+"n": "Cracovia",
+"f": "Cracovia, Polonia"
+},
+{
+"n": "Praga",
+"f": "Praga, República Checa"
+},
+{
+"n": "Budapest",
+"f": "Budapest, Hungría"
+},
+{
+"n": "Estocolmo",
+"f": "Estocolmo, Suecia"
+},
+{
+"n": "Oslo",
+"f": "Oslo, Noruega"
+},
+{
+"n": "Copenhague",
+"f": "Copenhague, Dinamarca"
+},
+{
+"n": "Helsinki",
+"f": "Helsinki, Finlandia"
+},
+{
+"n": "Moscú",
+"f": "Moscú, Rusia"
+},
+{
+"n": "San Petersburgo",
+"f": "San Petersburgo, Rusia"
+},
+{
+"n": "Estambul",
+"f": "Estambul, Turquía"
+},
+{
+"n": "Ankara",
+"f": "Ankara, Turquía"
+},
+{
+"n": "Nueva York",
+"f": "Nueva York, Estados Unidos"
+},
+{
+"n": "Los Ángeles",
+"f": "Los Ángeles, Estados Unidos"
+},
+{
+"n": "Chicago",
+"f": "Chicago, Estados Unidos"
+},
+{
+"n": "Miami",
+"f": "Miami, Estados Unidos"
+},
+{
+"n": "San Francisco",
+"f": "San Francisco, Estados Unidos"
+},
+{
+"n": "Washington",
+"f": "Washington, Estados Unidos"
+},
+{
+"n": "Boston",
+"f": "Boston, Estados Unidos"
+},
+{
+"n": "Houston",
+"f": "Houston, Estados Unidos"
+},
+{
+"n": "Las Vegas",
+"f": "Las Vegas, Estados Unidos"
+},
+{
+"n": "Orlando",
+"f": "Orlando, Estados Unidos"
+},
+{
+"n": "Toronto",
+"f": "Toronto, Canadá"
+},
+{
+"n": "Montreal",
+"f": "Montreal, Canadá"
+},
+{
+"n": "Vancouver",
+"f": "Vancouver, Canadá"
+},
+{
+"n": "Ottawa",
+"f": "Ottawa, Canadá"
+},
+{
+"n": "Ciudad de México",
+"f": "Ciudad de México, México"
+},
+{
+"n": "Guadalajara",
+"f": "Guadalajara, México"
+},
+{
+"n": "Monterrey",
+"f": "Monterrey, México"
+},
+{
+"n": "Cancún",
+"f": "Cancún, México"
+},
+{
+"n": "La Habana",
+"f": "La Habana, Cuba"
+},
+{
+"n": "Santiago de Cuba",
+"f": "Santiago de Cuba, Cuba"
+},
+{
+"n": "Santo Domingo",
+"f": "Santo Domingo, República Dominicana"
+},
+{
+"n": "Punta Cana",
+"f": "Punta Cana, República Dominicana"
+},
+{
+"n": "Bogotá",
+"f": "Bogotá, Colombia"
+},
+{
+"n": "Medellín",
+"f": "Medellín, Colombia"
+},
+{
+"n": "Cali",
+"f": "Cali, Colombia"
+},
+{
+"n": "Cartagena de Indias",
+"f": "Cartagena de Indias, Colombia"
+},
+{
+"n": "Caracas",
+"f": "Caracas, Venezuela"
+},
+{
+"n": "Maracaibo",
+"f": "Maracaibo, Venezuela"
+},
+{
+"n": "Quito",
+"f": "Quito, Ecuador"
+},
+{
+"n": "Guayaquil",
+"f": "Guayaquil, Ecuador"
+},
+{
+"n": "Lima",
+"f": "Lima, Perú"
+},
+{
+"n": "Cusco",
+"f": "Cusco, Perú"
+},
+{
+"n": "La Paz",
+"f": "La Paz, Bolivia"
+},
+{
+"n": "Santiago de Chile",
+"f": "Santiago de Chile, Chile"
+},
+{
+"n": "Valparaíso",
+"f": "Valparaíso, Chile"
+},
+{
+"n": "Buenos Aires",
+"f": "Buenos Aires, Argentina"
+},
+{
+"n": "Córdoba (Argentina)",
+"f": "Córdoba (Argentina), Argentina"
+},
+{
+"n": "Rosario",
+"f": "Rosario, Argentina"
+},
+{
+"n": "Mendoza",
+"f": "Mendoza, Argentina"
+},
+{
+"n": "Montevideo",
+"f": "Montevideo, Uruguay"
+},
+{
+"n": "Asunción",
+"f": "Asunción, Paraguay"
+},
+{
+"n": "Río de Janeiro",
+"f": "Río de Janeiro, Brasil"
+},
+{
+"n": "São Paulo",
+"f": "São Paulo, Brasil"
+},
+{
+"n": "Brasilia",
+"f": "Brasilia, Brasil"
+},
+{
+"n": "Salvador de Bahía",
+"f": "Salvador de Bahía, Brasil"
+},
+{
+"n": "Marrakech",
+"f": "Marrakech, Marruecos"
+},
+{
+"n": "Casablanca",
+"f": "Casablanca, Marruecos"
+},
+{
+"n": "Rabat",
+"f": "Rabat, Marruecos"
+},
+{
+"n": "Tánger",
+"f": "Tánger, Marruecos"
+},
+{
+"n": "Fez",
+"f": "Fez, Marruecos"
+},
+{
+"n": "El Cairo",
+"f": "El Cairo, Egipto"
+},
+{
+"n": "Alejandría",
+"f": "Alejandría, Egipto"
+},
+{
+"n": "Argel",
+"f": "Argel, Argelia"
+},
+{
+"n": "Túnez",
+"f": "Túnez, Túnez"
+},
+{
+"n": "Tokio",
+"f": "Tokio, Japón"
+},
+{
+"n": "Kioto",
+"f": "Kioto, Japón"
+},
+{
+"n": "Osaka",
+"f": "Osaka, Japón"
+},
+{
+"n": "Pekín",
+"f": "Pekín, China"
+},
+{
+"n": "Shanghái",
+"f": "Shanghái, China"
+},
+{
+"n": "Hong Kong",
+"f": "Hong Kong, China"
+},
+{
+"n": "Nueva Delhi",
+"f": "Nueva Delhi, India"
+},
+{
+"n": "Bombay",
+"f": "Bombay, India"
+},
+{
+"n": "Bangkok",
+"f": "Bangkok, Tailandia"
+},
+{
+"n": "Dubái",
+"f": "Dubái, Emiratos Árabes Unidos"
+},
+{
+"n": "Abu Dabi",
+"f": "Abu Dabi, Emiratos Árabes Unidos"
+},
+{
+"n": "Jerusalén",
+"f": "Jerusalén, Israel"
+},
+{
+"n": "Tel Aviv",
+"f": "Tel Aviv, Israel"
+},
+{
+"n": "Sídney",
+"f": "Sídney, Australia"
+},
+{
+"n": "Melbourne",
+"f": "Melbourne, Australia"
+},
+{
+"n": "Malabo",
+"f": "Malabo, Guinea Ecuatorial"
+},
+{
+"n": "Manila",
+"f": "Manila, Filipinas"
+},
+{
+"n": "Andorra la Vella",
+"f": "Andorra la Vella, Andorra"
+},
+{
+"n": "Zagreb",
+"f": "Zagreb, Croacia"
+},
+{
+"n": "Dubrovnik",
+"f": "Dubrovnik, Croacia"
+},
+{
+"n": "Bucarest",
+"f": "Bucarest, Rumanía"
+},
+{
+"n": "España",
+"f": "España"
+},
+{
+"n": "Francia",
+"f": "Francia"
+},
+{
+"n": "Portugal",
+"f": "Portugal"
+},
+{
+"n": "Italia",
+"f": "Italia"
+},
+{
+"n": "Alemania",
+"f": "Alemania"
+},
+{
+"n": "Reino Unido",
+"f": "Reino Unido"
+},
+{
+"n": "Marruecos",
+"f": "Marruecos"
+},
+{
+"n": "Argentina",
+"f": "Argentina"
+},
+{
+"n": "México",
+"f": "México"
+},
+{
+"n": "Cuba",
+"f": "Cuba"
+},
+{
+"n": "Colombia",
+"f": "Colombia"
+},
+{
+"n": "Venezuela",
+"f": "Venezuela"
+},
+{
+"n": "Estados Unidos",
+"f": "Estados Unidos"
+},
+{
+"n": "Cuba",
+"f": "Cuba"
+}
+]

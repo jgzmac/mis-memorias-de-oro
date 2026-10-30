@@ -19,10 +19,11 @@
       --oro: #E0A81E;
       --oro-sombra: #B98607;
     }
-    @font-face { font-family: 'Metropolis'; font-weight: 400; src: url(fonts/metropolis-latin-400-normal.woff2) format('woff2'); font-display: swap; }
-    @font-face { font-family: 'Metropolis'; font-weight: 500; src: url(fonts/metropolis-latin-500-normal.woff2) format('woff2'); font-display: swap; }
-    @font-face { font-family: 'Metropolis'; font-weight: 600; src: url(fonts/metropolis-latin-600-normal.woff2) format('woff2'); font-display: swap; }
-    @font-face { font-family: 'Metropolis'; font-weight: 700; src: url(fonts/metropolis-latin-700-normal.woff2) format('woff2'); font-display: swap; }
+    @font-face { font-family: 'Metropolis'; font-weight: 400; src: url(fonts/nunito-latin-400-normal.woff2) format('woff2'); font-display: swap; }
+    @font-face { font-family: 'Metropolis'; font-weight: 500; src: url(fonts/nunito-latin-500-normal.woff2) format('woff2'); font-display: swap; }
+    @font-face { font-family: 'Metropolis'; font-weight: 600; src: url(fonts/nunito-latin-600-normal.woff2) format('woff2'); font-display: swap; }
+    @font-face { font-family: 'Metropolis'; font-weight: 700; src: url(fonts/nunito-latin-700-normal.woff2) format('woff2'); font-display: swap; }
+    @font-face { font-family: 'Metropolis'; font-weight: 800; src: url(fonts/nunito-latin-800-normal.woff2) format('woff2'); font-display: swap; }
     * {
       margin: 0;
       padding: 0;
@@ -30,7 +31,7 @@
     }
 
     body {
-      font-family: 'Metropolis', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      font-family: 'Metropolis', ui-rounded, 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
       background: linear-gradient(170deg, #FFFFFF 0%, var(--fondo-1) 45%, #F8F0DD 100%) fixed;
       color: var(--tinta);
       min-height: 100vh;
@@ -560,9 +561,9 @@
 
 
     /* ===== Inicio (mezcla Cuaderno + Luz) ===== */
-    h1, h2, .home-hello, .memory-title { font-family: Georgia, "Iowan Old Style", "Palatino Linotype", serif; }
+    h1, h2, .home-hello { font-weight: 700; }
     .home-hello { font-size: 1.9em; line-height: 1.12; color: var(--tinta); margin-bottom: 4px; font-weight: 600; }
-    .home-sub { font-size: 1.1em; font-style: italic; color: var(--salvia-fuerte); margin-bottom: 14px; font-family: Georgia, serif; }
+    .home-sub { font-size: 1.1em; color: var(--salvia-fuerte); margin-bottom: 14px ; }
     .home-search { display: flex; align-items: center; gap: 10px; width: 100%; margin-bottom: 16px; padding: 13px 16px; background: white; border: 0; border-radius: 16px; box-shadow: 0 2px 0 #E6DAB8; color: var(--gris); font-size: 1rem; font-weight: 400; text-align: left; }
     .home-search:hover { transform: none; box-shadow: 0 2px 0 #D7C79A; }
     .home-search .i { width: 1.3rem; height: 1.3rem; flex: none; }
@@ -570,8 +571,8 @@
     .remember { margin-bottom: 18px; background: white; border: 1.5px solid #EAD9A3; border-radius: 6px 22px 6px 22px; overflow: hidden; box-shadow: 0 10px 22px -14px rgba(58,31,61,.5); }
     .remember .rem-media img, .remember .rem-media video { display: block; width: 100%; max-height: 220px; object-fit: cover; }
     .remember .rem-body { padding: 12px 16px 14px; }
-    .remember .rem-q { font: italic 1.05rem Georgia, serif; color: var(--salvia-fuerte); }
-    .remember .rem-t { font: 600 1.2rem Georgia, serif; margin-top: 4px; }
+    .remember .rem-q { font-style: italic; font-size: 1.05rem; font-weight: 600; color: var(--salvia-fuerte); }
+    .remember .rem-t { font-size: 1.2rem; font-weight: 700; margin-top: 4px; }
     .remember .rem-m { font-size: 0.85em; color: var(--gris); margin-top: 2px; }
     .remember .rem-x { margin-top: 8px; line-height: 1.45; font-style: italic; }
     .remember .rem-btns { display: flex; gap: 8px; margin-top: 12px; }
@@ -580,12 +581,15 @@
     .home-grid.actions .tile { flex-direction: column; gap: 6px; min-height: 84px; border-radius: 22px; font-size: 0.98em; font-weight: 600; background: white; color: var(--salvia-hover); border: 1.5px solid var(--azul-calma); box-shadow: 0 2px 0 #E6DAB8; }
     .home-grid.actions .tile .big-ico { font-size: 1em; display: block; line-height: 0; }
     .home-grid.actions .tile .i { color: var(--salvia); }
-    .home-grid.actions .tile.big-voice { grid-column: 1 / -1; flex-direction: row; justify-content: flex-start; gap: 14px; min-height: 76px; padding: 14px 20px; border: 0; background: var(--oro); color: #2e1a30; font-size: 1.25rem; font-family: Georgia, serif; box-shadow: 0 6px 0 var(--oro-sombra); text-align: left; }
+    .home-grid.actions .tile.big-voice { grid-column: 1 / -1; flex-direction: row; justify-content: flex-start; gap: 14px; min-height: 76px; padding: 14px 20px; border: 0; background: var(--oro); color: #2e1a30; font-size: 1.25rem; box-shadow: 0 6px 0 var(--oro-sombra); text-align: left; }
     .home-grid.actions .tile.big-voice:hover { background: #EDB83A; }
     .home-grid.actions .tile.big-voice .i { width: 2rem; height: 2rem; color: #2e1a30; }
     .home-grid.actions .tile.big-voice small { display: block; font: 400 0.8rem system-ui, sans-serif; opacity: .85; }
     .home-grid.actions .tile .i { width: 1.7rem; height: 1.7rem; }
     .home-grid.actions .tile.on { outline: 3px solid var(--oro); outline-offset: 2px; }
+    .profile-nudge { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; padding: 12px 14px; background: #FFF4D6; border: 1.5px solid var(--oro); border-radius: 16px; font-size: 0.95em; line-height: 1.4; }
+    .profile-nudge button { flex: none; min-height: 44px; padding: 0 16px; border-radius: 999px; background: var(--oro); color: #2e1a30; font-weight: 700; }
+    .home-more-t { margin: 6px 2px 8px; color: var(--gris); font-size: 0.95rem; font-weight: 600; }
     .home-more { display: block; margin: 8px auto 16px; background: none; border: 0; flex: none; color: var(--gris); text-decoration: underline; text-underline-offset: 3px; font-weight: 400; font-size: 0.95rem; min-height: 44px; cursor: pointer; }
     .upload-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 16px; }
     .upload-row .tile { flex-direction: column; gap: 4px; min-height: 68px; padding: 8px 4px; border-radius: 18px; background: var(--salvia-claro); color: var(--salvia-hover); border: 1.5px dashed var(--salvia); font-size: 0.92em; font-weight: 600; text-align: center; cursor: pointer; display: flex; align-items: center; justify-content: center; }
@@ -702,6 +706,7 @@
       <h2 class="home-hello" id="homeHello">Hola</h2>
       <p class="home-sub">Tus recuerdos, bien guardados.</p>
       <label class="home-search" for="homeSearch"><svg class="i"><use href="#i-search"/></svg><input type="search" id="homeSearch" placeholder="Buscar en tus recuerdos" autocomplete="off" enterkeyhint="search"></label>
+      <div class="profile-nudge hidden" id="profNudge"><span>Completa tu perfil: falta tu fecha o tu lugar de nacimiento. Así puedo decirte qué edad tenías en cada recuerdo.</span><button type="button" id="profNudgeBtn">Completar</button></div>
       <div class="remember hidden" id="remember"></div>
       <div class="home-grid actions">
         <button type="button" class="big-btn big-voice tile" id="btnVoice"><span class="big-ico"><svg class="i"><use href="#i-mic"/></svg></span><span>Contar con mi voz<small>Habla y yo lo escribo</small></span></button>
@@ -709,8 +714,8 @@
         <label class="big-btn big-media tile"><span class="big-ico"><svg class="i"><use href="#i-camera"/></svg></span><span>Hacer foto</span><input type="file" class="js-photo" accept="image/*" capture="environment" hidden></label>
         <label class="big-btn big-media tile"><span class="big-ico"><svg class="i"><use href="#i-video"/></svg></span><span>Grabar vídeo</span><input type="file" class="js-video" accept="video/*" capture="environment" hidden></label>
       </div>
-      <button type="button" class="home-more" id="btnUploadToggle" aria-expanded="false">Subir un archivo del móvil</button>
-      <div class="upload-row hidden" id="uploadRow">
+      <p class="home-more-t">Subir un archivo del móvil</p>
+      <div class="upload-row" id="uploadRow">
         <label class="big-btn big-media tile"><svg class="i"><use href="#i-image"/></svg><span>Foto</span><input type="file" class="js-photo" accept="image/*" hidden></label>
         <label class="big-btn big-media tile"><svg class="i"><use href="#i-video"/></svg><span>Vídeo</span><input type="file" class="js-video" accept="video/*" hidden></label>
         <label class="big-btn big-media tile"><svg class="i"><use href="#i-wave"/></svg><span>Audio</span><input type="file" class="js-audio" accept="audio/*" hidden></label>
@@ -901,6 +906,24 @@
 
   <script>
     // Icono de trazo fino desde el sprite
+    // Lugares: completa "Madrid" como "Madrid, España" y sugiere mientras se escribe
+    let PLACES = [];
+    const placeKey = (t) => String(t || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim();
+    fetch('/api/places').then(r => r.json()).then(r => {
+      PLACES = r || [];
+      const dl = document.createElement('datalist'); dl.id = 'placesList';
+      dl.innerHTML = PLACES.map(p => `<option value="${p.f.replace(/"/g, '&quot;')}"></option>`).join('');
+      document.body.appendChild(dl);
+      ['rvPlace', 'profPlace', 'onbPlace', 'tlBirthPlace', 'sfPlace'].forEach(id => { const e = document.getElementById(id); if (e) e.setAttribute('list', 'placesList'); });
+    }).catch(() => {});
+    function completePlace(v) {
+      const t = String(v || '').trim();
+      if (!t || t.includes(',')) return t;
+      const k = placeKey(t), hit = PLACES.find(p => placeKey(p.n) === k);
+      return hit ? hit.f : t;
+    }
+    document.addEventListener('focusin', (e) => { if (e.target.id && /Place$/.test(e.target.id) && !e.target.getAttribute('list')) e.target.setAttribute('list', 'placesList'); });
+    document.addEventListener('focusout', (e) => { if (e.target.id && /Place$/.test(e.target.id)) e.target.value = completePlace(e.target.value); });
     const esc = (t) => String(t == null ? '' : t).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
     const ic = (n) => `<svg class="i"><use href="#i-${n}"/></svg>`;
     const API_URL = '/api';
@@ -976,7 +999,12 @@
     }
     const ageLabel = (d) => { const a = ageAt(d); return a ? (a === 'recién nacido' ? 'Acababas de nacer' : `Tenías ${a}`) : ''; };
     async function loadBirth() {
-      try { const r = await (await fetch(`${API_URL}/profile`)).json(); birthDate = (r.success && r.data.birth_date) || ''; } catch (e) {}
+      try {
+        const r = await (await fetch(`${API_URL}/profile`)).json();
+        birthDate = (r.success && r.data.birth_date) || '';
+        const n = document.getElementById('profNudge');
+        if (n && r.success) n.classList.toggle('hidden', !!(r.data.birth_date && r.data.birth_place));
+      } catch (e) {}
       if (typeof renderMemories === 'function') renderMemories();
     }
     // Orden con dos botones en vez de desplegable
@@ -1048,6 +1076,7 @@
 
 
     // ===== Inicio: "¿Te acuerdas de este día?" y buscador =====
+    document.getElementById('profNudgeBtn').onclick = () => window.goTo('profile');
     let rememberId = null;
     function showRemember(again) {
       const box = document.getElementById('remember');
@@ -1074,8 +1103,6 @@
     (function () {
       const hs = document.getElementById('homeSearch');
       hs.addEventListener('keydown', (e) => { if (e.key !== 'Enter') return; e.preventDefault(); const q = hs.value; window.goTo('mem'); memSearch.value = q; hs.value = ''; renderMemories(); hs.blur(); });
-      const t = document.getElementById('btnUploadToggle'), row = document.getElementById('uploadRow');
-      t.onclick = () => { const open = row.classList.toggle('hidden') === false; t.setAttribute('aria-expanded', open); };
     })();
 
     async function updateMemory(id, data) {
@@ -1633,7 +1660,7 @@
       const body = {
         title: rv('rvTitle').value, content: rv('rvContent').value,
         date_happened: rv('rvDate').value, date_end: rv('rvDateEnd').value,
-        place: rv('rvPlace').value, event_type: rvTagList[0] || '',
+        place: completePlace(rv('rvPlace').value), event_type: rvTagList[0] || '',
         tags: rvTagList, mood: rv('rvMood').value,
         people, media_ids: [draft.media_id]
       };
@@ -1721,7 +1748,7 @@
       try {
         const r = await (await fetch(`${API_URL}/profile`, {
           method: 'PUT', headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ birth_date: document.getElementById('profBirth').value, birth_place: document.getElementById('profPlace').value })
+          body: JSON.stringify({ birth_date: document.getElementById('profBirth').value, birth_place: completePlace(document.getElementById('profPlace').value) })
         })).json();
         if (r.success) { birthDate = document.getElementById('profBirth').value; renderMemories(); }
         box.innerHTML = r.success ? '<div class="success">Perfil guardado</div>' : `<div class="error">${esc(r.error)}</div>`;
@@ -1916,7 +1943,7 @@
               if (r.success) { currentUser = r.data; showUserData(r.data); }
             }
             if (birth || place) {
-              const r = await (await fetch(`${API_URL}/profile`, { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ birth_date: birth, birth_place: place }) })).json();
+              const r = await (await fetch(`${API_URL}/profile`, { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ birth_date: birth, birth_place: completePlace(place) }) })).json();
               if (!r.success) { msg.innerHTML = `<div class="error">${esc(r.error)}</div>`; return; }
               birthDate = birth; renderMemories();
             }
@@ -2014,7 +2041,7 @@
       }
 
       async function saveBirth() {
-        const r = await api('/profile', { method: 'PUT', body: { birth_date: $('tlBirthDate').value, birth_place: $('tlBirthPlace').value } });
+        const r = await api('/profile', { method: 'PUT', body: { birth_date: $('tlBirthDate').value, birth_place: completePlace($('tlBirthPlace').value) } });
         if (!r.success) return say(r.error);
         profile = r.data; birthDate = profile.birth_date || ''; render();
       }
@@ -2199,7 +2226,7 @@
       }
 
       async function saveStage() {
-        const body = { kind: $('sfKind').value, title: $('sfTitle').value, place: $('sfPlace').value, start_date: $('sfStart').value, end_date: $('sfEnd').value };
+        const body = { kind: $('sfKind').value, title: $('sfTitle').value, place: completePlace($('sfPlace').value), start_date: $('sfStart').value, end_date: $('sfEnd').value };
         const isNew = editing === 'new';
         const r = isNew ? await api('/stages', { method: 'POST', body }) : await api('/stages/' + editing, { method: 'PUT', body });
         if (!r.success) return say(r.error);
