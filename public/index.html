@@ -6,16 +6,18 @@
   <title>Mis Memorias de Oro</title>
   <style>
     :root {
-      /* Paleta azul inspirada en Mi Sanitas (nombres antiguos conservados para no tocar todo el CSS) */
-      --salvia: #51A0DC;
-      --salvia-fuerte: #0079C8;
-      --salvia-hover: #0652AE;
-      --salvia-claro: #DDEDF8;
-      --fondo-1: #F2F8FC;
-      --fondo-2: #DDEDF8;
-      --azul-calma: #8DC0E8;
-      --tinta: #0D1846;
-      --gris: #4E5357;
+      /* Paleta "ciruela y oro" (nombres antiguos conservados para no tocar todo el CSS) */
+      --salvia: #8A5A92;
+      --salvia-fuerte: #6B3A70;
+      --salvia-hover: #3A1F3D;
+      --salvia-claro: #F5ECD6;
+      --fondo-1: #FFFDF9;
+      --fondo-2: #F5ECD6;
+      --azul-calma: #D7C79A;
+      --tinta: #2E1A30;
+      --gris: #6c5a70;
+      --oro: #E0A81E;
+      --oro-sombra: #B98607;
     }
     @font-face { font-family: 'Metropolis'; font-weight: 400; src: url(fonts/metropolis-latin-400-normal.woff2) format('woff2'); font-display: swap; }
     @font-face { font-family: 'Metropolis'; font-weight: 500; src: url(fonts/metropolis-latin-500-normal.woff2) format('woff2'); font-display: swap; }
@@ -29,7 +31,7 @@
 
     body {
       font-family: 'Metropolis', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-      background: linear-gradient(170deg, #FFFFFF 0%, var(--fondo-1) 45%, var(--fondo-2) 100%) fixed;
+      background: linear-gradient(170deg, #FFFFFF 0%, var(--fondo-1) 45%, #F8F0DD 100%) fixed;
       color: var(--tinta);
       min-height: 100vh;
       padding: 20px;
@@ -161,7 +163,7 @@
     .btn-primary:hover {
       background: var(--salvia-hover);
       transform: translateY(-2px);
-      box-shadow: 0 5px 15px rgba(0, 121, 200, 0.35);
+      box-shadow: 0 5px 15px rgba(107, 58, 112, 0.35);
     }
 
     .btn-secondary {
@@ -190,7 +192,7 @@
     }
 
     .btn-edit:hover {
-      background: #51A0DC;
+      background: var(--salvia);
     }
 
     .memories-list {
@@ -346,9 +348,23 @@
     .userbar { display: flex; justify-content: flex-end; align-items: center; gap: 12px; color: var(--salvia-hover); margin-bottom: 10px; }
     .userbar button { flex: none; background: transparent; color: var(--salvia-hover); border: 1px solid var(--salvia); border-radius: 6px; padding: 6px 14px; cursor: pointer; }
     .hidden { display: none !important; }
+    /* Asistente de bienvenida (primera vez) */
+    #onb { position: fixed; inset: 0; z-index: 70; background: var(--fondo-1, #f4f8fc); display: flex; flex-direction: column; padding: 20px 20px calc(20px + env(safe-area-inset-bottom)); overflow-y: auto; }
+    #onb .onb-in { width: 100%; max-width: 480px; margin: auto; display: grid; gap: 14px; }
+    #onb .onb-art { width: 96px; height: 96px; border-radius: 50%; background: var(--salvia-claro); color: var(--salvia-hover); display: grid; place-items: center; margin: 0 auto; }
+    #onb .onb-art .i { width: 3rem; height: 3rem; stroke-width: 1.4; }
+    #onb h2 { text-align: center; color: var(--tinta); font-size: 1.5em; line-height: 1.2; }
+    #onb p { text-align: center; line-height: 1.5; color: var(--gris); font-size: 1.05em; }
+    #onb label { font-weight: 600; }
+    #onb input { width: 100%; }
+    #onb .onb-dots { display: flex; justify-content: center; gap: 8px; margin-top: 4px; }
+    #onb .onb-dots span { width: 9px; height: 9px; border-radius: 50%; background: var(--salvia-claro); }
+    #onb .onb-dots span.on { background: var(--salvia-fuerte); }
+    #onb .onb-skip { background: none; border: 0; color: var(--gris); text-decoration: underline; min-height: 44px; cursor: pointer; font-size: 1em; }
+
 
     /* ===== Audio ===== */
-    .audio-box { border: 2px dashed var(--salvia); border-radius: 10px; padding: 15px; margin-bottom: 20px; background: #F2F8FC; }
+    .audio-box { border: 2px dashed var(--salvia); border-radius: 10px; padding: 15px; margin-bottom: 20px; background: var(--fondo-1); }
     .audio-box h3 { font-size: 1em; color: #333; margin-bottom: 10px; }
     .audio-actions { display: flex; gap: 8px; flex-wrap: wrap; }
     .audio-actions button, .audio-actions label.btn-file { flex: 1; min-width: 120px; padding: 10px; border: none; border-radius: 6px; cursor: pointer; background: var(--salvia-fuerte); color: white; font-size: 0.95em; text-align: center; }
@@ -399,7 +415,7 @@
     .tl-seg { position: absolute; top: 9px; height: 28px; border-radius: 8px; opacity: 0.75; font-size: 0.7em; color: #fff; padding: 0 6px; line-height: 28px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; cursor: pointer; }
     .tl-mark { position: absolute; top: 14px; height: 18px; min-width: 18px; border-radius: 9px; border: 2px solid white; box-shadow: 0 0 0 1px rgba(0,0,0,.2); cursor: pointer; }
     .tl-hist { position: absolute; top: 15px; width: 14px; height: 14px; margin-left: -7px; transform: rotate(45deg); background: var(--c-hist); border: 2px solid white; box-shadow: 0 0 0 1px rgba(0,0,0,.2); }
-    .tl-sel { position: absolute; top: 28px; bottom: 0; background: rgba(0,121,200,.15); border-left: 2px solid var(--salvia-fuerte); pointer-events: none; min-width: 2px; }
+    .tl-sel { position: absolute; top: 28px; bottom: 0; background: rgba(107,58,112,.15); border-left: 2px solid var(--salvia-fuerte); pointer-events: none; min-width: 2px; }
     .tl-hint { font-size: 0.82em; color: var(--gris); margin: 8px 2px; }
     .tl-detail { margin-top: 14px; }
     .tl-detail h3 { color: var(--salvia-hover); font-size: 1.05em; margin-bottom: 8px; }
@@ -429,14 +445,14 @@
     button, .audio-actions label.btn-file { min-height: 48px; }
     .form-row { grid-template-columns: 1fr; gap: 0; }
     .create-actions { display: grid; grid-template-columns: 1fr; gap: 12px; margin-bottom: 18px; }
-    .big-btn { display: flex; align-items: center; justify-content: center; gap: 12px; min-height: 72px; font-size: 1.2em; border-radius: 16px; box-shadow: 0 6px 18px rgba(13,24,70,0.14); }
+    .big-btn { display: flex; align-items: center; justify-content: center; gap: 12px; min-height: 72px; font-size: 1.2em; border-radius: 16px; box-shadow: 0 6px 18px rgba(46,26,48,0.14); }
     .big-ico { font-size: 1.5em; }
     .big-voice { background: var(--salvia-fuerte); color: white; }
     .big-voice:hover { background: var(--salvia-hover); }
     .big-write { background: white; color: var(--salvia-hover); border: 2px solid var(--salvia); }
     .big-write:hover { background: var(--salvia-claro); }
     .big-media { background: var(--salvia-claro); color: var(--salvia-hover); border: 2px dashed var(--salvia); min-height: 60px; font-size: 1.05em; cursor: pointer; }
-    .big-media:hover { background: #B3D6EF; }
+    .big-media:hover { background: #EADFB9; }
     .create-media { margin-top: -6px; }
     .media-status { background: var(--salvia-claro); border-radius: 12px; padding: 12px 14px; margin-bottom: 16px; font-size: 0.95em; }
     .rv-notes { background: var(--fondo-1); border-left: 4px solid var(--azul-calma); border-radius: 8px; padding: 10px 12px; font-size: 0.88em; line-height: 1.5; margin-bottom: 12px; }
@@ -458,12 +474,12 @@
     .person-row button { grid-row: 1 / span 2; grid-column: 2; }
 
     /* Menú inferior con iconos (móvil y escritorio) */
-    .bottom-nav { position: fixed; left: 0; right: 0; bottom: 0; z-index: 40; display: flex; justify-content: center; padding: 6px 6px calc(6px + env(safe-area-inset-bottom)); background: rgba(255,255,255,0.97); border-top: 1px solid var(--salvia-claro); box-shadow: 0 -4px 16px rgba(13,24,70,0.08); }
+    .bottom-nav { position: fixed; left: 0; right: 0; bottom: 0; z-index: 40; display: flex; justify-content: center; padding: 6px 6px calc(6px + env(safe-area-inset-bottom)); background: rgba(255,255,255,0.97); border-top: 1px solid var(--salvia-claro); box-shadow: 0 -4px 16px rgba(46,26,48,0.08); }
     .bottom-nav .nav-inner { display: flex; width: 100%; max-width: 720px; gap: 2px; }
     .bottom-nav button { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; min-height: 56px; padding: 4px 2px; border: none; border-radius: 14px; background: transparent; color: var(--gris); font-size: 0.72em; font-weight: 500; cursor: pointer; }
     .bottom-nav button .ico { font-size: 1.7em; line-height: 1; }
     .bottom-nav button.active { background: var(--salvia-claro); color: var(--salvia-hover); font-weight: 700; }
-    .bottom-nav button.nav-create .ico { background: var(--salvia-fuerte); color: white; border-radius: 50%; width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; font-size: 1.5em; box-shadow: 0 3px 10px rgba(13,24,70,0.3); }
+    .bottom-nav button.nav-create .ico { background: var(--salvia-fuerte); color: white; border-radius: 50%; width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; font-size: 1.5em; box-shadow: 0 3px 10px rgba(46,26,48,0.3); }
     .bottom-nav button.nav-create.active { background: transparent; }
 
     /* Inicio, perfil, buscador */
@@ -531,6 +547,49 @@
     .filter-toggle b { background: var(--salvia-fuerte); color: white; border-radius: 999px; padding: 0 8px; font-size: 0.85em; }
     .adv { display: none; }
     .adv.open { display: grid; }
+
+    /* Buscador en fila: caja arriba; debajo, "Filtros" y el orden a la misma altura */
+    .searchbar { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+    .searchbar > input[type="search"] { flex: 1 1 100%; order: 0; }
+    .searchbar > .filter-toggle { order: 1; }
+    .searchbar > .sort-row { order: 2; flex: 1; justify-content: flex-end; min-width: 0; }
+    .searchbar > .sort-row > span { display: none; }
+    .searchbar > .sort-row .seg-group { flex: 0 1 auto; flex-wrap: nowrap; justify-content: flex-end; gap: 6px; }
+    .searchbar > .sort-row .seg-group button { min-height: 44px; padding: 6px 12px; font-size: 0.95em; }
+    .searchbar > .adv { order: 3; flex: 1 1 100%; }
+
+
+    /* ===== Inicio (mezcla Cuaderno + Luz) ===== */
+    h1, h2, .home-hello, .memory-title { font-family: Georgia, "Iowan Old Style", "Palatino Linotype", serif; }
+    .home-hello { font-size: 1.9em; line-height: 1.12; color: var(--tinta); margin-bottom: 4px; font-weight: 600; }
+    .home-sub { font-size: 1.1em; font-style: italic; color: var(--salvia-fuerte); margin-bottom: 14px; font-family: Georgia, serif; }
+    .home-search { display: flex; align-items: center; gap: 10px; width: 100%; margin-bottom: 16px; padding: 13px 16px; background: white; border: 0; border-radius: 16px; box-shadow: 0 2px 0 #E6DAB8; color: var(--gris); font-size: 1rem; font-weight: 400; text-align: left; }
+    .home-search:hover { transform: none; box-shadow: 0 2px 0 #D7C79A; }
+    .home-search .i { width: 1.3rem; height: 1.3rem; flex: none; }
+    .home-search input { border: 0; outline: 0; padding: 0; background: transparent; flex: 1; min-width: 0; font-size: 16px; color: var(--tinta); }
+    .remember { margin-bottom: 18px; background: white; border: 1.5px solid #EAD9A3; border-radius: 6px 22px 6px 22px; overflow: hidden; box-shadow: 0 10px 22px -14px rgba(58,31,61,.5); }
+    .remember .rem-media img, .remember .rem-media video { display: block; width: 100%; max-height: 220px; object-fit: cover; }
+    .remember .rem-body { padding: 12px 16px 14px; }
+    .remember .rem-q { font: italic 1.05rem Georgia, serif; color: var(--salvia-fuerte); }
+    .remember .rem-t { font: 600 1.2rem Georgia, serif; margin-top: 4px; }
+    .remember .rem-m { font-size: 0.85em; color: var(--gris); margin-top: 2px; }
+    .remember .rem-x { margin-top: 8px; line-height: 1.45; font-style: italic; }
+    .remember .rem-btns { display: flex; gap: 8px; margin-top: 12px; }
+    .remember .rem-btns button { min-height: 44px; border-radius: 999px; background: white; color: var(--salvia-hover); border: 1.5px solid var(--azul-calma); font-weight: 600; }
+    .home-grid.actions { grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 8px; }
+    .home-grid.actions .tile { flex-direction: column; gap: 6px; min-height: 84px; border-radius: 22px; font-size: 0.98em; font-weight: 600; background: white; color: var(--salvia-hover); border: 1.5px solid var(--azul-calma); box-shadow: 0 2px 0 #E6DAB8; }
+    .home-grid.actions .tile .big-ico { font-size: 1em; display: block; line-height: 0; }
+    .home-grid.actions .tile .i { color: var(--salvia); }
+    .home-grid.actions .tile.big-voice { grid-column: 1 / -1; flex-direction: row; justify-content: flex-start; gap: 14px; min-height: 76px; padding: 14px 20px; border: 0; background: var(--oro); color: #2e1a30; font-size: 1.25rem; font-family: Georgia, serif; box-shadow: 0 6px 0 var(--oro-sombra); text-align: left; }
+    .home-grid.actions .tile.big-voice:hover { background: #EDB83A; }
+    .home-grid.actions .tile.big-voice .i { width: 2rem; height: 2rem; color: #2e1a30; }
+    .home-grid.actions .tile.big-voice small { display: block; font: 400 0.8rem system-ui, sans-serif; opacity: .85; }
+    .home-grid.actions .tile .i { width: 1.7rem; height: 1.7rem; }
+    .home-grid.actions .tile.on { outline: 3px solid var(--oro); outline-offset: 2px; }
+    .home-more { display: block; margin: 8px auto 16px; background: none; border: 0; flex: none; color: var(--gris); text-decoration: underline; text-underline-offset: 3px; font-weight: 400; font-size: 0.95rem; min-height: 44px; cursor: pointer; }
+    .upload-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 16px; }
+    .upload-row .tile { flex-direction: column; gap: 4px; min-height: 68px; padding: 8px 4px; border-radius: 18px; background: var(--salvia-claro); color: var(--salvia-hover); border: 1.5px dashed var(--salvia); font-size: 0.92em; font-weight: 600; text-align: center; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+    .upload-row .i { width: 1.5rem; height: 1.5rem; }
 
     @media (min-width: 700px) {
       body { padding: 24px 24px 100px; }
@@ -641,15 +700,20 @@
 
     <div id="viewHome" class="card">
       <h2 class="home-hello" id="homeHello">Hola</h2>
-      <p class="home-sub">¿Qué recuerdo quieres guardar hoy?</p>
+      <p class="home-sub">Tus recuerdos, bien guardados.</p>
+      <label class="home-search" for="homeSearch"><svg class="i"><use href="#i-search"/></svg><input type="search" id="homeSearch" placeholder="Buscar en tus recuerdos" autocomplete="off" enterkeyhint="search"></label>
+      <div class="remember hidden" id="remember"></div>
       <div class="home-grid actions">
-        <button type="button" class="big-btn big-voice tile s3" id="btnVoice" aria-label="Contar con mi voz" title="Contar con mi voz"><span class="big-ico"><svg class="i"><use href="#i-mic"/></svg></span></button>
-        <button type="button" class="big-btn big-write tile s3" id="btnWrite" aria-label="Escribir" title="Escribir"><span class="big-ico"><svg class="i"><use href="#i-pen"/></svg></span></button>
-        <label class="big-btn big-media tile s3" title="Hacer una foto ahora" aria-label="Hacer una foto ahora"><span class="big-ico"><svg class="i"><use href="#i-camera"/></svg></span><input type="file" class="js-photo" accept="image/*" capture="environment" hidden></label>
-        <label class="big-btn big-media tile s3" title="Grabar un vídeo ahora" aria-label="Grabar un vídeo ahora"><span class="big-ico"><svg class="i"><use href="#i-video"/></svg></span><input type="file" class="js-video" accept="video/*" capture="environment" hidden></label>
-        <label class="big-btn big-media tile s2" title="Subir una foto" aria-label="Subir una foto"><span class="big-ico"><svg class="i"><use href="#i-image"/></svg></span><input type="file" class="js-photo" accept="image/*" hidden></label>
-        <label class="big-btn big-media tile s2" title="Subir un vídeo" aria-label="Subir un vídeo"><span class="big-ico"><svg class="i"><use href="#i-folder"/></svg></span><input type="file" class="js-video" accept="video/*" hidden></label>
-        <label class="big-btn big-media tile s2" title="Subir un audio" aria-label="Subir un audio"><span class="big-ico"><svg class="i"><use href="#i-wave"/></svg></span><input type="file" class="js-audio" accept="audio/*" hidden></label>
+        <button type="button" class="big-btn big-voice tile" id="btnVoice"><span class="big-ico"><svg class="i"><use href="#i-mic"/></svg></span><span>Contar con mi voz<small>Habla y yo lo escribo</small></span></button>
+        <button type="button" class="big-btn big-write tile" id="btnWrite"><span class="big-ico"><svg class="i"><use href="#i-pen"/></svg></span><span>Escribir</span></button>
+        <label class="big-btn big-media tile"><span class="big-ico"><svg class="i"><use href="#i-camera"/></svg></span><span>Hacer foto</span><input type="file" class="js-photo" accept="image/*" capture="environment" hidden></label>
+        <label class="big-btn big-media tile"><span class="big-ico"><svg class="i"><use href="#i-video"/></svg></span><span>Grabar vídeo</span><input type="file" class="js-video" accept="video/*" capture="environment" hidden></label>
+      </div>
+      <button type="button" class="home-more" id="btnUploadToggle" aria-expanded="false">Subir un archivo del móvil</button>
+      <div class="upload-row hidden" id="uploadRow">
+        <label class="big-btn big-media tile"><svg class="i"><use href="#i-image"/></svg><span>Foto</span><input type="file" class="js-photo" accept="image/*" hidden></label>
+        <label class="big-btn big-media tile"><svg class="i"><use href="#i-video"/></svg><span>Vídeo</span><input type="file" class="js-video" accept="video/*" hidden></label>
+        <label class="big-btn big-media tile"><svg class="i"><use href="#i-wave"/></svg><span>Audio</span><input type="file" class="js-audio" accept="audio/*" hidden></label>
       </div>
       <div class="media-status hidden" id="mediaStatus"></div>
       <div class="card hidden" id="voicePanel">
@@ -739,6 +803,7 @@
           <div class="stat-item"><span class="stat-label">Total de memorias:</span><span class="stat-value" id="stat-total">0</span></div>
         </div>
       </div>
+      <button type="button" class="btn-secondary" id="onbAgain" style="margin-top:10px;">Ver la bienvenida otra vez</button>
       <button type="button" class="logout-big" id="logoutBtn"><svg class="i"><use href="#i-logout"/></svg> Cerrar sesión y salir</button>
     </div>
 
@@ -796,6 +861,9 @@
     </div>
   </div>
 
+
+
+  <div id="onb" class="hidden" role="dialog" aria-modal="true" aria-label="Bienvenida"><div class="onb-in" id="onbBody"></div></div>
 
   <div id="reviewModal" class="modal-bg hidden">
     <div class="modal">
@@ -971,11 +1039,44 @@
         const result = await response.json();
         memories = result.data || [];
         renderMemories();
+        if (!rememberId || !document.getElementById('viewHome').classList.contains('hidden')) showRemember(false);
         loadStats();
       } catch (err) {
         console.error('Error cargando memorias:', err);
       }
     }
+
+
+    // ===== Inicio: "¿Te acuerdas de este día?" y buscador =====
+    let rememberId = null;
+    function showRemember(again) {
+      const box = document.getElementById('remember');
+      if (!box) return;
+      const happy = memories.filter(m => (m.mood === 'feliz' || m.mood === 'emocionado' || m.mood === 'muy feliz') && m.date_happened);
+      const pool = happy.length > 1 && again ? happy.filter(m => m.id !== rememberId) : happy;
+      if (!pool.length) { box.classList.add('hidden'); return; }
+      const m = pool[Math.floor(Math.random() * pool.length)];
+      rememberId = m.id;
+      const vis = (m.media || []).find(x => x.kind === 'image');
+      const age = ageLabel(m.date_happened);
+      const when = new Date(m.date_happened + 'T00:00:00').toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' });
+      const txt = (m.content || '').trim();
+      box.innerHTML = `${vis ? `<div class="rem-media"><img src="${esc(vis.url)}" alt=""></div>` : ''}
+        <div class="rem-body"><div class="rem-q">¿Te acuerdas de este día?</div>
+        <div class="rem-t">${esc(m.title)}</div>
+        <div class="rem-m">${esc(when)}${age ? ' · ' + esc(age) : ''}</div>
+        ${txt ? `<div class="rem-x">${esc(txt.length > 140 ? txt.slice(0, 140).trim() + '…' : txt)}</div>` : ''}
+        <div class="rem-btns"><button type="button" id="remOpen">Ver recuerdo</button>${happy.length > 1 ? '<button type="button" id="remAgain">Otro</button>' : ''}</div></div>`;
+      box.classList.remove('hidden');
+      document.getElementById('remOpen').onclick = () => { window.goTo('mem'); memSearch.value = ''; currentMemoryId = null; selectMemory(m.id); };
+      const ag = document.getElementById('remAgain'); if (ag) ag.onclick = () => showRemember(true);
+    }
+    (function () {
+      const hs = document.getElementById('homeSearch');
+      hs.addEventListener('keydown', (e) => { if (e.key !== 'Enter') return; e.preventDefault(); const q = hs.value; window.goTo('mem'); memSearch.value = q; hs.value = ''; renderMemories(); hs.blur(); });
+      const t = document.getElementById('btnUploadToggle'), row = document.getElementById('uploadRow');
+      t.onclick = () => { const open = row.classList.toggle('hidden') === false; t.setAttribute('aria-expanded', open); };
+    })();
 
     async function updateMemory(id, data) {
       try {
@@ -1614,6 +1715,7 @@
         if (r.success) { document.getElementById('profBirth').value = r.data.birth_date || ''; document.getElementById('profPlace').value = r.data.birth_place || ''; }
       } catch (e) {}
     };
+    document.getElementById('onbAgain').onclick = () => window.startOnboarding();
     document.getElementById('profSave').onclick = async () => {
       const box = document.getElementById('profMsg');
       try {
@@ -1680,6 +1782,7 @@
         if (result.success) {
           document.getElementById('authPassword').value = ''; document.getElementById('authPassword2').value = ''; updateMeter('authPassword', 'authMeter', 'authMeterLabel');
           showApp(result.data);
+          if (authMode === 'register') window.maybeOnboard(true);
         } else {
           document.getElementById('authMessage').innerHTML = `<div class="error">${result.error}</div>`;
         }
@@ -1772,10 +1875,74 @@
       };
     })();
 
+
+    // ===== BIENVENIDA (primera vez) =====
+    (function () {
+      const root = document.getElementById('onb'), body = document.getElementById('onbBody');
+      const doneKey = () => `onb_${currentUser ? currentUser.id : ''}`;
+      const INTRO = [
+        ['mic', 'Cuenta tus recuerdos', 'Habla, escribe o sube una foto o un vídeo. La app lo ordena por ti y tú lo revisas antes de guardar.'],
+        ['clock', 'Mira toda tu vida', 'Tus recuerdos se colocan en una línea del tiempo, con lo que pasaba en el mundo y cuántos años tenías.'],
+        ['sparkle', 'Compártelo con quien quieras', 'La app escribe la historia de tu vida y puedes enviarla con un enlace, con fotos y vídeos incluidos.']
+      ];
+      const dots = (n) => `<div class="onb-dots">${[0, 1, 2, 3, 4].map(i => `<span class="${i === n ? 'on' : ''}"></span>`).join('')}</div>`;
+      const skip = '<button type="button" class="onb-skip" id="onbSkip">Saltar la bienvenida</button>';
+      function close() { root.classList.add('hidden'); try { localStorage.setItem(doneKey(), '1'); } catch (e) {} }
+      function intro(i) {
+        const [ico, t, d] = INTRO[i];
+        body.innerHTML = `<div class="onb-art">${ic(ico)}</div><h2>${t}</h2><p>${d}</p>${dots(i)}
+          <button type="button" class="btn-primary" id="onbNext">Siguiente</button>${skip}`;
+        document.getElementById('onbNext').onclick = () => (i < INTRO.length - 1 ? intro(i + 1) : data());
+        document.getElementById('onbSkip').onclick = close;
+      }
+      function data() {
+        body.innerHTML = `<div class="onb-art">${ic('user')}</div><h2>Cuéntame un poco de ti</h2>
+          <p>Con tu fecha de nacimiento sabré qué edad tenías en cada recuerdo.</p>
+          <div id="onbMsg"></div>
+          <label for="onbName">¿Cómo quieres que te llame?</label><input id="onbName" maxlength="80" autocomplete="name" value="${esc(currentUser ? currentUser.name : '')}">
+          <label for="onbBirth">Fecha de nacimiento</label><input type="date" id="onbBirth" max="${todayStr()}">
+          <label for="onbPlace">Lugar de nacimiento</label><input id="onbPlace" maxlength="120" placeholder="Ej: Sevilla">
+          ${dots(3)}
+          <button type="button" class="btn-primary" id="onbSave">Guardar y seguir</button>
+          <button type="button" class="onb-skip" id="onbLater">Ahora no, lo haré luego en Perfil</button>`;
+        document.getElementById('onbLater').onclick = first;
+        document.getElementById('onbSave').onclick = async () => {
+          const msg = document.getElementById('onbMsg'), name = document.getElementById('onbName').value.trim();
+          const birth = document.getElementById('onbBirth').value, place = document.getElementById('onbPlace').value;
+          if (isFuture(birth)) { msg.innerHTML = '<div class="error">La fecha de nacimiento no puede ser futura.</div>'; return; }
+          try {
+            if (name && currentUser && name !== currentUser.name) {
+              const r = await (await fetch(`${API_URL}/auth/name`, { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name }) })).json();
+              if (r.success) { currentUser = r.data; showUserData(r.data); }
+            }
+            if (birth || place) {
+              const r = await (await fetch(`${API_URL}/profile`, { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ birth_date: birth, birth_place: place }) })).json();
+              if (!r.success) { msg.innerHTML = `<div class="error">${esc(r.error)}</div>`; return; }
+              birthDate = birth; renderMemories();
+            }
+            first();
+          } catch (e) { msg.innerHTML = '<div class="error">No se pudo guardar. Puedes seguir y completarlo luego en Perfil.</div>'; }
+        };
+      }
+      function first() {
+        body.innerHTML = `<div class="onb-art">${ic('pen')}</div><h2>Empecemos con un recuerdo</h2>
+          <p>Elige cómo quieres contar el primero. Puede ser algo pequeño.</p>${dots(4)}
+          <button type="button" class="btn-primary" id="onbVoice">${ic('mic')} Contar con mi voz</button>
+          <button type="button" class="btn-secondary" id="onbWrite">${ic('pen')} Escribirlo</button>
+          <button type="button" class="onb-skip" id="onbEnd">Lo haré más tarde</button>`;
+        document.getElementById('onbVoice').onclick = () => { close(); window.goTo('home'); resetWriteForm(); openPanel('voice'); };
+        document.getElementById('onbWrite').onclick = () => { close(); window.goTo('home'); resetWriteForm(); openPanel('write'); };
+        document.getElementById('onbEnd').onclick = close;
+      }
+      window.startOnboarding = () => { root.classList.remove('hidden'); intro(0); };
+      // Solo tras crear la cuenta, nunca al entrar de nuevo; en Perfil se puede volver a ver
+      window.maybeOnboard = (isNew) => { if (isNew) window.startOnboarding(); };
+    })();
+
     // ===== LÍNEA DE VIDA =====
     (function () {
       const KINDS = {
-        general:   { label: 'General',     color: '#0D1846' },
+        general:   { label: 'General',     color: '#2E1A30' },
         school:    { label: 'Escolar',     color: '#007D79' },
         work:      { label: 'Profesional', color: '#DB3907' },
         personal:  { label: 'Personal',    color: '#D02670' },

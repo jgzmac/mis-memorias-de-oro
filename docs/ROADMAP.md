@@ -26,6 +26,12 @@ Actualizada: 2026-10-29. Orden propuesto (se puede cambiar).
 - **Web del resumen:** generar una página web con el resumen de vida, con enlaces a cada recuerdo y a su material audiovisual (fotos, vídeos, audios). Pendiente decidir privacidad: quién puede verla y cómo se protege el enlace.
 - **Duda importante y delicada: cómo fijar la fecha final.** Aún sin definir; hablarlo al empezar la próxima sesión (qué significa "fecha final" y cómo se decide).
 
+## Tareas registradas (2026-10-30)
+- **Actualizar el PowerPoint y la web de presentación** (`docs/Mis-Memorias-de-Oro-presentacion.pptx` y `docs/presentacion.html`) cuando empecemos a tener versiones finales: nombre definitivo, look&feel, Compartir web, estilos de resumen (Cálido, Ejecutivo) y cámara directa. Ahora mismo muestran el estilo "Nostálgico-cálido" y el diseño anterior.
+- **Decidir el nombre de la app** y **revisar el look&feel** (el actual, azul tipo Sanitas, resulta poco amigable): pendiente de elegir dirección.
+- **Publicar la app en internet** para que los enlaces de Compartir los abra otra persona.
+- **Ampliar `history.json` de 2023 a hoy**, con fuentes, para que el usuario apruebe los hechos.
+
 ## Principios de diseño
 - **Mobile-first:** se diseña primero para el móvil. Botones grandes, una acción principal por pantalla, formularios cortos.
 - **Coste cero en el MVP, con opción de cambiar:** motores locales/gratuitos; cada servicio de IA detrás de un "proveedor" intercambiable.
