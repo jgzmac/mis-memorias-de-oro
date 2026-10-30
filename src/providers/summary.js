@@ -90,7 +90,24 @@ function narrative(m, style, i, first) {
   return `${verb} «${m.title}»${place}${withWho}`;
 }
 
-function composeExecutive({ user, memories, stages, scopeLabel }) {
+// Hechos históricos del año: como mucho uno del mundo y uno de España, los más importantes.
+// Solo salen los de data/history.json (objetivos y contrastados); nunca se inventan.
+function yearEvents(history, y) {
+  const ofYear = (history || []).filter(e => e.positive && e.date.slice(0, 4) === String(y));
+  const out = [];
+  for (const scope of ['mundo', 'españa']) {
+    const best = ofYear.filter(e => e.scope === scope).sort((a, b) => b.importance - a.importance || a.date.localeCompare(b.date))[0];
+    if (best) out.push(best);
+  }
+  return out.sort((a, b) => a.date.localeCompare(b.date));
+}
+const monthName = (d) => new Date(d + 'T00:00:00').toLocaleDateString('es-ES', { month: 'long' });
+function eventsSentence(evs) {
+  if (!evs.length) return '';
+  return `Ese año también ocurrió: ${evs.map(e => `${e.text} (${monthName(e.date)})`).join('; ')}.`;
+}
+
+function composeExecutive({ user, memories, stages, scopeLabel, history }) {
   const out = [];
   const born = user.birth_date ? ` (n. ${user.birth_date.slice(0, 4)}${user.birth_place ? ', ' + user.birth_place : ''})` : '';
   out.push(scopeLabel ? `Resumen de ${user.name}: ${scopeLabel}.` : STYLES.ejecutivo.intro(user.name, born));
@@ -106,15 +123,19 @@ function composeExecutive({ user, memories, stages, scopeLabel }) {
     const extra = [m.place, peopleText(m)].filter(Boolean).join('; ');
     return `${m.date_happened.slice(0, 4)}: ${m.title}${extra ? ' (' + extra + ')' : ''}.`;
   });
+  const ctx = [...new Set(sorted.map(m => m.date_happened.slice(0, 4)))]
+    .map(y => { const ev = yearEvents(history, y); return ev.length ? `${y}: ${ev.map(e => `${e.text} (${monthName(e.date)})`).join('; ')}.` : ''; })
+    .filter(Boolean);
   if (lines.length) out.push(lines.join('\n'));
+  if (ctx.length) out.push('Hechos de aquel año:\n' + ctx.join('\n'));
   if (noDate.length) out.push(`Sin fecha: ${noDate.map(m => m.title).join('; ')}.`);
   if (!memories.length) out.push('Sin recuerdos registrados para este resumen.');
   return out.join('\n\n');
 }
 
-function compose({ user, memories, stages, styleKey, scopeLabel }) {
+function compose({ user, memories, stages, styleKey, scopeLabel, history }) {
   const style = STYLES[styleKey] || STYLES.amable;
-  if (style.executive) return composeExecutive({ user, memories, stages, scopeLabel });
+  if (style.executive) return composeExecutive({ user, memories, stages, scopeLabel, history });
 
   const out = [];
   const born = user.birth_date ? ` (naciste ${user.birth_place ? 'en ' + user.birth_place + ' ' : ''}el ${fmtLong(user.birth_date)} de ${user.birth_date.slice(0, 4)})` : '';
@@ -150,6 +171,8 @@ function compose({ user, memories, stages, styleKey, scopeLabel }) {
       const qq = i === 0 ? snippet(m.content, 110) : '';
       if (qq && qq.toLowerCase() !== m.title.toLowerCase()) text += ` «${qq}»`;
     });
+    const ev = eventsSentence(yearEvents(history, y));
+    if (ev) text += ' ' + ev;
     out.push(text.replace(/\s+/g, ' ').replace(/ ,/g, ','));
     prevYear = y;
   });

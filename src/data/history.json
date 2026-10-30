@@ -1,77 +1,590 @@
 {
-  "_nota": "Hechos históricos destacados. scope: mundo | españa. importance: 3 (máxima) a 1. Se puede ampliar añadiendo líneas; las fechas son AAAA-MM-DD.",
-  "events": [
-    { "date": "1912-04-15", "scope": "mundo", "importance": 1, "text": "Se hunde el Titanic" },
-    { "date": "1914-07-28", "scope": "mundo", "importance": 2, "text": "Comienza la Primera Guerra Mundial" },
-    { "date": "1918-11-11", "scope": "mundo", "importance": 2, "text": "Termina la Primera Guerra Mundial" },
-    { "date": "1929-10-29", "scope": "mundo", "importance": 2, "text": "Crac de la Bolsa de Nueva York: comienza la Gran Depresión" },
-    { "date": "1931-04-14", "scope": "españa", "importance": 3, "text": "Se proclama la Segunda República Española" },
-    { "date": "1936-07-18", "scope": "españa", "importance": 3, "text": "Comienza la Guerra Civil Española" },
-    { "date": "1937-05-06", "scope": "mundo", "importance": 1, "text": "Se incendia el dirigible Hindenburg" },
-    { "date": "1939-04-01", "scope": "españa", "importance": 3, "text": "Termina la Guerra Civil Española" },
-    { "date": "1939-09-01", "scope": "mundo", "importance": 3, "text": "Comienza la Segunda Guerra Mundial" },
-    { "date": "1944-06-06", "scope": "mundo", "importance": 2, "text": "Desembarco de Normandía" },
-    { "date": "1945-05-08", "scope": "mundo", "importance": 3, "text": "Termina la guerra en Europa" },
-    { "date": "1945-08-06", "scope": "mundo", "importance": 2, "text": "Bomba atómica sobre Hiroshima" },
-    { "date": "1945-09-02", "scope": "mundo", "importance": 3, "text": "Termina la Segunda Guerra Mundial" },
-    { "date": "1950-06-25", "scope": "mundo", "importance": 1, "text": "Comienza la guerra de Corea" },
-    { "date": "1957-03-25", "scope": "mundo", "importance": 1, "text": "Tratado de Roma: nacen las Comunidades Europeas" },
-    { "date": "1957-10-04", "scope": "mundo", "importance": 2, "text": "La Unión Soviética lanza el Sputnik, el primer satélite artificial" },
-    { "date": "1959-07-21", "scope": "españa", "importance": 1, "text": "Plan de Estabilización: España abre su economía" },
-    { "date": "1961-04-12", "scope": "mundo", "importance": 3, "text": "Yuri Gagarin, primer ser humano en el espacio" },
-    { "date": "1961-08-13", "scope": "mundo", "importance": 2, "text": "Se empieza a construir el Muro de Berlín" },
-    { "date": "1962-10-16", "scope": "mundo", "importance": 1, "text": "Crisis de los misiles de Cuba" },
-    { "date": "1963-11-22", "scope": "mundo", "importance": 2, "text": "Asesinato del presidente Kennedy" },
-    { "date": "1968-04-04", "scope": "mundo", "importance": 1, "text": "Asesinato de Martin Luther King" },
-    { "date": "1969-07-20", "scope": "mundo", "importance": 3, "text": "El ser humano llega a la Luna con el Apolo 11" },
-    { "date": "1969-08-15", "scope": "mundo", "importance": 1, "text": "Comienza el festival de Woodstock" },
-    { "date": "1973-12-20", "scope": "españa", "importance": 2, "text": "Atentado contra Carrero Blanco" },
-    { "date": "1975-11-20", "scope": "españa", "importance": 3, "text": "Muere Francisco Franco" },
-    { "date": "1975-11-22", "scope": "españa", "importance": 3, "text": "Juan Carlos I es proclamado rey" },
-    { "date": "1977-06-15", "scope": "españa", "importance": 3, "text": "Primeras elecciones democráticas en España desde 1936" },
-    { "date": "1978-07-25", "scope": "mundo", "importance": 1, "text": "Nace Louise Brown, el primer bebé probeta" },
-    { "date": "1978-10-16", "scope": "mundo", "importance": 1, "text": "Juan Pablo II es elegido papa" },
-    { "date": "1978-12-06", "scope": "españa", "importance": 3, "text": "Los españoles aprueban la Constitución en referéndum" },
-    { "date": "1981-02-23", "scope": "españa", "importance": 3, "text": "Intento de golpe de Estado del 23-F" },
-    { "date": "1982-06-13", "scope": "españa", "importance": 1, "text": "Comienza el Mundial de fútbol en España" },
-    { "date": "1982-10-28", "scope": "españa", "importance": 2, "text": "El PSOE de Felipe González gana las elecciones por mayoría absoluta" },
-    { "date": "1986-01-01", "scope": "españa", "importance": 3, "text": "España ingresa en la Comunidad Económica Europea" },
-    { "date": "1986-01-28", "scope": "mundo", "importance": 1, "text": "Accidente del transbordador espacial Challenger" },
-    { "date": "1986-04-26", "scope": "mundo", "importance": 2, "text": "Accidente nuclear de Chernóbil" },
-    { "date": "1989-06-04", "scope": "mundo", "importance": 1, "text": "Protestas de la plaza de Tiananmen" },
-    { "date": "1989-11-09", "scope": "mundo", "importance": 3, "text": "Cae el Muro de Berlín" },
-    { "date": "1990-02-11", "scope": "mundo", "importance": 2, "text": "Nelson Mandela sale de prisión" },
-    { "date": "1990-10-03", "scope": "mundo", "importance": 2, "text": "Reunificación de Alemania" },
-    { "date": "1991-01-17", "scope": "mundo", "importance": 1, "text": "Comienza la guerra del Golfo" },
-    { "date": "1991-12-26", "scope": "mundo", "importance": 3, "text": "Se disuelve la Unión Soviética" },
-    { "date": "1992-02-07", "scope": "mundo", "importance": 1, "text": "Se firma el Tratado de Maastricht, base de la Unión Europea" },
-    { "date": "1992-04-20", "scope": "españa", "importance": 2, "text": "Se inaugura la Expo '92 de Sevilla" },
-    { "date": "1992-07-25", "scope": "españa", "importance": 3, "text": "Se inauguran los Juegos Olímpicos de Barcelona" },
-    { "date": "1994-04-27", "scope": "mundo", "importance": 2, "text": "Mandela vota en las primeras elecciones multirraciales de Sudáfrica" },
-    { "date": "1996-03-03", "scope": "españa", "importance": 1, "text": "José María Aznar gana las elecciones generales" },
-    { "date": "1996-07-05", "scope": "mundo", "importance": 1, "text": "Nace la oveja Dolly, primer mamífero clonado" },
-    { "date": "1997-08-31", "scope": "mundo", "importance": 1, "text": "Muere Diana de Gales" },
-    { "date": "2000-01-01", "scope": "mundo", "importance": 1, "text": "Llega el año 2000" },
-    { "date": "2001-09-11", "scope": "mundo", "importance": 3, "text": "Atentados del 11 de septiembre en Estados Unidos" },
-    { "date": "2002-01-01", "scope": "españa", "importance": 3, "text": "El euro entra en circulación en España y otros once países" },
-    { "date": "2004-03-11", "scope": "españa", "importance": 3, "text": "Atentados del 11-M en Madrid" },
-    { "date": "2004-12-26", "scope": "mundo", "importance": 2, "text": "Tsunami del océano Índico" },
-    { "date": "2007-06-29", "scope": "mundo", "importance": 1, "text": "Sale a la venta el primer iPhone" },
-    { "date": "2008-09-15", "scope": "mundo", "importance": 2, "text": "Quiebra de Lehman Brothers: estalla la crisis financiera mundial" },
-    { "date": "2009-01-20", "scope": "mundo", "importance": 1, "text": "Barack Obama toma posesión como presidente de Estados Unidos" },
-    { "date": "2010-07-11", "scope": "españa", "importance": 3, "text": "España gana el Mundial de fútbol en Sudáfrica" },
-    { "date": "2011-03-11", "scope": "mundo", "importance": 2, "text": "Terremoto y tsunami en Japón; accidente de Fukushima" },
-    { "date": "2011-05-15", "scope": "españa", "importance": 1, "text": "Comienza el movimiento 15-M" },
-    { "date": "2013-03-13", "scope": "mundo", "importance": 1, "text": "Francisco es elegido papa" },
-    { "date": "2014-06-19", "scope": "españa", "importance": 2, "text": "Felipe VI es proclamado rey" },
-    { "date": "2015-12-12", "scope": "mundo", "importance": 1, "text": "Se aprueba el Acuerdo de París sobre el clima" },
-    { "date": "2016-06-23", "scope": "mundo", "importance": 2, "text": "El Reino Unido vota abandonar la Unión Europea (Brexit)" },
-    { "date": "2016-11-08", "scope": "mundo", "importance": 1, "text": "Donald Trump gana las elecciones de Estados Unidos" },
-    { "date": "2018-06-01", "scope": "españa", "importance": 2, "text": "Pedro Sánchez, presidente tras una moción de censura" },
-    { "date": "2020-03-11", "scope": "mundo", "importance": 3, "text": "La OMS declara la pandemia de COVID-19" },
-    { "date": "2020-03-14", "scope": "españa", "importance": 3, "text": "España declara el estado de alarma por el coronavirus" },
-    { "date": "2021-09-19", "scope": "españa", "importance": 1, "text": "Comienza la erupción del volcán de La Palma" },
-    { "date": "2022-02-24", "scope": "mundo", "importance": 3, "text": "Rusia invade Ucrania" },
-    { "date": "2022-09-08", "scope": "mundo", "importance": 1, "text": "Muere la reina Isabel II" }
-  ]
+ "_nota": "Hechos históricos destacados. scope: mundo | españa. importance: 3 (máxima) a 1. Solo hechos objetivos y contrastados. Fechas AAAA-MM-DD. Del 2023 en adelante: revisados hasta mayo de 2025 más el Mundial 2026 (verificado en Wikipedia); falta revisar de junio de 2025 a hoy. positive:true marca los hechos alegres; solo esos salen en el resumen de vida.",
+ "events": [
+  {
+   "date": "1912-04-15",
+   "scope": "mundo",
+   "importance": 1,
+   "text": "Se hunde el Titanic"
+  },
+  {
+   "date": "1914-07-28",
+   "scope": "mundo",
+   "importance": 2,
+   "text": "Comienza la Primera Guerra Mundial"
+  },
+  {
+   "date": "1918-11-11",
+   "scope": "mundo",
+   "importance": 2,
+   "text": "Termina la Primera Guerra Mundial",
+   "positive": true
+  },
+  {
+   "date": "1929-10-29",
+   "scope": "mundo",
+   "importance": 2,
+   "text": "Crac de la Bolsa de Nueva York: comienza la Gran Depresión"
+  },
+  {
+   "date": "1931-04-14",
+   "scope": "españa",
+   "importance": 3,
+   "text": "Se proclama la Segunda República Española"
+  },
+  {
+   "date": "1936-07-18",
+   "scope": "españa",
+   "importance": 3,
+   "text": "Comienza la Guerra Civil Española"
+  },
+  {
+   "date": "1937-05-06",
+   "scope": "mundo",
+   "importance": 1,
+   "text": "Se incendia el dirigible Hindenburg"
+  },
+  {
+   "date": "1939-04-01",
+   "scope": "españa",
+   "importance": 3,
+   "text": "Termina la Guerra Civil Española"
+  },
+  {
+   "date": "1939-09-01",
+   "scope": "mundo",
+   "importance": 3,
+   "text": "Comienza la Segunda Guerra Mundial"
+  },
+  {
+   "date": "1944-06-06",
+   "scope": "mundo",
+   "importance": 2,
+   "text": "Desembarco de Normandía"
+  },
+  {
+   "date": "1945-05-08",
+   "scope": "mundo",
+   "importance": 3,
+   "text": "Termina la guerra en Europa",
+   "positive": true
+  },
+  {
+   "date": "1945-08-06",
+   "scope": "mundo",
+   "importance": 2,
+   "text": "Bomba atómica sobre Hiroshima"
+  },
+  {
+   "date": "1945-09-02",
+   "scope": "mundo",
+   "importance": 3,
+   "text": "Termina la Segunda Guerra Mundial",
+   "positive": true
+  },
+  {
+   "date": "1950-06-25",
+   "scope": "mundo",
+   "importance": 1,
+   "text": "Comienza la guerra de Corea"
+  },
+  {
+   "date": "1957-03-25",
+   "scope": "mundo",
+   "importance": 1,
+   "text": "Tratado de Roma: nacen las Comunidades Europeas",
+   "positive": true
+  },
+  {
+   "date": "1957-10-04",
+   "scope": "mundo",
+   "importance": 2,
+   "text": "La Unión Soviética lanza el Sputnik, el primer satélite artificial",
+   "positive": true
+  },
+  {
+   "date": "1959-07-21",
+   "scope": "españa",
+   "importance": 1,
+   "text": "Plan de Estabilización: España abre su economía"
+  },
+  {
+   "date": "1961-04-12",
+   "scope": "mundo",
+   "importance": 3,
+   "text": "Yuri Gagarin, primer ser humano en el espacio",
+   "positive": true
+  },
+  {
+   "date": "1961-08-13",
+   "scope": "mundo",
+   "importance": 2,
+   "text": "Se empieza a construir el Muro de Berlín"
+  },
+  {
+   "date": "1962-10-16",
+   "scope": "mundo",
+   "importance": 1,
+   "text": "Crisis de los misiles de Cuba"
+  },
+  {
+   "date": "1963-11-22",
+   "scope": "mundo",
+   "importance": 2,
+   "text": "Asesinato del presidente Kennedy"
+  },
+  {
+   "date": "1968-04-04",
+   "scope": "mundo",
+   "importance": 1,
+   "text": "Asesinato de Martin Luther King"
+  },
+  {
+   "date": "1969-07-20",
+   "scope": "mundo",
+   "importance": 3,
+   "text": "El ser humano llega a la Luna con el Apolo 11",
+   "positive": true
+  },
+  {
+   "date": "1969-08-15",
+   "scope": "mundo",
+   "importance": 1,
+   "text": "Comienza el festival de Woodstock",
+   "positive": true
+  },
+  {
+   "date": "1973-12-20",
+   "scope": "españa",
+   "importance": 2,
+   "text": "Atentado contra Carrero Blanco"
+  },
+  {
+   "date": "1975-11-20",
+   "scope": "españa",
+   "importance": 3,
+   "text": "Muere Francisco Franco"
+  },
+  {
+   "date": "1975-11-22",
+   "scope": "españa",
+   "importance": 3,
+   "text": "Juan Carlos I es proclamado rey"
+  },
+  {
+   "date": "1977-06-15",
+   "scope": "españa",
+   "importance": 3,
+   "text": "Primeras elecciones democráticas en España desde 1936",
+   "positive": true
+  },
+  {
+   "date": "1978-07-25",
+   "scope": "mundo",
+   "importance": 1,
+   "text": "Nace Louise Brown, el primer bebé probeta",
+   "positive": true
+  },
+  {
+   "date": "1978-10-16",
+   "scope": "mundo",
+   "importance": 1,
+   "text": "Juan Pablo II es elegido papa",
+   "positive": true
+  },
+  {
+   "date": "1978-12-06",
+   "scope": "españa",
+   "importance": 3,
+   "text": "Los españoles aprueban la Constitución en referéndum",
+   "positive": true
+  },
+  {
+   "date": "1981-02-23",
+   "scope": "españa",
+   "importance": 3,
+   "text": "Intento de golpe de Estado del 23-F"
+  },
+  {
+   "date": "1982-06-13",
+   "scope": "españa",
+   "importance": 1,
+   "text": "Comienza el Mundial de fútbol en España",
+   "positive": true
+  },
+  {
+   "date": "1982-10-28",
+   "scope": "españa",
+   "importance": 2,
+   "text": "El PSOE de Felipe González gana las elecciones por mayoría absoluta"
+  },
+  {
+   "date": "1986-01-01",
+   "scope": "españa",
+   "importance": 3,
+   "text": "España ingresa en la Comunidad Económica Europea",
+   "positive": true
+  },
+  {
+   "date": "1986-01-28",
+   "scope": "mundo",
+   "importance": 1,
+   "text": "Accidente del transbordador espacial Challenger"
+  },
+  {
+   "date": "1986-04-26",
+   "scope": "mundo",
+   "importance": 2,
+   "text": "Accidente nuclear de Chernóbil"
+  },
+  {
+   "date": "1989-06-04",
+   "scope": "mundo",
+   "importance": 1,
+   "text": "Protestas de la plaza de Tiananmen"
+  },
+  {
+   "date": "1989-11-09",
+   "scope": "mundo",
+   "importance": 3,
+   "text": "Cae el Muro de Berlín",
+   "positive": true
+  },
+  {
+   "date": "1990-02-11",
+   "scope": "mundo",
+   "importance": 2,
+   "text": "Nelson Mandela sale de prisión",
+   "positive": true
+  },
+  {
+   "date": "1990-10-03",
+   "scope": "mundo",
+   "importance": 2,
+   "text": "Reunificación de Alemania",
+   "positive": true
+  },
+  {
+   "date": "1991-01-17",
+   "scope": "mundo",
+   "importance": 1,
+   "text": "Comienza la guerra del Golfo"
+  },
+  {
+   "date": "1991-12-26",
+   "scope": "mundo",
+   "importance": 3,
+   "text": "Se disuelve la Unión Soviética"
+  },
+  {
+   "date": "1992-02-07",
+   "scope": "mundo",
+   "importance": 1,
+   "text": "Se firma el Tratado de Maastricht, base de la Unión Europea",
+   "positive": true
+  },
+  {
+   "date": "1992-04-20",
+   "scope": "españa",
+   "importance": 2,
+   "text": "Se inaugura la Expo '92 de Sevilla",
+   "positive": true
+  },
+  {
+   "date": "1992-07-25",
+   "scope": "españa",
+   "importance": 3,
+   "text": "Se inauguran los Juegos Olímpicos de Barcelona",
+   "positive": true
+  },
+  {
+   "date": "1994-04-27",
+   "scope": "mundo",
+   "importance": 2,
+   "text": "Mandela vota en las primeras elecciones multirraciales de Sudáfrica",
+   "positive": true
+  },
+  {
+   "date": "1996-03-03",
+   "scope": "españa",
+   "importance": 1,
+   "text": "José María Aznar gana las elecciones generales"
+  },
+  {
+   "date": "1996-07-05",
+   "scope": "mundo",
+   "importance": 1,
+   "text": "Nace la oveja Dolly, primer mamífero clonado",
+   "positive": true
+  },
+  {
+   "date": "1997-08-31",
+   "scope": "mundo",
+   "importance": 1,
+   "text": "Muere Diana de Gales"
+  },
+  {
+   "date": "2000-01-01",
+   "scope": "mundo",
+   "importance": 1,
+   "text": "Llega el año 2000",
+   "positive": true
+  },
+  {
+   "date": "2001-09-11",
+   "scope": "mundo",
+   "importance": 3,
+   "text": "Atentados del 11 de septiembre en Estados Unidos"
+  },
+  {
+   "date": "2002-01-01",
+   "scope": "españa",
+   "importance": 3,
+   "text": "El euro entra en circulación en España y otros once países",
+   "positive": true
+  },
+  {
+   "date": "2004-03-11",
+   "scope": "españa",
+   "importance": 3,
+   "text": "Atentados del 11-M en Madrid"
+  },
+  {
+   "date": "2004-12-26",
+   "scope": "mundo",
+   "importance": 2,
+   "text": "Tsunami del océano Índico"
+  },
+  {
+   "date": "2007-06-29",
+   "scope": "mundo",
+   "importance": 1,
+   "text": "Sale a la venta el primer iPhone",
+   "positive": true
+  },
+  {
+   "date": "2008-09-15",
+   "scope": "mundo",
+   "importance": 2,
+   "text": "Quiebra de Lehman Brothers: estalla la crisis financiera mundial"
+  },
+  {
+   "date": "2009-01-20",
+   "scope": "mundo",
+   "importance": 1,
+   "text": "Barack Obama toma posesión como presidente de Estados Unidos",
+   "positive": true
+  },
+  {
+   "date": "2010-07-11",
+   "scope": "españa",
+   "importance": 3,
+   "text": "España gana el Mundial de fútbol en Sudáfrica",
+   "positive": true
+  },
+  {
+   "date": "2011-03-11",
+   "scope": "mundo",
+   "importance": 2,
+   "text": "Terremoto y tsunami en Japón; accidente de Fukushima"
+  },
+  {
+   "date": "2011-05-15",
+   "scope": "españa",
+   "importance": 1,
+   "text": "Comienza el movimiento 15-M"
+  },
+  {
+   "date": "2013-03-13",
+   "scope": "mundo",
+   "importance": 1,
+   "text": "Francisco es elegido papa",
+   "positive": true
+  },
+  {
+   "date": "2014-06-19",
+   "scope": "españa",
+   "importance": 2,
+   "text": "Felipe VI es proclamado rey"
+  },
+  {
+   "date": "2015-12-12",
+   "scope": "mundo",
+   "importance": 1,
+   "text": "Se aprueba el Acuerdo de París sobre el clima",
+   "positive": true
+  },
+  {
+   "date": "2016-06-23",
+   "scope": "mundo",
+   "importance": 2,
+   "text": "El Reino Unido vota abandonar la Unión Europea (Brexit)"
+  },
+  {
+   "date": "2016-11-08",
+   "scope": "mundo",
+   "importance": 1,
+   "text": "Donald Trump gana las elecciones de Estados Unidos"
+  },
+  {
+   "date": "2018-06-01",
+   "scope": "españa",
+   "importance": 2,
+   "text": "Pedro Sánchez, presidente tras una moción de censura"
+  },
+  {
+   "date": "2020-03-11",
+   "scope": "mundo",
+   "importance": 3,
+   "text": "La OMS declara la pandemia de COVID-19"
+  },
+  {
+   "date": "2020-03-14",
+   "scope": "españa",
+   "importance": 3,
+   "text": "España declara el estado de alarma por el coronavirus"
+  },
+  {
+   "date": "2021-09-19",
+   "scope": "españa",
+   "importance": 1,
+   "text": "Comienza la erupción del volcán de La Palma"
+  },
+  {
+   "date": "2022-02-24",
+   "scope": "mundo",
+   "importance": 3,
+   "text": "Rusia invade Ucrania"
+  },
+  {
+   "date": "2022-09-08",
+   "scope": "mundo",
+   "importance": 1,
+   "text": "Muere la reina Isabel II"
+  },
+  {
+   "date": "2022-12-18",
+   "scope": "mundo",
+   "importance": 2,
+   "text": "Argentina gana el Mundial de fútbol de Catar",
+   "positive": true
+  },
+  {
+   "date": "2022-12-31",
+   "scope": "mundo",
+   "importance": 1,
+   "text": "Muere el papa emérito Benedicto XVI"
+  },
+  {
+   "date": "2023-02-06",
+   "scope": "mundo",
+   "importance": 2,
+   "text": "Terremotos devastadores en Turquía y Siria"
+  },
+  {
+   "date": "2023-05-05",
+   "scope": "mundo",
+   "importance": 1,
+   "text": "La OMS declara el fin de la emergencia sanitaria mundial por la COVID-19",
+   "positive": true
+  },
+  {
+   "date": "2023-05-06",
+   "scope": "mundo",
+   "importance": 1,
+   "text": "Carlos III es coronado rey del Reino Unido",
+   "positive": true
+  },
+  {
+   "date": "2023-06-18",
+   "scope": "españa",
+   "importance": 1,
+   "text": "España gana la Liga de Naciones de fútbol",
+   "positive": true
+  },
+  {
+   "date": "2023-07-23",
+   "scope": "españa",
+   "importance": 2,
+   "text": "Elecciones generales en España"
+  },
+  {
+   "date": "2023-08-20",
+   "scope": "españa",
+   "importance": 3,
+   "text": "España gana el Mundial de fútbol femenino por primera vez",
+   "positive": true
+  },
+  {
+   "date": "2023-10-07",
+   "scope": "mundo",
+   "importance": 3,
+   "text": "Ataque de Hamás a Israel y comienzo de la guerra en Gaza"
+  },
+  {
+   "date": "2024-07-14",
+   "scope": "españa",
+   "importance": 3,
+   "text": "España gana su cuarta Eurocopa de fútbol",
+   "positive": true
+  },
+  {
+   "date": "2024-07-26",
+   "scope": "mundo",
+   "importance": 2,
+   "text": "Comienzan los Juegos Olímpicos de París",
+   "positive": true
+  },
+  {
+   "date": "2024-10-29",
+   "scope": "españa",
+   "importance": 3,
+   "text": "La DANA provoca inundaciones gravísimas en Valencia"
+  },
+  {
+   "date": "2024-11-05",
+   "scope": "mundo",
+   "importance": 2,
+   "text": "Donald Trump gana las elecciones presidenciales de Estados Unidos"
+  },
+  {
+   "date": "2024-12-07",
+   "scope": "mundo",
+   "importance": 1,
+   "text": "Reabre la catedral de Notre-Dame de París tras el incendio de 2019",
+   "positive": true
+  },
+  {
+   "date": "2024-12-08",
+   "scope": "mundo",
+   "importance": 2,
+   "text": "Cae el régimen de Bashar al-Ásad en Siria"
+  },
+  {
+   "date": "2025-04-21",
+   "scope": "mundo",
+   "importance": 3,
+   "text": "Muere el papa Francisco"
+  },
+  {
+   "date": "2025-04-28",
+   "scope": "españa",
+   "importance": 3,
+   "text": "Gran apagón eléctrico en España y Portugal"
+  },
+  {
+   "date": "2025-05-08",
+   "scope": "mundo",
+   "importance": 3,
+   "text": "León XIV es elegido papa",
+   "positive": true
+  },
+  {
+   "date": "2026-07-19",
+   "scope": "españa",
+   "importance": 3,
+   "text": "España gana su segundo Mundial de fútbol",
+   "positive": true
+  }
+ ]
 }

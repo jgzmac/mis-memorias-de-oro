@@ -6,16 +6,16 @@
   <title>Mis Memorias de Oro</title>
   <style>
     :root {
-      /* Paleta "Hogar": terracota, verde salvia y crema (nombres antiguos conservados) */
-      --salvia: #D98C74;
-      --salvia-fuerte: #C8624A;
-      --salvia-hover: #8F3F2C;
-      --salvia-claro: #FBE6DB;
-      --fondo-1: #FBF4E8;
-      --fondo-2: #F6E3C8;
-      --azul-calma: #E2C9A4;
-      --tinta: #3B2A20;
-      --gris: #7a6556;
+      /* Paleta "Hogar": verde salvia y crema (nombres antiguos conservados) */
+      --salvia: #8DB27F;
+      --salvia-fuerte: #5F8A55;
+      --salvia-hover: #3E6B3A;
+      --salvia-claro: #E3EEDD;
+      --fondo-1: #F7F5EA;
+      --fondo-2: #E6E8D2;
+      --azul-calma: #C5D8B5;
+      --tinta: #2F3A2A;
+      --gris: #66705F;
       --oro: #E0A81E;
       --oro-sombra: #B98607;
       --verde: #5F8A55;
@@ -419,7 +419,7 @@
     .tl-seg { position: absolute; top: 9px; height: 28px; border-radius: 8px; opacity: 0.75; font-size: 0.7em; color: #fff; padding: 0 6px; line-height: 28px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; cursor: pointer; }
     .tl-mark { position: absolute; top: 14px; height: 18px; min-width: 18px; border-radius: 9px; border: 2px solid white; box-shadow: 0 0 0 1px rgba(0,0,0,.2); cursor: pointer; }
     .tl-hist { position: absolute; top: 15px; width: 14px; height: 14px; margin-left: -7px; transform: rotate(45deg); background: var(--c-hist); border: 2px solid white; box-shadow: 0 0 0 1px rgba(0,0,0,.2); }
-    .tl-sel { position: absolute; top: 28px; bottom: 0; background: rgba(200,98,74,.15); border-left: 2px solid var(--salvia-fuerte); pointer-events: none; min-width: 2px; }
+    .tl-sel { position: absolute; top: 28px; bottom: 0; background: rgba(95,138,85,.18); border-left: 2px solid var(--salvia-fuerte); pointer-events: none; min-width: 2px; }
     .tl-hint { font-size: 0.82em; color: var(--gris); margin: 8px 2px; }
     .tl-detail { margin-top: 14px; }
     .tl-detail h3 { color: var(--salvia-hover); font-size: 1.05em; margin-bottom: 8px; }
@@ -578,11 +578,11 @@
     .scene.dusk::before { width: 46px; height: 46px; left: 18%; top: 18%; background: #fff8; box-shadow: 0 0 0 12px rgba(255,255,255,.25); }
     .scene.dusk::after { background: linear-gradient(90deg,#7C70B8 0 18%,#6A5DA8 18% 40%,#8A7EC4 40% 62%,#6A5DA8 62% 84%,#7C70B8 84%); }
     .rem-scene { height: 120px; }
-    #onb { background: linear-gradient(#FFF4DC 0%, #FBE3C0 38%, #F5ECD6 100%); }
+    #onb { background: linear-gradient(#F3F6E4 0%, #E3EEDD 40%, #F7F5EA 100%); }
     #onb::before { content: ""; position: absolute; width: 150px; height: 150px; border-radius: 50%; right: -30px; top: 40px; background: #FFF1C2; opacity: .55; box-shadow: 0 0 0 28px rgba(255,224,138,.25); pointer-events: none; }
-    #onb::after { content: ""; position: fixed; left: -15%; right: -15%; bottom: 0; height: 26%; background: radial-gradient(70% 100% at 25% 100%, #D7C79A 0 55%, transparent 56%), radial-gradient(70% 90% at 80% 100%, #C9B37F 0 55%, transparent 56%); opacity: .55; pointer-events: none; z-index: -1; }
+    #onb::after { content: ""; position: fixed; left: -15%; right: -15%; bottom: 0; height: 26%; background: radial-gradient(70% 100% at 25% 100%, var(--azul-calma) 0 55%, transparent 56%), radial-gradient(70% 90% at 80% 100%, #A8C496 0 55%, transparent 56%); opacity: .55; pointer-events: none; z-index: -1; }
     #onb .onb-in { position: relative; z-index: 1; }
-    #onb .onb-art { background: white; box-shadow: 0 8px 22px -10px rgba(58,31,61,.45); }
+    #onb .onb-art { background: white; box-shadow: 0 8px 22px -10px rgba(47,70,40,.45); }
     .profile-todo { background: #FFF4D6; border: 1.5px solid var(--oro); border-radius: 16px; padding: 12px 14px; margin: 10px 0 14px; line-height: 1.5; }
     .profile-todo b { display: block; margin-bottom: 2px; }
     .profile-todo ul { margin: 4px 0 0 18px; }
@@ -590,9 +590,11 @@
 
 
     /* Cabecera del Inicio: pradera de día con flores (sin casa ni atardecer) */
-    .home-hero { position: relative; height: 190px; border-radius: 26px; overflow: hidden; margin-bottom: 16px; background: linear-gradient(#CFE8F4 0%, #E8F3EA 70%); }
+    .home-hero { position: relative; height: 104px; border-radius: 22px; overflow: hidden; margin-bottom: 12px; background: linear-gradient(#CFE8F4 0%, #E8F3EA 70%); }
     .home-hero > svg { position: absolute; inset: 0; width: 100%; height: 100%; }
-    .home-hero .hero-text { position: relative; padding: 16px 18px; }
+    .home-hero .hero-text { position: relative; padding: 12px 16px; }
+    .home-hero .home-hello { font-size: 1.5em; }
+    .home-hero .home-sub { font-size: 1em; }
     .home-hero .home-hello { color: #2F4A33; margin: 0; }
     .home-hero .home-sub { color: #3F5F42; margin: 2px 0 0; font-weight: 600; }
 
@@ -600,21 +602,24 @@
     h1, h2, .home-hello { font-weight: 700; }
     .home-hello { font-size: 1.9em; line-height: 1.12; color: var(--tinta); margin-bottom: 4px; font-weight: 600; }
     .home-sub { font-size: 1.1em; color: var(--salvia-fuerte); margin-bottom: 14px ; }
-    .home-search { display: flex; align-items: center; gap: 10px; width: 100%; margin-bottom: 16px; padding: 13px 16px; background: white; border: 0; border-radius: 999px; box-shadow: 0 3px 10px -4px rgba(90,46,28,.25); color: var(--gris); font-size: 1rem; font-weight: 400; text-align: left; }
-    .home-search:hover { transform: none; box-shadow: 0 2px 0 #D7C79A; }
+    .home-search { display: flex; align-items: center; gap: 10px; width: 100%; margin-bottom: 16px; padding: 13px 16px; background: white; border: 0; border-radius: 999px; box-shadow: 0 3px 10px -4px rgba(47,70,40,.25); color: var(--gris); font-size: 1rem; font-weight: 400; text-align: left; }
+    .home-search:hover { transform: none; box-shadow: 0 2px 0 var(--azul-calma); }
     .home-search .i { width: 1.3rem; height: 1.3rem; flex: none; color: var(--salvia-fuerte); }
     .home-search input { border: 0; outline: 0; padding: 0; background: transparent; flex: 1; min-width: 0; font-size: 16px; color: var(--tinta); }
-    .remember { margin-bottom: 18px; background: white; border: 1.5px solid #EAD9A3; border-radius: 6px 22px 6px 22px; overflow: hidden; box-shadow: 0 10px 22px -14px rgba(58,31,61,.5); }
-    .remember .rem-media img, .remember .rem-media video { display: block; width: 100%; max-height: 220px; object-fit: cover; }
-    .remember .rem-body { padding: 12px 16px 14px; }
-    .remember .rem-q { font-style: italic; font-size: 1.05rem; font-weight: 600; color: var(--salvia-fuerte); }
-    .remember .rem-t { font-size: 1.2rem; font-weight: 700; margin-top: 4px; }
+    .remember { margin-bottom: 18px; background: white; border: 1.5px solid var(--azul-calma); border-radius: 6px 22px 6px 22px; overflow: hidden; box-shadow: 0 10px 22px -14px rgba(47,70,40,.5); }
+    .remember { display: flex; align-items: stretch; margin-bottom: 12px; }
+    .remember .rem-media, .remember .rem-scene { flex: 0 0 92px; width: 92px; height: auto; min-height: 100%; }
+    .remember .rem-media img, .remember .rem-media video { display: block; width: 100%; height: 100%; object-fit: cover; }
+    .remember .rem-body { flex: 1; min-width: 0; }
+    .remember .rem-body { padding: 10px 14px 12px; }
+    .remember .rem-q { font-style: italic; font-size: .95rem; font-weight: 600; color: var(--salvia-fuerte); }
+    .remember .rem-t { font-size: 1.1rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 700; margin-top: 4px; }
     .remember .rem-m { font-size: 0.85em; color: var(--gris); margin-top: 2px; }
     .remember .rem-x { margin-top: 8px; line-height: 1.45; font-style: italic; }
-    .remember .rem-btns { display: flex; gap: 8px; margin-top: 12px; }
-    .remember .rem-btns button { min-height: 44px; border-radius: 999px; background: white; color: var(--salvia-hover); border: 1.5px solid var(--azul-calma); font-weight: 600; }
+    .remember .rem-btns { display: flex; gap: 8px; margin-top: 8px; }
+    .remember .rem-btns button { min-height: 40px; padding: 0 14px; border-radius: 999px; background: white; color: var(--salvia-hover); border: 1.5px solid var(--azul-calma); font-weight: 600; }
     .home-grid.actions { grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 8px; }
-    .home-grid.actions .tile { flex-direction: column; gap: 6px; min-height: 84px; border-radius: 24px; font-size: 0.98em; font-weight: 700; background: white; color: #5A2E1C; border: 0; box-shadow: 0 3px 10px -6px rgba(90,46,28,.45); }
+    .home-grid.actions .tile { flex-direction: column; gap: 6px; min-height: 84px; border-radius: 24px; font-size: 0.98em; font-weight: 700; background: white; color: var(--salvia-hover); border: 0; box-shadow: 0 3px 10px -6px rgba(47,70,40,.45); }
     .home-grid.actions .tile .big-ico { font-size: 1em; display: block; line-height: 0; }
     .home-grid.actions .tile .i { color: var(--verde); }
     .home-grid.actions .tile.big-voice { grid-column: 1 / -1; flex-direction: row; justify-content: flex-start; gap: 14px; min-height: 76px; padding: 14px 20px; border: 0; background: var(--verde); color: #fff; font-size: 1.25rem; font-weight: 800; box-shadow: 0 6px 0 var(--verde-sombra); text-align: left; }
@@ -905,7 +910,7 @@
     <!-- LISTA DE MEMORIAS -->
     <div id="viewMem" class="hidden">
       <div class="card">
-        <h2 style="margin-bottom: 14px; color: #333;">Tus Memorias</h2>
+        <h2 style="margin-bottom: 14px; color: #333;">Tus recuerdos</h2>
         <div class="searchbar">
           <input type="search" id="memSearch" placeholder="Buscar por título, texto, persona o lugar" autocomplete="off">
           <div class="adv" id="memAdv"></div>

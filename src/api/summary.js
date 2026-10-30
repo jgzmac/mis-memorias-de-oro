@@ -3,6 +3,7 @@
  */
 const db = require('../db');
 const { compose, STYLES } = require('../providers/summary');
+const history = require('../data/history.json').events;
 
 function loadMemories(userId) {
   const mems = db.prepare('SELECT * FROM memories WHERE user_id = ?').all(userId);
@@ -29,7 +30,7 @@ function summary(req, res) {
       memories = memories.filter(m => m.people.some(p => p.name.toLowerCase() === value.toLowerCase()));
       scopeLabel = `tus recuerdos con ${value}`;
     }
-    res.json({ success: true, data: { text: compose({ user, memories, stages, styleKey, scopeLabel }), count: memories.length, memoryIds: memories.map(m => m.id), provider: 'local' } });
+    res.json({ success: true, data: { text: compose({ user, memories, stages, styleKey, scopeLabel, history }), count: memories.length, memoryIds: memories.map(m => m.id), provider: 'local' } });
   } catch (err) {
     console.error('Error en summary:', err.message);
     res.status(500).json({ success: false, error: 'No se pudo crear el resumen' });
