@@ -21,6 +21,11 @@ Actualizada: 2026-10-29. Orden propuesto (se puede cambiar).
 - Look&feel móvil (2026-10-30, en local, sin commit): botones propios en Inicio (voz, escribir, foto, vídeo); etiquetas con icono en lugar de categoría (con etiquetas propias); ánimo con 4 iconos; orden con botones; resumen con chips; filtros detrás de un botón "Filtros"; edad ("Tenías N años") en cada fecha de recuerdo, calculada con la fecha de nacimiento del perfil.
 - Ronda 2 de look&feel (2026-10-30, en local, sin commit): tema azul estilo Mi Sanitas con fuente Metropolis; botones solo con icono (voz, escribir, foto, vídeo, audio) en Inicio y Crear; "Mis recuerdos recientes" con edad y etiquetas; etiquetas automáticas según el análisis (texto y escenas) preseleccionadas al revisar; cada fila de la línea de vida con su color.
 
+## Próximos pasos (pedidos 2026-10-30)
+- **Compartir el resumen:** botón "Compartir" en la sección Resumen (además de copiar y descargar).
+- **Web del resumen:** generar una página web con el resumen de vida, con enlaces a cada recuerdo y a su material audiovisual (fotos, vídeos, audios). Pendiente decidir privacidad: quién puede verla y cómo se protege el enlace.
+- **Duda importante y delicada: cómo fijar la fecha final.** Aún sin definir; hablarlo al empezar la próxima sesión (qué significa "fecha final" y cómo se decide).
+
 ## Principios de diseño
 - **Mobile-first:** se diseña primero para el móvil. Botones grandes, una acción principal por pantalla, formularios cortos.
 - **Coste cero en el MVP, con opción de cambiar:** motores locales/gratuitos; cada servicio de IA detrás de un "proveedor" intercambiable.

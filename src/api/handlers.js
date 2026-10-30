@@ -33,6 +33,13 @@ function validDate(v) {
   return v === undefined || v === null || v === '' || DATE_RE.test(v);
 }
 
+// Un recuerdo ya ocurrió: no se admiten fechas posteriores a hoy (se compara en texto AAAA-MM-DD, con margen de un día por zonas horarias)
+function futureDate(v) {
+  if (!v) return false;
+  const lim = new Date(Date.now() + 24 * 3600 * 1000).toISOString().slice(0, 10);
+  return v > lim;
+}
+
 function fail(res, status, error) {
   return res.status(status).json({ success: false, error });
 }
@@ -53,6 +60,7 @@ function createMemory(req, res) {
     if (!content) content = title;
 
     if (!validDate(b.date_happened) || !validDate(b.date_end)) return fail(res, 400, 'Fecha no válida');
+    if (futureDate(b.date_happened) || futureDate(b.date_end)) return fail(res, 400, 'Un recuerdo no puede tener una fecha futura');
     const tags = Array.isArray(b.tags) ? b.tags.map(t => clean(t, 40)).filter(Boolean).slice(0, 30) : [];
     const people = normalizePeople(b.people) || [];
     const mediaIds = Array.isArray(b.media_ids) ? b.media_ids.map(Number).filter(Number.isInteger) : [];
@@ -129,6 +137,7 @@ function updateMemory(req, res) {
 
     const b = req.body;
     if (!validDate(b.date_happened) || !validDate(b.date_end)) return fail(res, 400, 'Fecha no válida');
+    if (futureDate(b.date_happened) || futureDate(b.date_end)) return fail(res, 400, 'Un recuerdo no puede tener una fecha futura');
 
     const sets = [];
     const vals = [];
