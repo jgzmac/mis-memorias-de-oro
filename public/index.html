@@ -6,18 +6,21 @@
   <title>Mis Memorias de Oro</title>
   <style>
     :root {
-      /* Paleta "ciruela y oro" (nombres antiguos conservados para no tocar todo el CSS) */
-      --salvia: #8A5A92;
-      --salvia-fuerte: #6B3A70;
-      --salvia-hover: #3A1F3D;
-      --salvia-claro: #F5ECD6;
-      --fondo-1: #FFFDF9;
-      --fondo-2: #F5ECD6;
-      --azul-calma: #D7C79A;
-      --tinta: #2E1A30;
-      --gris: #6c5a70;
+      /* Paleta "Hogar": terracota, verde salvia y crema (nombres antiguos conservados) */
+      --salvia: #D98C74;
+      --salvia-fuerte: #C8624A;
+      --salvia-hover: #8F3F2C;
+      --salvia-claro: #FBE6DB;
+      --fondo-1: #FBF4E8;
+      --fondo-2: #F6E3C8;
+      --azul-calma: #E2C9A4;
+      --tinta: #3B2A20;
+      --gris: #7a6556;
       --oro: #E0A81E;
       --oro-sombra: #B98607;
+      --verde: #5F8A55;
+      --verde-sombra: #436B3B;
+      --verde-claro: #E3EEDD;
     }
     @font-face { font-family: 'Metropolis'; font-weight: 400; src: url(fonts/nunito-latin-400-normal.woff2) format('woff2'); font-display: swap; }
     @font-face { font-family: 'Metropolis'; font-weight: 500; src: url(fonts/nunito-latin-500-normal.woff2) format('woff2'); font-display: swap; }
@@ -32,7 +35,7 @@
 
     body {
       font-family: 'Metropolis', ui-rounded, 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-      background: linear-gradient(170deg, #FFFFFF 0%, var(--fondo-1) 45%, #F8F0DD 100%) fixed;
+      background: var(--fondo-1) fixed;
       color: var(--tinta);
       min-height: 100vh;
       padding: 20px;
@@ -164,7 +167,7 @@
     .btn-primary:hover {
       background: var(--salvia-hover);
       transform: translateY(-2px);
-      box-shadow: 0 5px 15px rgba(107, 58, 112, 0.35);
+      box-shadow: 0 5px 15px rgba(200, 98, 74, 0.35);
     }
 
     .btn-secondary {
@@ -416,7 +419,7 @@
     .tl-seg { position: absolute; top: 9px; height: 28px; border-radius: 8px; opacity: 0.75; font-size: 0.7em; color: #fff; padding: 0 6px; line-height: 28px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; cursor: pointer; }
     .tl-mark { position: absolute; top: 14px; height: 18px; min-width: 18px; border-radius: 9px; border: 2px solid white; box-shadow: 0 0 0 1px rgba(0,0,0,.2); cursor: pointer; }
     .tl-hist { position: absolute; top: 15px; width: 14px; height: 14px; margin-left: -7px; transform: rotate(45deg); background: var(--c-hist); border: 2px solid white; box-shadow: 0 0 0 1px rgba(0,0,0,.2); }
-    .tl-sel { position: absolute; top: 28px; bottom: 0; background: rgba(107,58,112,.15); border-left: 2px solid var(--salvia-fuerte); pointer-events: none; min-width: 2px; }
+    .tl-sel { position: absolute; top: 28px; bottom: 0; background: rgba(200,98,74,.15); border-left: 2px solid var(--salvia-fuerte); pointer-events: none; min-width: 2px; }
     .tl-hint { font-size: 0.82em; color: var(--gris); margin: 8px 2px; }
     .tl-detail { margin-top: 14px; }
     .tl-detail h3 { color: var(--salvia-hover); font-size: 1.05em; margin-bottom: 8px; }
@@ -560,13 +563,46 @@
     .searchbar > .adv { order: 3; flex: 1 1 100%; }
 
 
+
+    /* Escenas ilustradas (sin fotos): fondos para bienvenida y recuerdo del día */
+    .scene { position: relative; overflow: hidden; }
+    .scene::before { content: ""; position: absolute; border-radius: 50%; }
+    .scene::after { content: ""; position: absolute; left: -10%; right: -10%; bottom: 0; height: 40%; }
+    .scene.sea { background: linear-gradient(#F7C98B, #F4A97E 62%, #E98E7A); }
+    .scene.sea::before { width: 54px; height: 54px; right: 22%; top: 22%; background: #FFE08A; box-shadow: 0 0 0 14px rgba(255,224,138,.28); }
+    .scene.sea::after { background: linear-gradient(#5E9FC4, #3D7DA6); border-radius: 50% 50% 0 0 / 30% 30% 0 0; }
+    .scene.garden { background: linear-gradient(#CFE6C8, #9CC79A); }
+    .scene.garden::before { width: 46px; height: 46px; left: 16%; top: 20%; background: #FFF3B0; box-shadow: 0 0 0 12px rgba(255,243,176,.35); }
+    .scene.garden::after { background: radial-gradient(120% 100% at 30% 100%, #6FA877 0 55%, transparent 56%), radial-gradient(90% 90% at 85% 110%, #4F8B5E 0 55%, transparent 56%); }
+    .scene.dusk { background: linear-gradient(#D9D4F2, #B7AEE0 70%, #E7C9D8); }
+    .scene.dusk::before { width: 46px; height: 46px; left: 18%; top: 18%; background: #fff8; box-shadow: 0 0 0 12px rgba(255,255,255,.25); }
+    .scene.dusk::after { background: linear-gradient(90deg,#7C70B8 0 18%,#6A5DA8 18% 40%,#8A7EC4 40% 62%,#6A5DA8 62% 84%,#7C70B8 84%); }
+    .rem-scene { height: 120px; }
+    #onb { background: linear-gradient(#FFF4DC 0%, #FBE3C0 38%, #F5ECD6 100%); }
+    #onb::before { content: ""; position: absolute; width: 150px; height: 150px; border-radius: 50%; right: -30px; top: 40px; background: #FFF1C2; opacity: .55; box-shadow: 0 0 0 28px rgba(255,224,138,.25); pointer-events: none; }
+    #onb::after { content: ""; position: fixed; left: -15%; right: -15%; bottom: 0; height: 26%; background: radial-gradient(70% 100% at 25% 100%, #D7C79A 0 55%, transparent 56%), radial-gradient(70% 90% at 80% 100%, #C9B37F 0 55%, transparent 56%); opacity: .55; pointer-events: none; z-index: -1; }
+    #onb .onb-in { position: relative; z-index: 1; }
+    #onb .onb-art { background: white; box-shadow: 0 8px 22px -10px rgba(58,31,61,.45); }
+    .profile-todo { background: #FFF4D6; border: 1.5px solid var(--oro); border-radius: 16px; padding: 12px 14px; margin: 10px 0 14px; line-height: 1.5; }
+    .profile-todo b { display: block; margin-bottom: 2px; }
+    .profile-todo ul { margin: 4px 0 0 18px; }
+    .profile-ok { background: #E7F4E4; border-radius: 16px; padding: 10px 14px; margin: 10px 0 14px; color: #2F6B34; font-weight: 600; }
+
+
+    /* Cabecera del Inicio: pradera de día con flores (sin casa ni atardecer) */
+    .home-hero { position: relative; height: 190px; border-radius: 26px; overflow: hidden; margin-bottom: 16px; background: linear-gradient(#CFE8F4 0%, #E8F3EA 70%); }
+    .home-hero > svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+    .home-hero .hero-text { position: relative; padding: 16px 18px; }
+    .home-hero .home-hello { color: #2F4A33; margin: 0; }
+    .home-hero .home-sub { color: #3F5F42; margin: 2px 0 0; font-weight: 600; }
+
     /* ===== Inicio (mezcla Cuaderno + Luz) ===== */
     h1, h2, .home-hello { font-weight: 700; }
     .home-hello { font-size: 1.9em; line-height: 1.12; color: var(--tinta); margin-bottom: 4px; font-weight: 600; }
     .home-sub { font-size: 1.1em; color: var(--salvia-fuerte); margin-bottom: 14px ; }
-    .home-search { display: flex; align-items: center; gap: 10px; width: 100%; margin-bottom: 16px; padding: 13px 16px; background: white; border: 0; border-radius: 16px; box-shadow: 0 2px 0 #E6DAB8; color: var(--gris); font-size: 1rem; font-weight: 400; text-align: left; }
+    .home-search { display: flex; align-items: center; gap: 10px; width: 100%; margin-bottom: 16px; padding: 13px 16px; background: white; border: 0; border-radius: 999px; box-shadow: 0 3px 10px -4px rgba(90,46,28,.25); color: var(--gris); font-size: 1rem; font-weight: 400; text-align: left; }
     .home-search:hover { transform: none; box-shadow: 0 2px 0 #D7C79A; }
-    .home-search .i { width: 1.3rem; height: 1.3rem; flex: none; }
+    .home-search .i { width: 1.3rem; height: 1.3rem; flex: none; color: var(--salvia-fuerte); }
     .home-search input { border: 0; outline: 0; padding: 0; background: transparent; flex: 1; min-width: 0; font-size: 16px; color: var(--tinta); }
     .remember { margin-bottom: 18px; background: white; border: 1.5px solid #EAD9A3; border-radius: 6px 22px 6px 22px; overflow: hidden; box-shadow: 0 10px 22px -14px rgba(58,31,61,.5); }
     .remember .rem-media img, .remember .rem-media video { display: block; width: 100%; max-height: 220px; object-fit: cover; }
@@ -578,12 +614,12 @@
     .remember .rem-btns { display: flex; gap: 8px; margin-top: 12px; }
     .remember .rem-btns button { min-height: 44px; border-radius: 999px; background: white; color: var(--salvia-hover); border: 1.5px solid var(--azul-calma); font-weight: 600; }
     .home-grid.actions { grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 8px; }
-    .home-grid.actions .tile { flex-direction: column; gap: 6px; min-height: 84px; border-radius: 22px; font-size: 0.98em; font-weight: 600; background: white; color: var(--salvia-hover); border: 1.5px solid var(--azul-calma); box-shadow: 0 2px 0 #E6DAB8; }
+    .home-grid.actions .tile { flex-direction: column; gap: 6px; min-height: 84px; border-radius: 24px; font-size: 0.98em; font-weight: 700; background: white; color: #5A2E1C; border: 0; box-shadow: 0 3px 10px -6px rgba(90,46,28,.45); }
     .home-grid.actions .tile .big-ico { font-size: 1em; display: block; line-height: 0; }
-    .home-grid.actions .tile .i { color: var(--salvia); }
-    .home-grid.actions .tile.big-voice { grid-column: 1 / -1; flex-direction: row; justify-content: flex-start; gap: 14px; min-height: 76px; padding: 14px 20px; border: 0; background: var(--oro); color: #2e1a30; font-size: 1.25rem; box-shadow: 0 6px 0 var(--oro-sombra); text-align: left; }
-    .home-grid.actions .tile.big-voice:hover { background: #EDB83A; }
-    .home-grid.actions .tile.big-voice .i { width: 2rem; height: 2rem; color: #2e1a30; }
+    .home-grid.actions .tile .i { color: var(--verde); }
+    .home-grid.actions .tile.big-voice { grid-column: 1 / -1; flex-direction: row; justify-content: flex-start; gap: 14px; min-height: 76px; padding: 14px 20px; border: 0; background: var(--verde); color: #fff; font-size: 1.25rem; font-weight: 800; box-shadow: 0 6px 0 var(--verde-sombra); text-align: left; }
+    .home-grid.actions .tile.big-voice:hover { background: #6C9A61; }
+    .home-grid.actions .tile.big-voice .i { width: 2rem; height: 2rem; color: #fff; }
     .home-grid.actions .tile.big-voice small { display: block; font: 400 0.8rem system-ui, sans-serif; opacity: .85; }
     .home-grid.actions .tile .i { width: 1.7rem; height: 1.7rem; }
     .home-grid.actions .tile.on { outline: 3px solid var(--oro); outline-offset: 2px; }
@@ -592,7 +628,7 @@
     .home-more-t { margin: 6px 2px 8px; color: var(--gris); font-size: 0.95rem; font-weight: 600; }
     .home-more { display: block; margin: 8px auto 16px; background: none; border: 0; flex: none; color: var(--gris); text-decoration: underline; text-underline-offset: 3px; font-weight: 400; font-size: 0.95rem; min-height: 44px; cursor: pointer; }
     .upload-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 16px; }
-    .upload-row .tile { flex-direction: column; gap: 4px; min-height: 68px; padding: 8px 4px; border-radius: 18px; background: var(--salvia-claro); color: var(--salvia-hover); border: 1.5px dashed var(--salvia); font-size: 0.92em; font-weight: 600; text-align: center; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+    .upload-row .tile { flex-direction: column; gap: 4px; min-height: 68px; padding: 8px 4px; border-radius: 18px; background: transparent; color: #7A4A33; border: 2px dashed #D7B98F; font-size: 0.92em; font-weight: 600; text-align: center; cursor: pointer; display: flex; align-items: center; justify-content: center; }
     .upload-row .i { width: 1.5rem; height: 1.5rem; }
 
     @media (min-width: 700px) {
@@ -671,6 +707,13 @@
           <label for="authName">Nombre</label>
           <input type="text" id="authName" autocomplete="name" maxlength="80">
         </div>
+        <div class="form-group" id="birthGroup" style="display:none;">
+          <label for="authBirth">Fecha de nacimiento</label>
+          <input type="date" id="authBirth">
+          <label for="authBirthPlace" style="margin-top:8px;display:block">Lugar de nacimiento</label>
+          <input type="text" id="authBirthPlace" maxlength="120" placeholder="Ej: Sevilla">
+          <div class="hint">Así sabré qué edad tenías en cada recuerdo.</div>
+        </div>
         <div class="form-group">
           <label for="authEmail">Correo electrónico</label>
           <input type="email" id="authEmail" autocomplete="email" required>
@@ -703,8 +746,17 @@
     <div id="message"></div>
 
     <div id="viewHome" class="card">
-      <h2 class="home-hello" id="homeHello">Hola</h2>
-      <p class="home-sub">Tus recuerdos, bien guardados.</p>
+      <div class="home-hero"><svg viewBox="0 0 360 190" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+          <circle cx="300" cy="46" r="20" fill="#FFF7D6"/><circle cx="300" cy="46" r="34" fill="#FFF7D6" opacity=".4"/>
+          <g fill="#fff" opacity=".9"><ellipse cx="70" cy="62" rx="30" ry="9"/><ellipse cx="92" cy="55" rx="20" ry="9"/><ellipse cx="215" cy="40" rx="26" ry="8"/><ellipse cx="234" cy="34" rx="16" ry="8"/></g>
+          <path d="M-10 150 Q70 112 160 142 T370 128 V190 H-10Z" fill="#A9CF98"/>
+          <path d="M-10 168 Q90 134 190 160 T370 150 V190 H-10Z" fill="#7FB070"/>
+          <rect x="268" y="120" width="7" height="34" rx="3" fill="#8B5A3C"/><circle cx="271" cy="112" r="24" fill="#5F8A55"/><circle cx="256" cy="124" r="16" fill="#6F9C62"/><circle cx="288" cy="124" r="15" fill="#6F9C62"/>
+          <g stroke="#4E7A45" stroke-width="2" stroke-linecap="round"><path d="M40 190v-26M72 190v-22M118 190v-28M160 190v-20M206 190v-26M236 190v-18"/></g>
+          <circle cx="40" cy="162" r="6" fill="#F4B6A6"/><circle cx="72" cy="166" r="5" fill="#FFE08A"/><circle cx="118" cy="160" r="6.5" fill="#F4B6A6"/><circle cx="160" cy="168" r="5" fill="#fff"/><circle cx="206" cy="162" r="6" fill="#FFE08A"/><circle cx="236" cy="170" r="5" fill="#F4B6A6"/>
+        </svg>
+        <div class="hero-text"><h2 class="home-hello" id="homeHello">Hola</h2>
+        <p class="home-sub">Tus recuerdos, bien guardados.</p></div></div>
       <label class="home-search" for="homeSearch"><svg class="i"><use href="#i-search"/></svg><input type="search" id="homeSearch" placeholder="Buscar en tus recuerdos" autocomplete="off" enterkeyhint="search"></label>
       <div class="profile-nudge hidden" id="profNudge"><span>Completa tu perfil: falta tu fecha o tu lugar de nacimiento. Así puedo decirte qué edad tenías en cada recuerdo.</span><button type="button" id="profNudgeBtn">Completar</button></div>
       <div class="remember hidden" id="remember"></div>
@@ -714,7 +766,7 @@
         <label class="big-btn big-media tile"><span class="big-ico"><svg class="i"><use href="#i-camera"/></svg></span><span>Hacer foto</span><input type="file" class="js-photo" accept="image/*" capture="environment" hidden></label>
         <label class="big-btn big-media tile"><span class="big-ico"><svg class="i"><use href="#i-video"/></svg></span><span>Grabar vídeo</span><input type="file" class="js-video" accept="video/*" capture="environment" hidden></label>
       </div>
-      <p class="home-more-t">Subir un archivo del móvil</p>
+      <p class="home-more-t">Subir un archivo</p>
       <div class="upload-row" id="uploadRow">
         <label class="big-btn big-media tile"><svg class="i"><use href="#i-image"/></svg><span>Foto</span><input type="file" class="js-photo" accept="image/*" hidden></label>
         <label class="big-btn big-media tile"><svg class="i"><use href="#i-video"/></svg><span>Vídeo</span><input type="file" class="js-video" accept="video/*" hidden></label>
@@ -779,6 +831,7 @@
       <h2 style="color: var(--salvia-hover);" id="profName">Tu perfil</h2>
       <div class="hint" id="profEmail"></div>
       <div id="profMsg"></div>
+      <div id="profTodo"></div>
       <div class="pw-box">
         <h3>Tu nombre</h3>
         <input type="text" id="profNameInput" maxlength="80" autocomplete="name">
@@ -914,7 +967,7 @@
       const dl = document.createElement('datalist'); dl.id = 'placesList';
       dl.innerHTML = PLACES.map(p => `<option value="${p.f.replace(/"/g, '&quot;')}"></option>`).join('');
       document.body.appendChild(dl);
-      ['rvPlace', 'profPlace', 'onbPlace', 'tlBirthPlace', 'sfPlace'].forEach(id => { const e = document.getElementById(id); if (e) e.setAttribute('list', 'placesList'); });
+      ['rvPlace', 'profPlace', 'authBirthPlace', 'tlBirthPlace', 'sfPlace'].forEach(id => { const e = document.getElementById(id); if (e) e.setAttribute('list', 'placesList'); });
     }).catch(() => {});
     function completePlace(v) {
       const t = String(v || '').trim();
@@ -933,8 +986,13 @@
     // Un recuerdo ya ocurrió: ninguna fecha puede ser posterior a hoy (hora local del usuario)
     const todayStr = () => { const d = new Date(); return new Date(d - d.getTimezoneOffset() * 60000).toISOString().slice(0, 10); };
     const isFuture = (v) => !!v && v > todayStr();
+    // Edad máxima: 120 años desde el nacimiento
+    const MAX_AGE = 120;
+    const lifeLimit = () => birthDate ? (Number(birthDate.slice(0, 4)) + MAX_AGE) + birthDate.slice(4) : '';
+    const beyondLife = (v) => !!v && !!lifeLimit() && v > lifeLimit();
+    const BEYOND_MSG = 'Esa fecha supera los 120 años desde tu nacimiento.';
     const FUTURE_MSG = 'Un recuerdo no puede tener una fecha futura. Elige hoy o un día anterior.';
-    function limitDates() { ['date', 'rvDate', 'rvDateEnd'].forEach(id => { const el = document.getElementById(id); if (el) el.max = todayStr(); }); }
+    function limitDates() { ['date', 'rvDate', 'rvDateEnd'].forEach(id => { const el = document.getElementById(id); if (el) el.max = (lifeLimit() && lifeLimit() < todayStr()) ? lifeLimit() : todayStr(); }); }
 
     // ===== ELEMENTOS DEL DOM =====
     const form = document.getElementById('memoryForm');
@@ -1002,6 +1060,7 @@
       try {
         const r = await (await fetch(`${API_URL}/profile`)).json();
         birthDate = (r.success && r.data.birth_date) || '';
+        limitDates();
         const n = document.getElementById('profNudge');
         if (n && r.success) n.classList.toggle('hidden', !!(r.data.birth_date && r.data.birth_place));
       } catch (e) {}
@@ -1089,12 +1148,11 @@
       const vis = (m.media || []).find(x => x.kind === 'image');
       const age = ageLabel(m.date_happened);
       const when = new Date(m.date_happened + 'T00:00:00').toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' });
-      const txt = (m.content || '').trim();
-      box.innerHTML = `${vis ? `<div class="rem-media"><img src="${esc(vis.url)}" alt=""></div>` : ''}
+      const scenes = ['sea', 'garden', 'dusk'];
+      box.innerHTML = `${vis ? `<div class="rem-media"><img src="${esc(vis.url)}" alt=""></div>` : `<div class="scene rem-scene ${scenes[m.id % 3]}"></div>`}
         <div class="rem-body"><div class="rem-q">¿Te acuerdas de este día?</div>
         <div class="rem-t">${esc(m.title)}</div>
         <div class="rem-m">${esc(when)}${age ? ' · ' + esc(age) : ''}</div>
-        ${txt ? `<div class="rem-x">${esc(txt.length > 140 ? txt.slice(0, 140).trim() + '…' : txt)}</div>` : ''}
         <div class="rem-btns"><button type="button" id="remOpen">Ver recuerdo</button>${happy.length > 1 ? '<button type="button" id="remAgain">Otro</button>' : ''}</div></div>`;
       box.classList.remove('hidden');
       document.getElementById('remOpen').onclick = () => { window.goTo('mem'); memSearch.value = ''; currentMemoryId = null; selectMemory(m.id); };
@@ -1321,6 +1379,7 @@
       e.preventDefault();
       limitDates();
       if (isFuture(dateInput.value)) return showMessage(FUTURE_MSG, 'error');
+      if (beyondLife(dateInput.value)) return showMessage(BEYOND_MSG, 'error');
       const data = {
         title: titleInput.value,
         content: contentInput.value,
@@ -1653,6 +1712,7 @@
     rv('rvConfirm').onclick = async () => {
       limitDates();
       if (isFuture(rv('rvDate').value) || isFuture(rv('rvDateEnd').value)) { rv('reviewMsg').innerHTML = `<div class="error">${FUTURE_MSG}</div>`; return; }
+      if (beyondLife(rv('rvDate').value) || beyondLife(rv('rvDateEnd').value)) { rv('reviewMsg').innerHTML = `<div class="error">${BEYOND_MSG}</div>`; return; }
       const people = [...rv('rvPeople').children].map(row => {
         const [n, r] = row.querySelectorAll('input');
         return { name: n.value, relation: r.value };
@@ -1709,6 +1769,7 @@
       document.getElementById('tabLogin').classList.toggle('active', !reg);
       document.getElementById('tabRegister').classList.toggle('active', reg);
       document.getElementById('nameGroup').style.display = reg ? '' : 'none';
+      document.getElementById('birthGroup').style.display = reg ? '' : 'none';
       document.getElementById('pwHint').style.display = reg ? '' : 'none';
       document.getElementById('regMeter').style.display = reg ? '' : 'none';
       document.getElementById('repeatGroup').style.display = reg ? '' : 'none';
@@ -1741,7 +1802,19 @@
         const r = await (await fetch(`${API_URL}/profile`)).json();
         if (r.success) { document.getElementById('profBirth').value = r.data.birth_date || ''; document.getElementById('profPlace').value = r.data.birth_place || ''; }
       } catch (e) {}
+      drawProfTodo();
     };
+    // Aviso arriba del perfil con lo que falta (nombre, fecha y lugar de nacimiento)
+    function drawProfTodo() {
+      const miss = [];
+      if (!currentUser || !String(currentUser.name || '').trim()) miss.push('Tu nombre');
+      if (!document.getElementById('profBirth').value) miss.push('Tu fecha de nacimiento');
+      if (!document.getElementById('profPlace').value.trim()) miss.push('Tu lugar de nacimiento');
+      document.getElementById('profTodo').innerHTML = miss.length
+        ? `<div class="profile-todo"><b>Te falta completar:</b><ul>${miss.map(x => `<li>${x}</li>`).join('')}</ul></div>`
+        : '<div class="profile-ok">Perfil completo</div>';
+      const n = document.getElementById('profNudge'); if (n) n.classList.toggle('hidden', !miss.some(x => /nacimiento/.test(x)));
+    }
     document.getElementById('onbAgain').onclick = () => window.startOnboarding();
     document.getElementById('profSave').onclick = async () => {
       const box = document.getElementById('profMsg');
@@ -1750,7 +1823,7 @@
           method: 'PUT', headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ birth_date: document.getElementById('profBirth').value, birth_place: completePlace(document.getElementById('profPlace').value) })
         })).json();
-        if (r.success) { birthDate = document.getElementById('profBirth').value; renderMemories(); }
+        if (r.success) { birthDate = document.getElementById('profBirth').value; renderMemories(); drawProfTodo(); }
         box.innerHTML = r.success ? '<div class="success">Perfil guardado</div>' : `<div class="error">${esc(r.error)}</div>`;
       } catch (e) { box.innerHTML = '<div class="error">No se pudo guardar. Inténtalo de nuevo.</div>'; }
       setTimeout(() => { box.innerHTML = ''; }, 3000);
@@ -1761,7 +1834,7 @@
     document.getElementById('profNameSave').onclick = async () => {
       try {
         const r = await (await fetch(`${API_URL}/auth/name`, { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: document.getElementById('profNameInput').value }) })).json();
-        if (r.success) { currentUser = r.data; showUserData(r.data); flash('profMsg', '<div class="success">Nombre actualizado</div>'); }
+        if (r.success) { currentUser = r.data; showUserData(r.data); drawProfTodo(); flash('profMsg', '<div class="success">Nombre actualizado</div>'); }
         else flash('profMsg', `<div class="error">${esc(r.error)}</div>`);
       } catch (e) { flash('profMsg', '<div class="error">No se pudo guardar. Inténtalo de nuevo.</div>'); }
     };
@@ -1796,6 +1869,10 @@
       };
       if (authMode === 'register') {
         body.name = document.getElementById('authName').value;
+        body.birth_date = document.getElementById('authBirth').value;
+        body.birth_place = completePlace(document.getElementById('authBirthPlace').value);
+        if (!body.birth_date) { document.getElementById('authMessage').innerHTML = '<div class="error">Indica tu fecha de nacimiento</div>'; return; }
+        if (isFuture(body.birth_date)) { document.getElementById('authMessage').innerHTML = '<div class="error">La fecha de nacimiento no puede ser futura</div>'; return; }
         if (document.getElementById('authPassword2').value !== body.password) {
           document.getElementById('authMessage').innerHTML = '<div class="error">Las contraseñas no coinciden</div>';
           return;
@@ -1912,48 +1989,19 @@
         ['clock', 'Mira toda tu vida', 'Tus recuerdos se colocan en una línea del tiempo, con lo que pasaba en el mundo y cuántos años tenías.'],
         ['sparkle', 'Compártelo con quien quieras', 'La app escribe la historia de tu vida y puedes enviarla con un enlace, con fotos y vídeos incluidos.']
       ];
-      const dots = (n) => `<div class="onb-dots">${[0, 1, 2, 3, 4].map(i => `<span class="${i === n ? 'on' : ''}"></span>`).join('')}</div>`;
+      const dots = (n) => `<div class="onb-dots">${[0, 1, 2, 3].map(i => `<span class="${i === n ? 'on' : ''}"></span>`).join('')}</div>`;
       const skip = '<button type="button" class="onb-skip" id="onbSkip">Saltar la bienvenida</button>';
       function close() { root.classList.add('hidden'); try { localStorage.setItem(doneKey(), '1'); } catch (e) {} }
       function intro(i) {
         const [ico, t, d] = INTRO[i];
         body.innerHTML = `<div class="onb-art">${ic(ico)}</div><h2>${t}</h2><p>${d}</p>${dots(i)}
           <button type="button" class="btn-primary" id="onbNext">Siguiente</button>${skip}`;
-        document.getElementById('onbNext').onclick = () => (i < INTRO.length - 1 ? intro(i + 1) : data());
+        document.getElementById('onbNext').onclick = () => (i < INTRO.length - 1 ? intro(i + 1) : first());
         document.getElementById('onbSkip').onclick = close;
-      }
-      function data() {
-        body.innerHTML = `<div class="onb-art">${ic('user')}</div><h2>Cuéntame un poco de ti</h2>
-          <p>Con tu fecha de nacimiento sabré qué edad tenías en cada recuerdo.</p>
-          <div id="onbMsg"></div>
-          <label for="onbName">¿Cómo quieres que te llame?</label><input id="onbName" maxlength="80" autocomplete="name" value="${esc(currentUser ? currentUser.name : '')}">
-          <label for="onbBirth">Fecha de nacimiento</label><input type="date" id="onbBirth" max="${todayStr()}">
-          <label for="onbPlace">Lugar de nacimiento</label><input id="onbPlace" maxlength="120" placeholder="Ej: Sevilla">
-          ${dots(3)}
-          <button type="button" class="btn-primary" id="onbSave">Guardar y seguir</button>
-          <button type="button" class="onb-skip" id="onbLater">Ahora no, lo haré luego en Perfil</button>`;
-        document.getElementById('onbLater').onclick = first;
-        document.getElementById('onbSave').onclick = async () => {
-          const msg = document.getElementById('onbMsg'), name = document.getElementById('onbName').value.trim();
-          const birth = document.getElementById('onbBirth').value, place = document.getElementById('onbPlace').value;
-          if (isFuture(birth)) { msg.innerHTML = '<div class="error">La fecha de nacimiento no puede ser futura.</div>'; return; }
-          try {
-            if (name && currentUser && name !== currentUser.name) {
-              const r = await (await fetch(`${API_URL}/auth/name`, { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name }) })).json();
-              if (r.success) { currentUser = r.data; showUserData(r.data); }
-            }
-            if (birth || place) {
-              const r = await (await fetch(`${API_URL}/profile`, { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ birth_date: birth, birth_place: completePlace(place) }) })).json();
-              if (!r.success) { msg.innerHTML = `<div class="error">${esc(r.error)}</div>`; return; }
-              birthDate = birth; renderMemories();
-            }
-            first();
-          } catch (e) { msg.innerHTML = '<div class="error">No se pudo guardar. Puedes seguir y completarlo luego en Perfil.</div>'; }
-        };
       }
       function first() {
         body.innerHTML = `<div class="onb-art">${ic('pen')}</div><h2>Empecemos con un recuerdo</h2>
-          <p>Elige cómo quieres contar el primero. Puede ser algo pequeño.</p>${dots(4)}
+          <p>Elige cómo quieres contar el primero. Puede ser algo pequeño.</p>${dots(3)}
           <button type="button" class="btn-primary" id="onbVoice">${ic('mic')} Contar con mi voz</button>
           <button type="button" class="btn-secondary" id="onbWrite">${ic('pen')} Escribirlo</button>
           <button type="button" class="onb-skip" id="onbEnd">Lo haré más tarde</button>`;
@@ -2020,6 +2068,7 @@
         const first = years.length ? Math.min(...years) : new Date().getFullYear() - 10;
         startMs = Date.UTC(first, 0, 1);
         endMs = Date.UTC(new Date(today).getUTCFullYear() + 1, 0, 1);
+        if (profile && profile.birth_date) endMs = Math.min(endMs, Date.UTC(+profile.birth_date.slice(0, 4) + 120 + 1, 0, 1));
       }
 
       function render() {

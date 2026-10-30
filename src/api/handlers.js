@@ -40,6 +40,19 @@ function futureDate(v) {
   return v > lim;
 }
 
+// Edad máxima: 120 años desde el nacimiento. Ningún recuerdo puede quedar más allá de esa fecha.
+const MAX_AGE = 120;
+function lifeLimit(userId) {
+  const u = db.prepare('SELECT birth_date FROM users WHERE id = ?').get(userId);
+  if (!u || !u.birth_date) return null;
+  return (Number(u.birth_date.slice(0, 4)) + MAX_AGE) + u.birth_date.slice(4);
+}
+function beyondLife(userId, ...dates) {
+  const lim = lifeLimit(userId);
+  return !!lim && dates.some(d => d && d > lim);
+}
+const BEYOND_MSG = 'Esa fecha supera los 120 años desde tu nacimiento';
+
 function fail(res, status, error) {
   return res.status(status).json({ success: false, error });
 }
@@ -61,6 +74,7 @@ function createMemory(req, res) {
 
     if (!validDate(b.date_happened) || !validDate(b.date_end)) return fail(res, 400, 'Fecha no válida');
     if (futureDate(b.date_happened) || futureDate(b.date_end)) return fail(res, 400, 'Un recuerdo no puede tener una fecha futura');
+    if (beyondLife(req.user.id, b.date_happened, b.date_end)) return fail(res, 400, BEYOND_MSG);
     const tags = Array.isArray(b.tags) ? b.tags.map(t => clean(t, 40)).filter(Boolean).slice(0, 30) : [];
     const people = normalizePeople(b.people) || [];
     const mediaIds = Array.isArray(b.media_ids) ? b.media_ids.map(Number).filter(Number.isInteger) : [];
@@ -138,6 +152,7 @@ function updateMemory(req, res) {
     const b = req.body;
     if (!validDate(b.date_happened) || !validDate(b.date_end)) return fail(res, 400, 'Fecha no válida');
     if (futureDate(b.date_happened) || futureDate(b.date_end)) return fail(res, 400, 'Un recuerdo no puede tener una fecha futura');
+    if (beyondLife(req.user.id, b.date_happened, b.date_end)) return fail(res, 400, BEYOND_MSG);
 
     const sets = [];
     const vals = [];

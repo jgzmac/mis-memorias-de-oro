@@ -29,6 +29,11 @@ function updateProfile(req, res) {
   const birth = clean(b.birth_date, 10);
   if (birth && !isRealDate(birth)) return fail(res, 'La fecha de nacimiento no es válida');
   if (birth && birth > new Date().toISOString().slice(0, 10)) return fail(res, 'La fecha de nacimiento no puede ser futura');
+  if (birth) {
+    const lim = (Number(birth.slice(0, 4)) + 120) + birth.slice(4);
+    const bad = db.prepare('SELECT COUNT(*) AS c FROM memories WHERE user_id = ? AND (date_happened > ? OR date_end > ?)').get(req.user.id, lim, lim).c;
+    if (bad) return fail(res, 'Tienes recuerdos más allá de los 120 años desde esa fecha de nacimiento');
+  }
   db.prepare('UPDATE users SET birth_date = ?, birth_place = ? WHERE id = ?')
     .run(birth || null, clean(b.birth_place, 120) || null, req.user.id);
   getProfile(req, res);

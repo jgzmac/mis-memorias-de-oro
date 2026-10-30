@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Maquetas 2 de Inicio - Mis Memorias de Oro</title>
+<style>
+  :root { color-scheme: light; }
+  * { box-sizing: border-box; margin: 0; }
+  body { font-family: "Nunito", ui-rounded, "SF Pro Rounded", "Segoe UI", system-ui, sans-serif; background: #ECE6DC; color: #3B2A20; padding: 28px 16px 48px; }
+  h1 { font-size: 1.15rem; text-align: center; font-weight: 700; }
+  .lead { text-align: center; max-width: 640px; margin: 8px auto 28px; color: #6a5648; line-height: 1.5; font-size: .95rem; }
+  .stage { display: flex; flex-wrap: wrap; gap: 36px; justify-content: center; align-items: flex-start; }
+  figure { display: grid; gap: 12px; justify-items: center; }
+  figcaption { max-width: 360px; text-align: center; font-size: .9rem; line-height: 1.45; color: #5a4a3e; }
+  figcaption b { display: block; font-size: 1rem; color: #3B2A20; margin-bottom: 2px; }
+  .phone { width: 372px; height: 800px; border-radius: 38px; overflow: hidden; position: relative; border: 9px solid #2a1f19; box-shadow: 0 18px 40px rgba(40,25,15,.28); display: flex; flex-direction: column; }
+  .scroll { flex: 1; overflow: hidden; position: relative; }
+  svg.i { width: 1em; height: 1em; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+  button { font-family: inherit; }
+
+  /* ---------- C · HOGAR ---------- */
+  .C { background: #FBF4E8; color: #3B2A20; }
+  .C .hero { position: relative; height: 250px; background: linear-gradient(#FFD9A8 0%, #FFC48C 55%, #F7A978 100%); overflow: hidden; }
+  .C .sun { position: absolute; width: 90px; height: 90px; border-radius: 50%; background: #FFF1C2; right: 34px; top: 40px; box-shadow: 0 0 0 20px rgba(255,241,194,.35), 0 0 0 44px rgba(255,241,194,.18); }
+  .C .hill1 { position: absolute; left: -20%; right: -20%; bottom: -50px; height: 130px; background: #8FA77A; border-radius: 50%; }
+  .C .hill2 { position: absolute; left: 10%; right: -40%; bottom: -70px; height: 130px; background: #6F8A62; border-radius: 50%; }
+  .C .house { position: absolute; left: 34px; bottom: 54px; width: 64px; height: 44px; background: #F3E2C7; border-radius: 4px; }
+  .C .house::before { content: ""; position: absolute; left: -8px; right: -8px; top: -26px; height: 28px; background: #C8624A; clip-path: polygon(50% 0, 100% 100%, 0 100%); }
+  .C .house::after { content: ""; position: absolute; left: 26px; bottom: 0; width: 13px; height: 22px; background: #8B5A3C; border-radius: 6px 6px 0 0; }
+  .C .hello { position: absolute; left: 22px; top: 22px; right: 22px; }
+  .C .hello h2 { font-size: 1.7rem; line-height: 1.1; font-weight: 800; color: #5A2E1C; }
+  .C .hello p { margin-top: 4px; font-weight: 600; color: #7A4A33; }
+  .C .sheet { position: relative; margin-top: -26px; background: #FBF4E8; border-radius: 30px 30px 0 0; padding: 18px 18px 8px; }
+  .C .find { display: flex; align-items: center; gap: 10px; background: #fff; border-radius: 999px; padding: 12px 16px; color: #8a7565; font-size: .98rem; box-shadow: 0 3px 10px -4px rgba(90,46,28,.25); }
+  .C .find .i { font-size: 1.2rem; color: #C8624A; }
+  .C .mem { margin-top: 14px; display: flex; gap: 12px; background: #fff; border-radius: 24px; padding: 10px; box-shadow: 0 6px 16px -10px rgba(90,46,28,.45); }
+  .C .mem .pic { width: 96px; flex: none; border-radius: 18px; position: relative; overflow: hidden; background: linear-gradient(#F7C98B, #F4A97E 60%, #E98E7A); }
+  .C .mem .pic::before { content: ""; position: absolute; width: 26px; height: 26px; border-radius: 50%; background: #FFE9A8; right: 16px; top: 16px; }
+  .C .mem .pic::after { content: ""; position: absolute; left: -10%; right: -10%; bottom: 0; height: 34%; background: #4E8DB3; border-radius: 50% 50% 0 0; }
+  .C .mem .tx { padding: 4px 4px 2px 0; display: grid; gap: 3px; align-content: center; }
+  .C .mem .q { font-weight: 800; color: #C8624A; font-size: .98rem; }
+  .C .mem .t { font-weight: 800; font-size: 1.08rem; }
+  .C .mem .m { font-size: .82rem; color: #8a7565; }
+  .C .mem .go { margin-top: 4px; justify-self: start; border: 0; background: #F6E3C8; color: #7A3E26; font-weight: 700; padding: 7px 14px; border-radius: 999px; font-size: .88rem; }
+  .C .big { margin-top: 14px; width: 100%; border: 0; display: flex; align-items: center; gap: 14px; padding: 16px 20px; border-radius: 26px; background: #C8624A; color: #fff; font-size: 1.2rem; font-weight: 800; text-align: left; box-shadow: 0 6px 0 #9E4733; }
+  .C .big .i { font-size: 2rem; }
+  .C .big small { display: block; font-weight: 600; font-size: .82rem; opacity: .92; }
+  .C .three { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-top: 14px; }
+  .C .o { display: grid; justify-items: center; gap: 6px; padding: 12px 4px; border-radius: 22px; background: #fff; font-weight: 700; font-size: .92rem; color: #5A2E1C; box-shadow: 0 3px 10px -6px rgba(90,46,28,.4); border: 0; }
+  .C .o .i { font-size: 1.6rem; color: #6F8A62; }
+  .C .up { margin-top: 12px; display: flex; align-items: center; justify-content: center; gap: 8px; color: #7A4A33; font-weight: 700; font-size: .92rem; }
+  .C .upr { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-top: 8px; }
+  .C .upr div { display: grid; justify-items: center; gap: 3px; padding: 9px 4px; border-radius: 18px; border: 2px dashed #D7B98F; color: #7A4A33; font-weight: 700; font-size: .85rem; }
+  .C nav { display: grid; grid-template-columns: repeat(5,1fr); background: #fff; padding: 8px 6px 14px; box-shadow: 0 -6px 16px -10px rgba(90,46,28,.35); }
+  .C nav a { display: grid; justify-items: center; gap: 2px; padding: 4px 0; color: #8a7565; font-size: .72rem; font-weight: 700; }
+  .C nav a .i { font-size: 1.45rem; }
+  .C nav a.on { color: #C8624A; }
+  .C nav a.on .i { background: #FBE3D8; padding: 5px 14px; width: 54px; height: 32px; border-radius: 999px; }
+
+  /* ---------- D · ATARDECER ---------- */
+  .D { background: linear-gradient(#FFF1E6 0%, #FDE0D2 60%, #F8CDBF 100%); color: #3A2A33; }
+  .D .scroll { padding: 20px 18px 8px; }
+  .D .top { display: flex; align-items: center; gap: 12px; }
+  .D .av { width: 50px; height: 50px; border-radius: 50%; background: #2F6F73; color: #fff; display: grid; place-items: center; font-weight: 800; font-size: 1.25rem; box-shadow: 0 0 0 4px #fff; }
+  .D .top h2 { font-size: 1.45rem; font-weight: 800; line-height: 1.1; }
+  .D .top p { color: #7b5f69; font-weight: 600; font-size: .95rem; }
+  .D .find { margin-top: 16px; display: flex; align-items: center; gap: 10px; background: rgba(255,255,255,.75); border-radius: 18px; padding: 13px 16px; color: #8c7580; }
+  .D .find .i { color: #2F6F73; font-size: 1.2rem; }
+  .D .card { margin-top: 14px; border-radius: 28px; overflow: hidden; background: #fff; box-shadow: 0 14px 26px -16px rgba(80,40,50,.55); }
+  .D .card .img { height: 170px; position: relative; background: linear-gradient(#CFE6C8, #9CC79A); overflow: hidden; }
+  .D .card .img::before { content: ""; position: absolute; width: 50px; height: 50px; border-radius: 50%; background: #FFF3B0; left: 20px; top: 20px; box-shadow: 0 0 0 14px rgba(255,243,176,.4); }
+  .D .card .img::after { content: ""; position: absolute; left: -10%; width: 70%; bottom: -40px; height: 110px; background: #6FA877; border-radius: 50%; box-shadow: 150px 14px 0 -4px #4F8B5E; }
+  .D .card .tag { position: absolute; left: 14px; bottom: 14px; z-index: 2; background: rgba(255,255,255,.92); color: #A94A44; font-weight: 800; font-size: .88rem; padding: 6px 12px; border-radius: 999px; }
+  .D .card .body { padding: 12px 16px 14px; display: grid; gap: 2px; }
+  .D .card .t { font-weight: 800; font-size: 1.15rem; }
+  .D .card .m { font-size: .83rem; color: #8c7580; }
+  .D .card .x { margin-top: 6px; font-style: italic; line-height: 1.4; }
+  .D .acts { margin-top: 14px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .D .a { display: flex; align-items: center; gap: 10px; padding: 14px; border: 0; border-radius: 22px; font-weight: 800; font-size: 1.02rem; color: #fff; text-align: left; line-height: 1.1; }
+  .D .a .i { font-size: 1.6rem; flex: none; }
+  .D .a1 { background: #2F6F73; grid-column: 1 / -1; padding: 18px; font-size: 1.15rem; border-radius: 26px; }
+  .D .a2 { background: #E0825A; } .D .a3 { background: #A94A44; } .D .a4 { background: #D9A441; color: #3A2A33; }
+  .D .up { margin-top: 12px; display: grid; grid-template-columns: auto 1fr 1fr 1fr; gap: 8px; align-items: center; font-weight: 800; font-size: .86rem; color: #7b5f69; }
+  .D .up span.p { background: rgba(255,255,255,.8); border-radius: 999px; padding: 9px 4px; display: flex; justify-content: center; align-items: center; gap: 4px; color: #2F6F73; }
+  .D nav { display: grid; grid-template-columns: repeat(5,1fr); background: rgba(255,255,255,.92); padding: 8px 6px 14px; margin: 0 12px 10px; border-radius: 26px; box-shadow: 0 8px 20px -10px rgba(80,40,50,.5); }
+  .D nav a { display: grid; justify-items: center; gap: 2px; padding: 4px 0; color: #8c7580; font-size: .72rem; font-weight: 700; }
+  .D nav a .i { font-size: 1.45rem; }
+  .D nav a.on { color: #2F6F73; }
+  .D nav a.on .i { background: #D5ECEA; padding: 5px 14px; width: 54px; height: 32px; border-radius: 999px; }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="mic" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></symbol>
+  <symbol id="pen" viewBox="0 0 24 24"><path d="M4 20l1-4L16 5l3 3L8 19z"/><path d="M14 7l3 3"/></symbol>
+  <symbol id="cam" viewBox="0 0 24 24"><path d="M4 8h3l2-3h6l2 3h3a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="13" r="3.8"/></symbol>
+  <symbol id="vid" viewBox="0 0 24 24"><rect x="3" y="6" width="13" height="12" rx="2"/><path d="M16 10.5l5-3v9l-5-3z"/></symbol>
+  <symbol id="img" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="1.6"/><path d="M4 18l5-5 4 4 3-3 4 4"/></symbol>
+  <symbol id="wave" viewBox="0 0 24 24"><path d="M4 12v0M8 8v8M12 5v14M16 9v6M20 12v0"/></symbol>
+  <symbol id="home" viewBox="0 0 24 24"><path d="M4 11l8-7 8 7v9H4z"/><path d="M10 20v-6h4v6"/></symbol>
+  <symbol id="book" viewBox="0 0 24 24"><path d="M5 4h10a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3z"/><path d="M5 17a3 3 0 0 1 3-3h10"/></symbol>
+  <symbol id="clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7v5l3 2"/></symbol>
+  <symbol id="spark" viewBox="0 0 24 24"><path d="M12 3l2 5 5 2-5 2-2 5-2-5-5-2 5-2z"/></symbol>
+  <symbol id="user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20a8 8 0 0 1 16 0"/></symbol>
+  <symbol id="search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4 4"/></symbol>
+</svg>
+
+<h1>Dos propuestas más cálidas y cercanas</h1>
+<p class="lead">Tonos tierra, ilustraciones suaves en lugar de fotos genéricas, formas muy redondeadas y trato humano. Las dos mantienen la letra redondeada, el buscador, el recuerdo del día, los botones de subir a la vista y el aviso de perfil (este último, dentro de Perfil).</p>
+
+<div class="stage">
+
+<figure>
+  <div class="phone C">
+    <div class="scroll">
+      <div class="hero">
+        <div class="sun"></div><div class="hill1"></div><div class="hill2"></div><div class="house"></div>
+        <div class="hello"><h2>Buenas tardes, Ana</h2><p>Tu casa de recuerdos</p></div>
+      </div>
+      <div class="sheet">
+        <div class="find"><svg class="i"><use href="#search"/></svg>Buscar en tus recuerdos</div>
+        <div class="mem">
+          <div class="pic"></div>
+          <div class="tx"><div class="q">¿Te acuerdas de este día?</div><div class="t">Verano en Cádiz</div><div class="m">Julio de 2000 · Tenías 25 años</div><button class="go">Ver recuerdo</button></div>
+        </div>
+        <button class="big"><svg class="i"><use href="#mic"/></svg><span>Contar con mi voz<small>Habla y yo lo escribo</small></span></button>
+        <div class="three">
+          <button class="o"><svg class="i"><use href="#pen"/></svg>Escribir</button>
+          <button class="o"><svg class="i"><use href="#cam"/></svg>Hacer foto</button>
+          <button class="o"><svg class="i"><use href="#vid"/></svg>Grabar vídeo</button>
+        </div>
+        <div class="up">Subir un archivo</div>
+        <div class="upr"><div><svg class="i"><use href="#img"/></svg>Foto</div><div><svg class="i"><use href="#vid"/></svg>Vídeo</div><div><svg class="i"><use href="#wave"/></svg>Audio</div></div>
+      </div>
+    </div>
+    <nav>
+      <a class="on"><svg class="i"><use href="#home"/></svg>Inicio</a>
+      <a><svg class="i"><use href="#book"/></svg>Recuerdos</a>
+      <a><svg class="i"><use href="#clock"/></svg>Mi vida</a>
+      <a><svg class="i"><use href="#spark"/></svg>Resumen</a>
+      <a><svg class="i"><use href="#user"/></svg>Perfil</a>
+    </nav>
+  </div>
+  <figcaption><b>C · Hogar</b>Una escena de atardecer con tu casa y colinas abre la pantalla. Terracota, verde salvia y crema: colores de tierra y de hogar. El recuerdo del día es una tarjeta con foto a un lado y un botón único para voz.</figcaption>
+</figure>
+
+<figure>
+  <div class="phone D">
+    <div class="scroll">
+      <div class="top"><div class="av">A</div><div><h2>Hola, Ana</h2><p>¿Qué quieres recordar hoy?</p></div></div>
+      <div class="find"><svg class="i"><use href="#search"/></svg>Buscar en tus recuerdos</div>
+      <div class="card">
+        <div class="img"><span class="tag">¿Te acuerdas de este día?</span></div>
+        <div class="body"><div class="t">El huerto de la abuela</div><div class="m">Agosto de 1983 · Tenías 8 años</div><div class="x">«Recogíamos tomates por la mañana.»</div></div>
+      </div>
+      <div class="acts">
+        <button class="a a1"><svg class="i"><use href="#mic"/></svg>Contar con mi voz</button>
+        <button class="a a2"><svg class="i"><use href="#pen"/></svg>Escribir</button>
+        <button class="a a3"><svg class="i"><use href="#cam"/></svg>Hacer foto</button>
+        <button class="a a4" style="grid-column:1/-1"><svg class="i"><use href="#vid"/></svg>Grabar un vídeo</button>
+      </div>
+      <div class="up"><span>Subir</span><span class="p"><svg class="i"><use href="#img"/></svg>Foto</span><span class="p"><svg class="i"><use href="#vid"/></svg>Vídeo</span><span class="p"><svg class="i"><use href="#wave"/></svg>Audio</span></div>
+    </div>
+    <nav>
+      <a class="on"><svg class="i"><use href="#home"/></svg>Inicio</a>
+      <a><svg class="i"><use href="#book"/></svg>Recuerdos</a>
+      <a><svg class="i"><use href="#clock"/></svg>Mi vida</a>
+      <a><svg class="i"><use href="#spark"/></svg>Resumen</a>
+      <a><svg class="i"><use href="#user"/></svg>Perfil</a>
+    </nav>
+  </div>
+  <figcaption><b>D · Atardecer</b>Fondo melocotón con la tarjeta del recuerdo del día en grande, como lo primero que ves. Cada acción tiene su color cálido (verde azulado, coral, granate, mostaza) y el menú flota como una píldora.</figcaption>
+</figure>
+
+</div>
+</body>
+</html>
