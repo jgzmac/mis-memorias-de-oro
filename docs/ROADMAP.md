@@ -1,6 +1,6 @@
 # Hoja de ruta - Mis Memorias de Oro
 
-Actualizada: 2026-10-29. Orden propuesto (se puede cambiar).
+Actualizada: 2026-10-30. Orden propuesto (se puede cambiar).
 
 ## Hecho
 - Recuerdos manuales (crear, editar, borrar, lista), base de datos persistente
@@ -16,7 +16,11 @@ Actualizada: 2026-10-29. Orden propuesto (se puede cambiar).
 - Resumen de vida (B2): sección "Resumen" en el menú; 4 estilos positivos (amable, alegre, nostálgico-cálido, entusiasta); de toda la vida, un año o una persona; copiar y descargar. Redacción local con plantillas (gratis); proveedor intercambiable en `src/providers/summary.js`.
 - Filtros avanzados (año, tipo, lugar, persona) en Recuerdos y Línea de vida.
 - Presentación web para Dirección/patrocinadores: `docs/presentacion.html` (autocontenida, con demo de voz, línea de vida y resúmenes interactivos). También existe `docs/Mis-Memorias-de-Oro-presentacion.pptx`.
-- Onboarding (A0): en pausa, el usuario aún no lo tiene claro.
+- Onboarding (A0): hecho. 3 pantallas de presentación y "Empecemos con un recuerdo"; se puede saltar y volver a verlo desde Perfil. La fecha y el lugar de nacimiento se piden al crear la cuenta.
+- Compartir el resumen como web con enlace secreto (texto y fotos), desactivable. Estilos de resumen: amable, alegre, cálido, entusiasta y ejecutivo, con redacción narrativa.
+- Cámara directa (foto y vídeo), fecha futura bloqueada, lugares que se completan ("Madrid" pasa a "Madrid, España"), aviso de perfil incompleto en Inicio y en Perfil.
+- Inicio nuevo y estilo "Hogar" (terracota, verde salvia y crema; fuente Nunito): buscador, "¿Te acuerdas de este día?" con un recuerdo positivo al azar, botones de subir siempre visibles.
+- Límite de vida: ningún recuerdo puede pasar de 120 años desde el nacimiento (decidido 2026-10-30; resuelve la duda de la "fecha final").
 
 - Look&feel móvil (2026-10-30, en local, sin commit): botones propios en Inicio (voz, escribir, foto, vídeo); etiquetas con icono en lugar de categoría (con etiquetas propias); ánimo con 4 iconos; orden con botones; resumen con chips; filtros detrás de un botón "Filtros"; edad ("Tenías N años") en cada fecha de recuerdo, calculada con la fecha de nacimiento del perfil.
 - Ronda 2 de look&feel (2026-10-30, en local, sin commit): tema azul estilo Mi Sanitas con fuente Metropolis (hoy Nunito); botones solo con icono (voz, escribir, foto, vídeo, audio) en Inicio y Crear; "Mis recuerdos recientes" con edad y etiquetas; etiquetas automáticas según el análisis (texto y escenas) preseleccionadas al revisar; cada fila de la línea de vida con su color.
@@ -24,11 +28,13 @@ Actualizada: 2026-10-29. Orden propuesto (se puede cambiar).
 ## Próximos pasos (pedidos 2026-10-30)
 - **Compartir el resumen:** botón "Compartir" en la sección Resumen (además de copiar y descargar).
 - **Web del resumen:** generar una página web con el resumen de vida, con enlaces a cada recuerdo y a su material audiovisual (fotos, vídeos, audios). Pendiente decidir privacidad: quién puede verla y cómo se protege el enlace.
-- **Duda importante y delicada: cómo fijar la fecha final.** Aún sin definir; hablarlo al empezar la próxima sesión (qué significa "fecha final" y cómo se decide).
+- ~~Fecha final~~: resuelto, edad máxima de 120 años desde el nacimiento.
 
 ## Tareas registradas (2026-10-30)
+- **Probar en el móvil** (pendiente del usuario): cámara y vídeo directos, menú e iconos, fecha futura y límite de 120 años, buscador y recuerdo del día en Inicio, lugares que se completan, alta con fecha de nacimiento, aviso de perfil, Compartir con fotos y vídeos. Todo se ha probado con simulación del navegador, no en pantalla real.
 - **Actualizar el PowerPoint y la web de presentación** (`docs/Mis-Memorias-de-Oro-presentacion.pptx` y `docs/presentacion.html`) cuando empecemos a tener versiones finales: nombre definitivo, look&feel, Compartir web, estilos de resumen (Cálido, Ejecutivo) y cámara directa. Ahora mismo muestran el estilo "Nostálgico-cálido" y el diseño anterior.
-- **Decidir el nombre de la app** y **revisar el look&feel** (el actual, azul tipo Sanitas, resulta poco amigable): pendiente de elegir dirección.
+- **Decidir el nombre de la app.** El look&feel ya es "Hogar" (elegido sobre la maqueta C); queda aplicarlo a las demás pantallas si el usuario lo pide.
+- **Quitar el token de GitHub del remoto** y revocar los antiguos.
 - **Publicar la app en internet** para que los enlaces de Compartir los abra otra persona.
 - **Ampliar `history.json` de 2023 a hoy**, con fuentes, para que el usuario apruebe los hechos.
 
