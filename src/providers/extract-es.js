@@ -180,6 +180,29 @@ function extractType(text) {
   return best ? { event_type: best.label, category: best.category } : { event_type: '', category: 'General' };
 }
 
+// ===== Etiquetas =====
+// Solo se marca una etiqueta cuando el texto la nombra con claridad; los nombres coinciden con los de la app.
+const TAG_RULES = [
+  [/\b(playa|mar|arena|chiringuito|orilla)\b/i, 'Playa'],
+  [/\b(vacaciones|veraneo|verano)\b/i, 'Vacaciones'],
+  [/\b(viaje|viajamos|viajar|excursi[oó]n|crucero|aeropuerto|hotel|avi[oó]n)\b/i, 'Viaje'],
+  [/\b(familia|familiar|abuel[oa]s?|madre|padre|mam[aá]|pap[aá]|herman[oa]s?|t[ií][oa]s?|prim[oa]s?|hij[oa]s?|niet[oa]s?)\b/i, 'Familia'],
+  [/\b(amig[oa]s?|colegas|cuadrilla)\b/i, 'Amigos'],
+  [/cumplea[ñn]os/i, 'Cumpleaños'],
+  [/\b(boda|casamos|casamiento|novia|novio)\b/i, 'Boda'],
+  [/\b(trabajo|empleo|oficina|empresa|jefe|compa[ñn]eros de trabajo)\b/i, 'Trabajo'],
+  [/\b(colegio|escuela|instituto|universidad|graduaci[oó]n|examen|clase)\b/i, 'Estudios'],
+  [/\b(monta[ñn]a|campo|bosque|r[ií]o|senderismo|naturaleza)\b/i, 'Naturaleza'],
+  [/\b(perro|perra|gato|gata|mascota)\b/i, 'Mascotas'],
+  [/\b(comida|cena|barbacoa|paella|restaurante|almuerzo)\b/i, 'Comida'],
+  [/\b(navidad|nochebuena|nochevieja|reyes magos)\b/i, 'Navidad']
+];
+function extractTags(text, people = []) {
+  const out = TAG_RULES.filter(([re]) => re.test(text)).map(([, t]) => t);
+  if (people.length > 1 && !out.includes('Amigos') && !out.includes('Familia')) out.push(people.some(p => /amig/.test(p.relation || '')) ? 'Amigos' : 'Familia');
+  return [...new Set(out)];
+}
+
 // ===== Estado de ánimo =====
 function extractMood(text) {
   const t = text.toLowerCase();
@@ -216,7 +239,8 @@ function extractMemory(rawText, today = new Date()) {
   }
   const mood = extractMood(text);
   const title = buildTitle(text, { event_type: type.event_type, place, date_happened: date.date_happened });
-  return { title, content: text, ...date, place, event_type: type.event_type, category, mood, people };
+  const tags = extractTags(text, people);
+  return { title, content: text, ...date, place, event_type: type.event_type, category, mood, people, tags };
 }
 
-module.exports = { extractMemory, extractDate, extractPeople, extractPlace, extractType };
+module.exports = { extractTags, extractMemory, extractDate, extractPeople, extractPlace, extractType };

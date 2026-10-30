@@ -148,8 +148,16 @@ function analyze(req, res) {
       ? speech
       : (sceneText ? `${label} donde aparece ${sceneText}.` : '');
 
+    // Etiquetas: las del texto hablado + las de escenas vistas con seguridad (puntuación alta)
+    const SCENE_TAGS = { 'playa': 'Playa', 'montaña': 'Naturaleza', 'campo': 'Naturaleza', 'una boda': 'Boda', 'un cumpleaños': 'Cumpleaños',
+      'una celebración navideña': 'Navidad', 'una comida o una mesa': 'Comida', 'comida': 'Comida', 'una graduación': 'Estudios', 'un colegio o una clase': 'Estudios',
+      'una oficina': 'Trabajo', 'una familia': 'Familia', 'una mascota': 'Mascotas', 'un avión o un aeropuerto': 'Viaje', 'un barco': 'Viaje',
+      'un coche o un viaje por carretera': 'Viaje', 'un jardín o flores': 'Naturaleza', 'nieve': 'Vacaciones' };
+    const tags = [...(draft.tags || [])];
+    seen.filter(s => s.score >= 0.2).forEach(s => { const t = SCENE_TAGS[s.es]; if (t && !tags.includes(t)) tags.push(t); });
+
     return {
-      ...draft, title, content, event_type: type, category, place: draft.place || place,
+      ...draft, tags, title, content, event_type: type, category, place: draft.place || place,
       date_happened: draft.date_happened || date, date_end: draft.date_end || '',
       media_id: mediaId, kind, mime, notes, camera: meta.camera || '', scenes: seen.map(s => s.es)
     };

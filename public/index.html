@@ -6,15 +6,21 @@
   <title>Mis Memorias de Oro</title>
   <style>
     :root {
-      --salvia: #7FA88B;          /* verde elegido */
-      --salvia-fuerte: #5E8F6E;   /* botones y textos sobre blanco (mejor lectura) */
-      --salvia-hover: #4E7D5D;
-      --salvia-claro: #E6EFE8;
-      --fondo-1: #F4F7F2;
-      --fondo-2: #DCE8DF;
-      --azul-calma: #8FA9B8;      /* acento secundario sereno */
-      --tinta: #33423A;
+      /* Paleta azul inspirada en Mi Sanitas (nombres antiguos conservados para no tocar todo el CSS) */
+      --salvia: #51A0DC;
+      --salvia-fuerte: #0079C8;
+      --salvia-hover: #0652AE;
+      --salvia-claro: #DDEDF8;
+      --fondo-1: #F2F8FC;
+      --fondo-2: #DDEDF8;
+      --azul-calma: #8DC0E8;
+      --tinta: #0D1846;
+      --gris: #4E5357;
     }
+    @font-face { font-family: 'Metropolis'; font-weight: 400; src: url(fonts/metropolis-latin-400-normal.woff2) format('woff2'); font-display: swap; }
+    @font-face { font-family: 'Metropolis'; font-weight: 500; src: url(fonts/metropolis-latin-500-normal.woff2) format('woff2'); font-display: swap; }
+    @font-face { font-family: 'Metropolis'; font-weight: 600; src: url(fonts/metropolis-latin-600-normal.woff2) format('woff2'); font-display: swap; }
+    @font-face { font-family: 'Metropolis'; font-weight: 700; src: url(fonts/metropolis-latin-700-normal.woff2) format('woff2'); font-display: swap; }
     * {
       margin: 0;
       padding: 0;
@@ -22,8 +28,8 @@
     }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-      background: linear-gradient(160deg, var(--fondo-1) 0%, var(--fondo-2) 100%);
+      font-family: 'Metropolis', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background: linear-gradient(170deg, #FFFFFF 0%, var(--fondo-1) 45%, var(--fondo-2) 100%) fixed;
       color: var(--tinta);
       min-height: 100vh;
       padding: 20px;
@@ -62,7 +68,7 @@
       background: white;
       border-radius: 10px;
       padding: 25px;
-      box-shadow: 0 6px 24px rgba(60, 90, 70, 0.10);
+      box-shadow: 0 6px 24px rgba(13, 24, 70, 0.10);
     }
 
     .form-group {
@@ -155,7 +161,7 @@
     .btn-primary:hover {
       background: var(--salvia-hover);
       transform: translateY(-2px);
-      box-shadow: 0 5px 15px rgba(94, 143, 110, 0.35);
+      box-shadow: 0 5px 15px rgba(0, 121, 200, 0.35);
     }
 
     .btn-secondary {
@@ -184,7 +190,7 @@
     }
 
     .btn-edit:hover {
-      background: #7893A3;
+      background: #51A0DC;
     }
 
     .memories-list {
@@ -269,7 +275,7 @@
       background: white;
       border-radius: 10px;
       padding: 20px;
-      box-shadow: 0 6px 24px rgba(60, 90, 70, 0.10);
+      box-shadow: 0 6px 24px rgba(13, 24, 70, 0.10);
       margin-bottom: 20px;
     }
 
@@ -342,7 +348,7 @@
     .hidden { display: none !important; }
 
     /* ===== Audio ===== */
-    .audio-box { border: 2px dashed var(--salvia); border-radius: 10px; padding: 15px; margin-bottom: 20px; background: #F3F8F4; }
+    .audio-box { border: 2px dashed var(--salvia); border-radius: 10px; padding: 15px; margin-bottom: 20px; background: #F2F8FC; }
     .audio-box h3 { font-size: 1em; color: #333; margin-bottom: 10px; }
     .audio-actions { display: flex; gap: 8px; flex-wrap: wrap; }
     .audio-actions button, .audio-actions label.btn-file { flex: 1; min-width: 120px; padding: 10px; border: none; border-radius: 6px; cursor: pointer; background: var(--salvia-fuerte); color: white; font-size: 0.95em; text-align: center; }
@@ -370,10 +376,10 @@
     .main-tabs { display: flex; gap: 6px; justify-content: center; margin-bottom: 20px; }
     .main-tabs button { flex: none; padding: 10px 22px; border-radius: 20px; background: transparent; color: var(--salvia-hover); border: 1px solid var(--salvia); font-weight: 500; }
     .main-tabs button.active { background: var(--salvia-fuerte); color: white; border-color: var(--salvia-fuerte); }
-    .life-placeholder { text-align: center; padding: 50px 20px; color: #6b7a70; line-height: 1.7; }
+    .life-placeholder { text-align: center; padding: 50px 20px; color: var(--gris); line-height: 1.7; }
 
     /* ===== Línea de vida ===== */
-    #viewLife { --c-school: #8FA9B8; --c-work: #C9A66B; --c-personal: #5E8F6E; --c-res: #C98F7A; --c-hist: #8E8E7E; padding: 14px; }
+    #viewLife { --c-hist: #8A3FF5; padding: 14px; }
     .tl-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 10px; flex-wrap: wrap; }
     .tl-head h2 { color: var(--salvia-hover); font-size: 1.2em; }
     .tl-zoom { display: flex; gap: 6px; }
@@ -387,26 +393,26 @@
     .tl-scroll { flex: 1; overflow-x: auto; overflow-y: hidden; touch-action: pan-x; -webkit-overflow-scrolling: touch; }
     .tl-inner { position: relative; }
     .tl-axis { position: relative; height: 28px; }
-    .tl-tick { position: absolute; top: 0; height: 100%; border-left: 1px solid var(--fondo-2); font-size: 0.72em; color: #6b7a70; padding: 6px 0 0 3px; white-space: nowrap; }
+    .tl-tick { position: absolute; top: 0; height: 100%; border-left: 1px solid var(--fondo-2); font-size: 0.72em; color: var(--gris); padding: 6px 0 0 3px; white-space: nowrap; }
     .tl-row { position: relative; height: 46px; border-top: 1px solid var(--fondo-2); cursor: crosshair; }
-    .tl-gridline { position: absolute; top: 0; bottom: 0; border-left: 1px dashed #eef3ee; pointer-events: none; }
+    .tl-gridline { position: absolute; top: 0; bottom: 0; border-left: 1px dashed #EBEEF2; pointer-events: none; }
     .tl-seg { position: absolute; top: 9px; height: 28px; border-radius: 8px; opacity: 0.75; font-size: 0.7em; color: #fff; padding: 0 6px; line-height: 28px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; cursor: pointer; }
     .tl-mark { position: absolute; top: 14px; height: 18px; min-width: 18px; border-radius: 9px; border: 2px solid white; box-shadow: 0 0 0 1px rgba(0,0,0,.2); cursor: pointer; }
     .tl-hist { position: absolute; top: 15px; width: 14px; height: 14px; margin-left: -7px; transform: rotate(45deg); background: var(--c-hist); border: 2px solid white; box-shadow: 0 0 0 1px rgba(0,0,0,.2); }
-    .tl-sel { position: absolute; top: 28px; bottom: 0; background: rgba(94,143,110,.18); border-left: 2px solid var(--salvia-fuerte); pointer-events: none; min-width: 2px; }
-    .tl-hint { font-size: 0.82em; color: #6b7a70; margin: 8px 2px; }
+    .tl-sel { position: absolute; top: 28px; bottom: 0; background: rgba(0,121,200,.15); border-left: 2px solid var(--salvia-fuerte); pointer-events: none; min-width: 2px; }
+    .tl-hint { font-size: 0.82em; color: var(--gris); margin: 8px 2px; }
     .tl-detail { margin-top: 14px; }
     .tl-detail h3 { color: var(--salvia-hover); font-size: 1.05em; margin-bottom: 8px; }
     .tl-detail h4 { font-size: 0.9em; margin: 12px 0 6px; color: var(--tinta); }
     .tl-item { background: var(--fondo-1); border-radius: 10px; padding: 10px 12px; margin-bottom: 6px; font-size: 0.92em; line-height: 1.4; }
-    .tl-item small { color: #6b7a70; display: block; }
+    .tl-item small { color: var(--gris); display: block; }
     .tl-item .btns { display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap; }
     .tl-item .btns button { flex: none; min-height: 38px; padding: 0 14px; font-size: 0.9em; }
     .tl-dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; }
     .tl-stage-form { background: var(--salvia-claro); border-radius: 12px; padding: 14px; margin-top: 10px; display: grid; gap: 8px; }
     .tl-stage-form label { font-size: 0.85em; font-weight: 600; }
     .tl-prop { border: 1px dashed var(--salvia); }
-    .footer-stats { text-align: center; font-size: 0.85em; color: #6b7a70; margin: 10px 0 30px; }
+    .footer-stats { text-align: center; font-size: 0.85em; color: var(--gris); margin: 10px 0 30px; }
     .footer-stats button { flex: none; background: none; border: none; color: var(--salvia-hover); text-decoration: underline; padding: 0 4px; font-size: 1em; font-weight: 400; cursor: pointer; }
     .stats-detail { background: white; border-radius: 10px; padding: 14px 18px; max-width: 420px; margin: 10px auto 0; text-align: left; box-shadow: 0 6px 24px rgba(60,90,70,0.10); }
     .stats-detail .stat-item:last-child { border-bottom: none; }
@@ -423,14 +429,14 @@
     button, .audio-actions label.btn-file { min-height: 48px; }
     .form-row { grid-template-columns: 1fr; gap: 0; }
     .create-actions { display: grid; grid-template-columns: 1fr; gap: 12px; margin-bottom: 18px; }
-    .big-btn { display: flex; align-items: center; justify-content: center; gap: 12px; min-height: 72px; font-size: 1.2em; border-radius: 16px; box-shadow: 0 6px 18px rgba(60,90,70,0.14); }
+    .big-btn { display: flex; align-items: center; justify-content: center; gap: 12px; min-height: 72px; font-size: 1.2em; border-radius: 16px; box-shadow: 0 6px 18px rgba(13,24,70,0.14); }
     .big-ico { font-size: 1.5em; }
     .big-voice { background: var(--salvia-fuerte); color: white; }
     .big-voice:hover { background: var(--salvia-hover); }
     .big-write { background: white; color: var(--salvia-hover); border: 2px solid var(--salvia); }
     .big-write:hover { background: var(--salvia-claro); }
     .big-media { background: var(--salvia-claro); color: var(--salvia-hover); border: 2px dashed var(--salvia); min-height: 60px; font-size: 1.05em; cursor: pointer; }
-    .big-media:hover { background: #d8e6dc; }
+    .big-media:hover { background: #B3D6EF; }
     .create-media { margin-top: -6px; }
     .media-status { background: var(--salvia-claro); border-radius: 12px; padding: 12px 14px; margin-bottom: 16px; font-size: 0.95em; }
     .rv-notes { background: var(--fondo-1); border-left: 4px solid var(--azul-calma); border-radius: 8px; padding: 10px 12px; font-size: 0.88em; line-height: 1.5; margin-bottom: 12px; }
@@ -452,22 +458,22 @@
     .person-row button { grid-row: 1 / span 2; grid-column: 2; }
 
     /* Menú inferior con iconos (móvil y escritorio) */
-    .bottom-nav { position: fixed; left: 0; right: 0; bottom: 0; z-index: 40; display: flex; justify-content: center; padding: 6px 6px calc(6px + env(safe-area-inset-bottom)); background: rgba(255,255,255,0.97); border-top: 1px solid var(--salvia-claro); box-shadow: 0 -4px 16px rgba(60,90,70,0.08); }
+    .bottom-nav { position: fixed; left: 0; right: 0; bottom: 0; z-index: 40; display: flex; justify-content: center; padding: 6px 6px calc(6px + env(safe-area-inset-bottom)); background: rgba(255,255,255,0.97); border-top: 1px solid var(--salvia-claro); box-shadow: 0 -4px 16px rgba(13,24,70,0.08); }
     .bottom-nav .nav-inner { display: flex; width: 100%; max-width: 720px; gap: 2px; }
-    .bottom-nav button { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; min-height: 56px; padding: 4px 2px; border: none; border-radius: 14px; background: transparent; color: #6b7a70; font-size: 0.72em; font-weight: 500; cursor: pointer; }
+    .bottom-nav button { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; min-height: 56px; padding: 4px 2px; border: none; border-radius: 14px; background: transparent; color: var(--gris); font-size: 0.72em; font-weight: 500; cursor: pointer; }
     .bottom-nav button .ico { font-size: 1.7em; line-height: 1; }
     .bottom-nav button.active { background: var(--salvia-claro); color: var(--salvia-hover); font-weight: 700; }
-    .bottom-nav button.nav-create .ico { background: var(--salvia-fuerte); color: white; border-radius: 50%; width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; font-size: 1.5em; box-shadow: 0 3px 10px rgba(60,90,70,0.3); }
+    .bottom-nav button.nav-create .ico { background: var(--salvia-fuerte); color: white; border-radius: 50%; width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; font-size: 1.5em; box-shadow: 0 3px 10px rgba(13,24,70,0.3); }
     .bottom-nav button.nav-create.active { background: transparent; }
 
     /* Inicio, perfil, buscador */
     .home-hello { font-size: 1.4em; color: var(--salvia-hover); margin-bottom: 4px; }
-    .home-sub { color: #6b7a70; margin-bottom: 18px; }
+    .home-sub { color: var(--gris); margin-bottom: 18px; }
     .home-recent h3 { font-size: 1em; color: var(--tinta); margin: 20px 0 8px; }
     .home-item { background: var(--fondo-1); border-radius: 12px; padding: 12px 14px; margin-bottom: 8px; cursor: pointer; }
-    .home-item small { display: block; color: #6b7a70; }
+    .home-item small { display: block; color: var(--gris); }
     .searchbar { display: grid; grid-template-columns: 1fr; gap: 8px; margin-bottom: 14px; }
-    .searchbar .sort-row { display: flex; align-items: center; gap: 8px; font-size: 0.9em; color: #6b7a70; }
+    .searchbar .sort-row { display: flex; align-items: center; gap: 8px; font-size: 0.9em; color: var(--gris); }
     .searchbar .sort-row select { flex: 1; }
     .profile-row { display: grid; gap: 8px; margin: 10px 0 16px; }
     .logout-big { width: 100%; margin-top: 10px; background: white; color: #b14a3a; border: 2px solid #e3b5ab; border-radius: 14px; font-size: 1.05em; }
@@ -478,10 +484,10 @@
     .bottom-nav button .ico .i { width: 1.5rem; height: 1.5rem; stroke-width: 1.4; }
     .bottom-nav button.nav-create .ico .i { width: 1.4rem; height: 1.4rem; stroke-width: 1.8; }
     .big-ico .i { width: 1.6rem; height: 1.6rem; stroke-width: 1.3; }
-    .pw-meter { height: 6px; border-radius: 3px; background: #e6ebe7; margin-top: 8px; overflow: hidden; }
+    .pw-meter { height: 6px; border-radius: 3px; background: #EBEEF2; margin-top: 8px; overflow: hidden; }
     .pw-meter span { display: block; height: 100%; width: 0; background: #9aa79f; transition: width .25s; }
     .pw-meter.l1 span { width: 33%; } .pw-meter.l2 span { width: 66%; background: #7f8f86; } .pw-meter.l3 span { width: 100%; background: var(--salvia-hover); }
-    .pw-label { font-size: 0.82em; color: #6b7a70; margin-top: 4px; min-height: 1.2em; }
+    .pw-label { font-size: 0.82em; color: var(--gris); margin-top: 4px; min-height: 1.2em; }
     .pw-box { background: var(--fondo-1); border-radius: 12px; padding: 14px; margin: 14px 0; display: grid; gap: 8px; }
     .pw-box h3 { font-size: 1em; color: var(--tinta); }
     .tl-gen { position: absolute; top: 12px; width: 8px; height: 22px; margin-left: -4px; border-radius: 4px; background: var(--salvia-hover); opacity: .85; cursor: pointer; }
@@ -491,6 +497,40 @@
     .adv select { font-size: 14px; padding: 10px; }
     .adv .adv-clear { grid-column: 1 / -1; min-height: 40px; background: transparent; color: var(--salvia-hover); border: 1px solid var(--salvia); border-radius: 10px; }
     .bottom-nav button { font-size: 0.68em; }
+
+    /* Inicio: botón grande de voz y tres botones pequeños con icono arriba */
+    .home-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 18px; }
+    .tile { flex-direction: column; gap: 6px; min-height: 96px; padding: 10px 6px; font-size: 0.95em; font-weight: 600; text-align: center; border-radius: 18px; line-height: 1.2; }
+    .tile .big-ico .i { width: 1.7rem; height: 1.7rem; }
+    .tile-wide { grid-column: 1 / -1; flex-direction: row; gap: 12px; min-height: 84px; font-size: 1.15em; }
+    .home-grid.actions { grid-template-columns: repeat(6, 1fr); }
+    .home-grid.actions .s3 { grid-column: span 3; min-height: 92px; }
+    .home-grid.actions .s2 { grid-column: span 2; min-height: 80px; }
+    .home-grid.actions .tile .big-ico .i { width: 2.1rem; height: 2.1rem; stroke-width: 1.5; }
+    .home-grid.actions .tile { cursor: pointer; }
+    .home-grid.actions .tile.big-media { border-style: solid; }
+    .big-media.tile { border-style: solid; border-width: 2px; }
+
+    /* Etiquetas y ánimo: fichas tocables con icono */
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+    .chip, .seg-group button { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 6px 14px; border: 1.5px solid var(--salvia); border-radius: 999px; background: white; color: var(--salvia-hover); font-size: 0.95em; font-weight: 500; cursor: pointer; }
+    .chip[aria-pressed="true"], .seg-group button[aria-pressed="true"] { background: var(--salvia-fuerte); border-color: var(--salvia-fuerte); color: white; }
+    .chip .i { width: 1.1rem; height: 1.1rem; }
+    .age-hint { font-size: 0.88em; color: var(--salvia-hover); margin-top: 4px; min-height: 1.1em; }
+    .seg-group { display: flex; flex-wrap: wrap; gap: 8px; flex: 1; }
+    .seg-group button { min-height: 40px; padding: 4px 12px; font-size: 0.9em; }
+    .memory-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+    .age-pill { background: #f3ead2; color: #7a5d12; border-radius: 999px; padding: 2px 10px; font-size: 0.85em; }
+    .memory-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+    .memory-tag { display: inline-flex; align-items: center; gap: 4px; background: var(--salvia-claro); color: var(--salvia-hover); border-radius: 999px; padding: 3px 10px; font-size: 0.82em; }
+    .memory-tag .i { width: 0.95rem; height: 0.95rem; }
+    .mood-ic { color: var(--salvia-hover); }
+
+    /* Filtros plegados detrás de un botón */
+    .filter-toggle { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 6px 14px; border: 1.5px solid var(--salvia); background: white; color: var(--salvia-hover); border-radius: 999px; font-size: 0.95em; width: fit-content; cursor: pointer; }
+    .filter-toggle b { background: var(--salvia-fuerte); color: white; border-radius: 999px; padding: 0 8px; font-size: 0.85em; }
+    .adv { display: none; }
+    .adv.open { display: grid; }
 
     @media (min-width: 700px) {
       body { padding: 24px 24px 100px; }
@@ -516,6 +556,9 @@
 <symbol id="i-mic" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></symbol>
 <symbol id="i-pen" viewBox="0 0 24 24"><path d="M4 20l4-1 11-11-3-3L5 16z"/><path d="M14 7l3 3"/></symbol>
 <symbol id="i-camera" viewBox="0 0 24 24"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></symbol>
+<symbol id="i-image" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="1.6"/><path d="M4 18l5-5 4 4 3-3 4 4"/></symbol>
+<symbol id="i-video" viewBox="0 0 24 24"><rect x="3" y="6" width="13" height="12" rx="2"/><path d="M16 10.5l5-3v9l-5-3z"/></symbol>
+<symbol id="i-wave" viewBox="0 0 24 24"><path d="M4 10v4M8 6v12M12 3v18M16 7v10M20 10v4"/></symbol>
 <symbol id="i-film" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M10 9.5v5l4-2.5z"/></symbol>
 <symbol id="i-logout" viewBox="0 0 24 24"><path d="M9 4H5v16h4"/><path d="M16 8l4 4-4 4M20 12H9"/></symbol>
 <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6"/><path d="M20 20l-4-4"/></symbol>
@@ -530,6 +573,21 @@
 <symbol id="i-rec" viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="2.5"/></symbol>
 <symbol id="i-sparkle" viewBox="0 0 24 24"><path d="M12 3l1.8 5.200L19 10l-5.200 1.800L12 17l-1.800-5.200L5 10l5.200-1.800z"/><path d="M19 16l.7 2 2 .7-2 .7-.7 2-.7-2-2-.7 2-.7z"/></symbol>
 <symbol id="i-filter" viewBox="0 0 24 24"><path d="M3 5h18l-7 8v6l-4 2v-8z"/></symbol>
+<symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.900 4.900l2.100 2.100M17 17l2.100 2.100M4.900 19.100L7 17M17 7l2.100-2.100"/></symbol>
+<symbol id="i-plane" viewBox="0 0 24 24"><path d="M21 3L3 11l7 3 3 7z"/><path d="M10 14L21 3"/></symbol>
+<symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 20s-8-5-8-11a4.500 4.500 0 0 1 8-2.500A4.500 4.500 0 0 1 20 9c0 6-8 11-8 11z"/></symbol>
+<symbol id="i-gift" viewBox="0 0 24 24"><rect x="4" y="9" width="16" height="11" rx="1"/><path d="M3 9h18V6H3zM12 6v14M12 6c-2-4-6-3-5 0M12 6c2-4 6-3 5 0"/></symbol>
+<symbol id="i-ring" viewBox="0 0 24 24"><circle cx="12" cy="15" r="5"/><path d="M9 6l3-3 3 3-3 3z"/></symbol>
+<symbol id="i-briefcase" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5h6v2M3 13h18"/></symbol>
+<symbol id="i-tree" viewBox="0 0 24 24"><path d="M12 21v-5"/><path d="M12 3l6 8h-3l4 6H5l4-6H6z"/></symbol>
+<symbol id="i-leaf" viewBox="0 0 24 24"><path d="M5 19c0-8 5-14 15-14 0 9-5 14-13 14"/><path d="M5 19c3-5 6-8 10-10"/></symbol>
+<symbol id="i-paw" viewBox="0 0 24 24"><circle cx="7" cy="10" r="1.800"/><circle cx="17" cy="10" r="1.800"/><circle cx="10" cy="5.500" r="1.800"/><circle cx="14" cy="5.500" r="1.800"/><path d="M12 11c-3 0-5 3-5 5.500 0 2 2 2.500 5 2.500s5-.5 5-2.500C17 14 15 11 12 11z"/></symbol>
+<symbol id="i-star" viewBox="0 0 24 24"><path d="M12 3l2.700 5.600 6.100.9-4.400 4.300 1 6.100L12 17l-5.400 2.900 1-6.100L3.200 9.500l6.100-.9z"/></symbol>
+<symbol id="i-smile" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 14c1 1.500 2.500 2.300 4 2.300s3-.8 4-2.300M9 9.500h.01M15 9.500h.01"/></symbol>
+<symbol id="i-meh" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8.500 15h7M9 9.500h.01M15 9.500h.01"/></symbol>
+<symbol id="i-sad" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 16c1-1.500 2.500-2.300 4-2.300s3 .8 4 2.300M9 9.500h.01M15 9.500h.01"/></symbol>
+<symbol id="i-utensils" viewBox="0 0 24 24"><path d="M7 3v8M5 3v5a2 2 0 0 0 4 0V3M7 11v10M17 3c-2 2-2 6 0 8v10"/></symbol>
+<symbol id="i-sliders" viewBox="0 0 24 24"><path d="M4 7h10M18 7h2M4 17h2M10 17h10"/><circle cx="16" cy="7" r="2"/><circle cx="8" cy="17" r="2"/></symbol>
 </defs></svg>
   <div class="container">
     <header>
@@ -584,10 +642,14 @@
     <div id="viewHome" class="card">
       <h2 class="home-hello" id="homeHello">Hola</h2>
       <p class="home-sub">¿Qué recuerdo quieres guardar hoy?</p>
-      <div class="create-actions">
-        <button type="button" class="big-btn big-voice" id="homeVoice"><span class="big-ico"><svg class="i"><use href="#i-mic"/></svg></span><span>Contar con mi voz</span></button>
-        <button type="button" class="big-btn big-write" id="homeWrite"><span class="big-ico"><svg class="i"><use href="#i-pen"/></svg></span><span>Escribir</span></button>
+      <div class="home-grid actions">
+        <button type="button" class="big-btn big-voice tile s3" id="homeVoice" aria-label="Contar con mi voz" title="Contar con mi voz"><span class="big-ico"><svg class="i"><use href="#i-mic"/></svg></span></button>
+        <button type="button" class="big-btn big-write tile s3" id="homeWrite" aria-label="Escribir" title="Escribir"><span class="big-ico"><svg class="i"><use href="#i-pen"/></svg></span></button>
+        <label class="big-btn big-media tile s2" title="Subir una foto" aria-label="Subir una foto"><span class="big-ico"><svg class="i"><use href="#i-image"/></svg></span><input type="file" class="js-photo" accept="image/*" hidden></label>
+        <label class="big-btn big-media tile s2" title="Subir un vídeo" aria-label="Subir un vídeo"><span class="big-ico"><svg class="i"><use href="#i-video"/></svg></span><input type="file" class="js-video" accept="video/*" hidden></label>
+        <label class="big-btn big-media tile s2" title="Subir un audio" aria-label="Subir un audio"><span class="big-ico"><svg class="i"><use href="#i-wave"/></svg></span><input type="file" class="js-audio" accept="audio/*" hidden></label>
       </div>
+      <div class="media-status hidden" id="mediaStatus"></div>
       <div class="home-recent" id="homeRecent"></div>
     </div>
 
@@ -631,11 +693,11 @@
       <h2 style="color: var(--salvia-hover); margin-bottom: 6px;">Tu resumen de vida</h2>
       <p class="home-sub" style="margin-bottom:12px">Tu historia en palabras, con un tono siempre positivo, a partir de tus recuerdos.</p>
       <div class="profile-row">
-        <label for="sumStyle" style="font-weight:600">Estilo</label>
-        <select id="sumStyle"></select>
-        <label for="sumScope" style="font-weight:600">Sobre qué</label>
-        <select id="sumScope"><option value="all">Toda mi vida</option><option value="year">Un año</option><option value="person">Una persona</option></select>
-        <select id="sumValue" class="hidden"></select>
+        <label style="font-weight:600">Estilo</label>
+        <div class="chips" id="sumStyleChips"></div><input type="hidden" id="sumStyle">
+        <label style="font-weight:600;margin-top:6px">Sobre qué</label>
+        <div class="chips" id="sumScopeChips"></div><input type="hidden" id="sumScope" value="all">
+        <div class="chips hidden" id="sumValueChips"></div><input type="hidden" id="sumValue">
         <button type="button" class="btn-primary" id="sumGo">Crear resumen</button>
       </div>
       <div id="sumMsg"></div>
@@ -651,7 +713,7 @@
       <div class="searchbar">
         <input type="search" id="tlSearch" placeholder="Buscar en tu línea de vida" autocomplete="off">
         <div class="adv" id="tlAdv"></div>
-        <div class="sort-row"><span>Orden:</span><select id="tlSort"><option value="desc">Más reciente primero</option><option value="asc">Más antiguo primero</option></select></div>
+        <div class="sort-row"><span>Orden:</span><div class="seg-group" data-sort="tlSort"><button type="button" data-v="desc" aria-pressed="true">Recientes</button><button type="button" data-v="asc" aria-pressed="false">Antiguos</button></div><input type="hidden" id="tlSort" value="desc"></div>
       </div>
       <div id="tlBirth" class="tl-birth hidden"></div>
       <div id="tlMsg"></div>
@@ -664,17 +726,16 @@
     </div>
 
     <div id="viewCreate" class="hidden">
-    <div class="create-actions">
-      <button type="button" class="big-btn big-voice" id="btnVoice"><span class="big-ico"><svg class="i"><use href="#i-mic"/></svg></span><span>Contar con mi voz</span></button>
-      <button type="button" class="big-btn big-write" id="btnWrite"><span class="big-ico"><svg class="i"><use href="#i-pen"/></svg></span><span>Escribir</span></button>
-    </div>
+    <div class="home-grid actions">
+        <button type="button" class="big-btn big-voice tile s3" id="btnVoice" aria-label="Contar con mi voz" title="Contar con mi voz"><span class="big-ico"><svg class="i"><use href="#i-mic"/></svg></span></button>
+        <button type="button" class="big-btn big-write tile s3" id="btnWrite" aria-label="Escribir" title="Escribir"><span class="big-ico"><svg class="i"><use href="#i-pen"/></svg></span></button>
+        <label class="big-btn big-media tile s2" title="Subir una foto" aria-label="Subir una foto"><span class="big-ico"><svg class="i"><use href="#i-image"/></svg></span><input type="file" class="js-photo" accept="image/*" hidden></label>
+        <label class="big-btn big-media tile s2" title="Subir un vídeo" aria-label="Subir un vídeo"><span class="big-ico"><svg class="i"><use href="#i-video"/></svg></span><input type="file" class="js-video" accept="video/*" hidden></label>
+        <label class="big-btn big-media tile s2" title="Subir un audio" aria-label="Subir un audio"><span class="big-ico"><svg class="i"><use href="#i-wave"/></svg></span><input type="file" class="js-audio" accept="audio/*" hidden></label>
+      </div>
 
-    <div class="create-actions create-media">
-      <label class="big-btn big-media"><span class="big-ico"><svg class="i"><use href="#i-camera"/></svg></span><span>Subir una foto</span><input type="file" id="photoFile" accept="image/*" hidden></label>
-      <label class="big-btn big-media"><span class="big-ico"><svg class="i"><use href="#i-film"/></svg></span><span>Subir un vídeo</span><input type="file" id="videoFile" accept="video/*" hidden></label>
-    </div>
-    <div class="media-status hidden" id="mediaStatus"></div>
 
+    <div class="media-status hidden" id="mediaStatus2"></div>
     <div class="main-content">
       <div class="card hidden" id="voicePanel">
         <div class="audio-box">
@@ -703,39 +764,22 @@
             <textarea id="content" name="content" required placeholder="Escribe tu recuerdo aquí..."></textarea>
           </div>
 
-          <div class="form-row">
-            <div class="form-group">
-              <label for="date">Fecha</label>
-              <input type="date" id="date" name="date">
-            </div>
-            <div class="form-group">
-              <label for="category">Categoría</label>
-              <select id="category" name="category">
-                <option value="General">General</option>
-                <option value="Viajes">Viajes</option>
-                <option value="Personal">Personal</option>
-                <option value="Familia">Familia</option>
-                <option value="Trabajo">Trabajo</option>
-              </select>
-            </div>
+          <div class="form-group">
+            <label for="date">¿Cuándo fue?</label>
+            <input type="date" id="date" name="date">
+            <div class="age-hint" id="dateAge"></div>
           </div>
 
-          <div class="form-row">
-            <div class="form-group">
-              <label for="mood">Estado de ánimo</label>
-              <select id="mood" name="mood">
-                <option value="neutral">Neutral</option>
-                <option value="feliz">Feliz</option>
-                <option value="muy feliz">Muy Feliz</option>
-                <option value="triste">Triste</option>
-                <option value="emocionado">Emocionado</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="tagInput">Etiquetas</label>
-              <input type="text" id="tagInput" placeholder="Escribe y presiona Enter" style="margin-bottom: 5px;">
-              <div class="tag-input" id="tagsContainer"></div>
-            </div>
+          <div class="form-group">
+            <label>Etiquetas (toca las que encajen)</label>
+            <div class="chips" id="tagsContainer"></div>
+            <input type="text" id="tagInput" placeholder="Otra etiqueta: escríbela y pulsa Intro" style="margin-top: 8px;">
+          </div>
+
+          <div class="form-group">
+            <label>¿Cómo te hace sentir?</label>
+            <div class="chips" id="moodChips"></div>
+            <input type="hidden" id="mood" value="neutral">
           </div>
 
           <div class="button-group">
@@ -755,7 +799,7 @@
         <div class="searchbar">
           <input type="search" id="memSearch" placeholder="Buscar por título, texto, persona o lugar" autocomplete="off">
           <div class="adv" id="memAdv"></div>
-          <div class="sort-row"><span>Orden:</span><select id="memSort"><option value="desc">Más reciente primero</option><option value="asc">Más antiguo primero</option></select></div>
+          <div class="sort-row"><span>Orden:</span><div class="seg-group" data-sort="memSort"><button type="button" data-v="desc" aria-pressed="true">Recientes</button><button type="button" data-v="asc" aria-pressed="false">Antiguos</button></div><input type="hidden" id="memSort" value="desc"></div>
         </div>
         <div class="memories-list" id="memoriesList">
           <div class="empty-state">No hay memorias aún. ¡Crea tu primera memoria!</div>
@@ -775,18 +819,18 @@
       <div class="review-field"><label for="rvTitle">Título</label><input id="rvTitle" maxlength="200"></div>
       <div class="review-field"><label for="rvContent">Lo que contaste</label><textarea id="rvContent"></textarea></div>
       <div class="form-row">
-        <div class="review-field"><label for="rvDate">Fecha (o inicio del periodo)</label><input type="date" id="rvDate"></div>
+        <div class="review-field"><label for="rvDate">Fecha (o inicio del periodo)</label><input type="date" id="rvDate"><div class="age-hint" id="rvAge"></div></div>
         <div class="review-field"><label for="rvDateEnd">Fin del periodo (si aplica)</label><input type="date" id="rvDateEnd"></div>
       </div>
-      <div class="form-row">
-        <div class="review-field"><label for="rvPlace">Lugar</label><input id="rvPlace" maxlength="200"></div>
-        <div class="review-field"><label for="rvType">Tipo de recuerdo</label><input id="rvType" maxlength="80" placeholder="Cumpleaños, viaje, boda..."></div>
+      <div class="review-field"><label for="rvPlace">Lugar</label><input id="rvPlace" maxlength="200"></div>
+      <div class="review-field"><label>Etiquetas (toca las que encajen)</label>
+        <div class="chips" id="rvTags"></div>
+        <input id="rvTagInput" maxlength="40" placeholder="Otra etiqueta: escríbela y pulsa Intro" style="margin-top:8px;">
+        <input type="hidden" id="rvType">
       </div>
-      <div class="form-row">
-        <div class="review-field"><label for="rvCategory">Categoría</label>
-          <select id="rvCategory"><option>General</option><option>Viajes</option><option>Personal</option><option>Familia</option><option>Trabajo</option></select></div>
-        <div class="review-field"><label for="rvMood">Estado de ánimo</label>
-          <select id="rvMood"><option value="neutral">Neutral</option><option value="feliz">Feliz</option><option value="muy feliz">Muy Feliz</option><option value="triste">Triste</option><option value="emocionado">Emocionado</option></select></div>
+      <div class="review-field"><label>¿Cómo te hace sentir?</label>
+        <div class="chips" id="rvMoodChips"></div>
+        <input type="hidden" id="rvMood" value="neutral">
       </div>
       <div class="review-field"><label>Personas y tu relación con ellas</label>
         <div id="rvPeople"></div>
@@ -802,6 +846,7 @@
 
   <script>
     // Icono de trazo fino desde el sprite
+    const esc = (t) => String(t == null ? '' : t).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
     const ic = (n) => `<svg class="i"><use href="#i-${n}"/></svg>`;
     const API_URL = '/api';
     let tags = [];
@@ -813,7 +858,6 @@
     const titleInput = document.getElementById('title');
     const contentInput = document.getElementById('content');
     const dateInput = document.getElementById('date');
-    const categorySelect = document.getElementById('category');
     const moodSelect = document.getElementById('mood');
     const tagInput = document.getElementById('tagInput');
     const tagsContainer = document.getElementById('tagsContainer');
@@ -824,6 +868,63 @@
     const memSort = document.getElementById('memSort');
     memSearch.addEventListener('input', () => renderMemories());
     memSort.addEventListener('change', () => renderMemories());
+
+    // ===== ETIQUETAS, ÁNIMO Y EDAD =====
+    const TAG_PRESETS = [['Playa','sun'],['Vacaciones','plane'],['Viaje','compass'],['Familia','users'],['Amigos','heart'],['Cumpleaños','gift'],['Boda','ring'],['Trabajo','briefcase'],['Estudios','book'],['Naturaleza','leaf'],['Mascotas','paw'],['Comida','utensils'],['Navidad','star']];
+    const MOODS = [['feliz','Feliz','smile'],['emocionado','Emocionado','sparkle'],['neutral','Normal','meh'],['triste','Triste','sad']];
+    const tagIcon = (t) => { const f = TAG_PRESETS.find(p => norm(p[0]) === norm(t)); return f ? f[1] : 'tag'; };
+    const moodInfo = (v) => MOODS.find(m => m[0] === v) || (v === 'muy feliz' ? MOODS[0] : null);
+
+    // Fichas tocables: varias (etiquetas) o una sola (ánimo, estilos)
+    function renderChips(box, items, selected, multi, onToggle) {
+      box.innerHTML = items.map(([val, label, icon]) => `<button type="button" class="chip" data-v="${esc(val)}" aria-pressed="${selected.includes(val)}">${icon ? ic(icon) : ''}<span>${esc(label)}</span></button>`).join('');
+      box.querySelectorAll('.chip').forEach(b => b.onclick = () => onToggle(b.dataset.v));
+    }
+    // Etiquetas: las de siempre + las propias que ya se hayan elegido
+    function tagItems(sel) {
+      const extra = sel.filter(t => !TAG_PRESETS.some(p => norm(p[0]) === norm(t))).map(t => [t, t, 'tag']);
+      return TAG_PRESETS.map(([n, i]) => [n, n, i]).concat(extra);
+    }
+    function tagPicker(box, input, getList, setList) {
+      const draw = () => renderChips(box, tagItems(getList()), getList(), true, v => {
+        const l = getList(); setList(l.includes(v) ? l.filter(x => x !== v) : [...l, v]); draw();
+      });
+      input.addEventListener('keydown', (e) => {
+        if (e.key !== 'Enter') return;
+        e.preventDefault();
+        const v = input.value.trim().slice(0, 40); input.value = '';
+        if (v && !getList().some(x => norm(x) === norm(v))) { const f = TAG_PRESETS.find(p => norm(p[0]) === norm(v)); setList([...getList(), f ? f[0] : v]); }
+        draw();
+      });
+      draw();
+      return draw;
+    }
+    function moodPicker(box, input) {
+      const draw = () => renderChips(box, MOODS, [(moodInfo(input.value) || {})[0] || input.value], false, v => { input.value = v; draw(); });
+      draw();
+      return draw;
+    }
+    // Edad en una fecha según la fecha de nacimiento del perfil
+    let birthDate = '';
+    function ageAt(d) {
+      if (!birthDate || !d || d < birthDate) return '';
+      const [by, bm, bd] = birthDate.split('-').map(Number), [y, m, dd] = d.split('-').map(Number);
+      let a = y - by; if (m < bm || (m === bm && dd < bd)) a--;
+      if (a >= 1) return a === 1 ? '1 año' : `${a} años`;
+      let mo = (y - by) * 12 + (m - bm) - (dd < bd ? 1 : 0);
+      return mo <= 0 ? 'recién nacido' : mo === 1 ? '1 mes' : `${mo} meses`;
+    }
+    const ageLabel = (d) => { const a = ageAt(d); return a ? (a === 'recién nacido' ? 'Acababas de nacer' : `Tenías ${a}`) : ''; };
+    async function loadBirth() {
+      try { const r = await (await fetch(`${API_URL}/profile`)).json(); birthDate = (r.success && r.data.birth_date) || ''; } catch (e) {}
+      if (typeof renderMemories === 'function') renderMemories();
+    }
+    // Orden con dos botones en vez de desplegable
+    document.querySelectorAll('.seg-group[data-sort]').forEach(g => g.querySelectorAll('button').forEach(b => b.onclick = () => {
+      const inp = document.getElementById(g.dataset.sort); inp.value = b.dataset.v;
+      g.querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', x === b));
+      inp.dispatchEvent(new Event('change'));
+    }));
 
     // ===== FUNCIONES HELPER =====
     function showMessage(text, type = 'success') {
@@ -845,13 +946,10 @@
       renderTags();
     }
 
+    let drawWriteTags = null, drawWriteMood = null;
     function renderTags() {
-      tagsContainer.innerHTML = tags.map(tag => `
-        <div class="tag">
-          ${esc(tag)}
-          <button type="button" data-tag="${esc(tag)}" onclick="removeTag(this.dataset.tag)">×</button>
-        </div>
-      `).join('');
+      if (drawWriteTags) drawWriteTags();
+      if (drawWriteMood) drawWriteMood();
     }
 
     // ===== API CALLS =====
@@ -937,6 +1035,12 @@
     // ===== RENDER =====
     // Búsqueda sin tildes ni mayúsculas, sobre título, texto, lugar, tipo, etiquetas y personas
     const norm = (t) => String(t || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
+    // Etiquetas de un recuerdo: las elegidas + el tipo detectado (sin repetir)
+    function allTags(m) {
+      const out = [...(m.tags || [])];
+      if (m.event_type && !out.some(t => norm(t) === norm(m.event_type))) out.unshift(m.event_type);
+      return out;
+    }
     function memText(m) {
       return norm([m.title, m.content, m.place, m.event_type, m.category, (m.tags || []).join(' '),
         (m.people || []).map(p => p.name + ' ' + (p.relation || '')).join(' ')].join(' '));
@@ -949,7 +1053,7 @@
         const t = memText(m);
         if (!q.every(w => t.includes(w))) return false;
         if (f.year && (m.date_happened || '').slice(0, 4) !== f.year) return false;
-        if (f.type && (m.event_type || '') !== f.type) return false;
+        if (f.type && !allTags(m).some(t => norm(t) === norm(f.type))) return false;
         if (f.place && norm(m.place) !== norm(f.place)) return false;
         if (f.person && !(m.people || []).some(p => norm(p.name) === norm(f.person))) return false;
         return true;
@@ -968,24 +1072,33 @@
     function setupFilters(boxId, onChange) {
       const box = document.getElementById(boxId);
       const state = {};
-      const defs = [['year', 'Año'], ['type', 'Tipo'], ['place', 'Lugar'], ['person', 'Persona']];
+      const defs = [['year', 'Año'], ['type', 'Etiqueta'], ['place', 'Lugar'], ['person', 'Persona']];
       function options(key) {
         const set = new Set();
         memories.forEach(m => {
           if (key === 'year' && m.date_happened) set.add(m.date_happened.slice(0, 4));
-          if (key === 'type' && m.event_type) set.add(m.event_type);
+          if (key === 'type') allTags(m).forEach(t => set.add(t));
           if (key === 'place' && m.place) set.add(m.place);
           if (key === 'person') (m.people || []).forEach(p => p.name && set.add(p.name));
         });
         return [...set].sort((a, b) => key === 'year' ? b.localeCompare(a) : a.localeCompare(b, 'es'));
       }
+      // Botón "Filtros" que despliega las opciones (menos ruido en el móvil)
+      let toggle = box.previousElementSibling;
+      if (!toggle || !toggle.classList.contains('filter-toggle')) {
+        toggle = document.createElement('button'); toggle.type = 'button'; toggle.className = 'filter-toggle';
+        box.parentNode.insertBefore(toggle, box);
+        toggle.onclick = () => { box.classList.toggle('open'); toggle.setAttribute('aria-expanded', box.classList.contains('open')); };
+      }
+      const paintToggle = () => { const n = defs.filter(([k]) => state[k]).length; toggle.innerHTML = `${ic('sliders')} Filtros${n ? ` <b>${n}</b>` : ''}`; };
       function build() {
+        paintToggle();
         box.innerHTML = defs.map(([k, label]) => {
           const opts = options(k);
           if (state[k] && !opts.includes(state[k])) state[k] = '';
           return `<select data-f="${k}" aria-label="${label}"><option value="">${label}: todos</option>${opts.map(o => `<option value="${esc(o)}" ${state[k] === o ? 'selected' : ''}>${esc(o)}</option>`).join('')}</select>`;
         }).join('') + '<button type="button" class="adv-clear">Quitar filtros</button>';
-        box.querySelectorAll('select').forEach(sel => sel.onchange = () => { state[sel.dataset.f] = sel.value; onChange(); });
+        box.querySelectorAll('select').forEach(sel => sel.onchange = () => { state[sel.dataset.f] = sel.value; paintToggle(); onChange(); });
         box.querySelector('.adv-clear').onclick = () => { defs.forEach(([k]) => state[k] = ''); build(); onChange(); };
       }
       build();
@@ -997,7 +1110,7 @@
       const el = document.getElementById('homeRecent');
       const recent = filterSort(memories, '', 'desc').slice(0, 3);
       el.innerHTML = recent.length
-        ? '<h3>Tus últimos recuerdos</h3>' + recent.map(m => `<div class="home-item" data-id="${m.id}"><strong>${esc(m.title)}</strong><small>${esc(m.date_happened ? new Date(m.date_happened + 'T00:00:00').toLocaleDateString('es-ES') : 'Sin fecha')}${m.place ? ' · ' + esc(m.place) : ''}</small></div>`).join('')
+        ? '<h3>Mis recuerdos recientes</h3>' + recent.map(m => `<div class="home-item" data-id="${m.id}"><strong>${esc(m.title)}</strong><small>${esc(m.date_happened ? new Date(m.date_happened + 'T00:00:00').toLocaleDateString('es-ES') : 'Sin fecha')}${ageLabel(m.date_happened) ? ' · ' + esc(ageLabel(m.date_happened)) : ''}${m.place ? ' · ' + esc(m.place) : ''}</small>${allTags(m).length ? `<div class="memory-tags">${allTags(m).map(t => `<span class="memory-tag">${ic(tagIcon(t))} ${esc(t)}</span>`).join('')}</div>` : ''}</div>`).join('')
         : '<p class="home-sub" style="margin-top:18px">Aún no tienes recuerdos. ¡Cuenta el primero!</p>';
       el.querySelectorAll('[data-id]').forEach(d => d.onclick = () => { window.goTo('mem'); currentMemoryId = null; selectMemory(+d.dataset.id); });
     }
@@ -1032,20 +1145,16 @@
         <div class="memory-item ${open ? 'active' : ''}" onclick="selectMemory(${memory.id})">
           <div class="memory-title">${esc(memory.title)}${audios.length ? ' ' + ic('mic') : ''}${visuals.some(v => v.kind === 'image') ? ' ' + ic('camera') : ''}${visuals.some(v => v.kind === 'video') ? ' ' + ic('film') : ''}</div>
           <div class="memory-meta">
-            <span class="memory-category">${esc(memory.category)}</span>
-            <span>${esc(when)}</span>
-            <span>${esc(memory.mood)}</span>
+            <span>${ic('cal')} ${esc(when || 'Sin fecha')}</span>
+            ${ageLabel(memory.date_happened) ? `<span class="age-pill">${esc(ageLabel(memory.date_happened))}</span>` : ''}
+            ${moodInfo(memory.mood) ? `<span class="mood-ic" title="${esc(moodInfo(memory.mood)[1])}">${ic(moodInfo(memory.mood)[2])}</span>` : ''}
           </div>
+          ${allTags(memory).length ? `<div class="memory-tags">${allTags(memory).map(t => `<span class="memory-tag">${ic(tagIcon(t))} ${esc(t)}</span>`).join('')}</div>` : ''}
           ${open ? `
             <div class="memory-detail" onclick="event.stopPropagation()">
               <p>${esc(memory.content)}</p>
-              ${memory.place || memory.event_type ? `<div class="memory-extra">${memory.event_type ? ic('tag') + ' ' + esc(memory.event_type) + ' ' : ''}${memory.place ? ic('pin') + ' ' + esc(memory.place) : ''}</div>` : ''}
+              ${memory.place ? `<div class="memory-extra">${ic('pin')} ${esc(memory.place)}</div>` : ''}
               ${people ? `<div class="memory-people">${ic('users')} ${people}</div>` : ''}
-              ${memory.tags && memory.tags.length > 0 ? `
-                <div class="memory-tags">
-                  ${memory.tags.map(tag => `<span class="memory-tag">${esc(tag)}</span>`).join('')}
-                </div>
-              ` : ''}
               ${visuals.map(v => `<div class="memory-photo">${v.kind === 'image'
                 ? `<a href="${v.url}" target="_blank" rel="noopener"><img loading="lazy" src="${v.url}" alt="${esc(memory.title)}"></a>`
                 : `<video controls playsinline preload="none" src="${v.url}"></video>`}</div>`).join('')}
@@ -1075,10 +1184,10 @@
         titleInput.value = memory.title;
         contentInput.value = memory.content;
         dateInput.value = memory.date_happened;
-        categorySelect.value = memory.category;
         moodSelect.value = memory.mood;
         tags = memory.tags || [];
         renderTags();
+        document.getElementById('dateAge').textContent = ageLabel(dateInput.value);
         currentMemoryId = id;
         document.getElementById('writeTitle').textContent = 'Editar recuerdo';
         renderMemories();
@@ -1094,7 +1203,7 @@
         title: titleInput.value,
         content: contentInput.value,
         date_happened: dateInput.value,
-        category: categorySelect.value,
+        event_type: tags[0] || '',
         mood: moodSelect.value,
         tags: tags
       };
@@ -1106,13 +1215,9 @@
       }
     });
 
-    tagInput.addEventListener('keypress', (e) => {
-      if (e.key === 'Enter') {
-        e.preventDefault();
-        addTag(tagInput.value.trim());
-        tagInput.value = '';
-      }
-    });
+    drawWriteTags = tagPicker(tagsContainer, tagInput, () => tags, (l) => { tags = l; });
+    drawWriteMood = moodPicker(document.getElementById('moodChips'), moodSelect);
+    dateInput.addEventListener('change', () => { document.getElementById('dateAge').textContent = ageLabel(dateInput.value); });
 
 
 
@@ -1178,7 +1283,6 @@
     let recorder = null, recChunks = [], recStream = null, recTimer = null, recStart = 0;
     let draft = null; // {media_id, ...datos propuestos}
 
-    const esc = (t) => String(t == null ? '' : t).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 
     function setAudioStatus(t) { audioStatus.textContent = t; }
 
@@ -1283,6 +1387,11 @@
       return row;
     }
 
+    let rvTagList = [];
+    const drawRvTags = tagPicker(rv('rvTags'), rv('rvTagInput'), () => rvTagList, (l) => { rvTagList = l; });
+    const drawRvMood = moodPicker(rv('rvMoodChips'), rv('rvMood'));
+    rv('rvDate').addEventListener('change', () => { rv('rvAge').textContent = ageLabel(rv('rvDate').value); });
+
     function openReview(d) {
       draft = d;
       rv('rvTitle').value = d.title || '';
@@ -1290,9 +1399,14 @@
       rv('rvDate').value = d.date_happened || '';
       rv('rvDateEnd').value = d.date_end || '';
       rv('rvPlace').value = d.place || '';
-      rv('rvType').value = d.event_type || '';
-      rv('rvCategory').value = d.category || 'General';
-      rv('rvMood').value = d.mood || 'neutral';
+      rvTagList = [];
+      [...(d.tags || []), d.event_type].filter(Boolean).forEach(t => {
+        const name = (TAG_PRESETS.find(p => norm(p[0]) === norm(t)) || [t])[0];
+        if (!rvTagList.some(x => norm(x) === norm(name))) rvTagList.push(name);
+      });
+      rv('rvMood').value = (moodInfo(d.mood) || MOODS[2])[0];
+      drawRvTags(); drawRvMood();
+      rv('rvAge').textContent = ageLabel(d.date_happened);
       rv('rvPeople').innerHTML = '';
       (d.people || []).forEach(p => rv('rvPeople').appendChild(personRow(p)));
       const kind = d.kind || 'audio';
@@ -1318,7 +1432,7 @@
 
     // ===== FOTOS Y VÍDEOS =====
     const mediaStatus = document.getElementById('mediaStatus');
-    function setMediaStatus(t) { mediaStatus.textContent = t || ''; mediaStatus.classList.toggle('hidden', !t); }
+    function setMediaStatus(t) { document.querySelectorAll('.media-status').forEach(el => { el.textContent = t || ''; el.classList.toggle('hidden', !t); }); }
 
     // Reduce una imagen a JPEG pequeño para analizarla (el original se guarda aparte, sin tocar)
     function toJpegBlob(source, w, h, max = 448) {
@@ -1401,8 +1515,9 @@
       poll();
     }
 
-    document.getElementById('photoFile').addEventListener('change', (e) => { const f = e.target.files[0]; e.target.value = ''; if (f) analyzeVisual(f, false); });
-    document.getElementById('videoFile').addEventListener('change', (e) => { const f = e.target.files[0]; e.target.value = ''; if (f) analyzeVisual(f, true); });
+    document.querySelectorAll('.js-photo').forEach(i => i.addEventListener('change', (e) => { const f = e.target.files[0]; e.target.value = ''; if (f) analyzeVisual(f, false); }));
+    document.querySelectorAll('.js-video').forEach(i => i.addEventListener('change', (e) => { const f = e.target.files[0]; e.target.value = ''; if (f) analyzeVisual(f, true); }));
+    document.querySelectorAll('.js-audio').forEach(i => i.addEventListener('change', (e) => { const f = e.target.files[0]; e.target.value = ''; if (!f) return; window.goTo('create'); openPanel('voice'); analyzeAudioBlob(f, f.name); }));
 
     rv('rvAddPerson').onclick = () => rv('rvPeople').appendChild(personRow());
 
@@ -1420,8 +1535,8 @@
       const body = {
         title: rv('rvTitle').value, content: rv('rvContent').value,
         date_happened: rv('rvDate').value, date_end: rv('rvDateEnd').value,
-        place: rv('rvPlace').value, event_type: rv('rvType').value,
-        category: rv('rvCategory').value, mood: rv('rvMood').value,
+        place: rv('rvPlace').value, event_type: rvTagList[0] || '',
+        tags: rvTagList, mood: rv('rvMood').value,
         people, media_ids: [draft.media_id]
       };
       const savedKind = draft.kind;
@@ -1489,6 +1604,7 @@
       appScreen.classList.remove('hidden');
       currentUser = user;
       showUserData(user);
+      loadBirth();
       const today = new Date().toISOString().split('T')[0];
       dateInput.value = today;
       window.goTo('home');
@@ -1508,6 +1624,7 @@
           method: 'PUT', headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ birth_date: document.getElementById('profBirth').value, birth_place: document.getElementById('profPlace').value })
         })).json();
+        if (r.success) { birthDate = document.getElementById('profBirth').value; renderMemories(); }
         box.innerHTML = r.success ? '<div class="success">Perfil guardado</div>' : `<div class="error">${esc(r.error)}</div>`;
       } catch (e) { box.innerHTML = '<div class="error">No se pudo guardar. Inténtalo de nuevo.</div>'; }
       setTimeout(() => { box.innerHTML = ''; }, 3000);
@@ -1595,25 +1712,31 @@
         if (!loaded) {
           try {
             const r = await (await fetch(`${API_URL}/summary/styles`)).json();
-            $('sumStyle').innerHTML = r.data.map(s => `<option value="${s.key}">${esc(s.label)}</option>`).join('');
+            styleItems = r.data.map(s => [s.key, s.label]);
+            $('sumStyle').value = styleItems[0][0];
+            drawStyle();
+            drawScope();
             loaded = true;
           } catch (e) { $('sumMsg').innerHTML = '<div class="error">No se pudo cargar. Inténtalo de nuevo.</div>'; return; }
         }
         await loadMemories();
         fillValue();
       };
+      let styleItems = [];
+      const drawStyle = () => renderChips($('sumStyleChips'), styleItems, [$('sumStyle').value], false, v => { $('sumStyle').value = v; drawStyle(); });
+      const drawScope = () => renderChips($('sumScopeChips'), [['all', 'Toda mi vida', 'book'], ['year', 'Un año', 'cal'], ['person', 'Una persona', 'users']], [$('sumScope').value], false, v => { $('sumScope').value = v; $('sumValue').value = ''; drawScope(); fillValue(); });
       function fillValue() {
-        const sc = $('sumScope').value, sel = $('sumValue');
-        sel.classList.toggle('hidden', sc === 'all');
-        if (sc === 'year') {
-          const ys = [...new Set(memories.filter(m => m.date_happened).map(m => m.date_happened.slice(0, 4)))].sort().reverse();
-          sel.innerHTML = ys.map(y => `<option>${y}</option>`).join('') || '<option value="">Sin años</option>';
-        } else if (sc === 'person') {
-          const ps = [...new Set(memories.flatMap(m => (m.people || []).map(p => p.name).filter(Boolean)))].sort((a, b) => a.localeCompare(b, 'es'));
-          sel.innerHTML = ps.map(p => `<option>${esc(p)}</option>`).join('') || '<option value="">Sin personas</option>';
+        const sc = $('sumScope').value, box = $('sumValueChips');
+        box.classList.toggle('hidden', sc === 'all');
+        let vals = [];
+        if (sc === 'year') vals = [...new Set(memories.filter(m => m.date_happened).map(m => m.date_happened.slice(0, 4)))].sort().reverse();
+        else if (sc === 'person') vals = [...new Set(memories.flatMap(m => (m.people || []).map(p => p.name).filter(Boolean)))].sort((a, b) => a.localeCompare(b, 'es'));
+        if (sc !== 'all') {
+          if (!vals.includes($('sumValue').value)) $('sumValue').value = vals[0] || '';
+          if (!vals.length) box.innerHTML = `<span class="home-sub" style="margin:0">${sc === 'year' ? 'Aún no hay años con recuerdos' : 'Aún no hay personas en tus recuerdos'}</span>`;
+          else renderChips(box, vals.map(v => [v, v]), [$('sumValue').value], false, v => { $('sumValue').value = v; fillValue(); });
         }
       }
-      $('sumScope').onchange = fillValue;
       $('sumGo').onclick = async () => {
         $('sumMsg').innerHTML = '<div class="media-status">Escribiendo tu historia…</div>';
         try {
@@ -1640,12 +1763,12 @@
     // ===== LÍNEA DE VIDA =====
     (function () {
       const KINDS = {
-        general:   { label: 'General',     color: '#33423A' },
-        school:    { label: 'Escolar',     color: '#7F938A' },
-        work:      { label: 'Profesional', color: '#6E8277' },
-        personal:  { label: 'Personal',    color: '#5E8F6E' },
-        residence: { label: 'Residencia',  color: '#9AA79F' },
-        history:   { label: 'Historia',    color: '#8E8E7E' }
+        general:   { label: 'General',     color: '#0D1846' },
+        school:    { label: 'Escolar',     color: '#007D79' },
+        work:      { label: 'Profesional', color: '#DB3907' },
+        personal:  { label: 'Personal',    color: '#D02670' },
+        residence: { label: 'Residencia',  color: '#1B883C' },
+        history:   { label: 'Historia',    color: '#8A3FF5' }
       };
       const ROWS = ['general', 'history', 'school', 'work', 'personal', 'residence'];
       const DAY = 86400000;
@@ -1671,6 +1794,7 @@
         try {
           const [p, s] = await Promise.all([api('/profile'), api('/stages')]);
           profile = p.data; stages = s.data || [];
+          birthDate = (profile && profile.birth_date) || '';
           await loadMemories();
         } catch (e) {
           $('tlMsg').innerHTML = '<div class="error">No se pudo cargar tu línea de vida. Inténtalo de nuevo.</div>'; return;
@@ -1713,13 +1837,13 @@
       async function saveBirth() {
         const r = await api('/profile', { method: 'PUT', body: { birth_date: $('tlBirthDate').value, birth_place: $('tlBirthPlace').value } });
         if (!r.success) return say(r.error);
-        profile = r.data; render();
+        profile = r.data; birthDate = profile.birth_date || ''; render();
       }
 
       function drawTimeline() {
         const W = Math.max(300, Math.ceil(xOf(endMs)));
         $('tlWrap').classList.remove('hidden');
-        $('tlLabels').innerHTML = '<div class="tl-axis-sp"></div>' + ROWS.map(k => `<div class="tl-label" style="color:${KINDS[k].color}">${KINDS[k].label}</div>`).join('');
+        $('tlLabels').innerHTML = '<div class="tl-axis-sp"></div>' + ROWS.map(k => `<div class="tl-label" style="color:${KINDS[k].color};border-left:4px solid ${KINDS[k].color}">${KINDS[k].label}</div>`).join('');
 
         // Marcas de años: más o menos densas según el zoom
         const step = ppy >= 80 ? 1 : ppy >= 32 ? 2 : ppy >= 14 ? 5 : 10;
@@ -1761,7 +1885,7 @@
         }
         $('tlInner').style.width = W + 'px';
         $('tlInner').innerHTML = `<div class="tl-axis">${ticks}</div>` +
-          ROWS.map(k => `<div class="tl-row" data-row="${k}">${grid}${rows[k]}</div>`).join('') + selBox;
+          ROWS.map(k => `<div class="tl-row" data-row="${k}" style="background:${KINDS[k].color}14">${grid}${rows[k]}</div>`).join('') + selBox;
         bindTimeline();
       }
 
@@ -1857,7 +1981,7 @@
           html += '<h4>' + ic('book') + ' Tus recuerdos</h4>';
           html += mems.length ? mems.map(m => {
             const audios = (m.media || []).filter(x => x.kind === 'audio');
-            return `<div class="tl-item"><strong>${esc(m.title)}</strong><small>${esc(fmt(m.date_happened))}${m.place ? ' · ' + esc(m.place) : ''}</small>
+            return `<div class="tl-item"><strong>${esc(m.title)}</strong><small>${esc(fmt(m.date_happened))}${ageLabel(m.date_happened) ? ' · ' + esc(ageLabel(m.date_happened)) : ''}${m.place ? ' · ' + esc(m.place) : ''}</small>
               ${(m.media || []).filter(x => x.kind === 'image').map(a => `<img loading="lazy" src="${a.url}" style="width:100%;max-height:220px;object-fit:contain;border-radius:8px;margin-top:6px;background:#000" alt="">`).join('')}
               ${(m.media || []).filter(x => x.kind === 'video').map(a => `<video controls playsinline preload="none" src="${a.url}" style="width:100%;max-height:220px;margin-top:6px;border-radius:8px;background:#000"></video>`).join('')}
               ${audios.map(a => `<audio controls preload="none" src="${a.url}" style="width:100%;margin-top:6px"></audio>`).join('')}

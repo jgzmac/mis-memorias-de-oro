@@ -18,6 +18,9 @@ Actualizada: 2026-10-29. Orden propuesto (se puede cambiar).
 - Presentación web para Dirección/patrocinadores: `docs/presentacion.html` (autocontenida, con demo de voz, línea de vida y resúmenes interactivos). También existe `docs/Mis-Memorias-de-Oro-presentacion.pptx`.
 - Onboarding (A0): en pausa, el usuario aún no lo tiene claro.
 
+- Look&feel móvil (2026-10-30, en local, sin commit): botones propios en Inicio (voz, escribir, foto, vídeo); etiquetas con icono en lugar de categoría (con etiquetas propias); ánimo con 4 iconos; orden con botones; resumen con chips; filtros detrás de un botón "Filtros"; edad ("Tenías N años") en cada fecha de recuerdo, calculada con la fecha de nacimiento del perfil.
+- Ronda 2 de look&feel (2026-10-30, en local, sin commit): tema azul estilo Mi Sanitas con fuente Metropolis; botones solo con icono (voz, escribir, foto, vídeo, audio) en Inicio y Crear; "Mis recuerdos recientes" con edad y etiquetas; etiquetas automáticas según el análisis (texto y escenas) preseleccionadas al revisar; cada fila de la línea de vida con su color.
+
 ## Principios de diseño
 - **Mobile-first:** se diseña primero para el móvil. Botones grandes, una acción principal por pantalla, formularios cortos.
 - **Coste cero en el MVP, con opción de cambiar:** motores locales/gratuitos; cada servicio de IA detrás de un "proveedor" intercambiable.
