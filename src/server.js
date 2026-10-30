@@ -19,6 +19,7 @@ const { receive, analyzeAudio, getJob } = require('./api/audio');
 const { getProfile, updateProfile, listStages, createStage, updateStage, deleteStage, getHistory } = require('./api/life');
 const visual = require('./api/visual');
 const summaryApi = require('./api/summary');
+const share = require('./api/share');
 const vision = require('./providers/vision');
 const provider = require('./providers');
 
@@ -89,6 +90,13 @@ app.get('/api/history', requireAuth, getHistory);
 // ===== RESUMEN DE VIDA =====
 app.get('/api/summary/styles', requireAuth, (req, res) => res.json({ success: true, data: summaryApi.styles() }));
 app.post('/api/summary', requireAuth, summaryApi.summary);
+
+// ===== COMPARTIR (enlace secreto) =====
+app.post('/api/share', requireAuth, share.create);
+app.get('/api/share', requireAuth, share.list);
+app.delete('/api/share/:token', requireAuth, share.remove);
+app.get('/c/:token', share.page);
+app.get('/c/:token/media/:id', share.media);
 
 // ===== FALLBACK PARA SPA =====
 app.get('*', (req, res) => {

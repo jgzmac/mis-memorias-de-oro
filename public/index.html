@@ -755,7 +755,8 @@
       </div>
       <div id="sumMsg"></div>
       <div id="sumOut" class="sum-out hidden"></div>
-      <div class="button-group hidden" id="sumActions"><button type="button" class="btn-secondary" id="sumCopy">Copiar</button><button type="button" class="btn-secondary" id="sumDownload">Descargar</button></div>
+      <div id="sumShareOut"></div>
+      <div class="button-group hidden" id="sumActions"><button type="button" class="btn-primary" id="sumShare">Compartir</button><button type="button" class="btn-secondary" id="sumCopy">Copiar</button><button type="button" class="btn-secondary" id="sumDownload">Descargar</button></div>
     </div>
 
     <div id="viewLife" class="card hidden">
@@ -1733,6 +1734,21 @@
           else renderChips(box, vals.map(v => [v, v]), [$('sumValue').value], false, v => { $('sumValue').value = v; fillValue(); });
         }
       }
+      let sumMemoryIds = [];
+      $('sumShare').onclick = async () => {
+        $('sumShareOut').innerHTML = '<div class="media-status">Creando el enlace…</div>';
+        try {
+          const r = await (await fetch(`${API_URL}/share`, { method: 'POST', headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ text: $('sumOut').textContent, memoryIds: sumMemoryIds }) })).json();
+          if (!r.success) { $('sumShareOut').innerHTML = `<div class="error">${esc(r.error)}</div>`; return; }
+          const url = location.origin + r.data.path;
+          $('sumShareOut').innerHTML = `<div class="pw-box"><h3>Enlace para compartir</h3><input type="text" id="shareUrl" readonly value="${esc(url)}"><div class="hint">Solo lo ve quien tenga este enlace. Incluye el resumen, los recuerdos y sus fotos y vídeos.</div><div class="button-group"><button type="button" class="btn-primary" id="shareSend">Enviar</button><button type="button" class="btn-secondary" id="shareCopy">Copiar enlace</button><button type="button" class="btn-secondary" id="shareOff">Desactivar</button></div></div>`;
+          $('shareUrl').onclick = () => $('shareUrl').select();
+          $('shareSend').onclick = async () => { try { if (navigator.share) await navigator.share({ title: 'Mis memorias de oro', url }); else { await navigator.clipboard.writeText(url); $('shareSend').textContent = 'Enlace copiado'; } } catch (e) { /* cancelado */ } };
+          $('shareCopy').onclick = async () => { try { await navigator.clipboard.writeText(url); $('shareCopy').textContent = 'Copiado'; } catch (e) { $('shareUrl').select(); } };
+          $('shareOff').onclick = async () => { await fetch(`${API_URL}/share/${r.data.token}`, { method: 'DELETE' }); $('sumShareOut').innerHTML = '<div class="success">Enlace desactivado. Ya nadie puede verlo.</div>'; };
+        } catch (e) { $('sumShareOut').innerHTML = '<div class="error">No se pudo crear el enlace.</div>'; }
+      };
       $('sumGo').onclick = async () => {
         $('sumMsg').innerHTML = '<div class="media-status">Escribiendo tu historia…</div>';
         try {
@@ -1740,7 +1756,7 @@
             body: JSON.stringify({ style: $('sumStyle').value, scope: $('sumScope').value, value: $('sumValue').value }) })).json();
           if (!r.success) { $('sumMsg').innerHTML = `<div class="error">${esc(r.error)}</div>`; return; }
           $('sumMsg').innerHTML = '';
-          $('sumOut').textContent = r.data.text;
+          $('sumOut').textContent = r.data.text; sumMemoryIds = r.data.memoryIds || []; $('sumShareOut').innerHTML = '';
           $('sumOut').classList.remove('hidden'); $('sumActions').classList.remove('hidden');
         } catch (e) { $('sumMsg').innerHTML = '<div class="error">No se pudo crear el resumen.</div>'; }
       };
