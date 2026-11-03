@@ -517,6 +517,11 @@
     .circle-item .ci-txt small { display: block; color: var(--gris); }
     .circle-item button { padding: 6px 10px; }
     .circle-form { display: grid; gap: 8px; margin: 8px 0 16px; }
+    .circle-prop .cp-row { display: flex; align-items: center; gap: 12px; padding: 10px 12px; margin: 6px 0; background: var(--fondo-1); border: 2px solid transparent; border-radius: 12px; cursor: pointer; }
+    .circle-prop .cp-row:has(input:checked) { background: var(--salvia-claro); border-color: var(--salvia); }
+    .circle-prop .cp-row .avatar { width: 40px; height: 40px; flex: none; font-size: 1.1em; }
+    .circle-prop .cp-row small { display: block; color: var(--gris); }
+    .circle-prop input[type=checkbox] { accent-color: var(--salvia-hover); margin-left: auto; }
     .circle-prop label { display: flex; align-items: center; gap: 8px; padding: 6px 0; font-size: 1.05em; }
     .circle-prop input[type=checkbox] { width: 22px; height: 22px; flex: none; }
     .qr-box { display: flex; flex-direction: column; align-items: center; gap: 8px; margin: 12px 0; }
@@ -1059,7 +1064,7 @@
       <p style="margin-bottom:8px">Estas personas salen en tu recuerdo y aún no están en tu círculo:</p>
       <div id="circleTipList"></div>
       <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px">
-        <button type="button" id="circleTipYes" style="flex:1">Añadir las marcadas</button>
+        <button type="button" class="btn-primary" id="circleTipYes" style="flex:1">Añadir las marcadas</button>
         <button type="button" class="btn-secondary" id="circleTipNo">Ahora no</button>
       </div>
     </div>
@@ -1885,7 +1890,7 @@
       });
       if (!fresh.length) return;
       const box = document.getElementById('circleTipList');
-      box.innerHTML = fresh.map((p, i) => `<label><input type="checkbox" checked data-i="${i}"> <span><strong>${esc(p.name)}</strong>${p.relation ? ' · ' + esc(p.relation) : ''}</span></label>`).join('');
+      box.innerHTML = fresh.map((p, i) => `<label class="cp-row"><span class="avatar" aria-hidden="true">${esc(p.name.charAt(0).toUpperCase())}</span><span><strong>${esc(p.name)}</strong>${p.relation ? '<small>' + esc(p.relation) + '</small>' : ''}</span><input type="checkbox" checked data-i="${i}" aria-label="Añadir a ${esc(p.name)}"></label>`).join('');
       const modal = document.getElementById('circleTip');
       modal.classList.remove('hidden');
       document.getElementById('circleTipNo').onclick = () => modal.classList.add('hidden');

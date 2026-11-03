@@ -77,6 +77,49 @@ function readVideoMeta(buffer) {
   return out;
 }
 
+// Títulos con más cariño que "Foto de...": [sin lugar, con lugar]. {p} = lugar
+const TITLES = {
+  'playa': ['Un día de playa', 'Un día de playa en {p}'],
+  'montaña': ['Días de montaña', 'Montaña en {p}'],
+  'campo': ['Un paseo por el campo', 'Un paseo por el campo en {p}'],
+  'ciudad': ['Paseando por la ciudad', 'Paseando por {p}'],
+  'monumento': ['Descubriendo un lugar con historia', 'Visitando {p}'],
+  'una boda': ['Un día de boda', 'Una boda en {p}'],
+  'un cumpleaños': ['Un cumpleaños para recordar', 'Un cumpleaños en {p}'],
+  'una celebración navideña': ['Navidad en familia', 'Navidad en {p}'],
+  'una comida o una mesa': ['Una comida en buena compañía', 'Comiendo en {p}'],
+  'comida': ['Buena mesa y buenos momentos', 'Buena mesa en {p}'],
+  'una graduación': ['El día de la graduación', 'Graduación en {p}'],
+  'un colegio o una clase': ['Días de colegio', 'Días de colegio en {p}'],
+  'una oficina': ['Días de trabajo', 'Trabajando en {p}'],
+  'deporte': ['Día de deporte', 'Deporte en {p}'],
+  'un bebé': ['Un pequeño gran momento', 'Un pequeño gran momento en {p}'],
+  'niños jugando': ['Risas y juegos', 'Risas y juegos en {p}'],
+  'un grupo de personas': ['Juntos otra vez', 'Juntos en {p}'],
+  'una familia': ['En familia', 'En familia en {p}'],
+  'una persona': ['Un buen retrato', 'Un buen retrato en {p}'],
+  'una pareja': ['Dos en buena compañía', 'Dos en {p}'],
+  'una mascota': ['Mi compañero de cuatro patas', 'Mi compañero de cuatro patas en {p}'],
+  'animales': ['Entre animales', 'Entre animales en {p}'],
+  'un jardín o flores': ['Entre flores', 'Entre flores en {p}'],
+  'una casa': ['Mi casa', 'Una casa en {p}'],
+  'el interior de una casa': ['En casa', 'En casa en {p}'],
+  'un coche o un viaje por carretera': ['De viaje por carretera', 'Camino a {p}'],
+  'un avión o un aeropuerto': ['Rumbo a una nueva aventura', 'Viajando a {p}'],
+  'un barco': ['Navegando', 'Navegando por {p}'],
+  'una iglesia': ['Un momento de recogimiento', 'Un momento especial en {p}'],
+  'una fiesta': ['De fiesta', 'De fiesta en {p}'],
+  'un atardecer': ['Un atardecer inolvidable', 'Un atardecer en {p}'],
+  'nieve': ['Un día de nieve', 'Nieve en {p}'],
+  'un documento o una foto antigua': ['Un recuerdo de antaño', 'Un recuerdo de antaño en {p}']
+};
+function inspiredTitle(scene, place, isImage) {
+  const t = scene && TITLES[scene];
+  if (t) return place ? t[1].replace('{p}', place) : t[0];
+  if (place) return `Visitando ${place}`;
+  return isImage ? 'Un momento para recordar' : 'Un vídeo para recordar';
+}
+
 function analyze(req, res) {
   const f = req.files && req.files.file && req.files.file[0];
   if (!f) return res.status(400).json({ success: false, error: 'Falta el archivo' });
@@ -143,10 +186,7 @@ function analyze(req, res) {
     const type = draft.event_type || (best && best.type) || '';
     const category = draft.category && draft.category !== 'General' ? draft.category : (best && best.category) || 'General';
     const label = isImage ? 'Foto' : 'Vídeo';
-    const when = place ? ` en ${place}` : '';
-    const title = (draft.title && speech)
-      ? draft.title
-      : (seen[0] ? `${label} de ${seen[0].es}${when}` : `${label}${when}`);
+    const title = (draft.title && speech) ? draft.title : inspiredTitle(seen[0] && seen[0].es, place, isImage);
     const content = speech
       ? speech
       : (sceneText ? `${label} donde aparece ${sceneText}.` : '');
@@ -169,4 +209,4 @@ function analyze(req, res) {
   res.status(202).json({ success: true, data: { jobId, mediaId } });
 }
 
-module.exports = { receive, analyze, readVideoMeta, IMAGE_TYPES, VIDEO_TYPES };
+module.exports = { receive, analyze, readVideoMeta, inspiredTitle, IMAGE_TYPES, VIDEO_TYPES };
