@@ -13,11 +13,11 @@ Actualizada: 2026-10-30. Orden propuesto (se puede cambiar).
 
 - Menú inferior con iconos (Inicio, Recuerdos, Crear, Línea de vida, Perfil con salir), buscador y orden (más reciente primero por defecto) en Recuerdos y Línea de vida; probado con simulación del navegador, pendiente de que el usuario lo vea en pantalla
 
-- Resumen de vida (B2): sección "Resumen" en el menú; 4 estilos positivos (amable, alegre, nostálgico-cálido, entusiasta); de toda la vida, un año o una persona; copiar y descargar. Redacción local con plantillas (gratis); proveedor intercambiable en `src/providers/summary.js`.
+- Resumen de vida (B2): sección "Resumen" en el menú; 4 estilos positivos (literario, alegre, nostálgico-cálido, entusiasta); de toda la vida, un año o una persona; copiar y descargar. Redacción local con plantillas (gratis); proveedor intercambiable en `src/providers/summary.js`.
 - Filtros avanzados (año, tipo, lugar, persona) en Recuerdos y Línea de vida.
 - Presentación web para Dirección/patrocinadores: `docs/presentacion.html` (autocontenida, con demo de voz, línea de vida y resúmenes interactivos). También existe `docs/Mis-Memorias-de-Oro-presentacion.pptx`.
 - Onboarding (A0): hecho. 3 pantallas de presentación y "Empecemos con un recuerdo"; se puede saltar y volver a verlo desde Perfil. La fecha y el lugar de nacimiento se piden al crear la cuenta.
-- Compartir el resumen como web con enlace secreto (texto y fotos), desactivable. Estilos de resumen: amable, alegre, cálido, entusiasta y ejecutivo, con redacción narrativa.
+- Compartir el resumen como web con enlace secreto (texto y fotos), desactivable. Estilos de resumen: literario, alegre, cálido, entusiasta y ejecutivo, con redacción narrativa.
 - Cámara directa (foto y vídeo), fecha futura bloqueada, lugares que se completan ("Madrid" pasa a "Madrid, España"), aviso de perfil incompleto en Inicio y en Perfil.
 - Inicio nuevo y estilo "Hogar" (terracota, verde salvia y crema; fuente Nunito): buscador, "¿Te acuerdas de este día?" con un recuerdo positivo al azar, botones de subir siempre visibles.
 - Límite de vida: ningún recuerdo puede pasar de 120 años desde el nacimiento (decidido 2026-10-30; resuelve la duda de la "fecha final").
@@ -26,7 +26,10 @@ Actualizada: 2026-10-30. Orden propuesto (se puede cambiar).
 - Ronda 2 de look&feel (2026-10-30, en local, sin commit): tema azul estilo Mi Sanitas con fuente Metropolis (hoy Nunito); botones solo con icono (voz, escribir, foto, vídeo, audio) en Inicio y Crear; "Mis recuerdos recientes" con edad y etiquetas; etiquetas automáticas según el análisis (texto y escenas) preseleccionadas al revisar; cada fila de la línea de vida con su color.
 
 ## Próximos pasos (pedidos 2026-10-30)
-- **Compartir el resumen:** botón "Compartir" en la sección Resumen (además de copiar y descargar).
+- ~~Compartir el resumen~~: hecho, ya sale el botón en Resumen.
+- **Quitar el enlace "abrir audio en pestaña nueva"** de los recuerdos con audio.
+- **"¿Quieres saber qué pasó ese día?"** en cada recuerdo: opción para consultar los hechos históricos (mundo y España) de la fecha del recuerdo.
+- **Ampliar los hechos históricos** (`src/data/history.json`), con fuentes, para que el usuario los apruebe.
 - **Web del resumen:** generar una página web con el resumen de vida, con enlaces a cada recuerdo y a su material audiovisual (fotos, vídeos, audios). Pendiente decidir privacidad: quién puede verla y cómo se protege el enlace.
 - ~~Fecha final~~: resuelto, edad máxima de 120 años desde el nacimiento.
 
@@ -66,7 +69,7 @@ Actualizada: 2026-10-30. Orden propuesto (se puede cambiar).
 1. **Fase N - Navegación inferior** (arriba). Tamaño medio, solo interfaz.
 2. **Pruebas y ajustes de lo ya hecho:** feedback del usuario sobre la línea de vida y sobre fotos/vídeos reales; probar vídeo con voz; fotos HEIC (iPhone).
 3. **Fase A0 - Onboarding inicial:** asistente paso a paso la primera vez (nombre, nacimiento, lugar, dónde vive; explicación breve de funciones), se puede saltar y completar luego en Perfil. Prioridad media-baja.
-4. **Fase B2 - Resumen de vida automático:** historia por escrito con tono siempre positivo y estilos a elegir (amable, alegre, entusiasta, nostálgico-cálido); alcance: toda la vida, una etapa, un año o una persona. Modelo local gratuito con opción de pasar a OpenAI. Si se usa servicio externo, avisar y pedir consentimiento.
+4. **Fase B2 - Resumen de vida automático:** historia por escrito con tono siempre positivo y estilos a elegir (literario, alegre, entusiasta, nostálgico-cálido); alcance: toda la vida, una etapa, un año o una persona. Modelo local gratuito con opción de pasar a OpenAI. Si se usa servicio externo, avisar y pedir consentimiento.
 5. **Fase E - Mejoras transversales:**
    - Filtros avanzados en la lista y la línea de vida (persona, lugar, fecha, tipo); el buscador básico y el orden van antes (ver sección arriba)
    - Mejor extracción del audio con ejemplos reales; ampliar ciudades y escenas de fotos

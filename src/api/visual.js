@@ -195,7 +195,7 @@ function analyze(req, res) {
     const SCENE_TAGS = { 'playa': 'Playa', 'montaña': 'Naturaleza', 'campo': 'Naturaleza', 'una boda': 'Boda', 'un cumpleaños': 'Cumpleaños',
       'una celebración navideña': 'Navidad', 'una comida o una mesa': 'Comida', 'comida': 'Comida', 'una graduación': 'Estudios', 'un colegio o una clase': 'Estudios',
       'una oficina': 'Trabajo', 'una familia': 'Familia', 'una mascota': 'Mascotas', 'un avión o un aeropuerto': 'Viaje', 'un barco': 'Viaje',
-      'un coche o un viaje por carretera': 'Viaje', 'un jardín o flores': 'Naturaleza', 'nieve': 'Vacaciones' };
+      'un coche o un viaje por carretera': 'Viaje', 'un jardín o flores': 'Naturaleza', 'nieve': 'Vacaciones', 'deporte': 'Deporte', 'monumento': 'Turismo', 'ciudad': 'Turismo' };
     const tags = [...(draft.tags || [])];
     seen.filter(s => s.score >= 0.2).forEach(s => { const t = SCENE_TAGS[s.es]; if (t && !tags.includes(t)) tags.push(t); });
 

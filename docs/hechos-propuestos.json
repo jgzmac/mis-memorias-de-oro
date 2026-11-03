@@ -1,0 +1,713 @@
+[
+ {
+  "date": "1901-12-12",
+  "scope": "mundo",
+  "importance": 2,
+  "text": "Marconi recibe la primera señal de radio transatlántica",
+  "positive": true,
+  "source": "https://es.wikipedia.org/wiki/Guglielmo_Marconi"
+ },
+ {
+  "date": "1902-03-06",
+  "scope": "españa",
+  "importance": 2,
+  "text": "Se funda el Madrid Football Club, origen del Real Madrid",
+  "positive": true,
+  "source": "https://es.wikipedia.org/wiki/Real_Madrid_Club_de_Fútbol"
+ },
+ {
+  "date": "1903-07-01",
+  "scope": "mundo",
+  "importance": 2,
+  "text": "Comienza el primer Tour de Francia",
+  "positive": true,
+  "source": "https://es.wikipedia.org/wiki/Tour_de_Francia_1903"
+ },
+ {
+  "date": "1903-12-17",
+  "scope": "mundo",
+  "importance": 3,
+  "text": "Los hermanos Wright realizan el primer vuelo a motor",
+  "positive": true,
+  "source": "https://es.wikipedia.org/wiki/Hermanos_Wright"
+ },
+ {
+  "date": "1908-10-01",
+  "scope": "mundo",
+  "importance": 2,
+  "text": "Ford presenta el Modelo T, el coche para todos",
+  "positive": true,
+  "source": "https://es.wikipedia.org/wiki/Ford_T"
+ },
+ {
+  "date": "1909-07-25",
+  "scope": "mundo",
+  "importance": 2,
+  "text": "Louis Blériot cruza en avión el Canal de la Mancha",
+  "positive": true,
+  "source": "https://es.wikipedia.org/wiki/Louis_Blériot"
+ },
+ {
+  "date": "1911-12-14",
+  "scope": "mundo",
+  "importance": 2,
+  "text": "Amundsen y su expedición llegan al Polo Sur",
+  "positive": true,
+  "source": "https://es.wikipedia.org/wiki/Roald_Amundsen"
+ },
+ {
+  "date": "1914-08-15",
+  "scope": "mundo",
+  "importance": 2,
+  "text": "Se abre al tráfico el Canal de Panamá",
+  "positive": true,
+  "source": "https://es.wikipedia.org/wiki/Canal_de_Panamá"
+ },
+ {
+  "date": "1919-10-17",
+  "scope": "españa",
+  "importance": 2,
+  "text": "Alfonso XIII inaugura el Metro de Madrid",
+  "positive": true,
+  "source": "https://es.wikipedia.org/wiki/Metro_de_Madrid"
+ },
+ {
+  "date": "1923-01-09",
+  "scope": "españa",
+  "importance": 2,
+  "text": "Juan de la Cierva hace volar con éxito el primer autogiro",
+  "positive": true,
+  "source": "https://es.wikipedia.org/wiki/Juan_de_la_Cierva_y_Codorníu"
+ },
+ {
+  "date": "1930-07-13",
+  "scope": "mundo",
+  "importance": 2,
+  "text": "Comienza en Uruguay el primer Mundial de fútbol",
+  "positive": true,
+  "source": "https://es.wikipedia.org/wiki/Copa_Mundial_de_Fútbol_de_1930"
+ },
+ {
+  "date": "1932-07-30",
+  "scope": "mundo",
+  "importance": 2,
+  "text": "Se inauguran los Juegos Olímpicos de Los Ángeles",
+  "positive": true,
+  "source": "https://es.wikipedia.org/wiki/Juegos_Olímpicos_de_Los_Ángeles_1932"
+ },
+ {
+  "date": "1948-07-29",
+  "scope": "mundo",
+  "importance": 2,
+  "text": "Se inauguran los Juegos Olímpicos de Londres",
+  "positive": true,
+  "source": "https://es.wikipedia.org/wiki/Juegos_Olímpicos_de_Londres_1948"
+ },
+ {
+  "date": "1948-12-10",
+  "scope": "mundo",
+  "importance": 3,
+  "text": "La ONU aprueba la Declaración Universal de los Derechos Humanos",
+  "positive": true,
+  "source": "https://es.wikipedia.org/wiki/Declaración_Universal_de_los_Derechos_Humanos"
+ },
+ {
+  "date": "1953-05-29",
+  "scope": "mundo",
+  "importance": 3,
+  "text": "Hillary y Tenzing llegan a la cima del Everest",
+  "positive": true,
+  "source": "https://es.wikipedia.org/wiki/Edmund_Hillary"
+ },
+ {
+  "date": "1954-05-06",
+  "scope": "mundo",
+  "importance": 1,
+  "text": "Roger Bannister baja de los cuatro minutos en la milla",
+  "positive": true,
+  "source": "https://es.wikipedia.org/wiki/Roger_Bannister"
+ },
+ {
+  "date": "1956-10-28",
+  "scope": "españa",
+  "importance": 3,
+  "text": "Televisión Española inicia sus emisiones regulares",
+  "positive": true,
+  "source": "https://es.wikipedia.org/wiki/Televisión_Española"
+ },
+ {
+  "date": "1956-11-22",
+  "scope": "mundo",
+  "importance": 2,
+  "text": "Se inauguran los Juegos Olímpicos de Melbourne",
+  "positive": true,
+  "source": "https://es.wikipedia.org/wiki/Juegos_Olímpicos_de_Melbourne_1956"
+ },
+ {
+  "date": "1960-08-25",
+  "scope": "mundo",
+  "importance": 2,
+  "text": "Se inauguran los Juegos Olímpicos de Roma",
+  "positive": true,
+  "source": "https://es.wikipedia.org/wiki/Juegos_Olímpicos_de_Roma_1960"
+ },
+ {
+  "date": "1964-06-21",
+  "scope": "españa",
+  "importance": 3,
+  "text": "España gana la Eurocopa 1964 en el Bernabéu",
+  "positive": true,
+  "source": "https://es.wikipedia.org/wiki/Eurocopa_1964"
+ },
+ {
+  "date": "1964-10-10",
+  "scope": "mundo",
+  "importance": 2,
+  "text": "Se inauguran los Juegos Olímpicos de Tokio",
+  "positive": true,
+  "source": "https://es.wikipedia.org/wiki/Juegos_Olímpicos_de_Tokio_1964"
+ },
+ {
+  "date": "1966-07-30",
+  "scope": "mundo",
+  "importance": 2,
+  "text": "Inglaterra gana el Mundial de fútbol en Wembley",
+  "positive": true,
+  "source": "https://es.wikipedia.org/wiki/Copa_Mundial_de_Fútbol_de_1966"
+ },
+ {
+  "date": "1967-12-03",
+  "scope": "mundo",
+  "importance": 3,
+  "text": "Christiaan Barnard realiza el primer trasplante de corazón humano",
+  "positive": true,
+  "source": "https://es.wikipedia.org/wiki/Christiaan_Barnard"
+ },
+ {
+  "date": "1968-04-06",
+  "scope": "españa",
+  "importance": 3,
+  "text": "Massiel gana Eurovisión para España con «La, la, la»",
+  "positive": true,
+  "source": "https://es.wikipedia.org/wiki/Festival_de_la_Canción_de_Eurovisión_1968"
+ },
+ {
+  "date": "1968-10-12",
+  "scope": "mundo",
+  "importance": 2,
+  "text": "Se inauguran los Juegos Olímpicos de México",
+  "positive": true,
+  "source": "https://es.wikipedia.org/wiki/Juegos_Olímpicos_de_México_1968"
+ },
+ {
+  "date": "1970-04-11",
+  "scope": "mundo",
+  "importance": 2,
+  "text": "Despega el Apolo 13; días después la tripulación regresa sana y salva a la Tierra",
+  "positive": true,
+  "source": "https://en.wikipedia.org/wiki/Apollo_13"
+ },
+ {
+  "date": "1970-06-21",
+  "scope": "mundo",
+  "importance": 3,
+  "text": "Brasil gana el Mundial de fútbol de México y se proclama campeón por tercera vez",
+  "positive": true,
+  "source": "https://en.wikipedia.org/wiki/1970_FIFA_World_Cup"
+ },
+ {
+  "date": "1971-04-19",
+  "scope": "mundo",
+  "importance": 2,
+  "text": "Se lanza Salyut 1, la primera estación espacial de la historia",
+  "positive": true,
+  "source": "https://en.wikipedia.org/wiki/Salyut_1"
+ },
+ {
+  "date": "1972-08-26",
+  "scope": "mundo",
+  "importance": 3,
+  "text": "Se inauguran en Múnich los Juegos Olímpicos de verano de 1972",
+  "positive": true,
+  "source": "https://en.wikipedia.org/wiki/1972_Summer_Olympics"
+ },
+ {
+  "date": "1974-04-25",
+  "scope": "mundo",
+  "importance": 2,
+  "text": "La Revolución de los Claveles pone fin a la dictadura en Portugal y abre paso a la democracia",
+  "positive": true,
+  "source": "https://en.wikipedia.org/wiki/Carnation_Revolution"
+ },
+ {
+  "date": "1974-07-07",
+  "scope": "mundo",
+  "importance": 3,
+  "text": "Alemania Occidental gana el Mundial de fútbol disputado en su propio país",
+  "positive": true,
+  "source": "https://en.wikipedia.org/wiki/1974_FIFA_World_Cup_final"
+ },
+ {
+  "date": "1976-07-17",
+  "scope": "mundo",
+  "importance": 3,
+  "text": "Se inauguran en Montreal los Juegos Olímpicos de verano de 1976",
+  "positive": true,
+  "source": "https://en.wikipedia.org/wiki/1976_Summer_Olympics"
+ },
+ {
+  "date": "1976-07-20",
+  "scope": "mundo",
+  "importance": 2,
+  "text": "La sonda Viking 1 aterriza en Marte y envía las primeras fotos desde su superficie",
+  "positive": true,
+  "source": "https://en.wikipedia.org/wiki/Viking_1"
+ },
+ {
+  "date": "1977-08-20",
+  "scope": "mundo",
+  "importance": 2,
+  "text": "Se lanza la sonda Voyager 2, que explorará los planetas exteriores",
+  "positive": true,
+  "source": "https://en.wikipedia.org/wiki/Voyager_2"
+ },
+ {
+  "date": "1977-09-05",
+  "scope": "mundo",
+  "importance": 2,
+  "text": "Se lanza la sonda Voyager 1, hoy el objeto humano más lejano de la Tierra",
+  "positive": true,
+  "source": "https://en.wikipedia.org/wiki/Voyager_1"
+ },
+ {
+  "date": "1978-06-25",
+  "scope": "mundo",
+  "importance": 3,
+  "text": "Argentina gana su primer Mundial de fútbol",
+  "positive": true,
+  "source": "https://en.wikipedia.org/wiki/1978_FIFA_World_Cup_final"
+ },
+ {
+  "date": "1978-09-17",
+  "scope": "mundo",
+  "importance": 2,
+  "text": "Egipto e Israel firman los Acuerdos de Camp David, un paso hacia la paz",
+  "positive": true,
+  "source": "https://en.wikipedia.org/wiki/Camp_David_Accords"
+ },
+ {
+  "date": "1979-03-26",
+  "scope": "mundo",
+  "importance": 2,
+  "text": "Egipto e Israel firman su tratado de paz en Washington",
+  "positive": true,
+  "source": "https://en.wikipedia.org/wiki/Egypt–Israel_peace_treaty"
+ },
+ {
+  "date": "1980-07-19",
+  "scope": "mundo",
+  "importance": 3,
+  "text": "Se inauguran en Moscú los Juegos Olímpicos de verano de 1980",
+  "positive": true,
+  "source": "https://en.wikipedia.org/wiki/1980_Summer_Olympics"
+ },
+ {
+  "date": "1981-04-12",
+  "scope": "mundo",
+  "importance": 2,
+  "text": "Despega el Columbia, primer vuelo del transbordador espacial",
+  "positive": true,
+  "source": "https://en.wikipedia.org/wiki/STS-1"
+ },
+ {
+  "date": "1981-07-29",
+  "scope": "mundo",
+  "importance": 2,
+  "text": "Se casan el príncipe Carlos y Diana Spencer en la catedral de San Pablo, en Londres",
+  "positive": true,
+  "source": "https://en.wikipedia.org/wiki/Wedding_of_Prince_Charles_and_Lady_Diana_Spencer"
+ },
+ {
+  "date": "1981-08-01",
+  "scope": "mundo",
+  "importance": 1,
+  "text": "Nace MTV, el primer canal de televisión dedicado a los videoclips",
+  "positive": true,
+  "source": "https://en.wikipedia.org/wiki/MTV"
+ },
+ {
+  "date": "1982-07-11",
+  "scope": "mundo",
+  "importance": 3,
+  "text": "Italia gana el Mundial de fútbol de España en la final jugada en el Santiago Bernabéu",
+  "positive": true,
+  "source": "https://en.wikipedia.org/wiki/1982_FIFA_World_Cup_final"
+ },
+ {
+  "date": "1984-07-28",
+  "scope": "mundo",
+  "importance": 3,
+  "text": "Se inauguran en Los Ángeles los Juegos Olímpicos de verano de 1984",
+  "positive": true,
+  "source": "https://en.wikipedia.org/wiki/1984_Summer_Olympics"
+ },
+ {
+  "date": "1985-07-13",
+  "scope": "mundo",
+  "importance": 2,
+  "text": "El concierto benéfico Live Aid reúne a millones de personas contra el hambre en África",
+  "positive": true,
+  "source": "https://en.wikipedia.org/wiki/Live_Aid"
+ },
+ {
+  "date": "1986-06-29",
+  "scope": "mundo",
+  "importance": 3,
+  "text": "Argentina, con Maradona, gana el Mundial de fútbol de México",
+  "positive": true,
+  "source": "https://en.wikipedia.org/wiki/1986_FIFA_World_Cup_final"
+ },
+ {
+  "date": "1987-12-08",
+  "scope": "mundo",
+  "importance": 2,
+  "text": "EE. UU. y la URSS firman el Tratado INF para eliminar misiles nucleares de alcance medio",
+  "positive": true,
+  "source": "https://en.wikipedia.org/wiki/INF_Treaty"
+ },
+ {
+  "date": "1988-09-17",
+  "scope": "mundo",
+  "importance": 3,
+  "text": "Se inauguran en Seúl los Juegos Olímpicos de verano de 1988",
+  "positive": true,
+  "source": "https://en.wikipedia.org/wiki/1988_Summer_Olympics"
+ },
+ {
+  "date": "1990-07-08",
+  "scope": "mundo",
+  "importance": 3,
+  "text": "Alemania Occidental gana el Mundial de fútbol de Italia",
+  "positive": true,
+  "source": "https://en.wikipedia.org/wiki/1990_FIFA_World_Cup_final"
+ },
+ {
+  "date": "1992-05-20",
+  "scope": "españa",
+  "importance": 2,
+  "text": "El FC Barcelona gana en Wembley su primera Copa de Europa",
+  "positive": true,
+  "source": "https://en.wikipedia.org/wiki/1992_European_Cup_final"
+ },
+ {
+  "date": "1992-08-08",
+  "scope": "españa",
+  "importance": 3,
+  "text": "España gana el oro olímpico de fútbol en el Camp Nou, en los Juegos de Barcelona",
+  "positive": true,
+  "source": "https://en.wikipedia.org/wiki/Football_at_the_1992_Summer_Olympics"
+ },
+ {
+  "date": "1993-09-13",
+  "scope": "mundo",
+  "importance": 2,
+  "text": "Israel y la OLP firman los Acuerdos de Oslo, un hito en el proceso de paz",
+  "positive": true,
+  "source": "https://en.wikipedia.org/wiki/Oslo_Accords"
+ },
+ {
+  "date": "1994-07-17",
+  "scope": "mundo",
+  "importance": 3,
+  "text": "Brasil gana el Mundial de fútbol de Estados Unidos, su cuarto título",
+  "positive": true,
+  "source": "https://en.wikipedia.org/wiki/1994_FIFA_World_Cup_final"
+ },
+ {
+  "date": "1996-07-19",
+  "scope": "mundo",
+  "importance": 3,
+  "text": "Se inauguran en Atlanta los Juegos Olímpicos de verano de 1996",
+  "positive": true,
+  "source": "https://en.wikipedia.org/wiki/1996_Summer_Olympics"
+ },
+ {
+  "date": "1997-07-04",
+  "scope": "mundo",
+  "importance": 2,
+  "text": "La sonda Mars Pathfinder aterriza en Marte y despliega el pequeño robot Sojourner",
+  "positive": true,
+  "source": "https://en.wikipedia.org/wiki/Mars_Pathfinder"
+ },
+ {
+  "date": "1998-05-20",
+  "scope": "españa",
+  "importance": 3,
+  "text": "El Real Madrid gana su séptima Copa de Europa frente a la Juventus",
+  "positive": true,
+  "source": "https://en.wikipedia.org/wiki/1998_UEFA_Champions_League_final"
+ },
+ {
+  "date": "1998-07-12",
+  "scope": "mundo",
+  "importance": 3,
+  "text": "Francia gana por primera vez el Mundial de fútbol, jugado en su país",
+  "positive": true,
+  "source": "https://en.wikipedia.org/wiki/1998_FIFA_World_Cup_final"
+ },
+ {
+  "date": "1998-10-29",
+  "scope": "mundo",
+  "importance": 1,
+  "text": "El astronauta John Glenn vuelve al espacio con 77 años, el más veterano en lograrlo",
+  "positive": true,
+  "source": "https://en.wikipedia.org/wiki/STS-95"
+ },
+ {
+  "date": "1999-01-01",
+  "scope": "mundo",
+  "importance": 2,
+  "text": "Nace el euro como moneda común europea (todavía solo en cuentas y pagos electrónicos)",
+  "positive": true,
+  "source": "https://en.wikipedia.org/wiki/History_of_the_euro"
+ },
+ {
+  "date": "2000-09-15",
+  "scope": "mundo",
+  "importance": 3,
+  "text": "Se inauguran en Sídney los Juegos Olímpicos de verano del año 2000",
+  "positive": true,
+  "source": "https://en.wikipedia.org/wiki/2000_Summer_Olympics"
+ },
+ {
+  "date": "2002-06-30",
+  "scope": "mundo",
+  "importance": 3,
+  "text": "Brasil gana su quinto Mundial de fútbol, el de Corea y Japón",
+  "positive": true,
+  "source": "https://en.wikipedia.org/wiki/2002_FIFA_World_Cup_final"
+ },
+ {
+  "date": "2003-04-14",
+  "scope": "mundo",
+  "importance": 2,
+  "text": "Se declara completo el Proyecto Genoma Humano, que descifra nuestro ADN",
+  "positive": true,
+  "source": "https://en.wikipedia.org/wiki/Human_Genome_Project"
+ },
+ {
+  "date": "2004-08-13",
+  "scope": "mundo",
+  "importance": 3,
+  "text": "Los Juegos Olímpicos vuelven a Atenas, su cuna, en 2004",
+  "positive": true,
+  "source": "https://en.wikipedia.org/wiki/2004_Summer_Olympics"
+ },
+ {
+  "date": "2005-06-05",
+  "scope": "españa",
+  "importance": 3,
+  "text": "Rafael Nadal gana Roland Garros en su debut, con 19 años, y empieza su leyenda",
+  "positive": true,
+  "source": "https://en.wikipedia.org/wiki/2005_French_Open_–_Men's_singles"
+ },
+ {
+  "date": "2005-09-25",
+  "scope": "españa",
+  "importance": 3,
+  "text": "Fernando Alonso se proclama campeón del mundo de Fórmula 1 por primera vez",
+  "positive": true,
+  "source": "https://en.wikipedia.org/wiki/2005_Brazilian_Grand_Prix"
+ },
+ {
+  "date": "2006-07-09",
+  "scope": "mundo",
+  "importance": 3,
+  "text": "Italia gana el Mundial de fútbol de Alemania",
+  "positive": true,
+  "source": "https://en.wikipedia.org/wiki/2006_FIFA_World_Cup_final"
+ },
+ {
+  "date": "2006-09-03",
+  "scope": "españa",
+  "importance": 3,
+  "text": "España gana el Mundial de baloncesto en Japón, el primero de su historia",
+  "positive": true,
+  "source": "https://en.wikipedia.org/wiki/2006_FIBA_World_Championship_final"
+ },
+ {
+  "date": "2007-07-29",
+  "scope": "españa",
+  "importance": 2,
+  "text": "Alberto Contador gana el Tour de Francia",
+  "positive": true,
+  "source": "https://en.wikipedia.org/wiki/2007_Tour_de_France"
+ },
+ {
+  "date": "2008-06-29",
+  "scope": "españa",
+  "importance": 3,
+  "text": "España gana la Eurocopa de fútbol en Viena, 44 años después de su primer título",
+  "positive": true,
+  "source": "https://en.wikipedia.org/wiki/UEFA_Euro_2008"
+ },
+ {
+  "date": "2008-08-08",
+  "scope": "mundo",
+  "importance": 3,
+  "text": "Se inauguran en Pekín los Juegos Olímpicos de verano de 2008",
+  "positive": true,
+  "source": "https://en.wikipedia.org/wiki/2008_Summer_Olympics"
+ },
+ {
+  "date": "2009-09-20",
+  "scope": "españa",
+  "importance": 3,
+  "text": "España gana su primer Eurobasket, tras vencer a Serbia 85-63",
+  "positive": true,
+  "source": "https://en.wikipedia.org/wiki/EuroBasket_2009_final"
+ },
+ {
+  "date": "2010-10-13",
+  "scope": "mundo",
+  "importance": 2,
+  "text": "Los 33 mineros atrapados en Chile son rescatados con vida tras 69 días bajo tierra",
+  "positive": true,
+  "source": "https://en.wikipedia.org/wiki/2010_Copiap%C3%B3_mining_accident"
+ },
+ {
+  "date": "2011-04-29",
+  "scope": "mundo",
+  "importance": 1,
+  "text": "Boda del príncipe Guillermo y Catalina Middleton en la abadía de Westminster",
+  "positive": true,
+  "source": "https://en.wikipedia.org/wiki/Wedding_of_Prince_William_and_Catherine_Middleton"
+ },
+ {
+  "date": "2011-07-08",
+  "scope": "mundo",
+  "importance": 2,
+  "text": "Despega el Atlantis en la última misión del programa de transbordadores espaciales",
+  "source": "https://en.wikipedia.org/wiki/STS-135"
+ },
+ {
+  "date": "2012-07-01",
+  "scope": "españa",
+  "importance": 3,
+  "text": "España gana la Eurocopa 2012 y se convierte en la primera selección tricampeona de grandes torneos seguidos",
+  "positive": true,
+  "source": "https://en.wikipedia.org/wiki/UEFA_Euro_2012_final"
+ },
+ {
+  "date": "2012-07-27",
+  "scope": "mundo",
+  "importance": 2,
+  "text": "Se inauguran los Juegos Olímpicos de Londres 2012",
+  "positive": true,
+  "source": "https://en.wikipedia.org/wiki/2012_Summer_Olympics"
+ },
+ {
+  "date": "2012-08-06",
+  "scope": "mundo",
+  "importance": 2,
+  "text": "El robot Curiosity aterriza en Marte",
+  "positive": true,
+  "source": "https://en.wikipedia.org/wiki/Curiosity_(rover)"
+ },
+ {
+  "date": "2014-05-24",
+  "scope": "españa",
+  "importance": 2,
+  "text": "El Real Madrid gana su décima Copa de Europa en la final de Lisboa contra el Atlético de Madrid",
+  "positive": true,
+  "source": "https://en.wikipedia.org/wiki/2014_UEFA_Champions_League_final"
+ },
+ {
+  "date": "2014-07-13",
+  "scope": "mundo",
+  "importance": 2,
+  "text": "Alemania gana el Mundial de fútbol de Brasil en la final de Maracaná",
+  "positive": true,
+  "source": "https://en.wikipedia.org/wiki/2014_FIFA_World_Cup_final"
+ },
+ {
+  "date": "2014-11-12",
+  "scope": "mundo",
+  "importance": 2,
+  "text": "La sonda Philae aterriza en un cometa por primera vez en la historia",
+  "positive": true,
+  "source": "https://en.wikipedia.org/wiki/Philae_(spacecraft)"
+ },
+ {
+  "date": "2016-08-05",
+  "scope": "mundo",
+  "importance": 2,
+  "text": "Se inauguran los Juegos Olímpicos de Río de Janeiro 2016",
+  "positive": true,
+  "source": "https://en.wikipedia.org/wiki/2016_Summer_Olympics"
+ },
+ {
+  "date": "2018-07-15",
+  "scope": "mundo",
+  "importance": 2,
+  "text": "Francia gana el Mundial de fútbol de Rusia",
+  "positive": true,
+  "source": "https://en.wikipedia.org/wiki/2018_FIFA_World_Cup_final"
+ },
+ {
+  "date": "2019-09-15",
+  "scope": "españa",
+  "importance": 2,
+  "text": "España gana el Mundial de baloncesto de China",
+  "positive": true,
+  "source": "https://en.wikipedia.org/wiki/2019_FIBA_Basketball_World_Cup"
+ },
+ {
+  "date": "2019-11-24",
+  "scope": "españa",
+  "importance": 2,
+  "text": "España gana la Copa Davis en Madrid, en la Caja Mágica",
+  "positive": true,
+  "source": "https://en.wikipedia.org/wiki/2019_Davis_Cup_Finals"
+ },
+ {
+  "date": "2021-02-18",
+  "scope": "mundo",
+  "importance": 2,
+  "text": "El robot Perseverance aterriza en Marte para buscar señales de vida antigua",
+  "positive": true,
+  "source": "https://en.wikipedia.org/wiki/Perseverance_(rover)"
+ },
+ {
+  "date": "2021-07-23",
+  "scope": "mundo",
+  "importance": 2,
+  "text": "Se inauguran los Juegos Olímpicos de Tokio, aplazados un año por la pandemia",
+  "positive": true,
+  "source": "https://en.wikipedia.org/wiki/2020_Summer_Olympics"
+ },
+ {
+  "date": "2024-06-01",
+  "scope": "españa",
+  "importance": 1,
+  "text": "El Real Madrid gana su 15.ª Copa de Europa en Wembley",
+  "positive": true,
+  "source": "https://en.wikipedia.org/wiki/2024_UEFA_Champions_League_final"
+ },
+ {
+  "date": "2026-02-06",
+  "scope": "mundo",
+  "importance": 2,
+  "text": "Se inauguran los Juegos Olímpicos de Invierno de Milán-Cortina",
+  "positive": true,
+  "source": "https://en.wikipedia.org/wiki/2026_Winter_Olympics"
+ },
+ {
+  "date": "2026-04-01",
+  "scope": "mundo",
+  "importance": 2,
+  "text": "Despega Artemis II: cuatro astronautas vuelven a viajar alrededor de la Luna por primera vez desde 1972",
+  "positive": true,
+  "source": "https://en.wikipedia.org/wiki/Artemis_II"
+ }
+]

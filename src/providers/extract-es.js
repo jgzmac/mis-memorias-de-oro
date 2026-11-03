@@ -196,7 +196,10 @@ const TAG_RULES = [
   [/\b(monta[ñn]a|campo|bosque|r[ií]o|senderismo|naturaleza)\b/i, 'Naturaleza'],
   [/\b(perro|perra|gato|gata|mascota)\b/i, 'Mascotas'],
   [/\b(comida|cena|barbacoa|paella|restaurante|almuerzo)\b/i, 'Comida'],
-  [/\b(navidad|nochebuena|nochevieja|reyes magos)\b/i, 'Navidad']
+  [/\b(navidad|nochebuena|nochevieja|reyes magos)\b/i, 'Navidad'],
+  [/\b(partido|torneo|carrera|entrenamiento|f[uú]tbol|baloncesto|tenis|nataci[oó]n|gimnasio|marat[oó]n)\b/i, 'Deporte'],
+  [/\b(aniversario|bodas de (plata|oro))\b/i, 'Aniversario'],
+  [/\b(turismo|turista|tur[ií]stic[oa]s?|visitamos|visita guiada|museo|catedral|monumento)\b/i, 'Turismo']
 ];
 function extractTags(text, people = []) {
   const out = TAG_RULES.filter(([re]) => re.test(text)).map(([, t]) => t);
@@ -209,7 +212,6 @@ function extractMood(text) {
   const t = text.toLowerCase();
   if (/(el mejor d[ií]a|felic[ií]sim|lo mejor de mi vida|inolvidable)/.test(t)) return 'muy feliz';
   if (/(triste|llor[eé]|falleci|muri[oó]|echo de menos|echamos de menos|perdimos|dolor)/.test(t)) return 'triste';
-  if (/(emocionad|nervios|ilusi[oó]n|emoci[oó]n)/.test(t)) return 'emocionado';
   if (/(feliz|alegr|contento|divert|genial|maravill|bonito|precios)/.test(t)) return 'feliz';
   return 'neutral';
 }

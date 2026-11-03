@@ -7,14 +7,15 @@
  */
 
 const STYLES = {
-  amable: {
-    label: 'Amable',
-    intro: (n, b) => `${n}, esta es la historia de tu vida, contada con cariño${b}.`,
+  literario: {
+    label: 'Literario',
+    third: true, // redactado en tercera persona, como una biografía
+    intro: (n, b) => `Esta es la historia de ${n}${b}, una vida contada tal y como fue vivida.`,
     open: ['En {y}{age},', 'Llegó {y}{age}, y', 'Ya en {y}{age},'],
-    verbs: ['guardaste', 'viviste', 'compartiste'],
-    quote: ['Lo recuerdas así: ', 'Lo contaste así: ', 'En tus palabras: '],
-    link: ['También', 'Además', 'Poco después'],
-    outro: 'Cada recuerdo es un tesoro que merece ser contado. Gracias por compartirlos.'
+    verbs: ['vivió', 'atesoró', 'compartió'],
+    quote: ['Así lo recordaba: ', 'En sus propias palabras: ', 'Así lo contó: '],
+    link: ['Aquel mismo tiempo', 'Poco después', 'Y también'],
+    outro: 'Así transcurre, hasta hoy, la vida de quien supo guardar cada momento. La historia continúa.'
   },
   alegre: {
     label: 'Alegre',
@@ -134,12 +135,12 @@ function composeExecutive({ user, memories, stages, scopeLabel, history }) {
 }
 
 function compose({ user, memories, stages, styleKey, scopeLabel, history }) {
-  const style = STYLES[styleKey] || STYLES.amable;
+  const style = STYLES[styleKey] || STYLES.literario;
   if (style.executive) return composeExecutive({ user, memories, stages, scopeLabel, history });
 
   const out = [];
-  const born = user.birth_date ? ` (naciste ${user.birth_place ? 'en ' + user.birth_place + ' ' : ''}el ${fmtLong(user.birth_date)} de ${user.birth_date.slice(0, 4)})` : '';
-  out.push(scopeLabel ? `${user.name}, este es tu resumen: ${scopeLabel}.` : style.intro(user.name, born));
+  const born = user.birth_date ? ` (${style.third ? 'nació' : 'naciste'} ${user.birth_place ? 'en ' + user.birth_place + ' ' : ''}el ${fmtLong(user.birth_date)} de ${user.birth_date.slice(0, 4)})` : '';
+  out.push(scopeLabel ? (style.third ? `Biografía de ${user.name}: ${scopeLabel}.` : `${user.name}, este es tu resumen: ${scopeLabel}.`) : style.intro(user.name, born));
 
   const withDate = memories.filter(m => m.date_happened).sort((a, b) => a.date_happened.localeCompare(b.date_happened));
   const noDate = memories.filter(m => !m.date_happened);
@@ -158,7 +159,7 @@ function compose({ user, memories, stages, styleKey, scopeLabel, history }) {
     let open = style.open[yi % style.open.length].replace('{y}', y).replace('{age}', ageText(ageAt(user.birth_date, y)));
     if (prevYear !== null && yi > 0 && yi % 2 === 1) open = `${gap(prevYear, y)}, en ${y}${ageText(ageAt(user.birth_date, y))},`;
     parts.push(open);
-    if (stageNames.length && stageKey !== lastStage) parts.push(`en tu etapa de ${list(stageNames)},`);
+    if (stageNames.length && stageKey !== lastStage) parts.push(`${style.third ? 'en su etapa de' : 'en tu etapa de'} ${list(stageNames)},`);
     lastStage = stageKey;
 
     // Primer recuerdo con detalle; los demás enlazados con conectores
@@ -177,8 +178,8 @@ function compose({ user, memories, stages, styleKey, scopeLabel, history }) {
     prevYear = y;
   });
 
-  if (noDate.length) out.push(`Y hay recuerdos que guardas sin fecha pero con mucho valor: ${list(noDate.map(m => `«${m.title}»`))}.`);
-  if (!memories.length) out.push('Todavía no hay recuerdos para este resumen. En cuanto cuentes alguno, aquí aparecerá tu historia.');
+  if (noDate.length) out.push(`${style.third ? 'Y hay recuerdos que guarda sin fecha, pero con mucho valor' : 'Y hay recuerdos que guardas sin fecha pero con mucho valor'}: ${list(noDate.map(m => `«${m.title}»`))}.`);
+  if (!memories.length) out.push(style.third ? 'Todavía no hay recuerdos para esta biografía. En cuanto se cuente alguno, aquí aparecerá la historia.' : 'Todavía no hay recuerdos para este resumen. En cuanto cuentes alguno, aquí aparecerá tu historia.');
   else out.push(style.outro);
   return out.join('\n\n');
 }

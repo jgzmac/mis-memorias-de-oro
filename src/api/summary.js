@@ -14,7 +14,7 @@ function loadMemories(userId) {
 function summary(req, res) {
   try {
     const b = req.body || {};
-    const styleKey = STYLES[b.style] ? b.style : 'amable';
+    const styleKey = STYLES[b.style] ? b.style : 'literario';
     const scope = ['all', 'year', 'person'].includes(b.scope) ? b.scope : 'all';
     const value = String(b.value || '').trim().slice(0, 80);
     const user = db.prepare('SELECT name, birth_date, birth_place, hide_age FROM users WHERE id = ?').get(req.user.id);

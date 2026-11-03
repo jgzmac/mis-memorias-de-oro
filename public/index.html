@@ -398,6 +398,11 @@
     .person-row input { padding: 7px; border: 1px solid #ccc; border-radius: 6px; }
     .person-row button { background: #eee; border: none; border-radius: 6px; padding: 0 10px; cursor: pointer; }
     .notice { background: #F6F3E4; color: #6B5F2E; padding: 10px; border-radius: 6px; font-size: 0.85em; margin-bottom: 12px; }
+    .day-box { margin-top: 12px; }
+    .day-btn { width: 100%; display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; }
+    .day-out h4 { margin: 12px 0 6px; font-size: 1em; color: var(--salvia-hover); }
+    .day-ev { background: var(--salvia-claro); border-radius: 12px; padding: 10px 12px; margin-top: 6px; font-size: 0.95em; line-height: 1.4; }
+    .day-ev small { display: block; color: var(--gris); font-size: 0.82em; margin-bottom: 2px; }
     .memory-audio { margin-top: 10px; }
     .memory-audio audio { width: 100%; }
     .memory-audio a { font-size: 0.85em; }
@@ -617,7 +622,7 @@
 
     /* Buscador en fila: caja arriba; debajo, "Filtros" y el orden a la misma altura */
     .searchbar { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
-    .searchbar > input[type="search"] { flex: 1 1 100%; order: 0; }
+    .searchbar > .home-search { flex: 1 1 100%; order: 0; margin-bottom: 0; }
     .searchbar > .filter-toggle { order: 1; }
     .searchbar > .sort-row { order: 2; flex: 1; justify-content: flex-end; min-width: 0; }
     .searchbar > .sort-row > span { display: none; }
@@ -745,6 +750,7 @@
 <symbol id="i-plane" viewBox="0 0 24 24"><path d="M21 3L3 11l7 3 3 7z"/><path d="M10 14L21 3"/></symbol>
 <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 20s-8-5-8-11a4.500 4.500 0 0 1 8-2.500A4.500 4.500 0 0 1 20 9c0 6-8 11-8 11z"/></symbol>
 <symbol id="i-gift" viewBox="0 0 24 24"><rect x="4" y="9" width="16" height="11" rx="1"/><path d="M3 9h18V6H3zM12 6v14M12 6c-2-4-6-3-5 0M12 6c2-4 6-3 5 0"/></symbol>
+<symbol id="i-trophy" viewBox="0 0 24 24"><path d="M8 4h8v6a4 4 0 0 1-8 0z"/><path d="M8 6H4v2a3 3 0 0 0 4 3M16 6h4v2a3 3 0 0 1-4 3"/><path d="M12 14v4M8 21h8M9 18h6"/></symbol>
 <symbol id="i-ring" viewBox="0 0 24 24"><circle cx="12" cy="15" r="5"/><path d="M9 6l3-3 3 3-3 3z"/></symbol>
 <symbol id="i-briefcase" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5h6v2M3 13h18"/></symbol>
 <symbol id="i-tree" viewBox="0 0 24 24"><path d="M12 21v-5"/><path d="M12 3l6 8h-3l4 6H5l4-6H6z"/></symbol>
@@ -910,7 +916,7 @@
         <div class="tl-zoom"><button type="button" id="tlZoomOut" aria-label="Alejar">−</button><button type="button" id="tlZoomIn" aria-label="Acercar">+</button></div>
       </div>
       <div class="searchbar">
-        <input type="search" id="tlSearch" placeholder="Buscar en tu línea de vida" autocomplete="off">
+        <label class="home-search" for="tlSearch"><svg class="i"><use href="#i-search"/></svg><input type="search" id="tlSearch" placeholder="Buscar en tu línea de vida" autocomplete="off" enterkeyhint="search"></label>
         <div class="adv" id="tlAdv"></div>
         <div class="sort-row"><span>Orden:</span><div class="seg-group" data-sort="tlSort"><button type="button" data-v="desc" aria-pressed="true">Recientes</button><button type="button" data-v="asc" aria-pressed="false">Antiguos</button></div><input type="hidden" id="tlSort" value="desc"></div>
       </div>
@@ -925,17 +931,17 @@
       <button type="button" class="btn-primary add-end" id="tlAdd">+ Añadir recuerdo</button>
     </div>
 
-    <!-- LISTA DE MEMORIAS -->
+    <!-- LISTA DE RECUERDOS -->
     <div id="viewMem" class="hidden">
       <div class="card">
         <h2 style="margin-bottom: 14px; color: #333;">Tus recuerdos</h2>
         <div class="searchbar">
-          <input type="search" id="memSearch" placeholder="Buscar por título, texto, persona o lugar" autocomplete="off">
+          <label class="home-search" for="memSearch"><svg class="i"><use href="#i-search"/></svg><input type="search" id="memSearch" placeholder="Buscar en tus recuerdos" autocomplete="off" enterkeyhint="search"></label>
           <div class="adv" id="memAdv"></div>
           <div class="sort-row"><span>Orden:</span><div class="seg-group" data-sort="memSort"><button type="button" data-v="desc" aria-pressed="true">Recientes</button><button type="button" data-v="asc" aria-pressed="false">Antiguos</button></div><input type="hidden" id="memSort" value="desc"></div>
         </div>
         <div class="memories-list" id="memoriesList">
-          <div class="empty-state">No hay memorias aún. ¡Crea tu primera memoria!</div>
+          <div class="empty-state">Aún no hay recuerdos. ¡Cuenta el primero!</div>
         </div>
         <button type="button" class="btn-primary add-end" id="memAdd">+ Añadir recuerdo</button>
       </div>
@@ -994,7 +1000,7 @@
           </div>
 
           <div class="button-group">
-            <button type="submit" class="btn-primary">Guardar Memoria</button>
+            <button type="submit" class="btn-primary">Guardar recuerdo</button>
             <button type="button" class="btn-secondary" id="cancelWrite">Cancelar</button>
           </div>
         </form>
@@ -1006,7 +1012,7 @@
       <h2 id="voiceTitle" style="color:var(--tinta);margin-bottom:12px">Tu recuerdo en voz alta</h2>
       <div class="audio-box"><div class="audio-actions" style="justify-content:center"><button type="button" id="recBtn"><svg class="i"><use href="#i-rec"/></svg> Grabar</button></div>
       <div class="audio-status" id="audioStatus"></div></div>
-      <button type="button" class="btn-secondary panel-close" data-close="voicePanel">Cerrar</button>
+      <button type="button" class="btn-secondary panel-close" data-close="voicePanel" id="discardRec">Cerrar</button>
     </div>
   </div>
 
@@ -1239,10 +1245,10 @@
     memSort.addEventListener('change', () => renderMemories());
 
     // ===== ETIQUETAS, ÁNIMO Y EDAD =====
-    const TAG_PRESETS = [['Playa','sun'],['Vacaciones','plane'],['Viaje','compass'],['Familia','users'],['Amigos','heart'],['Cumpleaños','gift'],['Boda','ring'],['Trabajo','briefcase'],['Estudios','book'],['Naturaleza','leaf'],['Mascotas','paw'],['Comida','utensils'],['Navidad','star']];
-    const MOODS = [['feliz','Feliz','smile'],['emocionado','Emocionado','sparkle'],['neutral','Normal','meh'],['triste','Triste','sad']];
+    const TAG_PRESETS = [['Playa','sun'],['Vacaciones','plane'],['Viaje','compass'],['Familia','users'],['Amigos','heart'],['Cumpleaños','gift'],['Boda','ring'],['Trabajo','briefcase'],['Estudios','book'],['Naturaleza','leaf'],['Mascotas','paw'],['Comida','utensils'],['Navidad','star'],['Deporte','trophy'],['Aniversario','cal'],['Turismo','camera']];
+    const MOODS = [['feliz','Feliz','smile'],['neutral','Normal','meh'],['triste','Triste','sad']];
     const tagIcon = (t) => { const f = TAG_PRESETS.find(p => norm(p[0]) === norm(t)); return f ? f[1] : 'tag'; };
-    const moodInfo = (v) => MOODS.find(m => m[0] === v) || (v === 'muy feliz' ? MOODS[0] : null);
+    const moodInfo = (v) => MOODS.find(m => m[0] === v) || (v === 'muy feliz' || v === 'emocionado' ? MOODS[0] : null);
 
     // Fichas tocables: varias (etiquetas) o una sola (ánimo, estilos)
     function renderChips(box, items, selected, multi, onToggle) {
@@ -1337,7 +1343,7 @@
         });
         const result = await response.json();
         if (result.success) {
-          showMessage('Memoria guardada exitosamente');
+          showMessage('Recuerdo guardado');
           resetWriteForm(); closePanels();
           window.goTo('mem');
           proposeCircle(data.people);
@@ -1401,7 +1407,7 @@
         });
         const result = await response.json();
         if (result.success) {
-          showMessage('Memoria actualizada');
+          showMessage('Recuerdo actualizado');
           resetWriteForm(); closePanels();
           window.goTo('mem');
           proposeCircle(data.people);
@@ -1417,7 +1423,7 @@
         const response = await fetch(`${API_URL}/memories/${id}`, { method: 'DELETE' });
         const result = await response.json();
         if (result.success) {
-          showMessage('Memoria eliminada');
+          showMessage('Recuerdo eliminado');
           currentMemoryId = null;
           form.reset();
           tags = [];
@@ -1527,7 +1533,7 @@
     function renderMemories() {
       renderHome();
       if (memories.length === 0) {
-        memoriesList.innerHTML = '<div class="empty-state">No hay memorias aún. ¡Crea tu primera memoria!</div>';
+        memoriesList.innerHTML = '<div class="empty-state">Aún no hay recuerdos. ¡Cuenta el primero!</div>';
         return;
       }
       if (!memFilters) memFilters = setupFilters('memAdv', () => renderMemories());
@@ -1566,8 +1572,8 @@
               ${audios.map(a => `
                 <div class="memory-audio">
                   <audio controls preload="none" src="${a.url}"></audio>
-                  <a href="${a.url}" target="_blank" rel="noopener">Abrir audio en otra pestaña</a>
                 </div>`).join('')}
+              ${memory.date_happened ? `<div class="day-box"><button type="button" class="btn-secondary day-btn" onclick="event.stopPropagation(); toggleDay(${memory.id})">${ic('globe')} ¿Quieres saber qué pasó ese día?</button><div class="day-out" id="dayOut${memory.id}" onclick="event.stopPropagation()"></div></div>` : ''}
               <div class="button-group" style="margin-top: 10px;">
                 <button onclick="editMemory(${memory.id})" class="btn-edit">Editar</button>
                 <button onclick="deleteMemory(${memory.id})" class="btn-danger">Eliminar</button>
@@ -1581,6 +1587,24 @@
         if (el) { scrollToMemory = null; el.scrollIntoView({ block: 'start' }); window.scrollBy(0, -70); }
       }
     }
+
+    // Hechos históricos de la fecha del recuerdo (mundo y España)
+    async function toggleDay(id) {
+      const out = document.getElementById('dayOut' + id), m = memories.find(x => x.id === id);
+      if (!out || !m) return;
+      if (out.innerHTML) { out.innerHTML = ''; return; }
+      out.innerHTML = '<div class="day-ev">Buscando…</div>';
+      try {
+        const r = await (await fetch(`${API_URL}/history?from=${m.date_happened}&to=${m.date_end || m.date_happened}`)).json();
+        const d = r.data || {};
+        const lead = { dia: 'Ese día', mes: 'Ese mes', 'año': 'Ese año', periodo: 'En ese periodo', cercano: 'Por aquellos años' }[d.level] || '';
+        const evs = (r.success && d.events) || [];
+        out.innerHTML = evs.length
+          ? `<h4>${esc(lead)} en el mundo y en España</h4>` + evs.map(e => `<div class="day-ev"><small>${esc(Dates.label(e.date, null, 'day'))} · ${e.scope === 'españa' ? 'España' : 'Mundo'}</small>${esc(e.text)}</div>`).join('')
+          : '<div class="day-ev">No tenemos hechos destacados para esa fecha.</div>';
+      } catch (e) { out.innerHTML = '<div class="day-ev">No se pudo consultar. Inténtalo de nuevo.</div>'; }
+    }
+    window.toggleDay = toggleDay;
 
     // Al llegar desde otra pantalla ("Ver recuerdo"): se coloca el recuerdo abierto a la vista, aunque la lista se cargue después
     let scrollToMemory = null;
@@ -1686,6 +1710,7 @@
       if (w) titleInput.focus({ preventScroll: true });
     }
     function closePanels() {
+      cancelRecording();
       writePanel.classList.add('hidden'); voicePanel.classList.add('hidden');
       btnWrite.classList.remove('on'); btnVoice.classList.remove('on');
     }
@@ -1839,6 +1864,11 @@
     recTip.addEventListener('click', (e) => { if (e.target === recTip) recTip.classList.add('hidden'); });
     document.getElementById('recTipGo').onclick = () => { try { if (document.getElementById('recTipHide').checked) localStorage.setItem(REC_TIP_KEY, '1'); } catch (e) {} recTip.classList.add('hidden'); openPanel('voice'); startRecording(); };
 
+    let recCancelled = false;
+    // Al cerrar la ventana mientras se graba: se para el micro y se descarta lo grabado
+    function cancelRecording() {
+      if (recorder && recorder.state === 'recording') { recCancelled = true; recorder.stop(); }
+    }
     async function startRecording() {
       recBtn.style.display = '';
       if (!navigator.mediaDevices || !window.MediaRecorder) {
@@ -1854,6 +1884,8 @@
         recStream.getTracks().forEach(t => t.stop());
         recBtn.classList.remove('recording'); audioStatus.classList.remove('warn');
         recBtn.innerHTML = ic('rec') + ' Grabar';
+        document.getElementById('discardRec').textContent = 'Cerrar';
+        if (recCancelled) { recCancelled = false; recChunks = []; setAudioStatus(''); return; } // cerrada sin terminar: se descarta
         recBtn.style.display = 'none'; // mientras se analiza solo se muestra el estado
         setAudioStatus('Registrando tu audio…');
         const type = recorder.mimeType || 'audio/webm';
@@ -1864,6 +1896,7 @@
       recorder.start();
       recStart = Date.now();
       recBtn.classList.add('recording');
+      document.getElementById('discardRec').textContent = 'Descartar';
       recTimer = setInterval(() => {
         const s = Math.floor((Date.now() - recStart) / 1000);
         const left = MAX_REC_SECS - s;
@@ -1877,6 +1910,14 @@
       audioStatus.classList.remove('warn');
       setAudioStatus('Grabando… tienes 2 minutos. Pulsa "Terminar grabación" cuando acabes.');
     }
+
+    // Mientras se graba, "Descartar" avisa de que la grabación no se guardará
+    document.getElementById('discardRec').onclick = async () => {
+      if (recorder && recorder.state === 'recording') {
+        if (!await askConfirm('¿Descartar la grabación?', 'Si descartas, esta grabación no se guardará y no se subirá. Podrás grabar otra cuando quieras.', 'Descartar')) return;
+      }
+      closePanels();
+    };
 
     // --- pantalla de revisión ---
     const reviewModal = document.getElementById('reviewModal');
