@@ -490,8 +490,9 @@
     .memory-item:hover { transform: none; }
     .button-group { flex-wrap: wrap; }
     .button-group button { min-width: 120px; }
-    .modal-bg { padding: 0; align-items: stretch; }
-    .modal { border-radius: 0; min-height: 100%; padding: 18px; }
+    /* El fondo blanco debe crecer con el contenido: con "stretch" se cortaba al hacer scroll y se veía lo de detrás */
+    .modal-bg { padding: 0; align-items: flex-start; background: #fff; }
+    .modal { border-radius: 0; min-height: 100vh; min-height: 100dvh; padding: 18px; box-sizing: border-box; }
     .person-row { grid-template-columns: 1fr auto; }
     .person-row input:nth-child(2) { grid-column: 1 / 2; }
     .person-row button { grid-row: 1 / span 2; grid-column: 2; }
