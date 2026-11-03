@@ -1359,7 +1359,7 @@
         <div class="rem-m">${esc(when)}${age ? ' · ' + esc(age) : ''}</div>
         <div class="rem-btns"><button type="button" id="remOpen">Ver recuerdo</button>${happy.length > 1 ? '<button type="button" id="remAgain">Otro</button>' : ''}</div></div>`;
       box.classList.remove('hidden');
-      document.getElementById('remOpen').onclick = () => { window.goTo('mem'); memSearch.value = ''; currentMemoryId = null; selectMemory(m.id); };
+      document.getElementById('remOpen').onclick = () => showMemory(m.id);
       const ag = document.getElementById('remAgain'); if (ag) ag.onclick = () => showRemember(true);
     }
     (function () {
@@ -1494,7 +1494,7 @@
       el.innerHTML = recent.length
         ? '<h3>Mis recuerdos recientes</h3>' + recent.map(m => `<div class="home-item" data-id="${m.id}"><strong>${esc(m.title)}</strong><small>${esc(m.date_happened ? whenLabel(m) : 'Sin fecha')}${ageOf(m.date_happened, m.date_end, m.date_precision) ? ' · ' + esc(ageOf(m.date_happened, m.date_end, m.date_precision)) : ''}${m.place ? ' · ' + esc(m.place) : ''}</small>${allTags(m).length ? `<div class="memory-tags">${allTags(m).map(t => `<span class="memory-tag">${ic(tagIcon(t))} ${esc(t)}</span>`).join('')}</div>` : ''}</div>`).join('')
         : '<p class="home-sub" style="margin-top:18px">Aún no tienes recuerdos. ¡Cuenta el primero!</p>';
-      el.querySelectorAll('[data-id]').forEach(d => d.onclick = () => { window.goTo('mem'); currentMemoryId = null; selectMemory(+d.dataset.id); });
+      el.querySelectorAll('[data-id]').forEach(d => d.onclick = () => showMemory(+d.dataset.id));
     }
 
     let memFilters = null;
@@ -1522,7 +1522,7 @@
         const audios = (memory.media || []).filter(m => m.kind === 'audio');
         const visuals = (memory.media || []).filter(m => m.kind === 'image' || m.kind === 'video');
         return `
-        <div class="memory-item ${open ? 'active' : ''}" onclick="selectMemory(${memory.id})">
+        <div class="memory-item ${open ? 'active' : ''}" data-mid="${memory.id}" onclick="selectMemory(${memory.id})">
           <div class="memory-title">${esc(memory.title)}${audios.length ? ' ' + ic('mic') : ''}${visuals.some(v => v.kind === 'image') ? ' ' + ic('camera') : ''}${visuals.some(v => v.kind === 'video') ? ' ' + ic('film') : ''}</div>
           <div class="memory-meta">
             <span>${ic('cal')} ${esc(when || 'Sin fecha')}</span>
@@ -1551,8 +1551,19 @@
           ` : ''}
         </div>`;
       }).join('');
+      if (scrollToMemory != null) {
+        const el = document.querySelector(`.memory-item[data-mid="${scrollToMemory}"]`);
+        if (el) { scrollToMemory = null; el.scrollIntoView({ block: 'start' }); window.scrollBy(0, -70); }
+      }
     }
 
+    // Al llegar desde otra pantalla ("Ver recuerdo"): se coloca el recuerdo abierto a la vista, aunque la lista se cargue después
+    let scrollToMemory = null;
+    function showMemory(id) {
+      window.goTo('mem'); memSearch.value = ''; currentMemoryId = null;
+      scrollToMemory = id; selectMemory(id);
+      setTimeout(() => { scrollToMemory = null; }, 3000);
+    }
     function selectMemory(id) {
       currentMemoryId = currentMemoryId === id ? null : id;
       renderMemories();
@@ -2733,7 +2744,7 @@
         if (editing !== null) html += stageForm(editing === 'new' ? draftStage : stages.find(s => s.id === editing));
         d.innerHTML = html;
 
-        d.querySelectorAll('[data-open]').forEach(b => b.onclick = () => { window.goTo('mem'); memSearch.value = ''; currentMemoryId = null; selectMemory(+b.dataset.open); });
+        d.querySelectorAll('[data-open]').forEach(b => b.onclick = () => showMemory(+b.dataset.open));
         d.querySelectorAll('[data-prop]').forEach(b => b.onclick = () => { draftStage = props[+b.dataset.prop]; editing = 'new'; drawDetail(); $('tlStageForm').scrollIntoView({ block: 'center' }); });
         d.querySelectorAll('[data-edit]').forEach(b => b.onclick = () => { editing = +b.dataset.edit; drawDetail(); $('tlStageForm').scrollIntoView({ block: 'center' }); });
         d.querySelectorAll('[data-del]').forEach(b => b.onclick = () => removeStage(+b.dataset.del));
