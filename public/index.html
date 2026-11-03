@@ -382,6 +382,9 @@
     .review-field input, .review-field select, .review-field textarea { width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 6px; font-size: 0.95em; font-family: inherit; }
     .review-field textarea { min-height: 110px; }
     /* Lista de sugerencias propia (la del navegador sale en negro y no sigue el estilo de la app) */
+    .ai-chip { display: inline-flex; align-items: center; gap: 5px; padding: 3px 10px; border-radius: 999px; background: var(--salvia-claro); color: var(--salvia-hover); font-size: .78em; font-weight: 600; line-height: 1.4; vertical-align: middle; }
+    .ai-chip.hidden { display: none; }
+    .ai-chip-row { margin: 0 0 8px; }
     .sug { position: fixed; z-index: 300; background: white; border: 2px solid var(--salvia); border-radius: 12px; box-shadow: 0 8px 24px rgba(0,0,0,.18); padding: 4px; overflow-y: auto; max-height: 240px; }
     .sug.hidden { display: none; }
     .sug-item { display: flex; align-items: center; gap: 10px; padding: 9px 10px; border-radius: 8px; cursor: pointer; color: var(--tinta); }
@@ -888,6 +891,7 @@
         <button type="button" class="btn-primary" id="sumGo">Crear resumen</button>
       </div>
       <div id="sumMsg"></div>
+      <div class="ai-chip-row hidden" id="sumAi"><span class="ai-chip" title="Este resumen lo ha generado una inteligencia artificial. Revísalo antes de compartirlo."><svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor" aria-hidden="true"><path d="M12 2l1.8 5.2L19 9l-5.2 1.8L12 16l-1.8-5.2L5 9l5.2-1.8zM19 14l.9 2.6L22.5 17.5l-2.6.9L19 21l-.9-2.6-2.6-.9 2.6-.9z"/></svg>Generado por IA</span></div>
       <div id="sumOut" class="sum-out hidden"></div>
       <div id="sumShareOut"></div>
       <div class="button-group hidden" id="sumActions"><button type="button" class="btn-primary" id="sumShare">Compartir</button><button type="button" class="btn-secondary" id="sumCopy">Copiar</button><button type="button" class="btn-secondary" id="sumDownload">Descargar</button></div>
@@ -1085,6 +1089,7 @@
   <div id="reviewModal" class="modal-bg hidden">
     <div class="modal">
       <h2 style="margin-bottom: 8px; color: #333;">Revisa tu recuerdo</h2>
+      <div class="ai-chip-row"><span class="ai-chip" title="Los textos propuestos los ha generado una inteligencia artificial. Revísalos antes de guardar."><svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor" aria-hidden="true"><path d="M12 2l1.8 5.2L19 9l-5.2 1.8L12 16l-1.8-5.2L5 9l5.2-1.8zM19 14l.9 2.6L22.5 17.5l-2.6.9L19 21l-.9-2.6-2.6-.9 2.6-.9z"/></svg>Generado por IA</span></div>
       <div class="notice" id="rvNotice">Esto es lo que he entendido del audio. Corrige lo que haga falta; todo es opcional. No se guardará hasta que confirmes.</div>
       <div id="reviewMsg"></div>
       <div class="rv-notes hidden" id="rvNotes"></div>
@@ -2452,7 +2457,7 @@
           if (!r.success) { $('sumMsg').innerHTML = `<div class="error">${esc(r.error)}</div>`; return; }
           $('sumMsg').innerHTML = '';
           $('sumOut').textContent = r.data.text; sumMemoryIds = r.data.memoryIds || []; $('sumShareOut').innerHTML = '';
-          $('sumOut').classList.remove('hidden'); $('sumActions').classList.remove('hidden');
+          $('sumOut').classList.remove('hidden'); $('sumAi').classList.remove('hidden'); $('sumActions').classList.remove('hidden');
         } catch (e) { $('sumMsg').innerHTML = '<div class="error">No se pudo crear el resumen.</div>'; }
       };
       $('sumCopy').onclick = async () => {
