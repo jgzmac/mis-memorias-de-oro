@@ -982,6 +982,17 @@
     </div>
   </div>
 
+  <div id="askModal" class="modal-bg hidden" role="alertdialog" aria-modal="true" aria-labelledby="askTitle" style="z-index:80">
+    <div class="modal" style="max-width:420px;min-height:0;border-radius:14px;margin:auto;text-align:center">
+      <h2 id="askTitle" style="color:var(--tinta);margin-bottom:10px;font-size:1.25em"></h2>
+      <p id="askText" style="margin-bottom:16px"></p>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <button type="button" class="btn-danger" id="askYes" style="flex:1"></button>
+        <button type="button" class="btn-secondary" id="askNo" style="flex:1">Cancelar</button>
+      </div>
+    </div>
+  </div>
+
   <div id="statsModal" class="modal-bg hidden" role="dialog" aria-modal="true" aria-labelledby="stTitle">
     <div class="modal" style="max-width:460px;min-height:0;border-radius:14px;margin:auto">
       <h2 id="stTitle" style="color:var(--tinta);margin-bottom:10px">Estadísticas</h2>
@@ -1360,7 +1371,7 @@
     }
 
     async function deleteMemory(id) {
-      if (!confirm('¿Deseas eliminar esta memoria?')) return;
+      if (!await askConfirm('¿Eliminar este recuerdo?', 'Se borrará del todo y no se puede deshacer.', 'Eliminar')) return;
       try {
         const response = await fetch(`${API_URL}/memories/${id}`, { method: 'DELETE' });
         const result = await response.json();
@@ -1583,6 +1594,22 @@
 
 
 
+
+    // Ventana de confirmación propia (en lugar del confirm() del navegador)
+    function askConfirm(title, text, yesLabel) {
+      return new Promise((resolve) => {
+        const m = document.getElementById('askModal'), yes = document.getElementById('askYes'), no = document.getElementById('askNo');
+        document.getElementById('askTitle').textContent = title;
+        document.getElementById('askText').textContent = text || '';
+        yes.textContent = yesLabel || 'Aceptar';
+        const done = (v) => { m.classList.add('hidden'); yes.onclick = no.onclick = m.onclick = null; document.removeEventListener('keydown', onKey); resolve(v); };
+        const onKey = (e) => { if (e.key === 'Escape') done(false); };
+        yes.onclick = () => done(true); no.onclick = () => done(false);
+        m.onclick = (e) => { if (e.target === m) done(false); };
+        document.addEventListener('keydown', onKey);
+        m.classList.remove('hidden'); no.focus();
+      });
+    }
 
     // ===== PANELES: voz / escribir =====
     const voicePanel = document.getElementById('voicePanel');
@@ -1826,7 +1853,7 @@
       const id = Number(b.closest('li').dataset.id), p = circle.find(x => x.id === id);
       if (!p) return;
       if (b.dataset.act === 'del') {
-        if (!confirm(`¿Quitar a ${p.name || p.relation} de tu círculo? Sus recuerdos no se borran.`)) return;
+        if (!await askConfirm(`¿Quitar a ${p.name || p.relation} de tu círculo?`, 'Sus recuerdos no se borran.', 'Quitar')) return;
         await fetch(`${API_URL}/circle/${id}`, { method: 'DELETE' });
         return loadCircle();
       }
@@ -2019,7 +2046,7 @@
     rv('rvAddPerson').onclick = () => rv('rvPeople').appendChild(personRow());
 
     rv('rvCancel').onclick = async () => {
-      if (!confirm('¿Descartar este recuerdo? Se borrará también el archivo subido.')) return;
+      if (!await askConfirm('¿Descartar este recuerdo?', 'Se borrará también el archivo subido.', 'Descartar')) return;
       if (draft) await fetch(`${API_URL}/media/${draft.media_id}`, { method: 'DELETE' });
       draft = null; closeReview(); setAudioStatus('Descartado.'); setMediaStatus('');
     };
@@ -2671,7 +2698,7 @@
       }
 
       async function removeStage(id) {
-        if (!confirm('¿Eliminar esta etapa? Tus recuerdos no se borran.')) return;
+        if (!await askConfirm('¿Eliminar esta etapa?', 'Tus recuerdos no se borran.', 'Eliminar')) return;
         const r = await api('/stages/' + id, { method: 'DELETE' });
         if (!r.success) return say(r.error);
         stages = stages.filter(s => s.id !== id);
