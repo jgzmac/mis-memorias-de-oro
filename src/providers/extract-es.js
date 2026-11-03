@@ -3,6 +3,7 @@
  * Reglas sencillas y sin coste: fecha/periodo, personas y relación, lugar, tipo y ánimo.
  * Todo es opcional: lo que no se detecta queda vacío para que el usuario lo complete.
  */
+const Dates = require('../../public/dates.js');
 
 const MONTHS = {
   enero: 1, febrero: 2, marzo: 3, abril: 4, mayo: 5, junio: 6, julio: 7, agosto: 8,
@@ -214,16 +215,27 @@ function extractMood(text) {
 }
 
 // ===== Título =====
-function buildTitle(text, { event_type, place, date_happened }) {
+// Corto a propósito: tipo + lugar ("Viaje a Sevilla"); la fecha ya se ve aparte.
+// Sin tipo: primera frase sin saludos ni muletillas, recortada a unas 6 palabras.
+const MAX_TITLE_WORDS = 6;
+function shortTitle(text) {
+  let first = (text.split(/(?<=[.!?])\s+/)[0] || text).replace(/[.!?…]+$/, '').trim();
+  first = first.replace(/^(bueno|pues|mira|entonces|recuerdo que|me acuerdo de que|me acuerdo|recuerdo|este|eh|em)[,\s]+/i, '');
+  first = first.split(/,\s|;\s|\s+(?:y luego|y después|y entonces|pero|porque|aunque)\s+/i)[0].trim();
+  const words = first.split(/\s+/).filter(Boolean);
+  if (!words.length) return '';
+  const cut = words.slice(0, MAX_TITLE_WORDS).join(' ').replace(/[\s,;:]+$/, '').replace(/(?:\s+(?:de|del|la|el|los|las|un|una|y|en|con|a|que|se|mi|mis|su))+$/i, '');
+  const t = words.length > MAX_TITLE_WORDS ? cut + '…' : cut;
+  return t.charAt(0).toUpperCase() + t.slice(1);
+}
+function buildTitle(text, { event_type, place }) {
   if (event_type) {
     let t = event_type;
-    const short = place ? place.split(' (')[0] : '';
+    const short = place ? place.split(/ \(|,/)[0].trim() : '';
     if (short) t += `${event_type === 'Viaje' ? ' a' : ' en'} ${short}`;
-    if (date_happened) t += ` (${date_happened.slice(0, 4)})`;
     return t;
   }
-  const first = text.split(/(?<=[.!?])\s+/)[0] || text;
-  return first.length > 60 ? first.slice(0, 57).trim() + '…' : first;
+  return shortTitle(text);
 }
 
 // ===== Punto de entrada =====
@@ -238,9 +250,12 @@ function extractMemory(rawText, today = new Date()) {
     category = 'Familia';
   }
   const mood = extractMood(text);
-  const title = buildTitle(text, { event_type: type.event_type, place, date_happened: date.date_happened });
+  // La fecha ya se guarda aparte: se quita del título ("En verano de 1999 fuimos…" → "Fuimos…")
+  const forTitle = date.date_text ? text.replace(new RegExp('^(?:en|el|durante|hace)?\\s*' + date.date_text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '[,\\s]*', 'i'), '').trim() || text : text;
+  const title = buildTitle(forTitle, { event_type: type.event_type, place, date_happened: date.date_happened });
   const tags = extractTags(text, people);
-  return { title, content: text, ...date, place, event_type: type.event_type, category, mood, people, tags };
+  const date_precision = Dates.infer(date.date_happened || '', date.date_end || '');
+  return { title, content: text, ...date, date_precision, place, event_type: type.event_type, category, mood, people, tags };
 }
 
-module.exports = { extractTags, extractMemory, extractDate, extractPeople, extractPlace, extractType };
+module.exports = { buildTitle, extractTags, extractMemory, extractDate, extractPeople, extractPlace, extractType };

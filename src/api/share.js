@@ -5,6 +5,7 @@
  */
 const crypto = require('crypto');
 const db = require('../db');
+const Dates = require('../../public/dates.js');
 const { absPath } = require('./media');
 
 function init() {
@@ -70,7 +71,7 @@ function page(req, res) {
   const ids = JSON.parse(s.memory_ids);
   let cards = '';
   if (ids.length) {
-    const mems = db.prepare(`SELECT id, title, content, date_happened, place FROM memories WHERE user_id = ? AND id IN (${ids.map(() => '?').join(',')}) ORDER BY date_happened`).all(s.user_id, ...ids);
+    const mems = db.prepare(`SELECT id, title, content, date_happened, date_end, date_precision, place FROM memories WHERE user_id = ? AND id IN (${ids.map(() => '?').join(',')}) ORDER BY date_happened`).all(s.user_id, ...ids);
     cards = mems.map(m => {
       const media = db.prepare('SELECT id, kind, mime FROM media WHERE memory_id = ? ORDER BY id').all(m.id).map(x => {
         const u = `/c/${s.token}/media/${x.id}`;
@@ -78,7 +79,7 @@ function page(req, res) {
         if (x.mime.startsWith('video/') && x.kind !== 'audio') return `<video src="${u}" controls preload="metadata" playsinline></video>`;
         return `<audio src="${u}" controls preload="none"></audio>`;
       }).join('');
-      return `<article id="r${m.id}"><h3>${esc(m.title)}</h3><div class="meta">${esc([m.date_happened, m.place].filter(Boolean).join(' · '))}</div><p>${esc(m.content)}</p>${media}</article>`;
+      return `<article id="r${m.id}"><h3>${esc(m.title)}</h3><div class="meta">${esc([Dates.label(m.date_happened, m.date_end, m.date_precision, { long: true }), m.place].filter(Boolean).join(' · '))}</div><p>${esc(m.content)}</p>${media}</article>`;
     }).join('');
   }
   res.send(`<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>${esc(s.title)}</title>

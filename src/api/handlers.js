@@ -5,6 +5,7 @@
 const fs = require('fs');
 const db = require('../db');
 const { absPath } = require('./media');
+const Dates = require('../../public/dates.js');
 
 const DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
 const clean = (v, max) => String(v == null ? '' : v).trim().slice(0, max);
@@ -69,23 +70,26 @@ function createMemory(req, res) {
     let title = clean(b.title, 200);
     let content = clean(b.content, 20000);
     if (!title && !content) return fail(res, 400, 'Escribe al menos un título o un contenido');
-    if (!title) title = content.length > 60 ? content.slice(0, 57) + '…' : content;
+    if (!title) title = require('../providers/extract-es').buildTitle(content, {}) || content.slice(0, 40);
     if (!content) content = title;
 
-    if (!validDate(b.date_happened) || !validDate(b.date_end)) return fail(res, 400, 'Fecha no válida');
-    if (futureDate(b.date_happened) || futureDate(b.date_end)) return fail(res, 400, 'Un recuerdo no puede tener una fecha futura');
-    if (beyondLife(req.user.id, b.date_happened, b.date_end)) return fail(res, 400, BEYOND_MSG);
+    const when = Dates.normalize(b.date_happened, b.date_end, b.date_precision);
+    if (!when) return fail(res, 400, 'Fecha no válida');
+    // Solo cuenta el inicio: "este año" o "este verano" son válidos aunque el periodo no haya terminado
+    if (futureDate(when.date_happened)) return fail(res, 400, 'Un recuerdo no puede tener una fecha futura');
+    if (beyondLife(req.user.id, when.date_happened, when.date_precision === 'range' ? when.date_end : '')) return fail(res, 400, BEYOND_MSG);
     const tags = Array.isArray(b.tags) ? b.tags.map(t => clean(t, 40)).filter(Boolean).slice(0, 30) : [];
     const people = normalizePeople(b.people) || [];
     const mediaIds = Array.isArray(b.media_ids) ? b.media_ids.map(Number).filter(Number.isInteger) : [];
 
     const create = db.transaction(() => {
       const r = db.prepare(`
-        INSERT INTO memories (title, content, date_happened, date_end, place, event_type, category, tags, mood, user_id)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`).run(
+        INSERT INTO memories (title, content, date_happened, date_end, date_precision, place, event_type, category, tags, mood, user_id)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`).run(
         title, content,
-        b.date_happened || new Date().toISOString().split('T')[0],
-        b.date_end || null,
+        when.date_happened || new Date().toISOString().split('T')[0],
+        when.date_end || null,
+        when.date_happened ? when.date_precision : 'day',
         clean(b.place, 200) || null,
         clean(b.event_type, 80) || null,
         clean(b.category, 40) || 'General',
@@ -150,9 +154,13 @@ function updateMemory(req, res) {
     if (!current) return fail(res, 404, 'Memoria no encontrada');
 
     const b = req.body;
-    if (!validDate(b.date_happened) || !validDate(b.date_end)) return fail(res, 400, 'Fecha no válida');
-    if (futureDate(b.date_happened) || futureDate(b.date_end)) return fail(res, 400, 'Un recuerdo no puede tener una fecha futura');
-    if (beyondLife(req.user.id, b.date_happened, b.date_end)) return fail(res, 400, BEYOND_MSG);
+    let when = null;
+    if (b.date_happened !== undefined || b.date_end !== undefined || b.date_precision !== undefined) {
+      when = Dates.normalize(b.date_happened !== undefined ? b.date_happened : current.date_happened, b.date_end !== undefined ? b.date_end : (b.date_happened !== undefined ? '' : current.date_end), b.date_precision !== undefined || b.date_happened === undefined ? (b.date_precision || current.date_precision) : undefined);
+      if (!when) return fail(res, 400, 'Fecha no válida');
+      if (futureDate(when.date_happened)) return fail(res, 400, 'Un recuerdo no puede tener una fecha futura');
+      if (beyondLife(req.user.id, when.date_happened, when.date_precision === 'range' ? when.date_end : '')) return fail(res, 400, BEYOND_MSG);
+    }
 
     const sets = [];
     const vals = [];
@@ -168,8 +176,11 @@ function updateMemory(req, res) {
       if (!c) return fail(res, 400, 'Contenido es requerido');
       set('content', c);
     }
-    if (b.date_happened !== undefined) set('date_happened', b.date_happened || null);
-    if (b.date_end !== undefined) set('date_end', b.date_end || null);
+    if (when) {
+      set('date_happened', when.date_happened || null);
+      set('date_end', when.date_end || null);
+      set('date_precision', when.date_precision);
+    }
     if (b.place !== undefined) set('place', clean(b.place, 200) || null);
     if (b.event_type !== undefined) set('event_type', clean(b.event_type, 80) || null);
     if (b.category !== undefined) set('category', clean(b.category, 40) || 'General');

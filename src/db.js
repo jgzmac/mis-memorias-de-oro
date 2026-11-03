@@ -100,7 +100,7 @@ function initializeDatabase() {
   db.exec('CREATE INDEX IF NOT EXISTS idx_memories_user ON memories(user_id)');
 
   // Datos extraídos de audio/foto/vídeo: periodo, lugar y tipo de recuerdo
-  for (const [col, type] of [['date_end', 'TEXT'], ['place', 'TEXT'], ['event_type', 'TEXT']]) {
+  for (const [col, type] of [['date_end', 'TEXT'], ['place', 'TEXT'], ['event_type', 'TEXT'], ['date_precision', 'TEXT']]) {
     if (!cols.includes(col)) db.exec(`ALTER TABLE memories ADD COLUMN ${col} ${type}`);
   }
 
@@ -137,7 +137,7 @@ function initializeDatabase() {
 
   // Perfil: nacimiento (punto de partida de la línea de vida)
   const ucols = db.prepare('PRAGMA table_info(users)').all().map(c => c.name);
-  for (const col of ['birth_date', 'birth_place']) {
+  for (const col of ['birth_date', 'birth_place', 'photo_path']) {
     if (!ucols.includes(col)) db.exec(`ALTER TABLE users ADD COLUMN ${col} TEXT`);
   }
 

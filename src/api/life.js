@@ -3,7 +3,9 @@
  * Todo es privado por usuario salvo los hechos históricos, que son un fichero común.
  */
 
+const fs = require('fs');
 const db = require('../db');
+const { absPath } = require('./media');
 const history = require('../data/history.json').events;
 
 const KINDS = ['school', 'work', 'residence'];
@@ -20,8 +22,9 @@ const fail = (res, error, status = 400) => res.status(status).json({ success: fa
 
 // ===== Perfil =====
 function getProfile(req, res) {
-  const u = db.prepare('SELECT id, name, email, birth_date, birth_place FROM users WHERE id = ?').get(req.user.id);
-  res.json({ success: true, data: u });
+  const u = db.prepare('SELECT id, name, email, birth_date, birth_place, photo_path FROM users WHERE id = ?').get(req.user.id);
+  const { photo_path, ...rest } = u;
+  res.json({ success: true, data: { ...rest, has_photo: !!photo_path } });
 }
 
 function updateProfile(req, res) {
@@ -31,12 +34,44 @@ function updateProfile(req, res) {
   if (birth && birth > new Date().toISOString().slice(0, 10)) return fail(res, 'La fecha de nacimiento no puede ser futura');
   if (birth) {
     const lim = (Number(birth.slice(0, 4)) + 120) + birth.slice(4);
-    const bad = db.prepare('SELECT COUNT(*) AS c FROM memories WHERE user_id = ? AND (date_happened > ? OR date_end > ?)').get(req.user.id, lim, lim).c;
+    const bad = db.prepare(`SELECT COUNT(*) AS c FROM memories WHERE user_id = ? AND (date_happened > ? OR (date_precision = 'range' AND date_end > ?))`).get(req.user.id, lim, lim).c;
     if (bad) return fail(res, 'Tienes recuerdos más allá de los 120 años desde esa fecha de nacimiento');
   }
   db.prepare('UPDATE users SET birth_date = ?, birth_place = ? WHERE id = ?')
     .run(birth || null, clean(b.birth_place, 120) || null, req.user.id);
   getProfile(req, res);
+}
+
+// ===== Foto de perfil =====
+// El navegador la reduce a ~300 px (JPEG) y la envía en base64; aquí solo se comprueba que sea un JPEG pequeño.
+function putPhoto(req, res) {
+  const m = /^data:image\/jpeg;base64,([A-Za-z0-9+/=]+)$/.exec(String((req.body || {}).image || ''));
+  if (!m) return fail(res, 'La foto no es válida');
+  const buf = Buffer.from(m[1], 'base64');
+  if (buf.length > 400 * 1024) return fail(res, 'La foto es demasiado grande');
+  if (buf.length < 100) return fail(res, 'La foto no es válida');
+  if (buf[0] !== 0xFF || buf[1] !== 0xD8) return fail(res, 'La foto no es válida');
+  const rel = require('path').join(String(req.user.id), 'avatar.jpg');
+  const full = absPath(rel);
+  fs.mkdirSync(require('path').dirname(full), { recursive: true });
+  fs.writeFileSync(full, buf);
+  db.prepare('UPDATE users SET photo_path = ? WHERE id = ?').run(rel, req.user.id);
+  res.json({ success: true });
+}
+function getPhoto(req, res) {
+  const u = db.prepare('SELECT photo_path FROM users WHERE id = ?').get(req.user.id);
+  if (!u || !u.photo_path) return res.status(404).json({ success: false, error: 'Sin foto' });
+  res.setHeader('X-Content-Type-Options', 'nosniff');
+  res.setHeader('Cache-Control', 'private, no-cache');
+  res.sendFile(absPath(u.photo_path), { headers: { 'Content-Type': 'image/jpeg' } }, (err) => {
+    if (err && !res.headersSent) res.status(404).json({ success: false, error: 'Sin foto' });
+  });
+}
+function deletePhoto(req, res) {
+  const u = db.prepare('SELECT photo_path FROM users WHERE id = ?').get(req.user.id);
+  if (u && u.photo_path) { try { fs.unlinkSync(absPath(u.photo_path)); } catch (e) { /* ya no estaba */ } }
+  db.prepare('UPDATE users SET photo_path = NULL WHERE id = ?').run(req.user.id);
+  res.json({ success: true });
 }
 
 // ===== Etapas (escolar, profesional, residencia) =====
@@ -133,4 +168,4 @@ function getHistory(req, res) {
   res.json({ success: true, data: { level: 'cercano', events: strip(nearest(mid)) } });
 }
 
-module.exports = { getProfile, updateProfile, listStages, createStage, updateStage, deleteStage, getHistory };
+module.exports = { putPhoto, getPhoto, deletePhoto, getProfile, updateProfile, listStages, createStage, updateStage, deleteStage, getHistory };

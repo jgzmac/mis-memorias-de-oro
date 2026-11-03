@@ -83,3 +83,11 @@ Actualizada: 2026-10-30. Orden propuesto (se puede cambiar).
 - Fase N: ¿qué iconos/orden exactos del menú? (propuesta arriba; ¿"Crear" como botón central destacado?)
 - Fase B2: estilos positivos que quiere ver.
 - Línea de vida: si se quiere alguna perspectiva más (Familia, Viajes).
+
+## Lote 2026-11-03 (hecho en local, pendiente de probar y subir)
+- Fecha aproximada: día exacto, mes, estación, año o periodo (`public/dates.js`, columna `date_precision`).
+- Título automático corto (tipo + lugar, o primeras palabras sin la fecha).
+- Audio: máximo 2 minutos, aviso a los 30 s finales y aviso previo con qué contar (cuándo, dónde, con quién, qué).
+- Foto de perfil (se reduce a 300 px en el navegador; `PUT/GET/DELETE /api/profile/photo`).
+- Círculo de personas en Perfil (`/api/circle`); al guardar un recuerdo se propone añadir a quien no esté.
+- QR del enlace del resumen (generado en el navegador con `public/qrcode.js`, MIT) con botón Guardar QR/compartir.

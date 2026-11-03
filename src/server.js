@@ -16,8 +16,9 @@ const {
 const { requireAuth, register, login, logout, me, updateName, changePassword } = require('./auth');
 const { serveMedia, discardMedia } = require('./api/media');
 const { receive, analyzeAudio, getJob } = require('./api/audio');
-const { getProfile, updateProfile, listStages, createStage, updateStage, deleteStage, getHistory } = require('./api/life');
+const { putPhoto, getPhoto, deletePhoto, getProfile, updateProfile, listStages, createStage, updateStage, deleteStage, getHistory } = require('./api/life');
 const visual = require('./api/visual');
+const circle = require('./api/circle');
 const summaryApi = require('./api/summary');
 const share = require('./api/share');
 const vision = require('./providers/vision');
@@ -28,7 +29,7 @@ const PORT = process.env.PORT || 3001;
 
 // ===== MIDDLEWARE =====
 app.use(cors({ origin: false }));
-app.use(bodyParser.json());
+app.use(bodyParser.json({ limit: '700kb' }));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, '../public')));
 
@@ -83,11 +84,20 @@ app.get('/api/places', (req, res) => res.json(require('./data/places.json')));
 // ===== LÍNEA DE VIDA =====
 app.get('/api/profile', requireAuth, getProfile);
 app.put('/api/profile', requireAuth, updateProfile);
+app.put('/api/profile/photo', requireAuth, putPhoto);
+app.get('/api/profile/photo', requireAuth, getPhoto);
+app.delete('/api/profile/photo', requireAuth, deletePhoto);
 app.get('/api/stages', requireAuth, listStages);
 app.post('/api/stages', requireAuth, createStage);
 app.put('/api/stages/:id', requireAuth, updateStage);
 app.delete('/api/stages/:id', requireAuth, deleteStage);
 app.get('/api/history', requireAuth, getHistory);
+
+// ===== CÍRCULO DE PERSONAS =====
+app.get('/api/circle', requireAuth, circle.list);
+app.post('/api/circle', requireAuth, circle.create);
+app.put('/api/circle/:id', requireAuth, circle.update);
+app.delete('/api/circle/:id', requireAuth, circle.remove);
 
 // ===== RESUMEN DE VIDA =====
 app.get('/api/summary/styles', requireAuth, (req, res) => res.json({ success: true, data: summaryApi.styles() }));

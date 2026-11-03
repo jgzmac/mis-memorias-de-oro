@@ -369,6 +369,7 @@
 
     /* ===== Audio ===== */
     .audio-box { border: 2px dashed var(--salvia); border-radius: 10px; padding: 15px; margin-bottom: 20px; background: var(--fondo-1); }
+    .audio-status.warn { color: #b3541e; font-weight: 700; }
     .audio-box h3 { font-size: 1em; color: #333; margin-bottom: 10px; }
     .audio-actions { display: flex; gap: 8px; flex-wrap: wrap; }
     .audio-actions button, .audio-actions label.btn-file { flex: 1; min-width: 120px; padding: 10px; border: none; border-radius: 6px; cursor: pointer; background: var(--salvia-fuerte); color: white; font-size: 0.95em; text-align: center; }
@@ -495,6 +496,22 @@
     .searchbar { display: grid; grid-template-columns: 1fr; gap: 8px; margin-bottom: 14px; }
     .searchbar .sort-row { display: flex; align-items: center; gap: 8px; font-size: 0.9em; color: var(--gris); }
     .searchbar .sort-row select { flex: 1; }
+    .avatar { width: 84px; height: 84px; border-radius: 50%; background: var(--fondo-2, #e3ecdf); color: var(--salvia-hover); display: flex; align-items: center; justify-content: center; font-size: 2em; font-weight: 800; overflow: hidden; flex: none; border: 3px solid #fff; box-shadow: 0 1px 6px rgba(0,0,0,.18); }
+    .avatar img { width: 100%; height: 100%; object-fit: cover; }
+    .avatar.sm { width: 44px; height: 44px; font-size: 1.1em; border-width: 2px; }
+    .avatar-row { display: flex; align-items: center; gap: 14px; margin: 8px 0 14px; flex-wrap: wrap; }
+    .avatar-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+    .circle-list { list-style: none; margin: 8px 0; padding: 0; display: grid; gap: 6px; }
+    .circle-item { display: flex; align-items: center; gap: 10px; background: var(--fondo-1); border-radius: 10px; padding: 8px 10px; }
+    .circle-item .avatar { width: 38px; height: 38px; font-size: 1em; border-width: 2px; }
+    .circle-item .ci-txt { flex: 1; min-width: 0; }
+    .circle-item .ci-txt small { display: block; color: var(--gris); }
+    .circle-item button { padding: 6px 10px; }
+    .circle-form { display: grid; gap: 8px; margin: 8px 0 16px; }
+    .circle-prop label { display: flex; align-items: center; gap: 8px; padding: 6px 0; font-size: 1.05em; }
+    .circle-prop input[type=checkbox] { width: 22px; height: 22px; flex: none; }
+    .qr-box { display: flex; flex-direction: column; align-items: center; gap: 8px; margin: 12px 0; }
+    .qr-box svg { width: 220px; height: 220px; background: #fff; padding: 10px; border-radius: 10px; border: 1px solid var(--salvia); }
     .profile-row { display: grid; gap: 8px; margin: 10px 0 16px; }
     .logout-big { width: 100%; margin-top: 10px; background: white; color: #b14a3a; border: 2px solid #e3b5ab; border-radius: 14px; font-size: 1.05em; }
 
@@ -536,6 +553,10 @@
     .chip, .seg-group button { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 6px 14px; border: 1.5px solid var(--salvia); border-radius: 999px; background: white; color: var(--salvia-hover); font-size: 0.95em; font-weight: 500; cursor: pointer; }
     .chip[aria-pressed="true"], .seg-group button[aria-pressed="true"] { background: var(--salvia-fuerte); border-color: var(--salvia-fuerte); color: white; }
     .chip .i { width: 1.1rem; height: 1.1rem; }
+    .dp-modes { margin-bottom: 8px; }
+    .dp-fields { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+    .dp-fields input, .dp-fields select { flex: 1 1 140px; min-width: 0; }
+    .dp-fields .dp-sep { color: var(--gris); }
     .age-hint { font-size: 0.88em; color: var(--salvia-hover); margin-top: 4px; min-height: 1.1em; }
     .seg-group { display: flex; flex-wrap: wrap; gap: 8px; flex: 1; }
     .seg-group button { min-height: 40px; padding: 4px 12px; font-size: 0.9em; }
@@ -592,7 +613,7 @@
     /* Cabecera del Inicio: pradera de día con flores (sin casa ni atardecer) */
     .home-hero { position: relative; height: 104px; border-radius: 22px; overflow: hidden; margin-bottom: 12px; background: linear-gradient(#CFE8F4 0%, #E8F3EA 70%); }
     .home-hero > svg { position: absolute; inset: 0; width: 100%; height: 100%; }
-    .home-hero .hero-text { position: relative; padding: 12px 16px; }
+    .home-hero .hero-text { position: relative; padding: 12px 16px; display: flex; align-items: center; gap: 12px; }
     .home-hero .home-hello { font-size: 1.5em; }
     .home-hero .home-sub { font-size: 1em; }
     .home-hero .home-hello { color: #2F4A33; margin: 0; }
@@ -760,8 +781,8 @@
           <g stroke="#4E7A45" stroke-width="2" stroke-linecap="round"><path d="M40 190v-26M72 190v-22M118 190v-28M160 190v-20M206 190v-26M236 190v-18"/></g>
           <circle cx="40" cy="162" r="6" fill="#F4B6A6"/><circle cx="72" cy="166" r="5" fill="#FFE08A"/><circle cx="118" cy="160" r="6.5" fill="#F4B6A6"/><circle cx="160" cy="168" r="5" fill="#fff"/><circle cx="206" cy="162" r="6" fill="#FFE08A"/><circle cx="236" cy="170" r="5" fill="#F4B6A6"/>
         </svg>
-        <div class="hero-text"><h2 class="home-hello" id="homeHello">Hola</h2>
-        <p class="home-sub">Tus recuerdos, bien guardados.</p></div></div>
+        <div class="hero-text"><div class="avatar sm" aria-hidden="true"></div><div><h2 class="home-hello" id="homeHello">Hola</h2>
+        <p class="home-sub">Tus recuerdos, bien guardados.</p></div></div></div>
       <label class="home-search" for="homeSearch"><svg class="i"><use href="#i-search"/></svg><input type="search" id="homeSearch" placeholder="Buscar en tus recuerdos" autocomplete="off" enterkeyhint="search"></label>
       <div class="profile-nudge hidden" id="profNudge"><span>Completa tu perfil: falta tu fecha o tu lugar de nacimiento. Así puedo decirte qué edad tenías en cada recuerdo.</span><button type="button" id="profNudgeBtn">Completar</button></div>
       <div class="remember hidden" id="remember"></div>
@@ -807,7 +828,7 @@
 
           <div class="form-group">
             <label for="date">¿Cuándo fue?</label>
-            <input type="date" id="date" name="date">
+            <div class="dp" id="dpWrite"></div>
             <div class="age-hint" id="dateAge"></div>
           </div>
 
@@ -815,6 +836,12 @@
             <label>Etiquetas (toca las que encajen)</label>
             <div class="chips" id="tagsContainer"></div>
             <input type="text" id="tagInput" placeholder="Otra etiqueta: escríbela y pulsa Intro" style="margin-top: 8px;">
+          </div>
+
+          <div class="form-group">
+            <label>¿Con quién estabas?</label>
+            <div id="wPeople"></div>
+            <button type="button" class="btn-secondary" id="wAddPerson" style="margin-top:4px;">+ Añadir persona</button>
           </div>
 
           <div class="form-group">
@@ -833,6 +860,14 @@
     </div>
 
     <div id="viewProfile" class="card hidden">
+      <div class="avatar-row">
+        <div class="avatar" id="profAvatar" aria-hidden="true"></div>
+        <div class="avatar-actions">
+          <label class="btn-file"><svg class="i"><use href="#i-camera"/></svg> <span id="avatarLbl">Añadir foto</span><input type="file" id="avatarFile" accept="image/*" hidden></label>
+          <button type="button" class="btn-secondary hidden" id="avatarDel">Quitar foto</button>
+        </div>
+      </div>
+      <div id="avatarMsg"></div>
       <h2 style="color: var(--salvia-hover);" id="profName">Tu perfil</h2>
       <div class="hint" id="profEmail"></div>
       <div id="profMsg"></div>
@@ -841,6 +876,22 @@
         <h3>Tu nombre</h3>
         <input type="text" id="profNameInput" maxlength="80" autocomplete="name">
         <button type="button" class="btn-secondary" id="profNameSave">Cambiar nombre</button>
+      </div>
+      <div class="pw-box" id="circleBox">
+        <h3>Mi círculo de personas</h3>
+        <div class="hint">Familia y amistades que aparecen en tus recuerdos. Todos los datos son opcionales.</div>
+        <div id="circleMsg"></div>
+        <ul class="circle-list" id="circleList"></ul>
+        <div class="circle-form">
+          <input type="text" id="cirName" maxlength="80" placeholder="Nombre" autocomplete="off">
+          <input type="text" id="cirRel" maxlength="60" placeholder="Parentesco (hija, amigo, vecina…)" autocomplete="off">
+          <label for="cirBirth" style="font-weight:600">Fecha de nacimiento (si la sabes)</label>
+          <input type="date" id="cirBirth">
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <button type="button" class="btn-primary" id="cirSave">Añadir al círculo</button>
+            <button type="button" class="btn-secondary hidden" id="cirCancel">Cancelar</button>
+          </div>
+        </div>
       </div>
       <h3 style="font-size:1em;margin-top:6px;">Tus datos de nacimiento</h3>
       <div class="profile-row">
@@ -928,6 +979,36 @@
 
   <div id="onb" class="hidden" role="dialog" aria-modal="true" aria-label="Bienvenida"><div class="onb-in" id="onbBody"></div></div>
 
+  <div id="recTip" class="modal-bg hidden" role="dialog" aria-modal="true" aria-labelledby="recTipTitle">
+    <div class="modal" style="max-width:460px;min-height:0;border-radius:14px;margin:auto">
+      <h2 id="recTipTitle" style="color:var(--tinta);margin-bottom:10px">Antes de grabar</h2>
+      <p style="margin-bottom:10px">Tienes <strong>2 minutos</strong> como máximo.</p>
+      <p style="margin-bottom:6px">Para que tu recuerdo quede bien, di con claridad:</p>
+      <ul style="margin:0 0 16px 20px;line-height:1.6">
+        <li><strong>Cuándo</strong> ocurrió (año, estación o fecha)</li>
+        <li><strong>Dónde</strong> fue</li>
+        <li><strong>Con quién</strong> estabas</li>
+        <li><strong>Qué</strong> sucedió</li>
+      </ul>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <button type="button" id="recTipGo" style="flex:1"><svg class="i"><use href="#i-rec"/></svg> Empezar a grabar</button>
+        <button type="button" class="btn-secondary" id="recTipCancel">Ahora no</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="circleTip" class="modal-bg hidden" role="dialog" aria-modal="true" aria-labelledby="circleTipTitle">
+    <div class="modal circle-prop" style="max-width:460px;min-height:0;border-radius:14px;margin:auto">
+      <h2 id="circleTipTitle" style="color:var(--tinta);margin-bottom:8px">¿Añadimos a tu círculo?</h2>
+      <p style="margin-bottom:8px">Estas personas salen en tu recuerdo y aún no están en tu círculo:</p>
+      <div id="circleTipList"></div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px">
+        <button type="button" id="circleTipYes" style="flex:1">Añadir las marcadas</button>
+        <button type="button" class="btn-secondary" id="circleTipNo">Ahora no</button>
+      </div>
+    </div>
+  </div>
+
   <div id="reviewModal" class="modal-bg hidden">
     <div class="modal">
       <h2 style="margin-bottom: 8px; color: #333;">Revisa tu recuerdo</h2>
@@ -937,8 +1018,7 @@
       <div class="review-field"><label for="rvTitle">Título</label><input id="rvTitle" maxlength="200"></div>
       <div class="review-field"><label for="rvContent">Lo que contaste</label><textarea id="rvContent"></textarea></div>
       <div class="form-row">
-        <div class="review-field"><label for="rvDate">Fecha (o inicio del periodo)</label><input type="date" id="rvDate"><div class="age-hint" id="rvAge"></div></div>
-        <div class="review-field"><label for="rvDateEnd">Fin del periodo (si aplica)</label><input type="date" id="rvDateEnd"></div>
+        <div class="review-field" style="grid-column:1/-1"><label>¿Cuándo fue?</label><div class="dp" id="dpReview"></div><div class="age-hint" id="rvAge"></div></div>
       </div>
       <div class="review-field"><label for="rvPlace">Lugar</label><input id="rvPlace" maxlength="200"></div>
       <div class="review-field"><label>Etiquetas (toca las que encajen)</label>
@@ -962,6 +1042,8 @@
     </div>
   </div>
 
+  <script src="dates.js"></script>
+  <script src="qrcode.js"></script>
   <script>
     // Icono de trazo fino desde el sprite
     // Lugares: completa "Madrid" como "Madrid, España" y sugiere mientras se escribe
@@ -997,13 +1079,59 @@
     const beyondLife = (v) => !!v && !!lifeLimit() && v > lifeLimit();
     const BEYOND_MSG = 'Esa fecha supera los 120 años desde tu nacimiento.';
     const FUTURE_MSG = 'Un recuerdo no puede tener una fecha futura. Elige hoy o un día anterior.';
-    function limitDates() { ['date', 'rvDate', 'rvDateEnd'].forEach(id => { const el = document.getElementById(id); if (el) el.max = (lifeLimit() && lifeLimit() < todayStr()) ? lifeLimit() : todayStr(); }); }
+    let birthDate = '';
+    // Edad aproximada cuando la fecha no es exacta (se calcula con el punto medio del periodo)
+    function ageOf(start, end, prec) {
+      if (!start) return '';
+      if (!prec || prec === 'day') return ageLabel(start);
+      const a = ageAt(Dates.midpoint(start, end));
+      return a && a !== 'recién nacido' ? `Tenías unos ${a}` : '';
+    }
+    const whenLabel = (m, long) => Dates.label(m.date_happened, m.date_end, m.date_precision, { long });
+
+    // Selector de fecha: exacta, mes, estación, año o periodo
+    function datePicker(host, onChange) {
+      const MODES = [['day', 'Día exacto'], ['month', 'Mes'], ['season', 'Estación'], ['year', 'Año'], ['range', 'Periodo']];
+      let prec = 'day', parts = {};
+      host.innerHTML = '<div class="seg-group dp-modes"></div><div class="dp-fields"></div>';
+      const modes = host.querySelector('.dp-modes'), fields = host.querySelector('.dp-fields');
+      MODES.forEach(([k, l]) => { const b = document.createElement('button'); b.type = 'button'; b.textContent = l; b.dataset.k = k; b.onclick = () => { const cur = get(); setMode(k, cur.date_happened, cur.date_end); changed(); }; modes.appendChild(b); });
+      const changed = () => { if (onChange) onChange(get()); };
+      function setMode(k, start, end) {
+        prec = k; parts = start ? Dates.toParts(start, end, k).parts : {};
+        modes.querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', b.dataset.k === k ? 'true' : 'false'));
+        draw();
+      }
+      function draw() {
+        const max = (lifeLimit() && lifeLimit() < todayStr()) ? lifeLimit() : todayStr();
+        const yMax = Number(max.slice(0, 4));
+        const inp = (type, key, ph, extra) => `<input type="${type}" data-k="${key}" value="${esc(parts[key] == null ? '' : parts[key])}" ${ph ? `placeholder="${ph}"` : ''} ${extra || ''}>`;
+        fields.innerHTML = {
+          day: () => inp('date', 'day', '', `max="${max}" aria-label="Fecha"`),
+          month: () => inp('month', 'month', '', `max="${max.slice(0, 7)}" aria-label="Mes y año"`),
+          season: () => `<select data-k="season" aria-label="Estación"><option value="">Estación…</option>${Object.entries(Dates.SEASON_NAMES).map(([k, n]) => `<option value="${k}" ${parts.season === k ? 'selected' : ''}>${n}</option>`).join('')}</select>${inp('number', 'year', 'Año', `min="1850" max="${yMax}" inputmode="numeric" aria-label="Año"`)}`,
+          year: () => inp('number', 'year', 'Año (ej. 1985)', `min="1850" max="${yMax}" inputmode="numeric" aria-label="Año"`),
+          range: () => `${inp('date', 'start', '', `max="${max}" aria-label="Desde"`)}<span class="dp-sep">hasta</span>${inp('date', 'end', '', `max="${max}" aria-label="Hasta"`)}`
+        }[prec]();
+        fields.querySelectorAll('[data-k]').forEach(el => { const h = () => { parts[el.dataset.k] = el.value; changed(); }; el.addEventListener('input', h); el.addEventListener('change', h); });
+      }
+      function get() {
+        const r = Dates.fromParts(prec, parts);
+        return r ? { ...r, date_precision: prec } : { date_happened: '', date_end: '', date_precision: 'day' };
+      }
+      function set(start, end, p) { const k = start ? (p || Dates.infer(start, end)) : 'day'; setMode(k, start, end); }
+      setMode('day', '', '');
+      return { get, set, redraw: draw };
+    }
+    const dpList = [];
+    function limitDates() { dpList.forEach(d => d.redraw()); }
 
     // ===== ELEMENTOS DEL DOM =====
     const form = document.getElementById('memoryForm');
     const titleInput = document.getElementById('title');
     const contentInput = document.getElementById('content');
-    const dateInput = document.getElementById('date');
+    const dpWrite = datePicker(document.getElementById('dpWrite'), (d) => { document.getElementById('dateAge').textContent = ageOf(d.date_happened, d.date_end, d.date_precision); });
+    dpList.push(dpWrite);
     const moodSelect = document.getElementById('mood');
     const tagInput = document.getElementById('tagInput');
     const tagsContainer = document.getElementById('tagsContainer');
@@ -1051,7 +1179,6 @@
       return draw;
     }
     // Edad en una fecha según la fecha de nacimiento del perfil
-    let birthDate = '';
     function ageAt(d) {
       if (!birthDate || !d || d < birthDate) return '';
       const [by, bm, bd] = birthDate.split('-').map(Number), [y, m, dd] = d.split('-').map(Number);
@@ -1117,6 +1244,7 @@
           showMessage('Memoria guardada exitosamente');
           resetWriteForm(); closePanels();
           window.goTo('mem');
+          proposeCircle(data.people);
         } else {
           showMessage(`${result.error}`, 'error');
         }
@@ -1151,8 +1279,8 @@
       const m = pool[Math.floor(Math.random() * pool.length)];
       rememberId = m.id;
       const vis = (m.media || []).find(x => x.kind === 'image');
-      const age = ageLabel(m.date_happened);
-      const when = new Date(m.date_happened + 'T00:00:00').toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' });
+      const age = ageOf(m.date_happened, m.date_end, m.date_precision);
+      const when = whenLabel(m, true);
       const scenes = ['sea', 'garden', 'dusk'];
       box.innerHTML = `${vis ? `<div class="rem-media"><img src="${esc(vis.url)}" alt=""></div>` : `<div class="scene rem-scene ${scenes[m.id % 3]}"></div>`}
         <div class="rem-body"><div class="rem-q">¿Te acuerdas de este día?</div>
@@ -1180,6 +1308,7 @@
           showMessage('Memoria actualizada');
           resetWriteForm(); closePanels();
           window.goTo('mem');
+          proposeCircle(data.people);
         }
       } catch (err) {
         showMessage(`Error: ${err.message}`, 'error');
@@ -1293,7 +1422,7 @@
       const el = document.getElementById('homeRecent');
       const recent = filterSort(memories, '', 'desc').slice(0, 3);
       el.innerHTML = recent.length
-        ? '<h3>Mis recuerdos recientes</h3>' + recent.map(m => `<div class="home-item" data-id="${m.id}"><strong>${esc(m.title)}</strong><small>${esc(m.date_happened ? new Date(m.date_happened + 'T00:00:00').toLocaleDateString('es-ES') : 'Sin fecha')}${ageLabel(m.date_happened) ? ' · ' + esc(ageLabel(m.date_happened)) : ''}${m.place ? ' · ' + esc(m.place) : ''}</small>${allTags(m).length ? `<div class="memory-tags">${allTags(m).map(t => `<span class="memory-tag">${ic(tagIcon(t))} ${esc(t)}</span>`).join('')}</div>` : ''}</div>`).join('')
+        ? '<h3>Mis recuerdos recientes</h3>' + recent.map(m => `<div class="home-item" data-id="${m.id}"><strong>${esc(m.title)}</strong><small>${esc(m.date_happened ? whenLabel(m) : 'Sin fecha')}${ageOf(m.date_happened, m.date_end, m.date_precision) ? ' · ' + esc(ageOf(m.date_happened, m.date_end, m.date_precision)) : ''}${m.place ? ' · ' + esc(m.place) : ''}</small>${allTags(m).length ? `<div class="memory-tags">${allTags(m).map(t => `<span class="memory-tag">${ic(tagIcon(t))} ${esc(t)}</span>`).join('')}</div>` : ''}</div>`).join('')
         : '<p class="home-sub" style="margin-top:18px">Aún no tienes recuerdos. ¡Cuenta el primero!</p>';
       el.querySelectorAll('[data-id]').forEach(d => d.onclick = () => { window.goTo('mem'); currentMemoryId = null; selectMemory(+d.dataset.id); });
     }
@@ -1318,9 +1447,7 @@
       memoriesList.innerHTML = shown.map(memory => {
         const open = currentMemoryId === memory.id;
         const fmt = (d) => new Date(d + 'T00:00:00').toLocaleDateString('es-ES');
-        const when = memory.date_happened
-          ? (memory.date_end && memory.date_end !== memory.date_happened ? `${fmt(memory.date_happened)} – ${fmt(memory.date_end)}` : fmt(memory.date_happened))
-          : '';
+        const when = whenLabel(memory);
         const people = (memory.people || []).map(p => esc([p.name, p.relation ? `(${p.relation})` : ''].filter(Boolean).join(' '))).join(', ');
         const audios = (memory.media || []).filter(m => m.kind === 'audio');
         const visuals = (memory.media || []).filter(m => m.kind === 'image' || m.kind === 'video');
@@ -1329,7 +1456,7 @@
           <div class="memory-title">${esc(memory.title)}${audios.length ? ' ' + ic('mic') : ''}${visuals.some(v => v.kind === 'image') ? ' ' + ic('camera') : ''}${visuals.some(v => v.kind === 'video') ? ' ' + ic('film') : ''}</div>
           <div class="memory-meta">
             <span>${ic('cal')} ${esc(when || 'Sin fecha')}</span>
-            ${ageLabel(memory.date_happened) ? `<span class="age-pill">${esc(ageLabel(memory.date_happened))}</span>` : ''}
+            ${ageOf(memory.date_happened, memory.date_end, memory.date_precision) ? `<span class="age-pill">${esc(ageOf(memory.date_happened, memory.date_end, memory.date_precision))}</span>` : ''}
             ${moodInfo(memory.mood) ? `<span class="mood-ic" title="${esc(moodInfo(memory.mood)[1])}">${ic(moodInfo(memory.mood)[2])}</span>` : ''}
           </div>
           ${allTags(memory).length ? `<div class="memory-tags">${allTags(memory).map(t => `<span class="memory-tag">${ic(tagIcon(t))} ${esc(t)}</span>`).join('')}</div>` : ''}
@@ -1366,11 +1493,13 @@
       if (memory) {
         titleInput.value = memory.title;
         contentInput.value = memory.content;
-        dateInput.value = memory.date_happened;
+        dpWrite.set(memory.date_happened, memory.date_end, memory.date_precision);
         moodSelect.value = memory.mood;
         tags = memory.tags || [];
         renderTags();
-        document.getElementById('dateAge').textContent = ageLabel(dateInput.value);
+        const wp = document.getElementById('wPeople'); wp.innerHTML = '';
+        (memory.people || []).forEach(p => wp.appendChild(personRow(p)));
+        document.getElementById('dateAge').textContent = ageOf(memory.date_happened, memory.date_end, memory.date_precision);
         currentMemoryId = id;
         document.getElementById('writeTitle').textContent = 'Editar recuerdo';
         renderMemories();
@@ -1383,13 +1512,17 @@
     form.addEventListener('submit', (e) => {
       e.preventDefault();
       limitDates();
-      if (isFuture(dateInput.value)) return showMessage(FUTURE_MSG, 'error');
-      if (beyondLife(dateInput.value)) return showMessage(BEYOND_MSG, 'error');
+      const when = dpWrite.get();
+      if (isFuture(when.date_happened)) return showMessage(FUTURE_MSG, 'error');
+      if (beyondLife(when.date_happened)) return showMessage(BEYOND_MSG, 'error');
       const data = {
         title: titleInput.value,
         content: contentInput.value,
-        date_happened: dateInput.value,
+        date_happened: when.date_happened,
+        date_end: when.date_end,
+        date_precision: when.date_precision,
         event_type: tags[0] || '',
+        people: [...document.getElementById('wPeople').children].map(row => { const [n, r] = row.querySelectorAll('input'); return { name: n.value, relation: r.value }; }),
         mood: moodSelect.value,
         tags: tags
       };
@@ -1401,9 +1534,9 @@
       }
     });
 
+    document.getElementById('wAddPerson').onclick = () => document.getElementById('wPeople').appendChild(personRow());
     drawWriteTags = tagPicker(tagsContainer, tagInput, () => tags, (l) => { tags = l; });
     drawWriteMood = moodPicker(document.getElementById('moodChips'), moodSelect);
-    dateInput.addEventListener('change', () => { document.getElementById('dateAge').textContent = ageLabel(dateInput.value); });
 
 
 
@@ -1433,7 +1566,7 @@
     document.getElementById('cancelWrite').onclick = () => { resetWriteForm(); closePanels(); };
 
     function resetWriteForm() {
-      form.reset(); tags = []; renderTags(); currentMemoryId = null;
+      form.reset(); tags = []; renderTags(); currentMemoryId = null; document.getElementById('wPeople').innerHTML = '';
       document.getElementById('writeTitle').textContent = 'Escribir un recuerdo';
       renderMemories();
     }
@@ -1464,6 +1597,7 @@
     const recBtn = document.getElementById('recBtn');
     const audioFile = document.getElementById('audioFile');
     const audioStatus = document.getElementById('audioStatus');
+    const MAX_REC_SECS = 120, WARN_LEFT_SECS = 30;
     let recorder = null, recChunks = [], recStream = null, recTimer = null, recStart = 0;
     let draft = null; // {media_id, ...datos propuestos}
 
@@ -1522,8 +1656,17 @@
     }
 
     // --- grabar ---
-    recBtn.addEventListener('click', async () => {
+    const recTip = document.getElementById('recTip');
+    recBtn.addEventListener('click', () => {
       if (recorder && recorder.state === 'recording') { recorder.stop(); return; }
+      recTip.classList.remove('hidden');
+      document.getElementById('recTipGo').focus();
+    });
+    document.getElementById('recTipCancel').onclick = () => recTip.classList.add('hidden');
+    recTip.addEventListener('click', (e) => { if (e.target === recTip) recTip.classList.add('hidden'); });
+    document.getElementById('recTipGo').onclick = () => { recTip.classList.add('hidden'); startRecording(); };
+
+    async function startRecording() {
       if (!navigator.mediaDevices || !window.MediaRecorder) {
         setAudioStatus('Tu navegador no permite grabar. Usa "Subir audio".'); return;
       }
@@ -1535,7 +1678,7 @@
       recorder.onstop = () => {
         clearInterval(recTimer);
         recStream.getTracks().forEach(t => t.stop());
-        recBtn.classList.remove('recording');
+        recBtn.classList.remove('recording'); audioStatus.classList.remove('warn');
         recBtn.innerHTML = ic('rec') + ' Grabar';
         const type = recorder.mimeType || 'audio/webm';
         const ext = type.includes('mp4') ? 'm4a' : type.includes('ogg') ? 'ogg' : 'webm';
@@ -1546,11 +1689,17 @@
       recBtn.classList.add('recording');
       recTimer = setInterval(() => {
         const s = Math.floor((Date.now() - recStart) / 1000);
-        recBtn.textContent = `Parar (${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')})`;
-        if (s >= 15 * 60) recorder.stop();
+        const left = MAX_REC_SECS - s;
+        recBtn.textContent = `Parar (${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')} de 2:00)`;
+        if (left <= WARN_LEFT_SECS && left > 0) {
+          audioStatus.classList.add('warn');
+          setAudioStatus(`Quedan ${left} segundos. Ve terminando tu recuerdo.`);
+        }
+        if (left <= 0) { setAudioStatus('Has llegado a los 2 minutos. Preparando tu audio…'); recorder.stop(); }
       }, 500);
-      setAudioStatus('Grabando… pulsa "Parar" cuando termines.');
-    });
+      audioStatus.classList.remove('warn');
+      setAudioStatus('Grabando… tienes 2 minutos. Pulsa "Parar" cuando termines.');
+    }
 
     // --- subir ---
     audioFile.addEventListener('change', () => {
@@ -1563,28 +1712,108 @@
     const reviewModal = document.getElementById('reviewModal');
     const rv = (id) => document.getElementById(id);
 
+    // ===== Círculo de personas =====
+    let circle = [];
+    const normName = (s) => String(s || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim();
+    async function loadCircle() {
+      try { const r = await (await fetch(`${API_URL}/circle`)).json(); circle = r.success ? r.data : []; } catch (e) { circle = []; }
+      drawCircle(); fillCircleSuggestions();
+    }
+    function fillCircleSuggestions() {
+      let dl = document.getElementById('circleNames');
+      if (!dl) { dl = document.createElement('datalist'); dl.id = 'circleNames'; document.body.appendChild(dl); }
+      dl.innerHTML = circle.filter(p => p.name).map(p => `<option value="${esc(p.name)}"></option>`).join('');
+    }
+    let cirEditing = null;
+    function drawCircle() {
+      const ul = document.getElementById('circleList');
+      if (!ul) return;
+      ul.innerHTML = circle.length ? circle.map(p => {
+        const age = p.birth_date ? ` · nació el ${new Date(p.birth_date + 'T00:00:00').toLocaleDateString('es-ES')}` : '';
+        return `<li class="circle-item" data-id="${p.id}"><span class="avatar">${esc((p.name || p.relation || '?').charAt(0).toUpperCase())}</span><span class="ci-txt"><strong>${esc(p.name || p.relation)}</strong><small>${esc((p.name ? p.relation : '') + age).replace(/^ · /, '')}</small></span><button type="button" class="btn-secondary" data-act="edit" aria-label="Editar">Editar</button><button type="button" class="btn-secondary" data-act="del" aria-label="Quitar">Quitar</button></li>`;
+      }).join('') : '<li class="hint">Todavía no hay nadie. Añade a tu familia y amistades.</li>';
+    }
+    function resetCircleForm() {
+      cirEditing = null;
+      ['cirName', 'cirRel', 'cirBirth'].forEach(id => { document.getElementById(id).value = ''; });
+      document.getElementById('cirSave').textContent = 'Añadir al círculo';
+      document.getElementById('cirCancel').classList.add('hidden');
+    }
+    document.getElementById('circleList').addEventListener('click', async (e) => {
+      const b = e.target.closest('button[data-act]'); if (!b) return;
+      const id = Number(b.closest('li').dataset.id), p = circle.find(x => x.id === id);
+      if (!p) return;
+      if (b.dataset.act === 'del') {
+        if (!confirm(`¿Quitar a ${p.name || p.relation} de tu círculo? Sus recuerdos no se borran.`)) return;
+        await fetch(`${API_URL}/circle/${id}`, { method: 'DELETE' });
+        return loadCircle();
+      }
+      cirEditing = id;
+      document.getElementById('cirName').value = p.name; document.getElementById('cirRel').value = p.relation; document.getElementById('cirBirth').value = p.birth_date || '';
+      document.getElementById('cirSave').textContent = 'Guardar cambios';
+      document.getElementById('cirCancel').classList.remove('hidden');
+      document.getElementById('cirName').focus();
+    });
+    document.getElementById('cirCancel').onclick = resetCircleForm;
+    document.getElementById('cirBirth').max = new Date().toISOString().slice(0, 10);
+    document.getElementById('cirSave').onclick = async () => {
+      const body = { name: document.getElementById('cirName').value, relation: document.getElementById('cirRel').value, birth_date: document.getElementById('cirBirth').value };
+      const url = cirEditing ? `${API_URL}/circle/${cirEditing}` : `${API_URL}/circle`;
+      try {
+        const r = await (await fetch(url, { method: cirEditing ? 'PUT' : 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) })).json();
+        if (!r.success) return flash('circleMsg', `<div class="error">${esc(r.error)}</div>`);
+        resetCircleForm(); await loadCircle();
+      } catch (e) { flash('circleMsg', '<div class="error">No se pudo guardar. Inténtalo de nuevo.</div>'); }
+    };
+
+    // Tras guardar un recuerdo: propone añadir al círculo a quien salga y no esté
+    function proposeCircle(people) {
+      const seen = new Set(circle.map(p => normName(p.name)));
+      const fresh = [];
+      (people || []).forEach(p => {
+        const n = String(p.name || '').trim(), k = normName(n);
+        if (n && !seen.has(k)) { seen.add(k); fresh.push({ name: n, relation: String(p.relation || '').trim() }); }
+      });
+      if (!fresh.length) return;
+      const box = document.getElementById('circleTipList');
+      box.innerHTML = fresh.map((p, i) => `<label><input type="checkbox" checked data-i="${i}"> <span><strong>${esc(p.name)}</strong>${p.relation ? ' · ' + esc(p.relation) : ''}</span></label>`).join('');
+      const modal = document.getElementById('circleTip');
+      modal.classList.remove('hidden');
+      document.getElementById('circleTipNo').onclick = () => modal.classList.add('hidden');
+      document.getElementById('circleTipYes').onclick = async () => {
+        const chosen = [...box.querySelectorAll('input:checked')].map(c => fresh[Number(c.dataset.i)]);
+        modal.classList.add('hidden');
+        for (const p of chosen) {
+          try { await fetch(`${API_URL}/circle`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(p) }); } catch (e) {}
+        }
+        if (chosen.length) { await loadCircle(); showMessage(chosen.length === 1 ? `${chosen[0].name} ya está en tu círculo` : 'Añadidas a tu círculo'); }
+      };
+    }
+
     function personRow(p = {}) {
       const row = document.createElement('div');
       row.className = 'person-row';
-      row.innerHTML = `<input placeholder="Nombre" maxlength="80" value="${esc(p.name)}"><input placeholder="Relación (abuela, amigo...)" maxlength="60" value="${esc(p.relation)}"><button type="button" title="Quitar">×</button>`;
+      row.innerHTML = `<input placeholder="Nombre" maxlength="80" list="circleNames" value="${esc(p.name)}"><input placeholder="Relación (abuela, amigo...)" maxlength="60" value="${esc(p.relation)}"><button type="button" title="Quitar">×</button>`;
       row.querySelector('button').onclick = () => row.remove();
+      // Si el nombre ya está en el círculo y no hay parentesco, lo rellena
+      const [ni, ri] = row.querySelectorAll('input');
+      ni.addEventListener('change', () => { const c = circle.find(x => normName(x.name) === normName(ni.value)); if (c && !ri.value) ri.value = c.relation; });
       return row;
     }
 
     let rvTagList = [];
     const drawRvTags = tagPicker(rv('rvTags'), rv('rvTagInput'), () => rvTagList, (l) => { rvTagList = l; });
     const drawRvMood = moodPicker(rv('rvMoodChips'), rv('rvMood'));
-    rv('rvDate').addEventListener('change', () => { rv('rvAge').textContent = ageLabel(rv('rvDate').value); });
+    const dpReview = datePicker(rv('dpReview'), (d) => { rv('rvAge').textContent = ageOf(d.date_happened, d.date_end, d.date_precision); });
+    dpList.push(dpReview);
 
     function openReview(d) {
       draft = d;
       rv('rvTitle').value = d.title || '';
       rv('rvContent').value = d.content || '';
-      rv('rvDate').value = d.date_happened || '';
-      rv('rvDateEnd').value = d.date_end || '';
+      dpReview.set(isFuture(d.date_happened) ? '' : d.date_happened, d.date_end, d.date_precision);
       limitDates();
-      if (isFuture(rv('rvDate').value)) rv('rvDate').value = '';
-      if (isFuture(rv('rvDateEnd').value)) rv('rvDateEnd').value = '';
+      rv('rvAge').textContent = ageOf(d.date_happened, d.date_end, d.date_precision);
       rv('rvPlace').value = d.place || '';
       rvTagList = [];
       [...(d.tags || []), d.event_type].filter(Boolean).forEach(t => {
@@ -1593,7 +1822,6 @@
       });
       rv('rvMood').value = (moodInfo(d.mood) || MOODS[2])[0];
       drawRvTags(); drawRvMood();
-      rv('rvAge').textContent = ageLabel(d.date_happened);
       rv('rvPeople').innerHTML = '';
       (d.people || []).forEach(p => rv('rvPeople').appendChild(personRow(p)));
       const kind = d.kind || 'audio';
@@ -1716,20 +1944,22 @@
 
     rv('rvConfirm').onclick = async () => {
       limitDates();
-      if (isFuture(rv('rvDate').value) || isFuture(rv('rvDateEnd').value)) { rv('reviewMsg').innerHTML = `<div class="error">${FUTURE_MSG}</div>`; return; }
-      if (beyondLife(rv('rvDate').value) || beyondLife(rv('rvDateEnd').value)) { rv('reviewMsg').innerHTML = `<div class="error">${BEYOND_MSG}</div>`; return; }
+      const rw = dpReview.get();
+      if (isFuture(rw.date_happened) || isFuture(rw.date_end)) { rv('reviewMsg').innerHTML = `<div class="error">${FUTURE_MSG}</div>`; return; }
+      if (beyondLife(rw.date_happened)) { rv('reviewMsg').innerHTML = `<div class="error">${BEYOND_MSG}</div>`; return; }
       const people = [...rv('rvPeople').children].map(row => {
         const [n, r] = row.querySelectorAll('input');
         return { name: n.value, relation: r.value };
       });
       const body = {
         title: rv('rvTitle').value, content: rv('rvContent').value,
-        date_happened: rv('rvDate').value, date_end: rv('rvDateEnd').value,
+        date_happened: rw.date_happened, date_end: rw.date_end, date_precision: rw.date_precision,
         place: completePlace(rv('rvPlace').value), event_type: rvTagList[0] || '',
         tags: rvTagList, mood: rv('rvMood').value,
         people, media_ids: [draft.media_id]
       };
       const savedKind = draft.kind;
+      const savedPeople = people;
       try {
         const res = await (await fetch(`${API_URL}/memories`, {
           method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body)
@@ -1739,6 +1969,7 @@
         setAudioStatus('Cuenta tu recuerdo: cuándo fue, con quién, dónde. Después podrás revisarlo.');
         window.goTo('mem');
         showMessage('Recuerdo guardado con tu ' + ({ image: 'foto', video: 'vídeo' }[savedKind] || 'audio'));
+        proposeCircle(savedPeople);
       } catch (e) { rv('reviewMsg').innerHTML = '<div class="error">No se pudo guardar. Inténtalo de nuevo.</div>'; }
     };
 
@@ -1783,11 +2014,51 @@
       document.getElementById('authMessage').innerHTML = '';
     }
 
+    // ===== Foto de perfil =====
+    let hasPhoto = false, photoV = Date.now();
+    function drawAvatars() {
+      const name = (document.getElementById('profName').textContent || '?').trim();
+      document.querySelectorAll('.avatar').forEach(el => {
+        el.innerHTML = hasPhoto ? `<img alt="" src="${API_URL}/profile/photo?v=${photoV}">` : esc(name.charAt(0).toUpperCase() || '?');
+      });
+      document.getElementById('avatarLbl').textContent = hasPhoto ? 'Cambiar foto' : 'Añadir foto';
+      document.getElementById('avatarDel').classList.toggle('hidden', !hasPhoto);
+    }
+    function resizeToJpeg(file, side = 300) {
+      return new Promise((resolve, reject) => {
+        const url = URL.createObjectURL(file), img = new Image();
+        img.onload = () => {
+          const c = document.createElement('canvas'); c.width = c.height = side;
+          const s = Math.min(img.width, img.height), sx = (img.width - s) / 2, sy = (img.height - s) / 2;
+          c.getContext('2d').drawImage(img, sx, sy, s, s, 0, 0, side, side);
+          URL.revokeObjectURL(url); resolve(c.toDataURL('image/jpeg', 0.85));
+        };
+        img.onerror = () => { URL.revokeObjectURL(url); reject(new Error('img')); };
+        img.src = url;
+      });
+    }
+    document.getElementById('avatarFile').addEventListener('change', async (e) => {
+      const f = e.target.files[0]; e.target.value = '';
+      if (!f) return;
+      const msg = document.getElementById('avatarMsg');
+      try {
+        const image = await resizeToJpeg(f);
+        const r = await (await fetch(`${API_URL}/profile/photo`, { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ image }) })).json();
+        if (!r.success) { msg.innerHTML = `<div class="error">${esc(r.error)}</div>`; return; }
+        hasPhoto = true; photoV = Date.now(); msg.innerHTML = ''; drawAvatars();
+      } catch (err) { msg.innerHTML = '<div class="error">No se pudo usar esa foto. Prueba con otra.</div>'; }
+    });
+    document.getElementById('avatarDel').onclick = async () => {
+      await fetch(`${API_URL}/profile/photo`, { method: 'DELETE' });
+      hasPhoto = false; drawAvatars();
+    };
+
     function showUserData(user) {
       document.getElementById('homeHello').textContent = `Hola, ${user.name}`;
       document.getElementById('profName').textContent = user.name;
       document.getElementById('profNameInput').value = user.name;
       document.getElementById('profEmail').textContent = user.email || '';
+      fetch(`${API_URL}/profile`).then(r => r.json()).then(r => { hasPhoto = !!(r.success && r.data.has_photo); photoV = Date.now(); drawAvatars(); }).catch(() => drawAvatars());
     }
 
     function showApp(user) {
@@ -1795,14 +2066,15 @@
       appScreen.classList.remove('hidden');
       currentUser = user;
       showUserData(user);
-      loadBirth();
+      loadBirth(); loadCircle();
       limitDates();
-      dateInput.value = todayStr();
+      dpWrite.set(todayStr(), '', 'day');
       window.goTo('home');
     }
 
     // Perfil: datos de nacimiento (los mismos que usa la línea de vida)
     window.fillProfile = async function () {
+      loadCircle();
       try {
         const r = await (await fetch(`${API_URL}/profile`)).json();
         if (r.success) { document.getElementById('profBirth').value = r.data.birth_date || ''; document.getElementById('profPlace').value = r.data.birth_place || ''; }
@@ -1954,7 +2226,31 @@
             body: JSON.stringify({ text: $('sumOut').textContent, memoryIds: sumMemoryIds }) })).json();
           if (!r.success) { $('sumShareOut').innerHTML = `<div class="error">${esc(r.error)}</div>`; return; }
           const url = location.origin + r.data.path;
-          $('sumShareOut').innerHTML = `<div class="pw-box"><h3>Enlace para compartir</h3><input type="text" id="shareUrl" readonly value="${esc(url)}"><div class="hint">Solo lo ve quien tenga este enlace. Incluye el resumen, los recuerdos y sus fotos y vídeos.</div><div class="button-group"><button type="button" class="btn-primary" id="shareSend">Enviar</button><button type="button" class="btn-secondary" id="shareCopy">Copiar enlace</button><button type="button" class="btn-secondary" id="shareOff">Desactivar</button></div></div>`;
+          $('sumShareOut').innerHTML = `<div class="pw-box"><h3>Enlace para compartir</h3><input type="text" id="shareUrl" readonly value="${esc(url)}"><div class="hint">Solo lo ve quien tenga este enlace. Incluye el resumen, los recuerdos y sus fotos y vídeos.</div><div class="qr-box" id="shareQr"></div><div class="button-group"><button type="button" class="btn-primary" id="shareSend">Enviar</button><button type="button" class="btn-secondary" id="shareQrSave">Guardar QR</button><button type="button" class="btn-secondary" id="shareCopy">Copiar enlace</button><button type="button" class="btn-secondary" id="shareOff">Desactivar</button></div></div>`;
+          // QR del mismo enlace, generado aquí (sin servicios externos)
+          const qr = qrcode(0, 'M'); qr.addData(url); qr.make();
+          const qrSvg = qr.createSvgTag({ cellSize: 6, margin: 2, scalable: true });
+          $('shareQr').innerHTML = qrSvg + '<div class="hint">Enséñalo para que lo escaneen con la cámara del móvil.</div>';
+          $('shareQr').querySelector('svg').setAttribute('role', 'img');
+          $('shareQr').querySelector('svg').setAttribute('aria-label', 'Código QR del enlace');
+          $('shareQrSave').onclick = () => {
+            const svg = $('shareQr').querySelector('svg'), vb = (svg.getAttribute('viewBox') || '0 0 100 100').split(' ').map(Number), S = 720;
+            const img = new Image();
+            img.onload = () => {
+              const c = document.createElement('canvas'); c.width = c.height = S;
+              const x = c.getContext('2d'); x.fillStyle = '#fff'; x.fillRect(0, 0, S, S); x.drawImage(img, 0, 0, S, S);
+              c.toBlob(async (blob) => {
+                const file = new File([blob], 'qr-mis-memorias.png', { type: 'image/png' });
+                try {
+                  if (navigator.canShare && navigator.canShare({ files: [file] })) { await navigator.share({ files: [file], title: 'Mis memorias de oro' }); return; }
+                } catch (e) { return; }
+                const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = file.name; a.click();
+                setTimeout(() => URL.revokeObjectURL(a.href), 2000);
+              }, 'image/png');
+            };
+            const xml = new XMLSerializer().serializeToString(svg).replace('<svg', `<svg width="${S}" height="${S}"`);
+            img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(xml);
+          };
           $('shareUrl').onclick = () => $('shareUrl').select();
           $('shareSend').onclick = async () => { try { if (navigator.share) await navigator.share({ title: 'Mis memorias de oro', url }); else { await navigator.clipboard.writeText(url); $('shareSend').textContent = 'Enlace copiado'; } } catch (e) { /* cancelado */ } };
           $('shareCopy').onclick = async () => { try { await navigator.clipboard.writeText(url); $('shareCopy').textContent = 'Copiado'; } catch (e) { $('shareUrl').select(); } };
@@ -2241,7 +2537,7 @@
           html += '<h4>' + ic('book') + ' Tus recuerdos</h4>';
           html += mems.length ? mems.map(m => {
             const audios = (m.media || []).filter(x => x.kind === 'audio');
-            return `<div class="tl-item"><strong>${esc(m.title)}</strong><small>${esc(fmt(m.date_happened))}${ageLabel(m.date_happened) ? ' · ' + esc(ageLabel(m.date_happened)) : ''}${m.place ? ' · ' + esc(m.place) : ''}</small>
+            return `<div class="tl-item"><strong>${esc(m.title)}</strong><small>${esc(whenLabel(m))}${ageOf(m.date_happened, m.date_end, m.date_precision) ? ' · ' + esc(ageOf(m.date_happened, m.date_end, m.date_precision)) : ''}${m.place ? ' · ' + esc(m.place) : ''}</small>
               ${(m.media || []).filter(x => x.kind === 'image').map(a => `<img loading="lazy" src="${a.url}" style="width:100%;max-height:220px;object-fit:contain;border-radius:8px;margin-top:6px;background:#000" alt="">`).join('')}
               ${(m.media || []).filter(x => x.kind === 'video').map(a => `<video controls playsinline preload="none" src="${a.url}" style="width:100%;max-height:220px;margin-top:6px;border-radius:8px;background:#000"></video>`).join('')}
               ${audios.map(a => `<audio controls preload="none" src="${a.url}" style="width:100%;margin-top:6px"></audio>`).join('')}
