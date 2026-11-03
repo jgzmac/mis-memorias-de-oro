@@ -1093,7 +1093,7 @@
       <div class="form-row">
         <div class="review-field" style="grid-column:1/-1"><label>¿Cuándo fue?</label><div class="dp" id="dpReview"></div><div class="age-hint" id="rvAge"></div></div>
       </div>
-      <div class="review-field"><label for="rvPlace">Lugar</label><input id="rvPlace" maxlength="200"></div>
+      <div class="review-field"><label for="rvPlace">¿Dónde fue?</label><input id="rvPlace" maxlength="200"></div>
       <div class="review-field"><label>Etiquetas (toca las que encajen)</label>
         <div class="chips" id="rvTags"></div>
         <input id="rvTagInput" maxlength="40" placeholder="Otra etiqueta: escríbela y pulsa Intro" style="margin-top:8px;">
@@ -2683,7 +2683,7 @@
           <label>Tipo</label>
           <select id="sfKind">${['residence', 'school', 'work'].map(k => `<option value="${k}" ${v.kind === k ? 'selected' : ''}>${KINDS[k].label}</option>`).join('')}</select>
           <label>Nombre (colegio, empresa…)</label><input type="text" id="sfTitle" maxlength="120" value="${esc(v.title)}">
-          <label>Lugar</label><input type="text" id="sfPlace" maxlength="120" value="${esc(v.place)}">
+          <label>¿Dónde fue?</label><input type="text" id="sfPlace" maxlength="120" value="${esc(v.place)}">
           <label>Desde</label><input type="date" id="sfStart" value="${esc(v.start_date)}">
           <label>Hasta (vacío si continúa)</label><input type="date" id="sfEnd" value="${esc(v.end_date || '')}">
           <div class="button-group"><button type="button" class="btn-primary" id="sfSave">Guardar</button><button type="button" class="btn-secondary" id="sfCancel">Cancelar</button></div>
