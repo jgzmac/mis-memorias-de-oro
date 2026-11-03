@@ -13,6 +13,7 @@ const { AUDIO_TYPES, registerMedia } = require('./media');
 const db = require('../db');
 const fs = require('fs');
 const path = require('path');
+const { dateFromName, resolveDate } = require('./filedate');
 
 // Registro de errores en data/errores.log (para diagnosticar sin ver la consola)
 function logError(where, err) {
@@ -78,7 +79,16 @@ function analyzeAudio(req, res) {
     try {
       const text = await provider.transcribe(samples);
       const draft = await provider.extract(text);
-      job.result = { ...draft, media_id: mediaId, duration_s: durationS };
+      // Si no se dijo la fecha en voz alta: la del nombre del archivo y la de sus datos (m4a/mp4)
+      const notes = [];
+      let date = draft.date_happened || '';
+      if (!date) {
+        let metaDate = '';
+        try { metaDate = (require('./visual').readVideoMeta(audio.buffer) || {}).date || ''; } catch (e) { /* sin datos */ }
+        const fd = resolveDate({ metaDate, nameDate: dateFromName(audio.originalname), what: 'audio' });
+        if (fd.date) { date = fd.date; notes.push(...fd.notes); }
+      }
+      job.result = { ...draft, date_happened: date, notes, media_id: mediaId, duration_s: durationS };
       job.status = 'done';
     } catch (err) {
       console.error('Error analizando audio:', err.message);

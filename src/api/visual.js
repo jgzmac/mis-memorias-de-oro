@@ -13,6 +13,7 @@ const vision = require('../providers/vision');
 const { registerMedia } = require('./media');
 const { startJob, logError } = require('./audio');
 const { nearestPlace } = require('./places');
+const { dateFromName, resolveDate } = require('./filedate');
 
 const IMAGE_TYPES = { 'image/jpeg': '.jpg', 'image/jpg': '.jpg', 'image/png': '.png', 'image/webp': '.webp', 'image/heic': '.heic', 'image/heif': '.heif', 'image/gif': '.gif' };
 const VIDEO_TYPES = { 'video/mp4': '.mp4', 'video/quicktime': '.mov', 'video/webm': '.webm', 'video/x-m4v': '.m4v', 'video/3gpp': '.3gp' };
@@ -100,11 +101,13 @@ function analyze(req, res) {
     const notes = [];
     const meta = isImage ? await readPhotoMeta(buffer) : readVideoMeta(buffer);
 
-    // Fecha: metadatos > fecha del archivo (menos fiable)
-    let date = meta.date || '';
-    if (date) notes.push(`Fecha tomada de los datos ${isImage ? 'de la foto' : 'del vídeo'}.`);
-    else if (validYear(lastModified)) { date = ymd(lastModified); notes.push('La foto no trae fecha propia: he usado la fecha del archivo, que puede no ser la real. Compruébala.'.replace('La foto', isImage ? 'La foto' : 'El vídeo')); }
-    else notes.push('No he encontrado la fecha. Indícala tú.');
+    // Fecha: datos del archivo + nombre (si coinciden, confirmada; si no, la más antigua) > fecha del archivo
+    const fd = resolveDate({
+      metaDate: meta.date || '', nameDate: dateFromName(f.originalname),
+      fileDate: validYear(lastModified) ? ymd(lastModified) : '', what: isImage ? 'foto' : 'vídeo'
+    });
+    const date = fd.date;
+    notes.push(...fd.notes);
 
     // Lugar: GPS -> ciudad cercana (sin internet)
     let place = '';
@@ -166,4 +169,4 @@ function analyze(req, res) {
   res.status(202).json({ success: true, data: { jobId, mediaId } });
 }
 
-module.exports = { receive, analyze, IMAGE_TYPES, VIDEO_TYPES };
+module.exports = { receive, analyze, readVideoMeta, IMAGE_TYPES, VIDEO_TYPES };
