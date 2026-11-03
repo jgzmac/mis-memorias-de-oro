@@ -1573,7 +1573,7 @@
                 <div class="memory-audio">
                   <audio controls preload="none" src="${a.url}"></audio>
                 </div>`).join('')}
-              ${memory.date_happened ? `<div class="day-box"><button type="button" class="btn-secondary day-btn" onclick="event.stopPropagation(); toggleDay(${memory.id})">${ic('globe')} ¿Quieres saber qué pasó ese día?</button><div class="day-out" id="dayOut${memory.id}" onclick="event.stopPropagation()"></div></div>` : ''}
+              ${memory.date_happened ? `<div class="day-box"><button type="button" class="btn-secondary day-btn" onclick="event.stopPropagation(); toggleDay(${memory.id})">${ic('globe')} ¿Quieres saber qué pasó ese año?</button><div class="day-out" id="dayOut${memory.id}" onclick="event.stopPropagation()"></div></div>` : ''}
               <div class="button-group" style="margin-top: 10px;">
                 <button onclick="editMemory(${memory.id})" class="btn-edit">Editar</button>
                 <button onclick="deleteMemory(${memory.id})" class="btn-danger">Eliminar</button>
