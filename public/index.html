@@ -536,6 +536,10 @@
     .circle-prop input[type=checkbox] { width: 22px; height: 22px; flex: none; }
     .qr-box { display: flex; flex-direction: column; align-items: center; gap: 8px; margin: 12px 0; }
     .qr-box svg { width: 220px; height: 220px; background: #fff; padding: 10px; border-radius: 10px; border: 1px solid var(--salvia); }
+    .birth-line { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+    .birth-line input[type=date] { flex: 1 1 150px; min-width: 0; }
+    .hide-age { display: inline-flex; align-items: center; gap: 6px; font-size: 0.95em; cursor: pointer; white-space: nowrap; }
+    .hide-age input { width: 20px; height: 20px; margin: 0; }
     .profile-row { display: grid; gap: 8px; margin: 10px 0 16px; }
     .prof-btn { width: 100%; margin-top: 10px; display: flex; align-items: center; justify-content: center; gap: 8px; background: var(--salvia-claro); color: var(--salvia-hover); border: 2px solid var(--salvia); border-radius: 14px; font-size: 1.05em; font-weight: 700; min-height: 48px; }
     .prof-btn:hover { background: #d3e6cb; }
@@ -860,7 +864,7 @@
       <h3 style="font-size:1em;margin-top:6px;">Datos de nacimiento</h3>
       <div class="profile-row">
         <label for="profBirth" style="font-weight:600">Fecha de nacimiento</label>
-        <input type="date" id="profBirth">
+        <div class="birth-line"><input type="date" id="profBirth"><label class="hide-age" for="profHideAge"><input type="checkbox" id="profHideAge"> Ocultar mi edad</label></div>
         <label for="profPlace" style="font-weight:600">Lugar de nacimiento</label>
         <input type="text" id="profPlace" maxlength="120">
         <button type="button" class="btn-primary" id="profSave">Guardar</button>
@@ -1157,6 +1161,7 @@
     const BEYOND_MSG = 'Esa fecha supera los 120 años desde tu nacimiento.';
     const FUTURE_MSG = 'Un recuerdo no puede tener una fecha futura. Elige hoy o un día anterior.';
     let birthDate = '';
+    let hideAge = false; // si está activo, no se muestra la edad en ninguna parte
     // Edad aproximada cuando la fecha no es exacta (se calcula con el punto medio del periodo)
     function ageOf(start, end, prec) {
       if (!start) return '';
@@ -1256,7 +1261,7 @@
     }
     // Edad en una fecha según la fecha de nacimiento del perfil
     function ageAt(d) {
-      if (!birthDate || !d || d < birthDate) return '';
+      if (hideAge || !birthDate || !d || d < birthDate) return '';
       const [by, bm, bd] = birthDate.split('-').map(Number), [y, m, dd] = d.split('-').map(Number);
       let a = y - by; if (m < bm || (m === bm && dd < bd)) a--;
       if (a >= 1) return a === 1 ? '1 año' : `${a} años`;
@@ -1268,6 +1273,7 @@
       try {
         const r = await (await fetch(`${API_URL}/profile`)).json();
         birthDate = (r.success && r.data.birth_date) || '';
+        hideAge = !!(r.success && r.data.hide_age);
         limitDates();
         const n = document.getElementById('profNudge');
         if (n && r.success) n.classList.toggle('hidden', !!(r.data.birth_date && r.data.birth_place));
@@ -1495,9 +1501,9 @@
 
     function renderHome() {
       const el = document.getElementById('homeRecent');
-      const recent = filterSort(memories, '', 'desc').slice(0, 3);
+      const recent = [...memories].sort((a, b) => (b.id || 0) - (a.id || 0)).slice(0, 3); // los últimos añadidos
       el.innerHTML = recent.length
-        ? '<h3>Mis recuerdos recientes</h3>' + recent.map(m => `<div class="home-item" data-id="${m.id}"><strong>${esc(m.title)}</strong><small>${esc(m.date_happened ? whenLabel(m) : 'Sin fecha')}${ageOf(m.date_happened, m.date_end, m.date_precision) ? ' · ' + esc(ageOf(m.date_happened, m.date_end, m.date_precision)) : ''}${m.place ? ' · ' + esc(m.place) : ''}</small>${allTags(m).length ? `<div class="memory-tags">${allTags(m).map(t => `<span class="memory-tag">${ic(tagIcon(t))} ${esc(t)}</span>`).join('')}</div>` : ''}</div>`).join('')
+        ? '<h3>Últimos recuerdos añadidos</h3>' + recent.map(m => `<div class="home-item" data-id="${m.id}"><strong>${esc(m.title)}</strong><small>${esc(m.date_happened ? whenLabel(m) : 'Sin fecha')}${ageOf(m.date_happened, m.date_end, m.date_precision) ? ' · ' + esc(ageOf(m.date_happened, m.date_end, m.date_precision)) : ''}${m.place ? ' · ' + esc(m.place) : ''}</small>${allTags(m).length ? `<div class="memory-tags">${allTags(m).map(t => `<span class="memory-tag">${ic(tagIcon(t))} ${esc(t)}</span>`).join('')}</div>` : ''}</div>`).join('')
         : '<p class="home-sub" style="margin-top:18px">Aún no tienes recuerdos. ¡Cuenta el primero!</p>';
       el.querySelectorAll('[data-id]').forEach(d => d.onclick = () => showMemory(+d.dataset.id));
     }
@@ -2273,7 +2279,7 @@
       loadCircle();
       try {
         const r = await (await fetch(`${API_URL}/profile`)).json();
-        if (r.success) { document.getElementById('profBirth').value = r.data.birth_date || ''; document.getElementById('profPlace').value = r.data.birth_place || ''; }
+        if (r.success) { document.getElementById('profBirth').value = r.data.birth_date || ''; document.getElementById('profPlace').value = r.data.birth_place || ''; document.getElementById('profHideAge').checked = !!r.data.hide_age; }
       } catch (e) {}
       drawProfTodo();
     };
@@ -2294,9 +2300,9 @@
       try {
         const r = await (await fetch(`${API_URL}/profile`, {
           method: 'PUT', headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ birth_date: document.getElementById('profBirth').value, birth_place: completePlace(document.getElementById('profPlace').value) })
+          body: JSON.stringify({ birth_date: document.getElementById('profBirth').value, birth_place: completePlace(document.getElementById('profPlace').value), hide_age: document.getElementById('profHideAge').checked })
         })).json();
-        if (r.success) { birthDate = document.getElementById('profBirth').value; renderMemories(); drawProfTodo(); }
+        if (r.success) { birthDate = document.getElementById('profBirth').value; hideAge = document.getElementById('profHideAge').checked; renderMemories(); renderHome(); drawProfTodo(); }
         box.innerHTML = r.success ? '<div class="success">Perfil guardado</div>' : `<div class="error">${esc(r.error)}</div>`;
       } catch (e) { box.innerHTML = '<div class="error">No se pudo guardar. Inténtalo de nuevo.</div>'; }
       setTimeout(() => { box.innerHTML = ''; }, 3000);
@@ -2549,6 +2555,7 @@
           const [p, s] = await Promise.all([api('/profile'), api('/stages')]);
           profile = p.data; stages = s.data || [];
           birthDate = (profile && profile.birth_date) || '';
+          hideAge = !!(profile && profile.hide_age);
           await loadMemories();
         } catch (e) {
           $('tlMsg').innerHTML = '<div class="error">No se pudo cargar tu línea de vida. Inténtalo de nuevo.</div>'; return;
@@ -2592,7 +2599,7 @@
       async function saveBirth() {
         const r = await api('/profile', { method: 'PUT', body: { birth_date: $('tlBirthDate').value, birth_place: completePlace($('tlBirthPlace').value) } });
         if (!r.success) return say(r.error);
-        profile = r.data; birthDate = profile.birth_date || ''; render();
+        profile = r.data; birthDate = profile.birth_date || ''; hideAge = !!profile.hide_age; render();
       }
 
       function drawTimeline() {

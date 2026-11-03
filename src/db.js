@@ -140,6 +140,8 @@ function initializeDatabase() {
   for (const col of ['birth_date', 'birth_place', 'photo_path']) {
     if (!ucols.includes(col)) db.exec(`ALTER TABLE users ADD COLUMN ${col} TEXT`);
   }
+  // Preferencia: ocultar la edad del usuario en toda la app
+  if (!ucols.includes('hide_age')) db.exec('ALTER TABLE users ADD COLUMN hide_age INTEGER DEFAULT 0');
 
   // Etapas de la vida: escolar, profesional o residencia (varias del mismo tipo, con huecos si hace falta)
   db.exec(`

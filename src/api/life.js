@@ -22,9 +22,9 @@ const fail = (res, error, status = 400) => res.status(status).json({ success: fa
 
 // ===== Perfil =====
 function getProfile(req, res) {
-  const u = db.prepare('SELECT id, name, email, birth_date, birth_place, photo_path FROM users WHERE id = ?').get(req.user.id);
-  const { photo_path, ...rest } = u;
-  res.json({ success: true, data: { ...rest, has_photo: !!photo_path } });
+  const u = db.prepare('SELECT id, name, email, birth_date, birth_place, photo_path, hide_age FROM users WHERE id = ?').get(req.user.id);
+  const { photo_path, hide_age, ...rest } = u;
+  res.json({ success: true, data: { ...rest, hide_age: !!hide_age, has_photo: !!photo_path } });
 }
 
 function updateProfile(req, res) {
@@ -39,6 +39,8 @@ function updateProfile(req, res) {
   }
   db.prepare('UPDATE users SET birth_date = ?, birth_place = ? WHERE id = ?')
     .run(birth || null, clean(b.birth_place, 120) || null, req.user.id);
+  // Solo se cambia si viene en la petición (la línea de vida guarda sin enviarlo)
+  if (b.hide_age !== undefined) db.prepare('UPDATE users SET hide_age = ? WHERE id = ?').run(b.hide_age ? 1 : 0, req.user.id);
   getProfile(req, res);
 }
 

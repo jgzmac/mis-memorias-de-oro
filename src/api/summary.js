@@ -17,7 +17,9 @@ function summary(req, res) {
     const styleKey = STYLES[b.style] ? b.style : 'amable';
     const scope = ['all', 'year', 'person'].includes(b.scope) ? b.scope : 'all';
     const value = String(b.value || '').trim().slice(0, 80);
-    const user = db.prepare('SELECT name, birth_date, birth_place FROM users WHERE id = ?').get(req.user.id);
+    const user = db.prepare('SELECT name, birth_date, birth_place, hide_age FROM users WHERE id = ?').get(req.user.id);
+    // Con la edad oculta, el resumen no menciona ni la edad ni el año de nacimiento
+    if (user && user.hide_age) { user.birth_date = null; }
     const stages = db.prepare('SELECT * FROM life_stages WHERE user_id = ?').all(req.user.id);
     let memories = loadMemories(req.user.id);
     let scopeLabel = '';
