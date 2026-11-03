@@ -501,6 +501,15 @@
     .avatar.sm { width: 44px; height: 44px; font-size: 1.1em; border-width: 2px; }
     .avatar-row { display: flex; align-items: center; gap: 14px; margin: 8px 0 14px; flex-wrap: wrap; }
     .avatar-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+    .tip-mic { width: 64px; height: 64px; margin: 0 auto 10px; border-radius: 50%; background: var(--fondo-1); color: var(--salvia-hover); display: flex; align-items: center; justify-content: center; animation: tipPulse 2s ease-in-out infinite; }
+    @keyframes tipPulse { 0%,100% { box-shadow: 0 0 0 0 rgba(120,160,120,.45); } 50% { box-shadow: 0 0 0 14px rgba(120,160,120,0); } }
+    @media (prefers-reduced-motion: reduce) { .tip-mic { animation: none; } }
+    .fold > summary { list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 10px; font-weight: 800; font-size: 1.1em; color: var(--tinta); padding: 4px 0; min-height: 44px; }
+    .fold > summary::-webkit-details-marker { display: none; }
+    .fold > summary::after { content: ''; width: 10px; height: 10px; border-right: 3px solid var(--salvia-hover); border-bottom: 3px solid var(--salvia-hover); transform: rotate(45deg); transition: transform .2s; flex: none; margin: 0 4px 4px 0; }
+    .fold[open] > summary::after { transform: rotate(-135deg); margin-bottom: -4px; }
+    .fold-count { margin-left: auto; font-weight: 600; font-size: .85em; color: var(--gris); background: var(--fondo-1); border-radius: 999px; padding: 2px 10px; }
+    .fold-count:empty { display: none; }
     .circle-list { list-style: none; margin: 8px 0; padding: 0; display: grid; gap: 6px; }
     .circle-item { display: flex; align-items: center; gap: 10px; background: var(--fondo-1); border-radius: 10px; padding: 8px 10px; }
     .circle-item .avatar { width: 38px; height: 38px; font-size: 1em; border-width: 2px; }
@@ -513,6 +522,17 @@
     .qr-box { display: flex; flex-direction: column; align-items: center; gap: 8px; margin: 12px 0; }
     .qr-box svg { width: 220px; height: 220px; background: #fff; padding: 10px; border-radius: 10px; border: 1px solid var(--salvia); }
     .profile-row { display: grid; gap: 8px; margin: 10px 0 16px; }
+    .prof-btn { width: 100%; margin-top: 10px; display: flex; align-items: center; justify-content: center; gap: 8px; background: var(--salvia-claro); color: var(--salvia-hover); border: 2px solid var(--salvia); border-radius: 14px; font-size: 1.05em; font-weight: 700; min-height: 48px; }
+    .prof-btn:hover { background: #d3e6cb; }
+    .st-big { font-size: 2.2em; font-weight: 800; color: var(--salvia-hover); text-align: center; line-height: 1.1; }
+    .st-sub { text-align: center; color: var(--gris); margin-bottom: 12px; }
+    .st-gap { background: #FFF3DC; border-radius: 12px; padding: 10px 12px; margin: 6px 0; color: #7a4b00; }
+    .st-ok { background: var(--salvia-claro); border-radius: 12px; padding: 10px 12px; color: var(--salvia-hover); }
+    .st-bars { display: grid; gap: 6px; margin: 8px 0; }
+    .st-bar { display: grid; grid-template-columns: 70px 1fr 28px; align-items: center; gap: 8px; font-size: .9em; }
+    .st-bar i { display: block; height: 12px; border-radius: 6px; background: var(--salvia); min-width: 3px; }
+    .st-bar i.zero { background: #e4e4e4; }
+    .add-end { width: 100%; margin-top: 14px; }
     .logout-big { width: 100%; margin-top: 10px; background: white; color: #b14a3a; border: 2px solid #e3b5ab; border-radius: 14px; font-size: 1.05em; }
 
 
@@ -799,19 +819,114 @@
         <label class="big-btn big-media tile"><svg class="i"><use href="#i-wave"/></svg><span>Audio</span><input type="file" class="js-audio" accept="audio/*" hidden></label>
       </div>
       <div class="media-status hidden" id="mediaStatus"></div>
-      <div class="card hidden" id="voicePanel">
-        <div class="audio-box">
-          <h3><svg class="i"><use href="#i-mic"/></svg> Cuenta tu recuerdo</h3>
-          <div class="audio-actions">
-            <button type="button" id="recBtn"><svg class="i"><use href="#i-rec"/></svg> Grabar</button>
-            <label class="btn-file"><svg class="i"><use href="#i-folder"/></svg> Subir audio<input type="file" id="audioFile" accept="audio/*"></label>
-          </div>
-          <div class="audio-status" id="audioStatus">Cuenta tu recuerdo: cuándo fue, con quién, dónde. Después podrás revisarlo.</div>
-        </div>
-        <button type="button" class="btn-secondary panel-close" data-close="voicePanel">Cerrar</button>
-      </div>
+      <div class="home-recent" id="homeRecent"></div>
+    </div>
 
-      <div class="card hidden" id="writePanel">
+    <div id="viewProfile" class="card hidden">
+      <div class="avatar-row">
+        <div class="avatar" id="profAvatar" aria-hidden="true"></div>
+        <div class="avatar-actions">
+          <label class="btn-file"><svg class="i"><use href="#i-camera"/></svg> <span id="avatarLbl">Añadir foto</span><input type="file" id="avatarFile" accept="image/*" hidden></label>
+          <button type="button" class="btn-secondary hidden" id="avatarDel">Quitar foto</button>
+        </div>
+      </div>
+      <div id="avatarMsg"></div>
+      <h2 style="color: var(--salvia-hover);" id="profName">Tu perfil</h2>
+      <div class="hint" id="profEmail"></div>
+      <div id="profMsg"></div>
+      <div id="profTodo"></div>
+      <details class="pw-box fold" id="dataBox">
+        <summary><span>Mis datos</span></summary>
+      <div>
+        <h3 style="font-size:1em">Tu nombre</h3>
+        <input type="text" id="profNameInput" maxlength="80" autocomplete="name">
+        <button type="button" class="btn-secondary" id="profNameSave">Cambiar nombre</button>
+      </div>
+      <h3 style="font-size:1em;margin-top:6px;">Datos de nacimiento</h3>
+      <div class="profile-row">
+        <label for="profBirth" style="font-weight:600">Fecha de nacimiento</label>
+        <input type="date" id="profBirth">
+        <label for="profPlace" style="font-weight:600">Lugar de nacimiento</label>
+        <input type="text" id="profPlace" maxlength="120">
+        <button type="button" class="btn-primary" id="profSave">Guardar</button>
+      </div>
+      </details>
+      <details class="pw-box fold" id="circleBox">
+        <summary><span>Mi círculo de personas</span><span class="fold-count" id="circleCount"></span></summary>
+        <div class="hint">Familia y amistades que aparecen en tus recuerdos. Todos los datos son opcionales.</div>
+        <div id="circleMsg"></div>
+        <ul class="circle-list" id="circleList"></ul>
+        <button type="button" class="btn-primary" id="cirOpen">+ Añadir persona</button>
+      </details>
+      <button type="button" class="prof-btn" id="pwOpen"><svg class="i"><use href="#i-user"/></svg> Cambiar contraseña</button>
+      <button type="button" class="prof-btn" id="statsOpen"><svg class="i"><use href="#i-book"/></svg> <span id="footerCount">0 recuerdos</span> · Estadísticas</button>
+      <button type="button" class="prof-btn" id="onbAgain"><svg class="i"><use href="#i-sparkle"/></svg> Ver la bienvenida otra vez</button>
+      <button type="button" class="logout-big" id="logoutBtn"><svg class="i"><use href="#i-logout"/></svg> Cerrar sesión y salir</button>
+    </div>
+
+    <div id="viewSummary" class="card hidden">
+      <h2 style="color: var(--salvia-hover); margin-bottom: 6px;">Tu resumen de vida</h2>
+      <p class="home-sub" style="margin-bottom:12px">Tu historia en palabras, con un tono siempre positivo, a partir de tus recuerdos.</p>
+      <div class="profile-row">
+        <label style="font-weight:600">Estilo</label>
+        <div class="chips" id="sumStyleChips"></div><input type="hidden" id="sumStyle">
+        <label style="font-weight:600;margin-top:6px">Sobre qué</label>
+        <div class="chips" id="sumScopeChips"></div><input type="hidden" id="sumScope" value="all">
+        <div class="chips hidden" id="sumValueChips"></div><input type="hidden" id="sumValue">
+        <button type="button" class="btn-primary" id="sumGo">Crear resumen</button>
+      </div>
+      <div id="sumMsg"></div>
+      <div id="sumOut" class="sum-out hidden"></div>
+      <div id="sumShareOut"></div>
+      <div class="button-group hidden" id="sumActions"><button type="button" class="btn-primary" id="sumShare">Compartir</button><button type="button" class="btn-secondary" id="sumCopy">Copiar</button><button type="button" class="btn-secondary" id="sumDownload">Descargar</button></div>
+    </div>
+
+    <div id="viewLife" class="card hidden">
+      <div class="tl-head">
+        <h2>Tu línea de vida</h2>
+        <div class="tl-zoom"><button type="button" id="tlZoomOut" aria-label="Alejar">−</button><button type="button" id="tlZoomIn" aria-label="Acercar">+</button></div>
+      </div>
+      <div class="searchbar">
+        <input type="search" id="tlSearch" placeholder="Buscar en tu línea de vida" autocomplete="off">
+        <div class="adv" id="tlAdv"></div>
+        <div class="sort-row"><span>Orden:</span><div class="seg-group" data-sort="tlSort"><button type="button" data-v="desc" aria-pressed="true">Recientes</button><button type="button" data-v="asc" aria-pressed="false">Antiguos</button></div><input type="hidden" id="tlSort" value="desc"></div>
+      </div>
+      <div id="tlBirth" class="tl-birth hidden"></div>
+      <div id="tlMsg"></div>
+      <div id="tlWrap" class="tl-wrap hidden">
+        <div class="tl-labels" id="tlLabels"></div>
+        <div class="tl-scroll" id="tlScroll"><div class="tl-inner" id="tlInner"></div></div>
+      </div>
+      <div class="tl-hint" id="tlHint">Toca un punto de la línea para ver qué recuerdos tienes y qué ocurría en el mundo. Desliza para moverte; pellizca o usa + y − para acercar.</div>
+      <div id="tlDetail" class="tl-detail"></div>
+      <button type="button" class="btn-primary add-end" id="tlAdd">+ Añadir recuerdo</button>
+    </div>
+
+    <!-- LISTA DE MEMORIAS -->
+    <div id="viewMem" class="hidden">
+      <div class="card">
+        <h2 style="margin-bottom: 14px; color: #333;">Tus recuerdos</h2>
+        <div class="searchbar">
+          <input type="search" id="memSearch" placeholder="Buscar por título, texto, persona o lugar" autocomplete="off">
+          <div class="adv" id="memAdv"></div>
+          <div class="sort-row"><span>Orden:</span><div class="seg-group" data-sort="memSort"><button type="button" data-v="desc" aria-pressed="true">Recientes</button><button type="button" data-v="asc" aria-pressed="false">Antiguos</button></div><input type="hidden" id="memSort" value="desc"></div>
+        </div>
+        <div class="memories-list" id="memoriesList">
+          <div class="empty-state">No hay memorias aún. ¡Crea tu primera memoria!</div>
+        </div>
+        <button type="button" class="btn-primary add-end" id="memAdd">+ Añadir recuerdo</button>
+      </div>
+    </div>
+    </div>
+  </div>
+
+
+
+  <div id="onb" class="hidden" role="dialog" aria-modal="true" aria-label="Bienvenida"><div class="onb-in" id="onbBody"></div></div>
+
+
+  <div id="writePanel" class="modal-bg hidden" role="dialog" aria-modal="true" aria-labelledby="writeTitle">
+    <div class="modal" style="max-width:620px;min-height:0;margin:auto">
         <h2 style="margin-bottom: 16px; color: var(--tinta);" id="writeTitle">Escribir un recuerdo</h2>
 
 
@@ -856,143 +971,73 @@
           </div>
         </form>
       </div>
-      <div class="home-recent" id="homeRecent"></div>
-    </div>
+  </div>
 
-    <div id="viewProfile" class="card hidden">
-      <div class="avatar-row">
-        <div class="avatar" id="profAvatar" aria-hidden="true"></div>
-        <div class="avatar-actions">
-          <label class="btn-file"><svg class="i"><use href="#i-camera"/></svg> <span id="avatarLbl">Añadir foto</span><input type="file" id="avatarFile" accept="image/*" hidden></label>
-          <button type="button" class="btn-secondary hidden" id="avatarDel">Quitar foto</button>
-        </div>
-      </div>
-      <div id="avatarMsg"></div>
-      <h2 style="color: var(--salvia-hover);" id="profName">Tu perfil</h2>
-      <div class="hint" id="profEmail"></div>
-      <div id="profMsg"></div>
-      <div id="profTodo"></div>
-      <div class="pw-box">
-        <h3>Tu nombre</h3>
-        <input type="text" id="profNameInput" maxlength="80" autocomplete="name">
-        <button type="button" class="btn-secondary" id="profNameSave">Cambiar nombre</button>
-      </div>
-      <div class="pw-box" id="circleBox">
-        <h3>Mi círculo de personas</h3>
-        <div class="hint">Familia y amistades que aparecen en tus recuerdos. Todos los datos son opcionales.</div>
-        <div id="circleMsg"></div>
-        <ul class="circle-list" id="circleList"></ul>
-        <div class="circle-form">
-          <input type="text" id="cirName" maxlength="80" placeholder="Nombre" autocomplete="off">
-          <input type="text" id="cirRel" maxlength="60" placeholder="Parentesco (hija, amigo, vecina…)" autocomplete="off">
-          <label for="cirBirth" style="font-weight:600">Fecha de nacimiento (si la sabes)</label>
-          <input type="date" id="cirBirth">
-          <div style="display:flex;gap:8px;flex-wrap:wrap">
-            <button type="button" class="btn-primary" id="cirSave">Añadir al círculo</button>
-            <button type="button" class="btn-secondary hidden" id="cirCancel">Cancelar</button>
-          </div>
-        </div>
-      </div>
-      <h3 style="font-size:1em;margin-top:6px;">Tus datos de nacimiento</h3>
-      <div class="profile-row">
-        <label for="profBirth" style="font-weight:600">Fecha de nacimiento</label>
-        <input type="date" id="profBirth">
-        <label for="profPlace" style="font-weight:600">Lugar de nacimiento</label>
-        <input type="text" id="profPlace" maxlength="120">
-        <button type="button" class="btn-primary" id="profSave">Guardar</button>
-      </div>
-      <div class="pw-box">
-        <h3>Cambiar contraseña</h3>
-        <div id="pwMsg"></div>
-        <input type="password" id="pwCurrent" placeholder="Contraseña actual" autocomplete="current-password">
-        <input type="password" id="pwNew" placeholder="Contraseña nueva" autocomplete="new-password">
-        <div class="pw-meter" id="pwNewMeter"><span></span></div><div class="pw-label" id="pwNewLabel"></div>
-        <input type="password" id="pwNew2" placeholder="Repite la contraseña nueva" autocomplete="new-password">
-        <button type="button" class="btn-primary" id="pwSave">Cambiar contraseña</button>
-      </div>
-      <div class="footer-stats" style="margin: 10px 0 0;">
-        <span id="footerCount">0 recuerdos</span> ·
-        <button type="button" id="statsToggle">Ver resumen</button>
-        <div class="stats-detail hidden" id="stats">
-          <div class="stat-item"><span class="stat-label">Total de memorias:</span><span class="stat-value" id="stat-total">0</span></div>
-        </div>
-      </div>
-      <button type="button" class="btn-secondary" id="onbAgain" style="margin-top:10px;">Ver la bienvenida otra vez</button>
-      <button type="button" class="logout-big" id="logoutBtn"><svg class="i"><use href="#i-logout"/></svg> Cerrar sesión y salir</button>
-    </div>
-
-    <div id="viewSummary" class="card hidden">
-      <h2 style="color: var(--salvia-hover); margin-bottom: 6px;">Tu resumen de vida</h2>
-      <p class="home-sub" style="margin-bottom:12px">Tu historia en palabras, con un tono siempre positivo, a partir de tus recuerdos.</p>
-      <div class="profile-row">
-        <label style="font-weight:600">Estilo</label>
-        <div class="chips" id="sumStyleChips"></div><input type="hidden" id="sumStyle">
-        <label style="font-weight:600;margin-top:6px">Sobre qué</label>
-        <div class="chips" id="sumScopeChips"></div><input type="hidden" id="sumScope" value="all">
-        <div class="chips hidden" id="sumValueChips"></div><input type="hidden" id="sumValue">
-        <button type="button" class="btn-primary" id="sumGo">Crear resumen</button>
-      </div>
-      <div id="sumMsg"></div>
-      <div id="sumOut" class="sum-out hidden"></div>
-      <div id="sumShareOut"></div>
-      <div class="button-group hidden" id="sumActions"><button type="button" class="btn-primary" id="sumShare">Compartir</button><button type="button" class="btn-secondary" id="sumCopy">Copiar</button><button type="button" class="btn-secondary" id="sumDownload">Descargar</button></div>
-    </div>
-
-    <div id="viewLife" class="card hidden">
-      <div class="tl-head">
-        <h2>Tu línea de vida</h2>
-        <div class="tl-zoom"><button type="button" id="tlZoomOut" aria-label="Alejar">−</button><button type="button" id="tlZoomIn" aria-label="Acercar">+</button></div>
-      </div>
-      <div class="searchbar">
-        <input type="search" id="tlSearch" placeholder="Buscar en tu línea de vida" autocomplete="off">
-        <div class="adv" id="tlAdv"></div>
-        <div class="sort-row"><span>Orden:</span><div class="seg-group" data-sort="tlSort"><button type="button" data-v="desc" aria-pressed="true">Recientes</button><button type="button" data-v="asc" aria-pressed="false">Antiguos</button></div><input type="hidden" id="tlSort" value="desc"></div>
-      </div>
-      <div id="tlBirth" class="tl-birth hidden"></div>
-      <div id="tlMsg"></div>
-      <div id="tlWrap" class="tl-wrap hidden">
-        <div class="tl-labels" id="tlLabels"></div>
-        <div class="tl-scroll" id="tlScroll"><div class="tl-inner" id="tlInner"></div></div>
-      </div>
-      <div class="tl-hint" id="tlHint">Toca un punto de la línea para ver qué recuerdos tienes y qué ocurría en el mundo. Desliza para moverte; pellizca o usa + y − para acercar.</div>
-      <div id="tlDetail" class="tl-detail"></div>
-    </div>
-
-    <!-- LISTA DE MEMORIAS -->
-    <div id="viewMem" class="hidden">
-      <div class="card">
-        <h2 style="margin-bottom: 14px; color: #333;">Tus recuerdos</h2>
-        <div class="searchbar">
-          <input type="search" id="memSearch" placeholder="Buscar por título, texto, persona o lugar" autocomplete="off">
-          <div class="adv" id="memAdv"></div>
-          <div class="sort-row"><span>Orden:</span><div class="seg-group" data-sort="memSort"><button type="button" data-v="desc" aria-pressed="true">Recientes</button><button type="button" data-v="asc" aria-pressed="false">Antiguos</button></div><input type="hidden" id="memSort" value="desc"></div>
-        </div>
-        <div class="memories-list" id="memoriesList">
-          <div class="empty-state">No hay memorias aún. ¡Crea tu primera memoria!</div>
-        </div>
-      </div>
-    </div>
+  <div id="voicePanel" class="modal-bg hidden" role="dialog" aria-modal="true" aria-labelledby="voiceTitle" aria-live="polite">
+    <div class="modal" style="max-width:460px;min-height:0;border-radius:14px;margin:auto;text-align:center">
+      <h2 id="voiceTitle" style="color:var(--tinta);margin-bottom:12px">Tu recuerdo en voz alta</h2>
+      <div class="audio-box"><div class="audio-actions" style="justify-content:center"><button type="button" id="recBtn"><svg class="i"><use href="#i-rec"/></svg> Grabar</button></div>
+      <div class="audio-status" id="audioStatus"></div></div>
+      <button type="button" class="btn-secondary panel-close" data-close="voicePanel">Cerrar</button>
     </div>
   </div>
 
+  <div id="statsModal" class="modal-bg hidden" role="dialog" aria-modal="true" aria-labelledby="stTitle">
+    <div class="modal" style="max-width:460px;min-height:0;border-radius:14px;margin:auto">
+      <h2 id="stTitle" style="color:var(--tinta);margin-bottom:10px">Estadísticas</h2>
+      <div id="stBody"></div>
+      <button type="button" class="btn-secondary panel-close" id="stClose">Cerrar</button>
+    </div>
+  </div>
 
+  <div id="pwModal" class="modal-bg hidden" role="dialog" aria-modal="true" aria-labelledby="pwTitle">
+    <div class="modal" style="max-width:460px;min-height:0;border-radius:14px;margin:auto">
+      <h2 id="pwTitle" style="color:var(--tinta);margin-bottom:10px">Cambiar contraseña</h2>
+      <div id="pwMsg"></div>
+      <input type="password" id="pwCurrent" placeholder="Contraseña actual" autocomplete="current-password">
+      <input type="password" id="pwNew" placeholder="Contraseña nueva" autocomplete="new-password">
+      <div class="pw-meter" id="pwNewMeter"><span></span></div><div class="pw-label" id="pwNewLabel"></div>
+      <input type="password" id="pwNew2" placeholder="Repite la contraseña nueva" autocomplete="new-password">
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px">
+        <button type="button" class="btn-primary" id="pwSave">Cambiar contraseña</button>
+        <button type="button" class="btn-secondary" id="pwClose">Cerrar</button>
+      </div>
+    </div>
+  </div>
 
-  <div id="onb" class="hidden" role="dialog" aria-modal="true" aria-label="Bienvenida"><div class="onb-in" id="onbBody"></div></div>
+  <div id="circleForm" class="modal-bg hidden" role="dialog" aria-modal="true" aria-labelledby="cirTitle">
+    <div class="modal" style="max-width:460px;min-height:0;border-radius:14px;margin:auto">
+      <h2 id="cirTitle" style="color:var(--tinta);margin-bottom:10px">Añadir una persona</h2>
+      <div id="cirMsg"></div>
+      <div class="circle-form">
+        <input type="text" id="cirName" maxlength="80" placeholder="Nombre" autocomplete="off">
+        <input type="text" id="cirRel" maxlength="60" placeholder="Parentesco (hija, amigo, vecina…)" autocomplete="off">
+        <label for="cirBirth" style="font-weight:600">Fecha de nacimiento (si la sabes)</label>
+        <input type="date" id="cirBirth">
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <button type="button" class="btn-primary" id="cirSave">Añadir al círculo</button>
+          <button type="button" class="btn-secondary" id="cirCancel">Cancelar</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <div id="recTip" class="modal-bg hidden" role="dialog" aria-modal="true" aria-labelledby="recTipTitle">
     <div class="modal" style="max-width:460px;min-height:0;border-radius:14px;margin:auto">
-      <h2 id="recTipTitle" style="color:var(--tinta);margin-bottom:10px">Antes de grabar</h2>
-      <p style="margin-bottom:10px">Tienes <strong>2 minutos</strong> como máximo.</p>
-      <p style="margin-bottom:6px">Para que tu recuerdo quede bien, di con claridad:</p>
+      <div class="tip-mic" aria-hidden="true"><svg class="i" style="width:30px;height:30px"><use href="#i-rec"/></svg></div>
+      <h2 id="recTipTitle" style="color:var(--tinta);margin-bottom:10px;text-align:center">¡Vamos a guardar un recuerdo bonito!</h2>
+      <p style="margin-bottom:10px">Tienes <strong>2 minutos</strong> para contarlo con calma. Te avisaré cuando queden 30 segundos.</p>
+      <p style="margin-bottom:6px">Para que quede perfecto, cuéntame con tus palabras:</p>
       <ul style="margin:0 0 16px 20px;line-height:1.6">
-        <li><strong>Cuándo</strong> ocurrió (año, estación o fecha)</li>
-        <li><strong>Dónde</strong> fue</li>
-        <li><strong>Con quién</strong> estabas</li>
-        <li><strong>Qué</strong> sucedió</li>
+        <li><strong>Cuándo</strong> fue (el año, la estación o la fecha)</li>
+        <li><strong>Dónde</strong> estabas</li>
+        <li><strong>Con quién</strong> lo viviste</li>
+        <li><strong>Qué</strong> pasó y cómo te sentiste</li>
       </ul>
+      <label style="display:flex;align-items:center;gap:10px;margin:0 0 14px;cursor:pointer"><input type="checkbox" id="recTipHide" style="width:22px;height:22px;flex:none;margin:0"> <span>No volver a mostrar este aviso</span></label>
       <div style="display:flex;gap:10px;flex-wrap:wrap">
-        <button type="button" id="recTipGo" style="flex:1"><svg class="i"><use href="#i-rec"/></svg> Empezar a grabar</button>
-        <button type="button" class="btn-secondary" id="recTipCancel">Ahora no</button>
+        <button type="button" id="recTipGo" style="flex:1"><svg class="i"><use href="#i-rec"/></svg> ¡Empezar a grabar!</button>
+        <button type="button" class="btn-secondary" id="recTipCancel">Mejor luego</button>
       </div>
     </div>
   </div>
@@ -1137,7 +1182,6 @@
     const tagsContainer = document.getElementById('tagsContainer');
     const memoriesList = document.getElementById('memoriesList');
     const messageDiv = document.getElementById('message');
-    const statTotal = document.getElementById('stat-total');
     const memSearch = document.getElementById('memSearch');
     const memSort = document.getElementById('memSort');
     memSearch.addEventListener('input', () => renderMemories());
@@ -1337,7 +1381,6 @@
       try {
         const response = await fetch(`${API_URL}/stats`);
         const result = await response.json();
-        statTotal.textContent = result.data.total;
         document.getElementById('footerCount').textContent = result.data.total === 1 ? '1 recuerdo' : `${result.data.total} recuerdos`;
       } catch (err) {
         console.error('Error cargando stats:', err);
@@ -1553,15 +1596,15 @@
       voicePanel.classList.toggle('hidden', w ? true : false);
       btnWrite.classList.toggle('on', w);
       btnVoice.classList.toggle('on', !w);
-      (w ? writePanel : voicePanel).scrollIntoView({ behavior: 'smooth', block: 'start' });
+      document.body.style.overflow = '';
       if (w) titleInput.focus({ preventScroll: true });
     }
     function closePanels() {
       writePanel.classList.add('hidden'); voicePanel.classList.add('hidden');
       btnWrite.classList.remove('on'); btnVoice.classList.remove('on');
     }
-    btnVoice.onclick = () => { if (!voicePanel.classList.contains('hidden')) return closePanels(); resetWriteForm(); openPanel('voice'); };
-    btnWrite.onclick = () => { if (!writePanel.classList.contains('hidden') && !currentMemoryId) return closePanels(); resetWriteForm(); openPanel('write'); };
+    btnVoice.onclick = () => { if (recorder && recorder.state === 'recording') { openPanel('voice'); return; } resetWriteForm(); openRecTip(); };
+    btnWrite.onclick = () => { resetWriteForm(); openPanel('write'); };
     document.querySelectorAll('[data-close]').forEach(b => b.onclick = closePanels);
     document.getElementById('cancelWrite').onclick = () => { resetWriteForm(); closePanels(); };
 
@@ -1570,6 +1613,45 @@
       document.getElementById('writeTitle').textContent = 'Escribir un recuerdo';
       renderMemories();
     }
+
+    // ===== ESTADÍSTICAS =====
+    (function () {
+      const modal = document.getElementById('statsModal'), body = document.getElementById('stBody');
+      const GAP_YEARS = 5;
+      const yr = (d) => Number(String(d || '').slice(0, 4));
+      function draw() {
+        const years = memories.map(m => yr(m.date_happened)).filter(y => y > 1000).sort((a, b) => a - b);
+        const n = memories.length;
+        if (!n) { body.innerHTML = '<p class="st-sub">Todavía no hay recuerdos. Cuenta el primero y aquí verás tu historia.</p>'; return; }
+        const by = new Date(birthDate || '').getFullYear();
+        const first = years[0], last = years[years.length - 1], now = new Date().getFullYear();
+        let html = `<div class="st-big">${n}</div><div class="st-sub">${n === 1 ? 'recuerdo guardado' : 'recuerdos guardados'}${years.length ? ` · de ${first} a ${last}` : ''}</div>`;
+        // huecos largos: entre recuerdos consecutivos y desde el nacimiento hasta el primero
+        const gaps = [];
+        if (by && first - by >= GAP_YEARS) gaps.push([by, first, 'Desde que naciste']);
+        for (let i = 1; i < years.length; i++) if (years[i] - years[i - 1] >= GAP_YEARS) gaps.push([years[i - 1], years[i]]);
+        if (now - last >= GAP_YEARS) gaps.push([last, now]);
+        html += '<h3 style="font-size:1em;margin:10px 0 4px">Épocas sin recuerdos</h3>';
+        html += gaps.length
+          ? gaps.map(g => `<div class="st-gap">${g[2] ? 'Hay un hueco hasta ' + g[1] + ' (naciste en ' + g[0] + ')' : 'Entre ' + g[0] + ' y ' + g[1]}: ${g[1] - g[0]} años sin recuerdos. ¿Te acuerdas de algo de esa época?</div>`).join('')
+          : `<div class="st-ok">No hay épocas largas vacías (más de ${GAP_YEARS} años). ¡Muy bien!</div>`;
+        // recuerdos por década
+        if (years.length) {
+          const dec = {}; years.forEach(y => { const d = Math.floor(y / 10) * 10; dec[d] = (dec[d] || 0) + 1; });
+          const from = Math.floor(first / 10) * 10, to = Math.floor(last / 10) * 10, max = Math.max(...Object.values(dec));
+          let bars = '';
+          for (let d = from; d <= to; d += 10) { const c = dec[d] || 0; bars += `<div class="st-bar"><span>${d}s</span><i class="${c ? '' : 'zero'}" style="width:${c ? Math.max(4, Math.round(c / max * 100)) : 0}%"></i><b>${c}</b></div>`; }
+          html += `<h3 style="font-size:1em;margin:14px 0 4px">Recuerdos por década</h3><div class="st-bars">${bars}</div>`;
+        }
+        const noDate = n - years.length; if (noDate) html += `<p class="hint">${noDate} sin fecha</p>`;
+        body.innerHTML = html;
+      }
+      document.getElementById('statsOpen').onclick = async () => { await loadMemories(); draw(); modal.classList.remove('hidden'); };
+      document.getElementById('stClose').onclick = () => modal.classList.add('hidden');
+      modal.addEventListener('click', (e) => { if (e.target === modal) modal.classList.add('hidden'); });
+      document.getElementById('memAdd').onclick = () => window.goTo('home');
+      document.getElementById('tlAdd').onclick = () => window.goTo('home');
+    })();
 
     // ===== PESTAÑAS Y RESUMEN =====
     (function () {
@@ -1586,16 +1668,11 @@
         window.scrollTo({ top: 0 });
       };
       navBtns.forEach(b => b.onclick = () => window.goTo(b.dataset.view));
-      document.getElementById('statsToggle').onclick = () => {
-        const d = document.getElementById('stats'); d.classList.toggle('hidden');
-        document.getElementById('statsToggle').textContent = d.classList.contains('hidden') ? 'Ver resumen' : 'Ocultar resumen';
-      };
     })();
 
     // ===== AUDIO =====
     const SAMPLE_RATE = 16000;
     const recBtn = document.getElementById('recBtn');
-    const audioFile = document.getElementById('audioFile');
     const audioStatus = document.getElementById('audioStatus');
     const MAX_REC_SECS = 120, WARN_LEFT_SECS = 30;
     let recorder = null, recChunks = [], recStream = null, recTimer = null, recStart = 0;
@@ -1657,21 +1734,27 @@
 
     // --- grabar ---
     const recTip = document.getElementById('recTip');
+    const REC_TIP_KEY = 'mmo_hide_rec_tip';
+    function openRecTip() {
+      let hide = false; try { hide = localStorage.getItem(REC_TIP_KEY) === '1'; } catch (e) {}
+      if (hide) { openPanel('voice'); startRecording(); return; }
+      document.getElementById('recTipHide').checked = false;
+      recTip.classList.remove('hidden'); document.getElementById('recTipGo').focus();
+    }
     recBtn.addEventListener('click', () => {
       if (recorder && recorder.state === 'recording') { recorder.stop(); return; }
-      recTip.classList.remove('hidden');
-      document.getElementById('recTipGo').focus();
+      openRecTip();
     });
     document.getElementById('recTipCancel').onclick = () => recTip.classList.add('hidden');
     recTip.addEventListener('click', (e) => { if (e.target === recTip) recTip.classList.add('hidden'); });
-    document.getElementById('recTipGo').onclick = () => { recTip.classList.add('hidden'); startRecording(); };
+    document.getElementById('recTipGo').onclick = () => { try { if (document.getElementById('recTipHide').checked) localStorage.setItem(REC_TIP_KEY, '1'); } catch (e) {} recTip.classList.add('hidden'); openPanel('voice'); startRecording(); };
 
     async function startRecording() {
       if (!navigator.mediaDevices || !window.MediaRecorder) {
-        setAudioStatus('Tu navegador no permite grabar. Usa "Subir audio".'); return;
+        setAudioStatus('Tu navegador no permite grabar. Usa el botón "Audio" para subir un archivo.'); return;
       }
       try { recStream = await navigator.mediaDevices.getUserMedia({ audio: true }); }
-      catch (e) { setAudioStatus('No se pudo acceder al micrófono. Revisa el permiso del navegador o usa "Subir audio".'); return; }
+      catch (e) { setAudioStatus('No se pudo acceder al micrófono. Revisa el permiso del navegador o sube un archivo con el botón "Audio".'); return; }
       recChunks = [];
       recorder = new MediaRecorder(recStream);
       recorder.ondataavailable = (e) => { if (e.data.size) recChunks.push(e.data); };
@@ -1701,13 +1784,6 @@
       setAudioStatus('Grabando… tienes 2 minutos. Pulsa "Parar" cuando termines.');
     }
 
-    // --- subir ---
-    audioFile.addEventListener('change', () => {
-      const f = audioFile.files[0];
-      audioFile.value = '';
-      if (f) analyzeAudioBlob(f, f.name);
-    });
-
     // --- pantalla de revisión ---
     const reviewModal = document.getElementById('reviewModal');
     const rv = (id) => document.getElementById(id);
@@ -1728,6 +1804,7 @@
     function drawCircle() {
       const ul = document.getElementById('circleList');
       if (!ul) return;
+      document.getElementById('circleCount').textContent = circle.length ? (circle.length === 1 ? '1 persona' : circle.length + ' personas') : '';
       ul.innerHTML = circle.length ? circle.map(p => {
         const age = p.birth_date ? ` · nació el ${new Date(p.birth_date + 'T00:00:00').toLocaleDateString('es-ES')}` : '';
         return `<li class="circle-item" data-id="${p.id}"><span class="avatar">${esc((p.name || p.relation || '?').charAt(0).toUpperCase())}</span><span class="ci-txt"><strong>${esc(p.name || p.relation)}</strong><small>${esc((p.name ? p.relation : '') + age).replace(/^ · /, '')}</small></span><button type="button" class="btn-secondary" data-act="edit" aria-label="Editar">Editar</button><button type="button" class="btn-secondary" data-act="del" aria-label="Quitar">Quitar</button></li>`;
@@ -1737,8 +1814,13 @@
       cirEditing = null;
       ['cirName', 'cirRel', 'cirBirth'].forEach(id => { document.getElementById(id).value = ''; });
       document.getElementById('cirSave').textContent = 'Añadir al círculo';
-      document.getElementById('cirCancel').classList.add('hidden');
+      document.getElementById('cirTitle').textContent = 'Añadir una persona';
+      document.getElementById('cirMsg').innerHTML = '';
     }
+    const cirModal = document.getElementById('circleForm');
+    function openCircleForm() { cirModal.classList.remove('hidden'); document.getElementById('cirName').focus(); }
+    function closeCircleForm() { cirModal.classList.add('hidden'); resetCircleForm(); }
+    document.getElementById('cirOpen').onclick = () => { resetCircleForm(); openCircleForm(); };
     document.getElementById('circleList').addEventListener('click', async (e) => {
       const b = e.target.closest('button[data-act]'); if (!b) return;
       const id = Number(b.closest('li').dataset.id), p = circle.find(x => x.id === id);
@@ -1751,19 +1833,19 @@
       cirEditing = id;
       document.getElementById('cirName').value = p.name; document.getElementById('cirRel').value = p.relation; document.getElementById('cirBirth').value = p.birth_date || '';
       document.getElementById('cirSave').textContent = 'Guardar cambios';
-      document.getElementById('cirCancel').classList.remove('hidden');
-      document.getElementById('cirName').focus();
+      document.getElementById('cirTitle').textContent = 'Editar persona';
+      openCircleForm();
     });
-    document.getElementById('cirCancel').onclick = resetCircleForm;
+    document.getElementById('cirCancel').onclick = closeCircleForm;
     document.getElementById('cirBirth').max = new Date().toISOString().slice(0, 10);
     document.getElementById('cirSave').onclick = async () => {
       const body = { name: document.getElementById('cirName').value, relation: document.getElementById('cirRel').value, birth_date: document.getElementById('cirBirth').value };
       const url = cirEditing ? `${API_URL}/circle/${cirEditing}` : `${API_URL}/circle`;
       try {
         const r = await (await fetch(url, { method: cirEditing ? 'PUT' : 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) })).json();
-        if (!r.success) return flash('circleMsg', `<div class="error">${esc(r.error)}</div>`);
-        resetCircleForm(); await loadCircle();
-      } catch (e) { flash('circleMsg', '<div class="error">No se pudo guardar. Inténtalo de nuevo.</div>'); }
+        if (!r.success) return flash('cirMsg', `<div class="error">${esc(r.error)}</div>`);
+        closeCircleForm(); await loadCircle();
+      } catch (e) { flash('cirMsg', '<div class="error">No se pudo guardar. Inténtalo de nuevo.</div>'); }
     };
 
     // Tras guardar un recuerdo: propone añadir al círculo a quien salga y no esté
@@ -1808,7 +1890,7 @@
     dpList.push(dpReview);
 
     function openReview(d) {
-      draft = d;
+      draft = d; voicePanel.classList.add('hidden');
       rv('rvTitle').value = d.title || '';
       rv('rvContent').value = d.content || '';
       dpReview.set(isFuture(d.date_happened) ? '' : d.date_happened, d.date_end, d.date_precision);
@@ -1966,7 +2048,7 @@
         })).json();
         if (!res.success) { rv('reviewMsg').innerHTML = `<div class="error">${esc(res.error)}</div>`; return; }
         draft = null; closeReview(); closePanels();
-        setAudioStatus('Cuenta tu recuerdo: cuándo fue, con quién, dónde. Después podrás revisarlo.');
+        setAudioStatus('');
         window.goTo('mem');
         showMessage('Recuerdo guardado con tu ' + ({ image: 'foto', video: 'vídeo' }[savedKind] || 'audio'));
         proposeCircle(savedPeople);
@@ -2115,6 +2197,9 @@
         else flash('profMsg', `<div class="error">${esc(r.error)}</div>`);
       } catch (e) { flash('profMsg', '<div class="error">No se pudo guardar. Inténtalo de nuevo.</div>'); }
     };
+    const pwModal = document.getElementById('pwModal');
+    document.getElementById('pwOpen').onclick = () => { pwModal.classList.remove('hidden'); document.getElementById('pwCurrent').focus(); };
+    document.getElementById('pwClose').onclick = () => { pwModal.classList.add('hidden'); ['pwCurrent', 'pwNew', 'pwNew2'].forEach(id => document.getElementById(id).value = ''); document.getElementById('pwMsg').innerHTML = ''; updateMeter('pwNew', 'pwNewMeter', 'pwNewLabel'); };
     document.getElementById('pwSave').onclick = async () => {
       const cur = document.getElementById('pwCurrent').value, n1 = document.getElementById('pwNew').value, n2 = document.getElementById('pwNew2').value;
       if (n1 !== n2) return flash('pwMsg', '<div class="error">Las contraseñas nuevas no coinciden</div>');
@@ -2306,7 +2391,7 @@
           <button type="button" class="btn-primary" id="onbVoice">${ic('mic')} Contar con mi voz</button>
           <button type="button" class="btn-secondary" id="onbWrite">${ic('pen')} Escribirlo</button>
           <button type="button" class="onb-skip" id="onbEnd">Lo haré más tarde</button>`;
-        document.getElementById('onbVoice').onclick = () => { close(); window.goTo('home'); resetWriteForm(); openPanel('voice'); };
+        document.getElementById('onbVoice').onclick = () => { close(); window.goTo('home'); resetWriteForm(); openRecTip(); };
         document.getElementById('onbWrite').onclick = () => { close(); window.goTo('home'); resetWriteForm(); openPanel('write'); };
         document.getElementById('onbEnd').onclick = close;
       }
