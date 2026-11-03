@@ -164,6 +164,9 @@
       color: white;
     }
 
+    .btn-primary:disabled, .btn-secondary:disabled { opacity: 0.45; cursor: not-allowed; }
+    .btn-primary:disabled:hover, .btn-secondary:disabled:hover { transform: none; box-shadow: none; background: var(--salvia-fuerte); }
+
     .btn-primary:hover {
       background: var(--salvia-hover);
       transform: translateY(-2px);
@@ -1161,6 +1164,17 @@
     const BEYOND_MSG = 'Esa fecha supera los 120 años desde tu nacimiento.';
     const FUTURE_MSG = 'Un recuerdo no puede tener una fecha futura. Elige hoy o un día anterior.';
     let birthDate = '';
+    // Botón "Guardar" solo activo si hay cambios respecto a cómo se abrió el formulario.
+    // setTimeout 0: deja que los manejadores propios (etiquetas, personas...) actualicen su estado antes de comparar.
+    const guards = {};
+    function watchChanges(root, btn, getState) {
+      let base = getState();
+      const upd = () => { btn.disabled = getState() === base; };
+      ['input', 'change', 'click'].forEach(ev => root.addEventListener(ev, () => setTimeout(upd, 0)));
+      new MutationObserver(upd).observe(root, { childList: true, subtree: true });
+      upd();
+      return { update: upd, rebase() { base = getState(); upd(); } };
+    }
     let hideAge = false; // si está activo, no se muestra la edad en ninguna parte
     // Edad aproximada cuando la fecha no es exacta (se calcula con el punto medio del periodo)
     function ageOf(start, end, prec) {
@@ -1595,6 +1609,7 @@
         document.getElementById('dateAge').textContent = ageOf(memory.date_happened, memory.date_end, memory.date_precision);
         currentMemoryId = id;
         document.getElementById('writeTitle').textContent = 'Editar recuerdo';
+        if (guards.write) guards.write.rebase();
         renderMemories();
         window.goTo('home');
         openPanel('write');
@@ -1604,6 +1619,7 @@
     // ===== EVENT LISTENERS =====
     form.addEventListener('submit', (e) => {
       e.preventDefault();
+      if (form.querySelector('button[type=submit]').disabled) return; // sin cambios: no hay nada que guardar
       limitDates();
       const when = dpWrite.get();
       if (isFuture(when.date_happened)) return showMessage(FUTURE_MSG, 'error');
@@ -1631,6 +1647,9 @@
     document.getElementById('wAddPerson').onclick = () => document.getElementById('wPeople').appendChild(personRow());
     drawWriteTags = tagPicker(tagsContainer, tagInput, () => tags, (l) => { tags = l; });
     drawWriteMood = moodPicker(document.getElementById('moodChips'), moodSelect);
+    guards.write = watchChanges(form, form.querySelector('button[type=submit]'), () => JSON.stringify([
+      titleInput.value, contentInput.value, dpWrite.get(), document.getElementById('wPlace').value, tags, moodSelect.value,
+      [...document.getElementById('wPeople').children].map(r => [...r.querySelectorAll('input')].map(i => i.value))]));
 
 
 
@@ -1679,6 +1698,7 @@
       form.reset(); tags = []; renderTags(); currentMemoryId = null; document.getElementById('wPeople').innerHTML = '';
       document.getElementById('writeTitle').textContent = 'Escribir un recuerdo';
       renderMemories();
+      if (guards.write) guards.write.rebase();
     }
 
     // ===== ESTADÍSTICAS =====
@@ -1892,7 +1912,9 @@
       document.getElementById('cirMsg').innerHTML = '';
     }
     const cirModal = document.getElementById('circleForm');
-    function openCircleForm() { cirModal.classList.remove('hidden'); document.getElementById('cirName').focus(); }
+    const cirIds = ['cirName', 'cirRel', 'cirBirth'];
+    guards.cir = watchChanges(cirModal, document.getElementById('cirSave'), () => cirIds.map(id => document.getElementById(id).value).join('|'));
+    function openCircleForm() { cirModal.classList.remove('hidden'); guards.cir.rebase(); document.getElementById('cirName').focus(); }
     function closeCircleForm() { cirModal.classList.add('hidden'); resetCircleForm(); }
     document.getElementById('cirOpen').onclick = () => { resetCircleForm(); openCircleForm(); };
     document.getElementById('circleList').addEventListener('click', async (e) => {
@@ -2259,6 +2281,7 @@
       document.getElementById('homeHello').textContent = `Hola, ${user.name}`;
       document.getElementById('profName').textContent = user.name;
       document.getElementById('profNameInput').value = user.name;
+      if (guards.name) guards.name.rebase();
       document.getElementById('profEmail').textContent = user.email || '';
       fetch(`${API_URL}/profile`).then(r => r.json()).then(r => { hasPhoto = !!(r.success && r.data.has_photo); photoV = Date.now(); drawAvatars(); }).catch(() => drawAvatars());
     }
@@ -2281,6 +2304,7 @@
         const r = await (await fetch(`${API_URL}/profile`)).json();
         if (r.success) { document.getElementById('profBirth').value = r.data.birth_date || ''; document.getElementById('profPlace').value = r.data.birth_place || ''; document.getElementById('profHideAge').checked = !!r.data.hide_age; }
       } catch (e) {}
+      if (guards.prof) guards.prof.rebase();
       drawProfTodo();
     };
     // Aviso arriba del perfil con lo que falta (nombre, fecha y lugar de nacimiento)
@@ -2295,6 +2319,8 @@
       const n = document.getElementById('profNudge'); if (n) n.classList.toggle('hidden', !miss.some(x => /nacimiento/.test(x)));
     }
     document.getElementById('onbAgain').onclick = () => window.startOnboarding();
+    guards.prof = watchChanges(document.getElementById('profSave').closest('.profile-row'), document.getElementById('profSave'),
+      () => ['profBirth', 'profPlace'].map(id => document.getElementById(id).value).concat(document.getElementById('profHideAge').checked).join('|'));
     document.getElementById('profSave').onclick = async () => {
       const box = document.getElementById('profMsg');
       try {
@@ -2302,7 +2328,7 @@
           method: 'PUT', headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ birth_date: document.getElementById('profBirth').value, birth_place: completePlace(document.getElementById('profPlace').value), hide_age: document.getElementById('profHideAge').checked })
         })).json();
-        if (r.success) { birthDate = document.getElementById('profBirth').value; hideAge = document.getElementById('profHideAge').checked; renderMemories(); renderHome(); drawProfTodo(); }
+        if (r.success) { birthDate = document.getElementById('profBirth').value; hideAge = document.getElementById('profHideAge').checked; renderMemories(); renderHome(); drawProfTodo(); guards.prof.rebase(); }
         box.innerHTML = r.success ? '<div class="success">Perfil guardado</div>' : `<div class="error">${esc(r.error)}</div>`;
       } catch (e) { box.innerHTML = '<div class="error">No se pudo guardar. Inténtalo de nuevo.</div>'; }
       setTimeout(() => { box.innerHTML = ''; }, 3000);
@@ -2310,6 +2336,7 @@
 
     document.getElementById('pwNew').addEventListener('input', () => updateMeter('pwNew', 'pwNewMeter', 'pwNewLabel'));
     function flash(boxId, html) { const b = document.getElementById(boxId); b.innerHTML = html; setTimeout(() => { b.innerHTML = ''; }, 4000); }
+    guards.name = watchChanges(document.getElementById('profNameInput').parentElement, document.getElementById('profNameSave'), () => document.getElementById('profNameInput').value.trim());
     document.getElementById('profNameSave').onclick = async () => {
       try {
         const r = await (await fetch(`${API_URL}/auth/name`, { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: document.getElementById('profNameInput').value }) })).json();
@@ -2318,8 +2345,10 @@
       } catch (e) { flash('profMsg', '<div class="error">No se pudo guardar. Inténtalo de nuevo.</div>'); }
     };
     const pwModal = document.getElementById('pwModal');
+    const pwIds = ['pwCurrent', 'pwNew', 'pwNew2'];
+    guards.pw = watchChanges(pwModal, document.getElementById('pwSave'), () => pwIds.every(id => document.getElementById(id).value) ? 'listo' : '');
     document.getElementById('pwOpen').onclick = () => { pwModal.classList.remove('hidden'); document.getElementById('pwCurrent').focus(); };
-    document.getElementById('pwClose').onclick = () => { pwModal.classList.add('hidden'); ['pwCurrent', 'pwNew', 'pwNew2'].forEach(id => document.getElementById(id).value = ''); document.getElementById('pwMsg').innerHTML = ''; updateMeter('pwNew', 'pwNewMeter', 'pwNewLabel'); };
+    document.getElementById('pwClose').onclick = () => { pwModal.classList.add('hidden'); ['pwCurrent', 'pwNew', 'pwNew2'].forEach(id => document.getElementById(id).value = ''); document.getElementById('pwMsg').innerHTML = ''; updateMeter('pwNew', 'pwNewMeter', 'pwNewLabel'); guards.pw.update(); };
     document.getElementById('pwSave').onclick = async () => {
       const cur = document.getElementById('pwCurrent').value, n1 = document.getElementById('pwNew').value, n2 = document.getElementById('pwNew2').value;
       if (n1 !== n2) return flash('pwMsg', '<div class="error">Las contraseñas nuevas no coinciden</div>');
@@ -2327,7 +2356,7 @@
         const r = await (await fetch(`${API_URL}/auth/password`, { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ current: cur, next: n1 }) })).json();
         if (r.success) {
           ['pwCurrent', 'pwNew', 'pwNew2'].forEach(id => document.getElementById(id).value = '');
-          updateMeter('pwNew', 'pwNewMeter', 'pwNewLabel');
+          updateMeter('pwNew', 'pwNewMeter', 'pwNewLabel'); guards.pw.update();
           flash('pwMsg', '<div class="success">Contraseña cambiada. Se han cerrado tus sesiones en otros dispositivos.</div>');
         } else flash('pwMsg', `<div class="error">${esc(r.error)}</div>`);
       } catch (e) { flash('pwMsg', '<div class="error">No se pudo cambiar. Inténtalo de nuevo.</div>'); }
@@ -2589,6 +2618,7 @@
             <input type="text" id="tlBirthPlace" placeholder="Lugar de nacimiento (opcional)" maxlength="120">
             <button type="button" class="btn-primary" id="tlBirthSave">Guardar</button></div>`;
           $('tlBirthSave').onclick = saveBirth;
+          watchChanges(b, $('tlBirthSave'), () => $('tlBirthDate').value);
         } else b.classList.add('hidden');
 
         range();
@@ -2771,6 +2801,7 @@
         if (editing !== null) {
           $('sfCancel').onclick = () => { editing = null; drawDetail(); };
           $('sfSave').onclick = saveStage;
+          if (!(editing === 'new' && draftStage)) watchChanges($('tlStageForm'), $('sfSave'), () => ['sfKind', 'sfTitle', 'sfPlace', 'sfStart', 'sfEnd'].map(id => $(id).value).join('|'));
         }
       }
 
