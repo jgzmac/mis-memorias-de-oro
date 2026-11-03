@@ -381,6 +381,13 @@
     .review-field label { display: block; font-weight: 600; font-size: 0.85em; margin-bottom: 4px; color: #444; }
     .review-field input, .review-field select, .review-field textarea { width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 6px; font-size: 0.95em; font-family: inherit; }
     .review-field textarea { min-height: 110px; }
+    /* Lista de sugerencias propia (la del navegador sale en negro y no sigue el estilo de la app) */
+    .sug { position: fixed; z-index: 300; background: white; border: 2px solid var(--salvia); border-radius: 12px; box-shadow: 0 8px 24px rgba(0,0,0,.18); padding: 4px; overflow-y: auto; max-height: 240px; }
+    .sug.hidden { display: none; }
+    .sug-item { display: flex; align-items: center; gap: 10px; padding: 9px 10px; border-radius: 8px; cursor: pointer; color: var(--tinta); }
+    .sug-item:hover, .sug-item.on { background: var(--salvia-claro); }
+    .sug-item .avatar { width: 30px; height: 30px; flex: none; font-size: .95em; }
+    .sug-item small { display: block; color: var(--gris); }
     .person-row { display: grid; grid-template-columns: 1fr 1fr auto; gap: 6px; margin-bottom: 6px; }
     .person-row input { padding: 7px; border: 1px solid #ccc; border-radius: 6px; }
     .person-row button { background: #eee; border: none; border-radius: 6px; padding: 0 10px; cursor: pointer; }
@@ -953,6 +960,11 @@
           </div>
 
           <div class="form-group">
+            <label for="wPlace">¿Dónde fue?</label>
+            <input type="text" id="wPlace" maxlength="200" placeholder="Ej: Sevilla" autocomplete="off">
+          </div>
+
+          <div class="form-group">
             <label>Etiquetas (toca las que encajen)</label>
             <div class="chips" id="tagsContainer"></div>
             <input type="text" id="tagInput" placeholder="Otra etiqueta: escríbela y pulsa Intro" style="margin-top: 8px;">
@@ -1115,7 +1127,6 @@
       const dl = document.createElement('datalist'); dl.id = 'placesList';
       dl.innerHTML = PLACES.map(p => `<option value="${p.f.replace(/"/g, '&quot;')}"></option>`).join('');
       document.body.appendChild(dl);
-      ['rvPlace', 'profPlace', 'authBirthPlace', 'tlBirthPlace', 'sfPlace'].forEach(id => { const e = document.getElementById(id); if (e) e.setAttribute('list', 'placesList'); });
     }).catch(() => {});
     function completePlace(v) {
       const t = String(v || '').trim();
@@ -1123,7 +1134,7 @@
       const k = placeKey(t), hit = PLACES.find(p => placeKey(p.n) === k);
       return hit ? hit.f : t;
     }
-    document.addEventListener('focusin', (e) => { if (e.target.id && /Place$/.test(e.target.id) && !e.target.getAttribute('list')) e.target.setAttribute('list', 'placesList'); });
+    document.addEventListener('focusin', (e) => { if (e.target.id && /Place$/.test(e.target.id) && !e.target.dataset.sug) { attachSuggest(e.target, placeItems); e.target.dispatchEvent(new Event('focus')); } });
     document.addEventListener('focusout', (e) => { if (e.target.id && /Place$/.test(e.target.id)) e.target.value = completePlace(e.target.value); });
     const esc = (t) => String(t == null ? '' : t).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
     const ic = (n) => `<svg class="i"><use href="#i-${n}"/></svg>`;
@@ -1554,6 +1565,7 @@
         contentInput.value = memory.content;
         dpWrite.set(memory.date_happened, memory.date_end, memory.date_precision);
         moodSelect.value = memory.mood;
+        document.getElementById('wPlace').value = memory.place || '';
         tags = memory.tags || [];
         renderTags();
         const wp = document.getElementById('wPeople'); wp.innerHTML = '';
@@ -1582,6 +1594,7 @@
         date_precision: when.date_precision,
         event_type: tags[0] || '',
         people: [...document.getElementById('wPeople').children].map(row => { const [n, r] = row.querySelectorAll('input'); return { name: n.value, relation: r.value }; }),
+        place: completePlace(document.getElementById('wPlace').value),
         mood: moodSelect.value,
         tags: tags
       };
@@ -1907,14 +1920,60 @@
     function personRow(p = {}) {
       const row = document.createElement('div');
       row.className = 'person-row';
-      row.innerHTML = `<input placeholder="Nombre" maxlength="80" list="circleNames" value="${esc(p.name)}"><input placeholder="Relación (abuela, amigo...)" maxlength="60" value="${esc(p.relation)}"><button type="button" title="Quitar">×</button>`;
+      row.innerHTML = `<input placeholder="Nombre" maxlength="80" autocomplete="off" value="${esc(p.name)}"><input placeholder="Relación (abuela, amigo...)" maxlength="60" value="${esc(p.relation)}"><button type="button" title="Quitar">×</button>`;
       row.querySelector('button').onclick = () => row.remove();
       // Si el nombre ya está en el círculo y no hay parentesco, lo rellena
       const [ni, ri] = row.querySelectorAll('input');
       ni.addEventListener('change', () => { const c = circle.find(x => normName(x.name) === normName(ni.value)); if (c && !ri.value) ri.value = c.relation; });
+      attachSuggest(ni, () => circle.filter(p => p.name).map(p => ({ value: p.name, sub: p.relation, avatar: p.name.charAt(0).toUpperCase() })),
+        (it) => { const c = circle.find(x => x.name === it.value); if (c && !ri.value) ri.value = c.relation; });
       return row;
     }
 
+    // Lista de sugerencias con el aspecto de la app: nombres del círculo y lugares
+    function attachSuggest(input, getItems, onPick) {
+      input.dataset.sug = '1'; input.removeAttribute('list'); input.setAttribute('autocomplete', 'off');
+      const box = document.createElement('div'); box.className = 'sug hidden'; box.setAttribute('role', 'listbox');
+      document.body.appendChild(box);
+      let shown = [], cur = -1;
+      const hide = () => { box.classList.add('hidden'); cur = -1; };
+      const pick = (it) => { input.value = it.value; hide(); if (onPick) onPick(it); input.dispatchEvent(new Event('change', { bubbles: true })); };
+      const mark = () => [...box.children].forEach((c, i) => c.classList.toggle('on', i === cur));
+      function show() {
+        const q = normName(input.value);
+        shown = getItems(input).filter(it => normName(it.value) !== q && (!q || normName(it.value).includes(q))).slice(0, 6);
+        if (!shown.length) return hide();
+        box.innerHTML = shown.map((it, i) => `<div class="sug-item" role="option" data-i="${i}">${it.avatar ? `<span class="avatar">${esc(it.avatar)}</span>` : `<span>${ic('pin')}</span>`}<span><strong>${esc(it.value)}</strong>${it.sub ? `<small>${esc(it.sub)}</small>` : ''}</span></div>`).join('');
+        const r = input.getBoundingClientRect();
+        box.style.left = r.left + 'px'; box.style.top = (r.bottom + 4) + 'px'; box.style.width = Math.max(r.width, 200) + 'px';
+        box.classList.remove('hidden'); cur = -1;
+      }
+      // mousedown (no click) para que el campo no pierda el foco antes de elegir
+      box.addEventListener('mousedown', (e) => { e.preventDefault(); const el = e.target.closest('.sug-item'); if (el) pick(shown[+el.dataset.i]); });
+      input.addEventListener('input', show);
+      input.addEventListener('focus', show);
+      input.addEventListener('blur', () => setTimeout(hide, 120));
+      input.addEventListener('keydown', (e) => {
+        if (box.classList.contains('hidden')) return;
+        if (e.key === 'ArrowDown') { e.preventDefault(); cur = (cur + 1) % shown.length; mark(); }
+        else if (e.key === 'ArrowUp') { e.preventDefault(); cur = (cur - 1 + shown.length) % shown.length; mark(); }
+        else if (e.key === 'Enter' && cur >= 0) { e.preventDefault(); pick(shown[cur]); }
+        else if (e.key === 'Escape') { e.stopPropagation(); hide(); }
+      });
+      window.addEventListener('scroll', hide, true);
+    }
+    // Lugares: primero los ya usados en tus recuerdos, luego ciudades conocidas
+    function placeItems(input) {
+      const q = placeKey(input && input.value);
+      const used = {}; (typeof memories !== 'undefined' ? memories : []).forEach(m => { if (m.place) used[m.place] = (used[m.place] || 0) + 1; });
+      const mine = Object.keys(used).sort((a, b) => used[b] - used[a]).map(v => ({ value: v, sub: 'Ya usado en tus recuerdos' }));
+      if (!q) return mine;
+      const known = PLACES.filter(p => placeKey(p.f).includes(q)).slice(0, 8).map(p => ({ value: p.f }));
+      return [...mine, ...known];
+    }
+    attachSuggest(document.getElementById('wPlace'), placeItems);
+
+    attachSuggest(rv('rvPlace'), placeItems);
     let rvTagList = [];
     const drawRvTags = tagPicker(rv('rvTags'), rv('rvTagInput'), () => rvTagList, (l) => { rvTagList = l; });
     const drawRvMood = moodPicker(rv('rvMoodChips'), rv('rvMood'));
