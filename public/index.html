@@ -1755,12 +1755,15 @@
       return rendered.getChannelData(0);
     }
 
+    // Si algo falla, se vuelve a mostrar el botón para poder grabar de nuevo
+    function failAudio(t) { setAudioStatus(t); recBtn.style.display = ''; }
+
     async function analyzeAudioBlob(blob, filename) {
       setAudioStatus('Preparando el audio…');
       let pcm;
       try { pcm = await decodeTo16kMono(blob); }
-      catch (e) { setAudioStatus('No se pudo leer ese audio. Prueba con otro archivo o graba de nuevo.'); return; }
-      if (pcm.length < SAMPLE_RATE * 0.5) { setAudioStatus('El audio es demasiado corto.'); return; }
+      catch (e) { failAudio('No se pudo leer ese audio. Prueba con otro archivo o graba de nuevo.'); return; }
+      if (pcm.length < SAMPLE_RATE * 0.5) { failAudio('El audio es demasiado corto.'); return; }
 
       const fd = new FormData();
       fd.append('audio', blob, filename);
@@ -1769,15 +1772,15 @@
       let r;
       try {
         r = await (await fetch(`${API_URL}/audio/analyze`, { method: 'POST', body: fd })).json();
-      } catch (e) { setAudioStatus('No se pudo conectar con el servidor.'); return; }
-      if (!r.success) { setAudioStatus('' + r.error); return; }
+      } catch (e) { failAudio('No se pudo conectar con el servidor.'); return; }
+      if (!r.success) { failAudio('' + r.error); return; }
 
       const started = Date.now();
       const poll = async () => {
         let j;
         try { j = (await (await fetch(`${API_URL}/audio/jobs/${r.data.jobId}`)).json()); }
-        catch (e) { setAudioStatus('Se perdió la conexión.'); return; }
-        if (!j.success) { setAudioStatus('' + j.error); return; }
+        catch (e) { failAudio('Se perdió la conexión.'); return; }
+        if (!j.success) { failAudio('' + j.error); return; }
         const d = j.data;
         if (d.status === 'processing') {
           const secs = Math.round((Date.now() - started) / 1000);
@@ -1786,7 +1789,7 @@
             : `Escuchando tu recuerdo… ${secs}s`);
           return setTimeout(poll, 2000);
         }
-        if (d.status === 'error') { setAudioStatus('' + d.error); return; }
+        if (d.status === 'error') { failAudio('' + d.error); return; }
         setAudioStatus('Listo. Revisa lo que he entendido.');
         openReview(d.result);
       };
@@ -1811,6 +1814,7 @@
     document.getElementById('recTipGo').onclick = () => { try { if (document.getElementById('recTipHide').checked) localStorage.setItem(REC_TIP_KEY, '1'); } catch (e) {} recTip.classList.add('hidden'); openPanel('voice'); startRecording(); };
 
     async function startRecording() {
+      recBtn.style.display = '';
       if (!navigator.mediaDevices || !window.MediaRecorder) {
         setAudioStatus('Tu navegador no permite grabar. Usa el botón "Audio" para subir un archivo.'); return;
       }
@@ -1824,17 +1828,20 @@
         recStream.getTracks().forEach(t => t.stop());
         recBtn.classList.remove('recording'); audioStatus.classList.remove('warn');
         recBtn.innerHTML = ic('rec') + ' Grabar';
+        recBtn.style.display = 'none'; // mientras se analiza solo se muestra el estado
+        setAudioStatus('Registrando tu audio…');
         const type = recorder.mimeType || 'audio/webm';
         const ext = type.includes('mp4') ? 'm4a' : type.includes('ogg') ? 'ogg' : 'webm';
         analyzeAudioBlob(new Blob(recChunks, { type }), `grabacion.${ext}`);
       };
+      recBtn.style.display = '';
       recorder.start();
       recStart = Date.now();
       recBtn.classList.add('recording');
       recTimer = setInterval(() => {
         const s = Math.floor((Date.now() - recStart) / 1000);
         const left = MAX_REC_SECS - s;
-        recBtn.textContent = `Parar (${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')} de 2:00)`;
+        recBtn.textContent = `Terminar grabación (${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')} de 2:00)`;
         if (left <= WARN_LEFT_SECS && left > 0) {
           audioStatus.classList.add('warn');
           setAudioStatus(`Quedan ${left} segundos. Ve terminando tu recuerdo.`);
@@ -1842,7 +1849,7 @@
         if (left <= 0) { setAudioStatus('Has llegado a los 2 minutos. Preparando tu audio…'); recorder.stop(); }
       }, 500);
       audioStatus.classList.remove('warn');
-      setAudioStatus('Grabando… tienes 2 minutos. Pulsa "Parar" cuando termines.');
+      setAudioStatus('Grabando… tienes 2 minutos. Pulsa "Terminar grabación" cuando acabes.');
     }
 
     // --- pantalla de revisión ---
