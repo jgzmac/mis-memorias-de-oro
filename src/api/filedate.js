@@ -50,7 +50,7 @@ const dayDiff = (a, b) => Math.abs(Date.parse(a) - Date.parse(b)) / 86400000;
  *  - metaDate: fecha de los datos internos del archivo (EXIF, cabecera del vídeo)
  *  - nameDate: fecha del nombre del archivo
  *  - fileDate: fecha de modificación del archivo (la menos fiable)
- * Si datos y nombre coinciden, queda confirmada; si no, se propone la más antigua.
+ * Si datos y nombre coinciden, queda confirmada; si no, se propone la de los datos internos.
  * `what`: 'foto', 'vídeo' o 'audio' (solo para los mensajes).
  */
 function resolveDate({ metaDate = '', nameDate = '', fileDate = '', what = 'archivo' }) {
@@ -63,9 +63,9 @@ function resolveDate({ metaDate = '', nameDate = '', fileDate = '', what = 'arch
       notes.push(`Fecha confirmada: coincide la de los datos ${de} con la del nombre del archivo.`);
       return { date: nameDate, confirmed: true, notes };
     }
-    const oldest = metaDate < nameDate ? metaDate : nameDate;
-    notes.push(`La fecha de los datos ${de} (${show(metaDate)}) y la del nombre del archivo (${show(nameDate)}) no coinciden: propongo la más antigua (${show(oldest)}). Compruébala.`);
-    return { date: oldest, confirmed: false, notes };
+    // El dato interno lo escribe el dispositivo al crear el archivo; el nombre se puede cambiar o arrastrar de otra copia
+    notes.push(`La fecha de los datos ${de} (${show(metaDate)}) y la del nombre del archivo (${show(nameDate)}) no coinciden: propongo la de los datos ${de}, que es más fiable. Compruébala.`);
+    return { date: metaDate, confirmed: false, notes };
   }
   if (metaDate) {
     notes.push(`Fecha tomada de los datos ${de}.`);

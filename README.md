@@ -1,151 +1,36 @@
-# ✨ Mis Memorias de Oro
+# Mis Memorias de Oro
 
-> Una aplicación web moderna para guardar y organizar tus recuerdos más preciosos.
+Aplicación web (piloto) para guardar los recuerdos de una vida con la voz, el texto, fotos y vídeos, verlos en una línea de vida y obtener un resumen en distintos estilos. Versión **1.2.0 - Release candidate**.
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Node.js](https://img.shields.io/badge/Node.js-v22%2B-green)]()
-[![Status](https://img.shields.io/badge/Status-MVP%20v1.0-blue)]()
+## Qué hace
 
-## 🎯 Características
+- **Crear recuerdos** hablando (grabación de hasta 2 minutos o archivo de audio), escribiendo, o subiendo fotos y vídeos. La IA local propone título, fecha, lugar, personas, etiquetas y sentimiento, y el usuario lo revisa antes de guardar.
+- **Fechas** aproximadas (día, mes, estación, año o periodo) y edad en cada recuerdo. En fotos y vídeos se prioriza la fecha del metadato sobre la del nombre del archivo.
+- **Línea de vida** con etapas (escolar, profesional, residencias), huecos y hechos históricos ("¿Quieres saber qué pasó ese año?").
+- **Resumen de vida** en cinco estilos (Literario, Alegre, Cálido, Entusiasta, Ejecutivo), con enlace y QR para compartir.
+- **Cuentas** con registro (aceptación de condiciones y privacidad), contraseña segura y foto de perfil; círculo de personas.
+- **Inicio** con "¿Te acuerdas de este día?", últimos recuerdos y buscador.
 
-### Crear Memorias
-- ✅ Título y contenido detallado
-- ✅ Fecha personalizable (default: hoy)
-- ✅ Categorización (Viajes, Personal, Familia, Trabajo, General)
-- ✅ Sistema de etiquetas dinámico
-- ✅ Mood tracking (5 estados de ánimo)
+## Arrancar
 
-### Gestionar Memorias
-- ✅ Listar todas tus memorias ordenadas por fecha
-- ✅ Ver detalles completos
-- ✅ Editar memorias existentes
-- ✅ Eliminar con confirmación
-- ✅ Filtrar por categoría
-
-### Estadísticas
-- ✅ Total de memorias
-- ✅ Distribución por categoría
-- ✅ Distribución por estado de ánimo
-
-## 🚀 Quick Start
-
-### Requisitos
-- Node.js v22+
-- npm
-
-### Instalación
+Requisitos: Node.js 22+ y npm.
 
 ```bash
-# Clonar repositorio
-git clone https://github.com/tuusuario/mis-memorias-de-oro.git
-cd mis-memorias-de-oro
-
-# Instalar dependencias
 npm install
-
-# Iniciar servidor
-npm run dev
+npm start
 ```
 
-Abre [http://localhost:3001](http://localhost:3001) en tu navegador.
+Abre http://localhost:3001. En Mac también sirve `Iniciar Memorias.command`.
 
-## 📊 Stack Tecnológico
+Los datos se guardan en `data/` (base de datos SQLite, archivos y modelos de IA). Los modelos se descargan antes la primera vez (ver `docs/ROADMAP.md`, notas técnicas).
 
-### Backend
-- **Node.js** - Runtime JavaScript
-- **Express.js** - Framework web
-- **SQLite** (desarrollo) - Base de datos local
-- **Supabase** (próximo) - PostgreSQL + Auth
+## Documentación
 
-### Frontend
-- **Vanilla JavaScript** - Sin dependencias
-- **HTML5 + CSS3** - Markup y estilos
-- **Responsive Design** - Mobile-friendly
+- [Anexo técnico (datos, BBDD, servidor, IA, lenguajes)](docs/ANEXO-TECNICO.md)
+- [Arquitectura](docs/ARCHITECTURE.md) (parte del diseño inicial; el anexo técnico es la referencia vigente)
+- [Hoja de ruta](docs/ROADMAP.md)
+- [Cambios por versión](CHANGELOG.md)
 
-## 📁 Estructura del Proyecto
+## Licencia
 
-```
-src/
-├── server.js              # Express app + rutas
-├── db.js                  # SQLite initialization
-├── api/handlers.js        # Lógica CRUD
-├── auth.js                # Autenticación
-└── memories.js            # Operaciones
-
-public/
-└── index.html             # SPA completa (550+ líneas)
-
-config/
-├── supabase.js            # Supabase config
-└── init-database.sql      # Schema PostgreSQL
-
-docs/
-├── API.md                 # Documentación API
-├── SETUP.md               # Guía de setup
-└── ARCHITECTURE.md        # Decisiones técnicas
-```
-
-## 🧪 API Endpoints
-
-```
-POST   /api/memories              Crear memoria
-GET    /api/memories              Listar memorias
-GET    /api/memories/:id          Obtener detalle
-PUT    /api/memories/:id          Actualizar
-DELETE /api/memories/:id          Eliminar
-GET    /api/stats                 Estadísticas
-GET    /api/health                Health check
-```
-
-## 🔧 Configuración
-
-```bash
-# Copiar variables de entorno
-cp .env.example .env
-
-# Editar .env si es necesario
-# PORT=3001
-# NODE_ENV=development
-```
-
-## 🗺️ Roadmap
-
-### v1.0 ✅ (Actual)
-- [x] CRUD básico de memorias
-- [x] Frontend SPA
-- [x] Categorización y etiquetas
-- [x] Estadísticas
-- [x] Responsive design
-
-### v1.1 (Próximo)
-- [ ] Upload de fotos
-- [ ] Búsqueda full-text
-- [ ] Exportar a JSON/CSV
-
-### v2.0 (Supabase)
-- [ ] Autenticación real
-- [ ] Multi-usuario
-- [ ] Sincronización en cloud
-- [ ] Apps móvil
-
-## 🤝 Contribuir
-
-¡Las contribuciones son bienvenidas! Por favor:
-
-1. Fork el repositorio
-2. Crea una rama (`git checkout -b feature/amazing-feature`)
-3. Commit cambios (`git commit -m 'Add feature'`)
-4. Push a la rama (`git push origin feature/amazing-feature`)
-5. Abre un Pull Request
-
-## 📄 Licencia
-
-MIT - Ver [LICENSE](LICENSE) para detalles.
-
-## 👨‍💻 Autor
-
-**Javier Gómez**
-
----
-
-Hecho con ❤️ por desarrolladores que valoran los recuerdos.
+MIT. Ver `LICENSE`.

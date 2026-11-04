@@ -569,8 +569,10 @@
     .bottom-nav button .ico .i { width: 1.5rem; height: 1.5rem; stroke-width: 1.4; }
     .bottom-nav button.nav-create .ico .i { width: 1.4rem; height: 1.4rem; stroke-width: 1.8; }
     .big-ico .i { width: 1.6rem; height: 1.6rem; stroke-width: 1.3; }
-    .terms-lbl { display: flex; gap: 10px; align-items: flex-start; font-weight: 400; line-height: 1.4; }
-    .terms-lbl input { width: 22px; height: 22px; flex: none; margin-top: 2px; padding: 0; }
+    .terms-check { margin-top: 4px; }
+    label.terms-lbl { display: flex; flex-direction: row; align-items: flex-start; gap: 12px; margin: 0; font-size: 0.95em; line-height: 1.4; cursor: pointer; }
+    label.terms-lbl input[type="checkbox"] { width: 24px; min-width: 24px; height: 24px; flex: 0 0 24px; margin: 0; padding: 0; border: 0; accent-color: var(--salvia-fuerte); }
+    label.terms-lbl span { flex: 1; min-width: 0; }
     .terms-lbl a { color: var(--salvia-hover); font-weight: 700; }
     .terms-body { max-height: 55vh; overflow-y: auto; line-height: 1.45; font-size: .95em; margin-bottom: 8px; }
     .terms-body h3 { margin: 14px 0 6px; color: var(--salvia-hover); }
@@ -2315,6 +2317,22 @@
     }
     document.getElementById('authPassword').addEventListener('input', () => updateMeter('authPassword', 'authMeter', 'authMeterLabel'));
 
+    // El botón solo se activa con los datos obligatorios completos y correctos
+    function authFormValid() {
+      const g = (id) => document.getElementById(id).value;
+      const email = g('authEmail').trim(), pw = g('authPassword');
+      if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email) || !pw) return false;
+      if (authMode !== 'register') return true;
+      const bd = g('authBirth');
+      return !!g('authName').trim() && !!bd && !isFuture(bd) && bd >= '1900-01-01'
+        && pw.length >= 8 && pw.length <= 72 && /[a-z]/.test(pw) && /[A-Z]/.test(pw) && /[0-9]/.test(pw)
+        && g('authPassword2') === pw && document.getElementById('authTerms').checked;
+    }
+    function updateAuthBtn() { document.getElementById('authSubmit').disabled = !authFormValid(); }
+    ['authName', 'authBirth', 'authEmail', 'authPassword', 'authPassword2'].forEach(id => document.getElementById(id).addEventListener('input', updateAuthBtn));
+    document.getElementById('authBirth').addEventListener('change', updateAuthBtn);
+    document.getElementById('authTerms').addEventListener('change', updateAuthBtn);
+
     function setAuthMode(mode) {
       authMode = mode;
       const reg = mode === 'register';
@@ -2329,6 +2347,7 @@
       document.getElementById('authSubmit').textContent = reg ? 'Crear cuenta' : 'Entrar';
       document.getElementById('authPassword').autocomplete = reg ? 'new-password' : 'current-password';
       document.getElementById('authMessage').innerHTML = '';
+      updateAuthBtn();
     }
 
     // ===== Foto de perfil =====
@@ -2474,6 +2493,8 @@
       b.onclick = () => { const show = inp.type === 'password'; inp.type = show ? 'text' : 'password'; b.innerHTML = ic(show ? 'eyeoff' : 'eye'); b.setAttribute('aria-label', show ? 'Ocultar contraseña' : 'Mostrar contraseña'); };
       wrap.appendChild(b);
     });
+    updateAuthBtn();
+    setInterval(updateAuthBtn, 600); // por si el navegador autorrellena sin avisar
     document.getElementById('tabLogin').onclick = () => setAuthMode('login');
     document.getElementById('tabRegister').onclick = () => setAuthMode('register');
 
@@ -2502,7 +2523,7 @@
         });
         const result = await r.json();
         if (result.success) {
-          document.getElementById('authPassword').value = ''; document.getElementById('authPassword2').value = ''; updateMeter('authPassword', 'authMeter', 'authMeterLabel');
+          document.getElementById('authPassword').value = ''; document.getElementById('authPassword2').value = ''; updateMeter('authPassword', 'authMeter', 'authMeterLabel'); updateAuthBtn();
           showApp(result.data);
           if (authMode === 'register') window.maybeOnboard(true);
         } else {

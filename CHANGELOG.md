@@ -2,6 +2,29 @@
 
 Todos los cambios notables en este proyecto serán documentados en este archivo.
 
+## [1.2.0] - 2026-11-04 (Release candidate)
+
+### Added
+- Registro con casilla obligatoria de condiciones de uso y política de privacidad (ventana con texto borrador); se guarda la fecha de aceptación.
+- Botón "ver contraseña" propio en registro y cambio de contraseña.
+- Botón de registro/acceso deshabilitado hasta completar correctamente los datos obligatorios.
+- Hechos históricos ampliados (226): guerras, deporte, libros Nobel y películas.
+- Primer fotograma del vídeo en "¿Te acuerdas de este día?".
+- Anexo técnico (`docs/ANEXO-TECNICO.md`).
+
+### Changed
+- Fecha de fotos y vídeos: si el metadato y el nombre no coinciden, se propone el metadato.
+- "Últimos recuerdos añadidos" con los mismos iconos de tipo que el listado de recuerdos.
+- Sin botón "Cerrar" mientras se procesa un audio.
+- Resumen "Amable" sustituido por "Literario"; categorías Deporte, Aniversario y Turismo; sentimiento "Emocionado" retirado.
+
+### Fixed
+- Fondo transparente al hacer scroll en la pantalla de revisión en móvil.
+- Casilla de condiciones mal formateada.
+
+### Documentation
+- README actualizado.
+
 ## [1.0.0] - 2026-09-08
 
 ### ✨ Added
