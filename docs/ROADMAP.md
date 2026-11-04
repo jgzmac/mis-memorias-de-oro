@@ -94,3 +94,8 @@ Actualizada: 2026-10-30. Orden propuesto (se puede cambiar).
 - Foto de perfil (se reduce a 300 px en el navegador; `PUT/GET/DELETE /api/profile/photo`).
 - Círculo de personas en Perfil (`/api/circle`); al guardar un recuerdo se propone añadir a quien no esté.
 - QR del enlace del resumen (generado en el navegador con `public/qrcode.js`, MIT) con botón Guardar QR/compartir.
+
+## 1.1.5 (pendiente de subir)
+- Registro: casilla obligatoria de condiciones de uso y privacidad (ventana con el texto borrador; se guarda `terms_accepted_at`).
+- Home: los recuerdos con vídeo muestran el primer fotograma.
+- Botón ojo propio para ver la contraseña en registro y cambio de contraseña.

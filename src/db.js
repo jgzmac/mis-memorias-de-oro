@@ -142,6 +142,8 @@ function initializeDatabase() {
   }
   // Preferencia: ocultar la edad del usuario en toda la app
   if (!ucols.includes('hide_age')) db.exec('ALTER TABLE users ADD COLUMN hide_age INTEGER DEFAULT 0');
+  // Constancia de la aceptación de condiciones y privacidad al registrarse
+  if (!ucols.includes('terms_accepted_at')) db.exec('ALTER TABLE users ADD COLUMN terms_accepted_at TEXT');
 
   // Etapas de la vida: escolar, profesional o residencia (varias del mismo tipo, con huecos si hace falta)
   db.exec(`

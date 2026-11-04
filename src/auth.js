@@ -88,6 +88,7 @@ async function register(req, res) {
     if (!/^\d{4}-\d{2}-\d{2}$/.test(birth) || isNaN(Date.parse(birth)) || birth < '1850-01-01') return res.status(400).json({ success: false, error: 'Indica tu fecha de nacimiento' });
     if (birth > new Date().toISOString().slice(0, 10)) return res.status(400).json({ success: false, error: 'La fecha de nacimiento no puede ser futura' });
     if (!name || name.length > 80) return res.status(400).json({ success: false, error: 'Indica tu nombre' });
+    if (req.body.accept_terms !== true) return res.status(400).json({ success: false, error: 'Para crear la cuenta debes aceptar las condiciones de uso y la política de privacidad' });
     if (!validEmail(email)) return res.status(400).json({ success: false, error: 'Correo no válido' });
     const pwError = validatePassword(password, email);
     if (pwError) return res.status(400).json({ success: false, error: pwError });
@@ -97,8 +98,8 @@ async function register(req, res) {
     }
 
     const hash = await bcrypt.hash(password, 10);
-    const result = db.prepare('INSERT INTO users (email, name, password_hash, birth_date, birth_place) VALUES (?, ?, ?, ?, ?)')
-      .run(email, name, hash, birth, place || null);
+    const result = db.prepare('INSERT INTO users (email, name, password_hash, birth_date, birth_place, terms_accepted_at) VALUES (?, ?, ?, ?, ?, ?)')
+      .run(email, name, hash, birth, place || null, new Date().toISOString());
 
     createSession(res, result.lastInsertRowid);
     res.status(201).json({ success: true, data: { id: result.lastInsertRowid, email, name } });
