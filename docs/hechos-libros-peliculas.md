@@ -1,0 +1,50 @@
+# Hechos añadidos: libros (Nobel) y películas
+
+fecha · texto · fuente
+
+- 1910-08-04 · Se publica "Gitanjali", de Rabindranath Tagore (Premio Nobel de Literatura 1913) · Wikipedia (en): Gitanjali
+- 1926-10-22 · Se publica "Fiesta (The Sun Also Rises)", de Ernest Hemingway (Premio Nobel de Literatura 1954) · Wikipedia (en): The Sun Also Rises; Wikidata
+- 1929-09-27 · Se publica "Adiós a las armas", de Ernest Hemingway (Premio Nobel de Literatura 1954) · Wikipedia (en): A Farewell to Arms
+- 1929-10-07 · Se publica "El ruido y la furia", de William Faulkner (Premio Nobel de Literatura 1949) · Wikipedia (en): The Sound and the Fury
+- 1931-03-02 · Se publica "La buena tierra", de Pearl S. Buck (Premio Nobel de Literatura 1938) · Wikipedia (en): The Good Earth; Wikidata
+- 1939-04-14 · Se publica "Las uvas de la ira", de John Steinbeck (Premio Nobel de Literatura 1962) · Wikipedia (en): The Grapes of Wrath; Wikidata
+- 1939-12-15 · Se estrena la película "Lo que el viento se llevó" · Wikipedia (en/es): ficha de la película, primer estreno
+- 1940-10-21 · Se publica "Por quién doblan las campanas", de Ernest Hemingway (Premio Nobel de Literatura 1954) · Wikipedia (en): For Whom the Bell Tolls; Wikidata
+- 1942-05-19 · Se publica "El extranjero", de Albert Camus (Premio Nobel de Literatura 1957) · Wikipedia (en): The Stranger (Camus novel)
+- 1942-11-26 · Se estrena la película "Casablanca" · Wikipedia (en/es): ficha de la película, primer estreno
+- 1952-03-27 · Se estrena la película "Cantando bajo la lluvia" · Wikipedia (en/es): ficha de la película, primer estreno
+- 1952-09-01 · Se publica "El viejo y el mar", de Ernest Hemingway (Premio Nobel de Literatura 1954) · Wikipedia (en): The Old Man and the Sea; Wikidata
+- 1952-10-17 · Se publica "Esperando a Godot", de Samuel Beckett (Premio Nobel de Literatura 1969) · Wikipedia (en): Waiting for Godot
+- 1953-04-04 · Se estrena la película "Bienvenido Mister Marshall" · Wikipedia (en/es): ficha de la película, primer estreno
+- 1957-11-23 · Se publica "Doctor Zhivago", de Borís Pasternak (Premio Nobel de Literatura 1958) · Wikipedia (en): Doctor Zhivago (novel)
+- 1959-11-18 · Se estrena la película "Ben-Hur" · Wikipedia (en/es): ficha de la película, primer estreno
+- 1960-06-16 · Se estrena la película "Psicosis" · Wikipedia (en/es): ficha de la película, primer estreno
+- 1964-09-21 · Se publica "Herzog", de Saul Bellow (Premio Nobel de Literatura 1976) · Wikipedia (en): Herzog (novel)
+- 1965-03-02 · Se estrena la película "Sonrisas y lágrimas (The Sound of Music)" · Wikipedia (en/es): ficha de la película, primer estreno
+- 1972-03-14 · Se estrena la película "El Padrino" · Wikipedia (en/es): ficha de la película, primer estreno
+- 1975-06-20 · Se estrena la película "Tiburón" · Wikipedia (en/es): ficha de la película, primer estreno
+- 1977-05-25 · Se estrena la película "La guerra de las galaxias" · Wikipedia (en/es): ficha de la película, primer estreno
+- 1978-06-16 · Se estrena la película "Grease" · Wikipedia (en/es): ficha de la película, primer estreno
+- 1981-06-12 · Se estrena la película "En busca del arca perdida" · Wikipedia (en/es): ficha de la película, primer estreno
+- 1982-05-26 · Se estrena la película "E.T., el extraterrestre" · Wikipedia (en/es): ficha de la película, primer estreno
+- 1985-07-03 · Se estrena la película "Regreso al futuro" · Wikipedia (en/es): ficha de la película, primer estreno
+- 1987-09-16 · Se publica "Beloved (Amada)", de Toni Morrison (Premio Nobel de Literatura 1993) · Wikipedia (en): Beloved (novel)
+- 1988-11-17 · Se estrena la película "Cinema Paradiso" · Wikipedia (en/es): ficha de la película, primer estreno
+- 1990-03-23 · Se estrena la película "Pretty Woman" · Wikipedia (en/es): ficha de la película, primer estreno
+- 1993-06-09 · Se estrena la película "Parque Jurásico" · Wikipedia (en/es): ficha de la película, primer estreno
+- 1994-06-15 · Se estrena la película "El Rey León" · Wikipedia (en/es): ficha de la película, primer estreno
+- 1995-11-19 · Se estrena la película "Toy Story" · Wikipedia (en/es): ficha de la película, primer estreno
+- 1997-11-01 · Se estrena la película "Titanic" · Wikipedia (en/es): ficha de la película, primer estreno
+- 1999-08-02 · Se estrena la película "El sexto sentido" · Wikipedia (en/es): ficha de la película, primer estreno
+- 2001-12-10 · Se estrena la película "El Señor de los Anillos: La Comunidad del Anillo" · Wikipedia (en/es): ficha de la película, primer estreno
+- 2003-05-18 · Se estrena la película "Buscando a Nemo" · Wikipedia (en/es): ficha de la película, primer estreno
+- 2004-09-03 · Se estrena la película "Mar adentro" · Wikipedia (en/es): ficha de la película, primer estreno
+- 2006-03-16 · Se estrena la película "Volver" · Wikipedia (en/es): ficha de la película, primer estreno
+- 2007-10-30 · Se publica "La vegetariana", de Han Kang (Premio Nobel de Literatura 2024) · Wikidata: La vegetariana
+- 2008-02-07 · Se publica "Los años", de Annie Ernaux (Premio Nobel de Literatura 2022) · Wikidata: Les Années
+- 2009-12-10 · Se estrena la película "Avatar" · Wikipedia (en/es): ficha de la película, primer estreno
+- 2012-10-11 · Se estrena la película "Lo imposible" · Wikipedia (en/es): ficha de la película, primer estreno
+- 2013-11-19 · Se estrena la película "Frozen: El reino del hielo" · Wikipedia (en/es): ficha de la película, primer estreno
+- 2014-03-14 · Se estrena la película "Ocho apellidos vascos" · Wikipedia (en/es): ficha de la película, primer estreno
+- 2017-10-20 · Se estrena la película "Coco" · Wikipedia (en/es): ficha de la película, primer estreno
+- 2021-03-02 · Se publica "Klara y el Sol", de Kazuo Ishiguro (Premio Nobel de Literatura 2017) · Wikidata: Klara and the Sun

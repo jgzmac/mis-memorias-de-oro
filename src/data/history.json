@@ -2,6 +2,62 @@
  "_nota": "Hechos históricos destacados. scope: mundo | españa. importance: 3 (máxima) a 1. Solo hechos objetivos y contrastados. Fechas AAAA-MM-DD. Del 2023 en adelante: revisados hasta mayo de 2025 más el Mundial 2026 (verificado en Wikipedia); falta revisar de junio de 2025 a hoy. positive:true marca los hechos alegres; solo esos salen en el resumen de vida.",
  "events": [
   {
+   "date": "1901-12-12",
+   "scope": "mundo",
+   "importance": 2,
+   "text": "Marconi recibe la primera señal de radio transatlántica",
+   "positive": true
+  },
+  {
+   "date": "1902-03-06",
+   "scope": "españa",
+   "importance": 2,
+   "text": "Se funda el Madrid Football Club, origen del Real Madrid",
+   "positive": true
+  },
+  {
+   "date": "1903-07-01",
+   "scope": "mundo",
+   "importance": 2,
+   "text": "Comienza el primer Tour de Francia",
+   "positive": true
+  },
+  {
+   "date": "1903-12-17",
+   "scope": "mundo",
+   "importance": 3,
+   "text": "Los hermanos Wright realizan el primer vuelo a motor",
+   "positive": true
+  },
+  {
+   "date": "1908-10-01",
+   "scope": "mundo",
+   "importance": 2,
+   "text": "Ford presenta el Modelo T, el coche para todos",
+   "positive": true
+  },
+  {
+   "date": "1909-07-25",
+   "scope": "mundo",
+   "importance": 2,
+   "text": "Louis Blériot cruza en avión el Canal de la Mancha",
+   "positive": true
+  },
+  {
+   "date": "1910-08-04",
+   "scope": "mundo",
+   "importance": 1,
+   "text": "Se publica \"Gitanjali\", de Rabindranath Tagore (Premio Nobel de Literatura 1913)",
+   "positive": true
+  },
+  {
+   "date": "1911-12-14",
+   "scope": "mundo",
+   "importance": 2,
+   "text": "Amundsen y su expedición llegan al Polo Sur",
+   "positive": true
+  },
+  {
    "date": "1912-04-15",
    "scope": "mundo",
    "importance": 1,
@@ -14,10 +70,52 @@
    "text": "Comienza la Primera Guerra Mundial"
   },
   {
+   "date": "1914-08-15",
+   "scope": "mundo",
+   "importance": 2,
+   "text": "Se abre al tráfico el Canal de Panamá",
+   "positive": true
+  },
+  {
    "date": "1918-11-11",
    "scope": "mundo",
    "importance": 2,
    "text": "Termina la Primera Guerra Mundial",
+   "positive": true
+  },
+  {
+   "date": "1919-10-17",
+   "scope": "españa",
+   "importance": 2,
+   "text": "Alfonso XIII inaugura el Metro de Madrid",
+   "positive": true
+  },
+  {
+   "date": "1923-01-09",
+   "scope": "españa",
+   "importance": 2,
+   "text": "Juan de la Cierva hace volar con éxito el primer autogiro",
+   "positive": true
+  },
+  {
+   "date": "1926-10-22",
+   "scope": "mundo",
+   "importance": 1,
+   "text": "Se publica \"Fiesta (The Sun Also Rises)\", de Ernest Hemingway (Premio Nobel de Literatura 1954)",
+   "positive": true
+  },
+  {
+   "date": "1929-09-27",
+   "scope": "mundo",
+   "importance": 1,
+   "text": "Se publica \"Adiós a las armas\", de Ernest Hemingway (Premio Nobel de Literatura 1954)",
+   "positive": true
+  },
+  {
+   "date": "1929-10-07",
+   "scope": "mundo",
+   "importance": 1,
+   "text": "Se publica \"El ruido y la furia\", de William Faulkner (Premio Nobel de Literatura 1949)",
    "positive": true
   },
   {
@@ -27,10 +125,31 @@
    "text": "Crac de la Bolsa de Nueva York: comienza la Gran Depresión"
   },
   {
+   "date": "1930-07-13",
+   "scope": "mundo",
+   "importance": 2,
+   "text": "Comienza en Uruguay el primer Mundial de fútbol",
+   "positive": true
+  },
+  {
+   "date": "1931-03-02",
+   "scope": "mundo",
+   "importance": 1,
+   "text": "Se publica \"La buena tierra\", de Pearl S. Buck (Premio Nobel de Literatura 1938)",
+   "positive": true
+  },
+  {
    "date": "1931-04-14",
    "scope": "españa",
    "importance": 3,
    "text": "Se proclama la Segunda República Española"
+  },
+  {
+   "date": "1932-07-30",
+   "scope": "mundo",
+   "importance": 2,
+   "text": "Se inauguran los Juegos Olímpicos de Los Ángeles",
+   "positive": true
   },
   {
    "date": "1936-07-18",
@@ -51,10 +170,45 @@
    "text": "Termina la Guerra Civil Española"
   },
   {
+   "date": "1939-04-14",
+   "scope": "mundo",
+   "importance": 1,
+   "text": "Se publica \"Las uvas de la ira\", de John Steinbeck (Premio Nobel de Literatura 1962)",
+   "positive": true
+  },
+  {
    "date": "1939-09-01",
    "scope": "mundo",
    "importance": 3,
    "text": "Comienza la Segunda Guerra Mundial"
+  },
+  {
+   "date": "1939-12-15",
+   "scope": "mundo",
+   "importance": 1,
+   "text": "Se estrena la película \"Lo que el viento se llevó\"",
+   "positive": true
+  },
+  {
+   "date": "1940-10-21",
+   "scope": "mundo",
+   "importance": 1,
+   "text": "Se publica \"Por quién doblan las campanas\", de Ernest Hemingway (Premio Nobel de Literatura 1954)",
+   "positive": true
+  },
+  {
+   "date": "1942-05-19",
+   "scope": "mundo",
+   "importance": 1,
+   "text": "Se publica \"El extranjero\", de Albert Camus (Premio Nobel de Literatura 1957)",
+   "positive": true
+  },
+  {
+   "date": "1942-11-26",
+   "scope": "mundo",
+   "importance": 1,
+   "text": "Se estrena la película \"Casablanca\"",
+   "positive": true
   },
   {
    "date": "1944-06-06",
@@ -83,10 +237,80 @@
    "positive": true
   },
   {
+   "date": "1948-07-29",
+   "scope": "mundo",
+   "importance": 2,
+   "text": "Se inauguran los Juegos Olímpicos de Londres",
+   "positive": true
+  },
+  {
+   "date": "1948-12-10",
+   "scope": "mundo",
+   "importance": 3,
+   "text": "La ONU aprueba la Declaración Universal de los Derechos Humanos",
+   "positive": true
+  },
+  {
    "date": "1950-06-25",
    "scope": "mundo",
    "importance": 1,
    "text": "Comienza la guerra de Corea"
+  },
+  {
+   "date": "1952-03-27",
+   "scope": "mundo",
+   "importance": 1,
+   "text": "Se estrena la película \"Cantando bajo la lluvia\"",
+   "positive": true
+  },
+  {
+   "date": "1952-09-01",
+   "scope": "mundo",
+   "importance": 1,
+   "text": "Se publica \"El viejo y el mar\", de Ernest Hemingway (Premio Nobel de Literatura 1954)",
+   "positive": true
+  },
+  {
+   "date": "1952-10-17",
+   "scope": "mundo",
+   "importance": 1,
+   "text": "Se publica \"Esperando a Godot\", de Samuel Beckett (Premio Nobel de Literatura 1969)",
+   "positive": true
+  },
+  {
+   "date": "1953-04-04",
+   "scope": "españa",
+   "importance": 1,
+   "text": "Se estrena la película \"Bienvenido Mister Marshall\"",
+   "positive": true
+  },
+  {
+   "date": "1953-05-29",
+   "scope": "mundo",
+   "importance": 3,
+   "text": "Hillary y Tenzing llegan a la cima del Everest",
+   "positive": true
+  },
+  {
+   "date": "1954-05-06",
+   "scope": "mundo",
+   "importance": 1,
+   "text": "Roger Bannister baja de los cuatro minutos en la milla",
+   "positive": true
+  },
+  {
+   "date": "1956-10-28",
+   "scope": "españa",
+   "importance": 3,
+   "text": "Televisión Española inicia sus emisiones regulares",
+   "positive": true
+  },
+  {
+   "date": "1956-11-22",
+   "scope": "mundo",
+   "importance": 2,
+   "text": "Se inauguran los Juegos Olímpicos de Melbourne",
+   "positive": true
   },
   {
    "date": "1957-03-25",
@@ -103,10 +327,38 @@
    "positive": true
   },
   {
+   "date": "1957-11-23",
+   "scope": "mundo",
+   "importance": 1,
+   "text": "Se publica \"Doctor Zhivago\", de Borís Pasternak (Premio Nobel de Literatura 1958)",
+   "positive": true
+  },
+  {
    "date": "1959-07-21",
    "scope": "españa",
    "importance": 1,
    "text": "Plan de Estabilización: España abre su economía"
+  },
+  {
+   "date": "1959-11-18",
+   "scope": "mundo",
+   "importance": 1,
+   "text": "Se estrena la película \"Ben-Hur\"",
+   "positive": true
+  },
+  {
+   "date": "1960-06-16",
+   "scope": "mundo",
+   "importance": 1,
+   "text": "Se estrena la película \"Psicosis\"",
+   "positive": true
+  },
+  {
+   "date": "1960-08-25",
+   "scope": "mundo",
+   "importance": 2,
+   "text": "Se inauguran los Juegos Olímpicos de Roma",
+   "positive": true
   },
   {
    "date": "1961-04-12",
@@ -134,10 +386,66 @@
    "text": "Asesinato del presidente Kennedy"
   },
   {
+   "date": "1964-06-21",
+   "scope": "españa",
+   "importance": 3,
+   "text": "España gana la Eurocopa 1964 en el Bernabéu",
+   "positive": true
+  },
+  {
+   "date": "1964-09-21",
+   "scope": "mundo",
+   "importance": 1,
+   "text": "Se publica \"Herzog\", de Saul Bellow (Premio Nobel de Literatura 1976)",
+   "positive": true
+  },
+  {
+   "date": "1964-10-10",
+   "scope": "mundo",
+   "importance": 2,
+   "text": "Se inauguran los Juegos Olímpicos de Tokio",
+   "positive": true
+  },
+  {
+   "date": "1965-03-02",
+   "scope": "mundo",
+   "importance": 1,
+   "text": "Se estrena la película \"Sonrisas y lágrimas (The Sound of Music)\"",
+   "positive": true
+  },
+  {
+   "date": "1966-07-30",
+   "scope": "mundo",
+   "importance": 2,
+   "text": "Inglaterra gana el Mundial de fútbol en Wembley",
+   "positive": true
+  },
+  {
+   "date": "1967-12-03",
+   "scope": "mundo",
+   "importance": 3,
+   "text": "Christiaan Barnard realiza el primer trasplante de corazón humano",
+   "positive": true
+  },
+  {
    "date": "1968-04-04",
    "scope": "mundo",
    "importance": 1,
    "text": "Asesinato de Martin Luther King"
+  },
+  {
+   "date": "1968-04-06",
+   "scope": "españa",
+   "importance": 3,
+   "text": "Massiel gana Eurovisión para España con «La, la, la»",
+   "positive": true
+  },
+  {
+   "date": "1968-10-12",
+   "scope": "mundo",
+   "importance": 2,
+   "text": "Se inauguran los Juegos Olímpicos de México",
+   "positive": true
   },
   {
    "date": "1969-07-20",
@@ -154,10 +462,66 @@
    "positive": true
   },
   {
+   "date": "1970-04-11",
+   "scope": "mundo",
+   "importance": 2,
+   "text": "Despega el Apolo 13; días después la tripulación regresa sana y salva a la Tierra",
+   "positive": true
+  },
+  {
+   "date": "1970-06-21",
+   "scope": "mundo",
+   "importance": 3,
+   "text": "Brasil gana el Mundial de fútbol de México y se proclama campeón por tercera vez",
+   "positive": true
+  },
+  {
+   "date": "1971-04-19",
+   "scope": "mundo",
+   "importance": 2,
+   "text": "Se lanza Salyut 1, la primera estación espacial de la historia",
+   "positive": true
+  },
+  {
+   "date": "1972-03-14",
+   "scope": "mundo",
+   "importance": 1,
+   "text": "Se estrena la película \"El Padrino\"",
+   "positive": true
+  },
+  {
+   "date": "1972-08-26",
+   "scope": "mundo",
+   "importance": 3,
+   "text": "Se inauguran en Múnich los Juegos Olímpicos de verano de 1972",
+   "positive": true
+  },
+  {
    "date": "1973-12-20",
    "scope": "españa",
    "importance": 2,
    "text": "Atentado contra Carrero Blanco"
+  },
+  {
+   "date": "1974-04-25",
+   "scope": "mundo",
+   "importance": 2,
+   "text": "La Revolución de los Claveles pone fin a la dictadura en Portugal y abre paso a la democracia",
+   "positive": true
+  },
+  {
+   "date": "1974-07-07",
+   "scope": "mundo",
+   "importance": 3,
+   "text": "Alemania Occidental gana el Mundial de fútbol disputado en su propio país",
+   "positive": true
+  },
+  {
+   "date": "1975-06-20",
+   "scope": "mundo",
+   "importance": 1,
+   "text": "Se estrena la película \"Tiburón\"",
+   "positive": true
   },
   {
    "date": "1975-11-20",
@@ -172,6 +536,27 @@
    "text": "Juan Carlos I es proclamado rey"
   },
   {
+   "date": "1976-07-17",
+   "scope": "mundo",
+   "importance": 3,
+   "text": "Se inauguran en Montreal los Juegos Olímpicos de verano de 1976",
+   "positive": true
+  },
+  {
+   "date": "1976-07-20",
+   "scope": "mundo",
+   "importance": 2,
+   "text": "La sonda Viking 1 aterriza en Marte y envía las primeras fotos desde su superficie",
+   "positive": true
+  },
+  {
+   "date": "1977-05-25",
+   "scope": "mundo",
+   "importance": 1,
+   "text": "Se estrena la película \"La guerra de las galaxias\"",
+   "positive": true
+  },
+  {
    "date": "1977-06-15",
    "scope": "españa",
    "importance": 3,
@@ -179,10 +564,45 @@
    "positive": true
   },
   {
+   "date": "1977-08-20",
+   "scope": "mundo",
+   "importance": 2,
+   "text": "Se lanza la sonda Voyager 2, que explorará los planetas exteriores",
+   "positive": true
+  },
+  {
+   "date": "1977-09-05",
+   "scope": "mundo",
+   "importance": 2,
+   "text": "Se lanza la sonda Voyager 1, hoy el objeto humano más lejano de la Tierra",
+   "positive": true
+  },
+  {
+   "date": "1978-06-16",
+   "scope": "mundo",
+   "importance": 1,
+   "text": "Se estrena la película \"Grease\"",
+   "positive": true
+  },
+  {
+   "date": "1978-06-25",
+   "scope": "mundo",
+   "importance": 3,
+   "text": "Argentina gana su primer Mundial de fútbol",
+   "positive": true
+  },
+  {
    "date": "1978-07-25",
    "scope": "mundo",
    "importance": 1,
    "text": "Nace Louise Brown, el primer bebé probeta",
+   "positive": true
+  },
+  {
+   "date": "1978-09-17",
+   "scope": "mundo",
+   "importance": 2,
+   "text": "Egipto e Israel firman los Acuerdos de Camp David, un paso hacia la paz",
    "positive": true
   },
   {
@@ -200,10 +620,59 @@
    "positive": true
   },
   {
+   "date": "1979-03-26",
+   "scope": "mundo",
+   "importance": 2,
+   "text": "Egipto e Israel firman su tratado de paz en Washington",
+   "positive": true
+  },
+  {
+   "date": "1980-07-19",
+   "scope": "mundo",
+   "importance": 3,
+   "text": "Se inauguran en Moscú los Juegos Olímpicos de verano de 1980",
+   "positive": true
+  },
+  {
    "date": "1981-02-23",
    "scope": "españa",
    "importance": 3,
    "text": "Intento de golpe de Estado del 23-F"
+  },
+  {
+   "date": "1981-04-12",
+   "scope": "mundo",
+   "importance": 2,
+   "text": "Despega el Columbia, primer vuelo del transbordador espacial",
+   "positive": true
+  },
+  {
+   "date": "1981-06-12",
+   "scope": "mundo",
+   "importance": 1,
+   "text": "Se estrena la película \"En busca del arca perdida\"",
+   "positive": true
+  },
+  {
+   "date": "1981-07-29",
+   "scope": "mundo",
+   "importance": 2,
+   "text": "Se casan el príncipe Carlos y Diana Spencer en la catedral de San Pablo, en Londres",
+   "positive": true
+  },
+  {
+   "date": "1981-08-01",
+   "scope": "mundo",
+   "importance": 1,
+   "text": "Nace MTV, el primer canal de televisión dedicado a los videoclips",
+   "positive": true
+  },
+  {
+   "date": "1982-05-26",
+   "scope": "mundo",
+   "importance": 1,
+   "text": "Se estrena la película \"E.T., el extraterrestre\"",
+   "positive": true
   },
   {
    "date": "1982-06-13",
@@ -213,10 +682,38 @@
    "positive": true
   },
   {
+   "date": "1982-07-11",
+   "scope": "mundo",
+   "importance": 3,
+   "text": "Italia gana el Mundial de fútbol de España en la final jugada en el Santiago Bernabéu",
+   "positive": true
+  },
+  {
    "date": "1982-10-28",
    "scope": "españa",
    "importance": 2,
    "text": "El PSOE de Felipe González gana las elecciones por mayoría absoluta"
+  },
+  {
+   "date": "1984-07-28",
+   "scope": "mundo",
+   "importance": 3,
+   "text": "Se inauguran en Los Ángeles los Juegos Olímpicos de verano de 1984",
+   "positive": true
+  },
+  {
+   "date": "1985-07-03",
+   "scope": "mundo",
+   "importance": 1,
+   "text": "Se estrena la película \"Regreso al futuro\"",
+   "positive": true
+  },
+  {
+   "date": "1985-07-13",
+   "scope": "mundo",
+   "importance": 2,
+   "text": "El concierto benéfico Live Aid reúne a millones de personas contra el hambre en África",
+   "positive": true
   },
   {
    "date": "1986-01-01",
@@ -238,6 +735,41 @@
    "text": "Accidente nuclear de Chernóbil"
   },
   {
+   "date": "1986-06-29",
+   "scope": "mundo",
+   "importance": 3,
+   "text": "Argentina, con Maradona, gana el Mundial de fútbol de México",
+   "positive": true
+  },
+  {
+   "date": "1987-09-16",
+   "scope": "mundo",
+   "importance": 1,
+   "text": "Se publica \"Beloved (Amada)\", de Toni Morrison (Premio Nobel de Literatura 1993)",
+   "positive": true
+  },
+  {
+   "date": "1987-12-08",
+   "scope": "mundo",
+   "importance": 2,
+   "text": "EE. UU. y la URSS firman el Tratado INF para eliminar misiles nucleares de alcance medio",
+   "positive": true
+  },
+  {
+   "date": "1988-09-17",
+   "scope": "mundo",
+   "importance": 3,
+   "text": "Se inauguran en Seúl los Juegos Olímpicos de verano de 1988",
+   "positive": true
+  },
+  {
+   "date": "1988-11-17",
+   "scope": "mundo",
+   "importance": 1,
+   "text": "Se estrena la película \"Cinema Paradiso\"",
+   "positive": true
+  },
+  {
    "date": "1989-06-04",
    "scope": "mundo",
    "importance": 1,
@@ -255,6 +787,20 @@
    "scope": "mundo",
    "importance": 2,
    "text": "Nelson Mandela sale de prisión",
+   "positive": true
+  },
+  {
+   "date": "1990-03-23",
+   "scope": "mundo",
+   "importance": 1,
+   "text": "Se estrena la película \"Pretty Woman\"",
+   "positive": true
+  },
+  {
+   "date": "1990-07-08",
+   "scope": "mundo",
+   "importance": 3,
+   "text": "Alemania Occidental gana el Mundial de fútbol de Italia",
    "positive": true
   },
   {
@@ -291,6 +837,13 @@
    "positive": true
   },
   {
+   "date": "1992-05-20",
+   "scope": "españa",
+   "importance": 2,
+   "text": "El FC Barcelona gana en Wembley su primera Copa de Europa",
+   "positive": true
+  },
+  {
    "date": "1992-07-25",
    "scope": "españa",
    "importance": 3,
@@ -298,10 +851,52 @@
    "positive": true
   },
   {
+   "date": "1992-08-08",
+   "scope": "españa",
+   "importance": 3,
+   "text": "España gana el oro olímpico de fútbol en el Camp Nou, en los Juegos de Barcelona",
+   "positive": true
+  },
+  {
+   "date": "1993-06-09",
+   "scope": "mundo",
+   "importance": 1,
+   "text": "Se estrena la película \"Parque Jurásico\"",
+   "positive": true
+  },
+  {
+   "date": "1993-09-13",
+   "scope": "mundo",
+   "importance": 2,
+   "text": "Israel y la OLP firman los Acuerdos de Oslo, un hito en el proceso de paz",
+   "positive": true
+  },
+  {
    "date": "1994-04-27",
    "scope": "mundo",
    "importance": 2,
    "text": "Mandela vota en las primeras elecciones multirraciales de Sudáfrica",
+   "positive": true
+  },
+  {
+   "date": "1994-06-15",
+   "scope": "mundo",
+   "importance": 1,
+   "text": "Se estrena la película \"El Rey León\"",
+   "positive": true
+  },
+  {
+   "date": "1994-07-17",
+   "scope": "mundo",
+   "importance": 3,
+   "text": "Brasil gana el Mundial de fútbol de Estados Unidos, su cuarto título",
+   "positive": true
+  },
+  {
+   "date": "1995-11-19",
+   "scope": "mundo",
+   "importance": 1,
+   "text": "Se estrena la película \"Toy Story\"",
    "positive": true
   },
   {
@@ -318,10 +913,66 @@
    "positive": true
   },
   {
+   "date": "1996-07-19",
+   "scope": "mundo",
+   "importance": 3,
+   "text": "Se inauguran en Atlanta los Juegos Olímpicos de verano de 1996",
+   "positive": true
+  },
+  {
+   "date": "1997-07-04",
+   "scope": "mundo",
+   "importance": 2,
+   "text": "La sonda Mars Pathfinder aterriza en Marte y despliega el pequeño robot Sojourner",
+   "positive": true
+  },
+  {
    "date": "1997-08-31",
    "scope": "mundo",
    "importance": 1,
    "text": "Muere Diana de Gales"
+  },
+  {
+   "date": "1997-11-01",
+   "scope": "mundo",
+   "importance": 1,
+   "text": "Se estrena la película \"Titanic\"",
+   "positive": true
+  },
+  {
+   "date": "1998-05-20",
+   "scope": "españa",
+   "importance": 3,
+   "text": "El Real Madrid gana su séptima Copa de Europa frente a la Juventus",
+   "positive": true
+  },
+  {
+   "date": "1998-07-12",
+   "scope": "mundo",
+   "importance": 3,
+   "text": "Francia gana por primera vez el Mundial de fútbol, jugado en su país",
+   "positive": true
+  },
+  {
+   "date": "1998-10-29",
+   "scope": "mundo",
+   "importance": 1,
+   "text": "El astronauta John Glenn vuelve al espacio con 77 años, el más veterano en lograrlo",
+   "positive": true
+  },
+  {
+   "date": "1999-01-01",
+   "scope": "mundo",
+   "importance": 2,
+   "text": "Nace el euro como moneda común europea (todavía solo en cuentas y pagos electrónicos)",
+   "positive": true
+  },
+  {
+   "date": "1999-08-02",
+   "scope": "mundo",
+   "importance": 1,
+   "text": "Se estrena la película \"El sexto sentido\"",
+   "positive": true
   },
   {
    "date": "2000-01-01",
@@ -331,10 +982,24 @@
    "positive": true
   },
   {
+   "date": "2000-09-15",
+   "scope": "mundo",
+   "importance": 3,
+   "text": "Se inauguran en Sídney los Juegos Olímpicos de verano del año 2000",
+   "positive": true
+  },
+  {
    "date": "2001-09-11",
    "scope": "mundo",
    "importance": 3,
    "text": "Atentados del 11 de septiembre en Estados Unidos"
+  },
+  {
+   "date": "2001-12-10",
+   "scope": "mundo",
+   "importance": 1,
+   "text": "Se estrena la película \"El Señor de los Anillos: La Comunidad del Anillo\"",
+   "positive": true
   },
   {
    "date": "2002-01-01",
@@ -344,10 +1009,45 @@
    "positive": true
   },
   {
+   "date": "2002-06-30",
+   "scope": "mundo",
+   "importance": 3,
+   "text": "Brasil gana su quinto Mundial de fútbol, el de Corea y Japón",
+   "positive": true
+  },
+  {
+   "date": "2003-04-14",
+   "scope": "mundo",
+   "importance": 2,
+   "text": "Se declara completo el Proyecto Genoma Humano, que descifra nuestro ADN",
+   "positive": true
+  },
+  {
+   "date": "2003-05-18",
+   "scope": "mundo",
+   "importance": 1,
+   "text": "Se estrena la película \"Buscando a Nemo\"",
+   "positive": true
+  },
+  {
    "date": "2004-03-11",
    "scope": "españa",
    "importance": 3,
    "text": "Atentados del 11-M en Madrid"
+  },
+  {
+   "date": "2004-08-13",
+   "scope": "mundo",
+   "importance": 3,
+   "text": "Los Juegos Olímpicos vuelven a Atenas, su cuna, en 2004",
+   "positive": true
+  },
+  {
+   "date": "2004-09-03",
+   "scope": "españa",
+   "importance": 1,
+   "text": "Se estrena la película \"Mar adentro\"",
+   "positive": true
   },
   {
    "date": "2004-12-26",
@@ -356,10 +1056,80 @@
    "text": "Tsunami del océano Índico"
   },
   {
+   "date": "2005-06-05",
+   "scope": "españa",
+   "importance": 3,
+   "text": "Rafael Nadal gana Roland Garros en su debut, con 19 años, y empieza su leyenda",
+   "positive": true
+  },
+  {
+   "date": "2005-09-25",
+   "scope": "españa",
+   "importance": 3,
+   "text": "Fernando Alonso se proclama campeón del mundo de Fórmula 1 por primera vez",
+   "positive": true
+  },
+  {
+   "date": "2006-03-16",
+   "scope": "españa",
+   "importance": 1,
+   "text": "Se estrena la película \"Volver\"",
+   "positive": true
+  },
+  {
+   "date": "2006-07-09",
+   "scope": "mundo",
+   "importance": 3,
+   "text": "Italia gana el Mundial de fútbol de Alemania",
+   "positive": true
+  },
+  {
+   "date": "2006-09-03",
+   "scope": "españa",
+   "importance": 3,
+   "text": "España gana el Mundial de baloncesto en Japón, el primero de su historia",
+   "positive": true
+  },
+  {
    "date": "2007-06-29",
    "scope": "mundo",
    "importance": 1,
    "text": "Sale a la venta el primer iPhone",
+   "positive": true
+  },
+  {
+   "date": "2007-07-29",
+   "scope": "españa",
+   "importance": 2,
+   "text": "Alberto Contador gana el Tour de Francia",
+   "positive": true
+  },
+  {
+   "date": "2007-10-30",
+   "scope": "mundo",
+   "importance": 1,
+   "text": "Se publica \"La vegetariana\", de Han Kang (Premio Nobel de Literatura 2024)",
+   "positive": true
+  },
+  {
+   "date": "2008-02-07",
+   "scope": "mundo",
+   "importance": 1,
+   "text": "Se publica \"Los años\", de Annie Ernaux (Premio Nobel de Literatura 2022)",
+   "positive": true
+  },
+  {
+   "date": "2008-06-29",
+   "scope": "españa",
+   "importance": 3,
+   "text": "España gana la Eurocopa de fútbol en Viena, 44 años después de su primer título",
+   "positive": true
+  },
+  {
+   "date": "2008-08-08",
+   "scope": "mundo",
+   "importance": 3,
+   "text": "Se inauguran en Pekín los Juegos Olímpicos de verano de 2008",
    "positive": true
   },
   {
@@ -376,10 +1146,31 @@
    "positive": true
   },
   {
+   "date": "2009-09-20",
+   "scope": "españa",
+   "importance": 3,
+   "text": "España gana su primer Eurobasket, tras vencer a Serbia 85-63",
+   "positive": true
+  },
+  {
+   "date": "2009-12-10",
+   "scope": "mundo",
+   "importance": 1,
+   "text": "Se estrena la película \"Avatar\"",
+   "positive": true
+  },
+  {
    "date": "2010-07-11",
    "scope": "españa",
    "importance": 3,
    "text": "España gana el Mundial de fútbol en Sudáfrica",
+   "positive": true
+  },
+  {
+   "date": "2010-10-13",
+   "scope": "mundo",
+   "importance": 2,
+   "text": "Los 33 mineros atrapados en Chile son rescatados con vida tras 69 días bajo tierra",
    "positive": true
   },
   {
@@ -389,10 +1180,51 @@
    "text": "Terremoto y tsunami en Japón; accidente de Fukushima"
   },
   {
+   "date": "2011-04-29",
+   "scope": "mundo",
+   "importance": 1,
+   "text": "Boda del príncipe Guillermo y Catalina Middleton en la abadía de Westminster",
+   "positive": true
+  },
+  {
    "date": "2011-05-15",
    "scope": "españa",
    "importance": 1,
    "text": "Comienza el movimiento 15-M"
+  },
+  {
+   "date": "2011-07-08",
+   "scope": "mundo",
+   "importance": 2,
+   "text": "Despega el Atlantis en la última misión del programa de transbordadores espaciales"
+  },
+  {
+   "date": "2012-07-01",
+   "scope": "españa",
+   "importance": 3,
+   "text": "España gana la Eurocopa 2012 y se convierte en la primera selección tricampeona de grandes torneos seguidos",
+   "positive": true
+  },
+  {
+   "date": "2012-07-27",
+   "scope": "mundo",
+   "importance": 2,
+   "text": "Se inauguran los Juegos Olímpicos de Londres 2012",
+   "positive": true
+  },
+  {
+   "date": "2012-08-06",
+   "scope": "mundo",
+   "importance": 2,
+   "text": "El robot Curiosity aterriza en Marte",
+   "positive": true
+  },
+  {
+   "date": "2012-10-11",
+   "scope": "españa",
+   "importance": 1,
+   "text": "Se estrena la película \"Lo imposible\"",
+   "positive": true
   },
   {
    "date": "2013-03-13",
@@ -402,10 +1234,45 @@
    "positive": true
   },
   {
+   "date": "2013-11-19",
+   "scope": "mundo",
+   "importance": 1,
+   "text": "Se estrena la película \"Frozen: El reino del hielo\"",
+   "positive": true
+  },
+  {
+   "date": "2014-03-14",
+   "scope": "españa",
+   "importance": 1,
+   "text": "Se estrena la película \"Ocho apellidos vascos\"",
+   "positive": true
+  },
+  {
+   "date": "2014-05-24",
+   "scope": "españa",
+   "importance": 2,
+   "text": "El Real Madrid gana su décima Copa de Europa en la final de Lisboa contra el Atlético de Madrid",
+   "positive": true
+  },
+  {
    "date": "2014-06-19",
    "scope": "españa",
    "importance": 2,
    "text": "Felipe VI es proclamado rey"
+  },
+  {
+   "date": "2014-07-13",
+   "scope": "mundo",
+   "importance": 2,
+   "text": "Alemania gana el Mundial de fútbol de Brasil en la final de Maracaná",
+   "positive": true
+  },
+  {
+   "date": "2014-11-12",
+   "scope": "mundo",
+   "importance": 2,
+   "text": "La sonda Philae aterriza en un cometa por primera vez en la historia",
+   "positive": true
   },
   {
    "date": "2015-12-12",
@@ -421,16 +1288,51 @@
    "text": "El Reino Unido vota abandonar la Unión Europea (Brexit)"
   },
   {
+   "date": "2016-08-05",
+   "scope": "mundo",
+   "importance": 2,
+   "text": "Se inauguran los Juegos Olímpicos de Río de Janeiro 2016",
+   "positive": true
+  },
+  {
    "date": "2016-11-08",
    "scope": "mundo",
    "importance": 1,
    "text": "Donald Trump gana las elecciones de Estados Unidos"
   },
   {
+   "date": "2017-10-20",
+   "scope": "mundo",
+   "importance": 1,
+   "text": "Se estrena la película \"Coco\"",
+   "positive": true
+  },
+  {
    "date": "2018-06-01",
    "scope": "españa",
    "importance": 2,
    "text": "Pedro Sánchez, presidente tras una moción de censura"
+  },
+  {
+   "date": "2018-07-15",
+   "scope": "mundo",
+   "importance": 2,
+   "text": "Francia gana el Mundial de fútbol de Rusia",
+   "positive": true
+  },
+  {
+   "date": "2019-09-15",
+   "scope": "españa",
+   "importance": 2,
+   "text": "España gana el Mundial de baloncesto de China",
+   "positive": true
+  },
+  {
+   "date": "2019-11-24",
+   "scope": "españa",
+   "importance": 2,
+   "text": "España gana la Copa Davis en Madrid, en la Caja Mágica",
+   "positive": true
   },
   {
    "date": "2020-03-11",
@@ -443,6 +1345,27 @@
    "scope": "españa",
    "importance": 3,
    "text": "España declara el estado de alarma por el coronavirus"
+  },
+  {
+   "date": "2021-02-18",
+   "scope": "mundo",
+   "importance": 2,
+   "text": "El robot Perseverance aterriza en Marte para buscar señales de vida antigua",
+   "positive": true
+  },
+  {
+   "date": "2021-03-02",
+   "scope": "mundo",
+   "importance": 1,
+   "text": "Se publica \"Klara y el Sol\", de Kazuo Ishiguro (Premio Nobel de Literatura 2017)",
+   "positive": true
+  },
+  {
+   "date": "2021-07-23",
+   "scope": "mundo",
+   "importance": 2,
+   "text": "Se inauguran los Juegos Olímpicos de Tokio, aplazados un año por la pandemia",
+   "positive": true
   },
   {
    "date": "2021-09-19",
@@ -522,6 +1445,13 @@
    "text": "Ataque de Hamás a Israel y comienzo de la guerra en Gaza"
   },
   {
+   "date": "2024-06-01",
+   "scope": "españa",
+   "importance": 1,
+   "text": "El Real Madrid gana su 15.ª Copa de Europa en Wembley",
+   "positive": true
+  },
+  {
    "date": "2024-07-14",
    "scope": "españa",
    "importance": 3,
@@ -577,6 +1507,20 @@
    "scope": "mundo",
    "importance": 3,
    "text": "León XIV es elegido papa",
+   "positive": true
+  },
+  {
+   "date": "2026-02-06",
+   "scope": "mundo",
+   "importance": 2,
+   "text": "Se inauguran los Juegos Olímpicos de Invierno de Milán-Cortina",
+   "positive": true
+  },
+  {
+   "date": "2026-04-01",
+   "scope": "mundo",
+   "importance": 2,
+   "text": "Despega Artemis II: cuatro astronautas vuelven a viajar alrededor de la Luna por primera vez desde 1972",
    "positive": true
   },
   {
