@@ -2,6 +2,11 @@
 
 Todos los cambios notables en este proyecto serán documentados en este archivo.
 
+## [2.0.1] - 2026-11-05
+
+### Changed
+- Perfil: "Quitar foto" con el mismo aspecto que "Cambiar foto".
+
 ## [2.0.0] - 2026-11-05 (Release candidate)
 
 ### Added
