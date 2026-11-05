@@ -549,6 +549,13 @@
     .birth-line input[type=date] { flex: 1 1 150px; min-width: 0; }
     .hide-age { display: inline-flex; align-items: center; gap: 6px; font-size: 0.95em; cursor: pointer; white-space: nowrap; }
     .hide-age input { width: 20px; height: 20px; margin: 0; }
+    .info-btn { width: 32px; height: 32px; border-radius: 50%; border: 0; background: var(--salvia-claro); color: var(--salvia-hover); display: inline-flex; align-items: center; justify-content: center; padding: 0; cursor: pointer; flex: none; }
+    .info-btn .i { width: 18px; height: 18px; }
+    .priv-hint { background: var(--salvia-claro); border-radius: 10px; padding: 10px 12px; font-size: .85em; color: var(--gris); margin-top: 6px; line-height: 1.35; }
+    /* Modo privado: en lugar de fotos, vídeos y audios se muestra un candado */
+    .priv-lock { display: flex; align-items: center; justify-content: center; gap: 8px; background: #EEF1EA; color: var(--gris); border-radius: 10px; padding: 16px; margin-top: 8px; font-size: .9em; min-height: 56px; }
+    .priv-lock .i { width: 26px; height: 26px; }
+    .rem-media.priv-lock { margin: 0; border-radius: 0; padding: 0; min-height: 100%; }
     .profile-row { display: grid; gap: 8px; margin: 10px 0 16px; }
     .prof-btn { width: 100%; margin-top: 10px; display: flex; align-items: center; justify-content: center; gap: 8px; background: var(--salvia-claro); color: var(--salvia-hover); border: 2px solid var(--salvia); border-radius: 14px; font-size: 1.05em; font-weight: 700; min-height: 48px; }
     .prof-btn:hover { background: #d3e6cb; }
@@ -681,7 +688,8 @@
     .home-hero .hero-text { position: relative; padding: 12px 16px; display: flex; align-items: center; gap: 12px; }
     .home-hero .home-hello { font-size: 1.5em; }
     .home-hero .home-sub { font-size: 1em; }
-    .home-hero .home-hello { color: #2F4A33; margin: 0; }
+    .home-hero .home-hello { color: #3F5F42; margin: 0; font-weight: 700; text-shadow: 0 1px 0 rgba(255,255,255,.8); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .home-hero .hero-text > div:last-child { min-width: 0; background: rgba(255,255,255,.72); border-radius: 14px; padding: 6px 12px; }
     .home-hero .home-sub { color: #3F5F42; margin: 2px 0 0; font-weight: 600; }
 
     /* ===== Inicio (mezcla Cuaderno + Luz) ===== */
@@ -771,6 +779,8 @@
 <symbol id="i-trophy" viewBox="0 0 24 24"><path d="M8 4h8v6a4 4 0 0 1-8 0z"/><path d="M8 6H4v2a3 3 0 0 0 4 3M16 6h4v2a3 3 0 0 1-4 3"/><path d="M12 14v4M8 21h8M9 18h6"/></symbol>
 <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></symbol>
 <symbol id="i-eyeoff" viewBox="0 0 24 24"><path d="M3 3l18 18"/><path d="M10.600 6.100A9.500 9.500 0 0 1 12 5c6 0 10 7 10 7a17 17 0 0 1-3.200 3.900M6.300 6.800C3.600 8.600 2 12 2 12s4 7 10 7c1.600 0 3-.4 4.200-1"/><path d="M9.900 9.900a3 3 0 0 0 4.200 4.200"/></symbol>
+<symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></symbol>
+<symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5"/><circle cx="12" cy="7.800" r=".6"/></symbol>
 <symbol id="i-ring" viewBox="0 0 24 24"><circle cx="12" cy="15" r="5"/><path d="M9 6l3-3 3 3-3 3z"/></symbol>
 <symbol id="i-briefcase" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5h6v2M3 13h18"/></symbol>
 <symbol id="i-tree" viewBox="0 0 24 24"><path d="M12 21v-5"/><path d="M12 3l6 8h-3l4 6H5l4-6H6z"/></symbol>
@@ -896,7 +906,8 @@
       <h3 style="font-size:1em;margin-top:6px;">Datos de nacimiento</h3>
       <div class="profile-row">
         <label for="profBirth" style="font-weight:600">Fecha de nacimiento</label>
-        <div class="birth-line"><input type="date" id="profBirth"><label class="hide-age" for="profHideAge"><input type="checkbox" id="profHideAge"> Ocultar mi edad</label></div>
+        <div class="birth-line"><input type="date" id="profBirth"><label class="hide-age" for="profHideAge"><input type="checkbox" id="profHideAge"> Activar modo privado</label><button type="button" class="info-btn" id="privInfoBtn" aria-label="Qué hace el modo privado" aria-expanded="false"><svg class="i"><use href="#i-info"/></svg></button></div>
+        <div class="priv-hint hidden" id="privHint">No muestra tu edad y, en lugar de fotos, vídeos y audios, enseña un candado (también en el resumen compartido).</div>
         <label for="profPlace" style="font-weight:600">Lugar de nacimiento</label>
         <input type="text" id="profPlace" maxlength="120">
         <button type="button" class="btn-primary" id="profSave">Guardar</button>
@@ -1229,6 +1240,7 @@
       upd();
       return { update: upd, rebase() { base = getState(); upd(); } };
     }
+    const privLock = (extra) => `<div class="priv-lock ${extra || ''}" title="Modo privado activado">${ic('lock')}</div>`;
     let hideAge = false; // si está activo, no se muestra la edad en ninguna parte
     // Edad aproximada cuando la fecha no es exacta (se calcula con el punto medio del periodo)
     function ageOf(start, end, prec) {
@@ -1433,7 +1445,7 @@
       const age = ageOf(m.date_happened, m.date_end, m.date_precision);
       const when = whenLabel(m, true);
       const scenes = ['sea', 'garden', 'dusk'];
-      box.innerHTML = `${vis ? `<div class="rem-media"><img src="${esc(vis.url)}" alt=""></div>` : vid0 ? `<div class="rem-media"><video muted playsinline preload="metadata" src="${esc(vid0.url)}#t=0.1" style="pointer-events:none"></video></div>` : `<div class="scene rem-scene ${scenes[m.id % 3]}"></div>`}
+      box.innerHTML = `${hideAge && (vis || vid0) ? privLock('rem-media') : vis ? `<div class="rem-media"><img src="${esc(vis.url)}" alt=""></div>` : vid0 ? `<div class="rem-media"><video muted playsinline preload="metadata" src="${esc(vid0.url)}#t=0.1" style="pointer-events:none"></video></div>` : `<div class="scene rem-scene ${scenes[m.id % 3]}"></div>`}
         <div class="rem-body"><div class="rem-q">¿Te acuerdas de este día?</div>
         <div class="rem-t">${esc(m.title)}</div>
         <div class="rem-m">${esc(when)}${age ? ' · ' + esc(age) : ''}</div>
@@ -1615,10 +1627,10 @@
               <p>${esc(memory.content)}</p>
               ${memory.place ? `<div class="memory-extra">${ic('pin')} ${esc(memory.place)}</div>` : ''}
               ${people ? `<div class="memory-people">${ic('users')} ${people}</div>` : ''}
-              ${visuals.map(v => `<div class="memory-photo">${v.kind === 'image'
+              ${hideAge ? (visuals.length || audios.length ? privLock() : '') : visuals.map(v => `<div class="memory-photo">${v.kind === 'image'
                 ? `<a href="${v.url}" target="_blank" rel="noopener"><img loading="lazy" src="${v.url}" alt="${esc(memory.title)}"></a>`
                 : `<video controls playsinline preload="none" src="${v.url}"></video>`}</div>`).join('')}
-              ${audios.map(a => `
+              ${hideAge ? '' : audios.map(a => `
                 <div class="memory-audio">
                   <audio controls preload="none" src="${a.url}"></audio>
                 </div>`).join('')}
@@ -2144,7 +2156,7 @@
       (d.people || []).forEach(p => rv('rvPeople').appendChild(personRow(p)));
       const kind = d.kind || 'audio';
       const url = `${API_URL}/media/${d.media_id}`;
-      rv('rvMedia').innerHTML = kind === 'image' ? `<img src="${url}" alt="Tu foto">`
+      rv('rvMedia').innerHTML = hideAge ? privLock() : kind === 'image' ? `<img src="${url}" alt="Tu foto">`
         : kind === 'video' ? `<video controls playsinline src="${url}"></video>`
         : `<audio controls style="width:100%" src="${url}"></audio>`;
       rv('rvMediaLabel').textContent = { image: 'Tu foto', video: 'Tu vídeo', audio: 'Audio original' }[kind];
@@ -2493,6 +2505,7 @@
       b.onclick = () => { const show = inp.type === 'password'; inp.type = show ? 'text' : 'password'; b.innerHTML = ic(show ? 'eyeoff' : 'eye'); b.setAttribute('aria-label', show ? 'Ocultar contraseña' : 'Mostrar contraseña'); };
       wrap.appendChild(b);
     });
+    document.getElementById('privInfoBtn').onclick = () => { const h = document.getElementById('privHint'); const show = h.classList.toggle('hidden') === false; document.getElementById('privInfoBtn').setAttribute('aria-expanded', show); };
     updateAuthBtn();
     setInterval(updateAuthBtn, 600); // por si el navegador autorrellena sin avisar
     document.getElementById('tabLogin').onclick = () => setAuthMode('login');
@@ -2902,9 +2915,9 @@
           html += mems.length ? mems.map(m => {
             const audios = (m.media || []).filter(x => x.kind === 'audio');
             return `<div class="tl-item"><strong>${esc(m.title)}</strong><small>${esc(whenLabel(m))}${ageOf(m.date_happened, m.date_end, m.date_precision) ? ' · ' + esc(ageOf(m.date_happened, m.date_end, m.date_precision)) : ''}${m.place ? ' · ' + esc(m.place) : ''}</small>
-              ${(m.media || []).filter(x => x.kind === 'image').map(a => `<img loading="lazy" src="${a.url}" style="width:100%;max-height:220px;object-fit:contain;border-radius:8px;margin-top:6px;background:#000" alt="">`).join('')}
-              ${(m.media || []).filter(x => x.kind === 'video').map(a => `<video controls playsinline preload="none" src="${a.url}" style="width:100%;max-height:220px;margin-top:6px;border-radius:8px;background:#000"></video>`).join('')}
-              ${audios.map(a => `<audio controls preload="none" src="${a.url}" style="width:100%;margin-top:6px"></audio>`).join('')}
+              ${hideAge ? ((m.media || []).length ? privLock() : '') : (m.media || []).filter(x => x.kind === 'image').map(a => `<img loading="lazy" src="${a.url}" style="width:100%;max-height:220px;object-fit:contain;border-radius:8px;margin-top:6px;background:#000" alt="">`).join('')}
+              ${hideAge ? '' : (m.media || []).filter(x => x.kind === 'video').map(a => `<video controls playsinline preload="none" src="${a.url}" style="width:100%;max-height:220px;margin-top:6px;border-radius:8px;background:#000"></video>`).join('')}
+              ${hideAge ? '' : audios.map(a => `<audio controls preload="none" src="${a.url}" style="width:100%;margin-top:6px"></audio>`).join('')}
               <div class="btns"><button type="button" class="btn-secondary" data-open="${m.id}">Abrir recuerdo</button></div></div>`;
           }).join('') : '<div class="tl-item">No hay recuerdos en estas fechas.</div>';
 

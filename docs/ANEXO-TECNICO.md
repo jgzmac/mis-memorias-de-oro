@@ -1,4 +1,4 @@
-# Anexo técnico - Resumen (versión 1.2.0, Release candidate)
+# Anexo técnico - Resumen (versión 2.0.0, Release candidate)
 
 ## 1. Dónde se guardan los datos
 
@@ -23,7 +23,7 @@ SQLite (fichero único) mediante `better-sqlite3`, modo WAL. Las tablas se crean
 
 | Tabla | Contenido |
 |---|---|
-| `users` | correo, nombre, contraseña cifrada (bcrypt), nacimiento (fecha y lugar), ruta de la foto de perfil, ocultar edad, `terms_accepted_at` |
+| `users` | correo, nombre, contraseña cifrada (bcrypt), nacimiento (fecha y lugar), ruta de la foto de perfil, modo privado (columna hide_age), `terms_accepted_at` |
 | `sessions` | huella (SHA-256) del token de sesión y caducidad (30 días) |
 | `memories` | recuerdos: título, texto, fecha y precisión, lugar, etiquetas, sentimiento, usuario |
 | `memory_people` | personas de cada recuerdo (nombre y relación) |

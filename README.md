@@ -1,6 +1,6 @@
 # Mis Memorias de Oro
 
-Aplicación web (piloto) para guardar los recuerdos de una vida con la voz, el texto, fotos y vídeos, verlos en una línea de vida y obtener un resumen en distintos estilos. Versión **1.2.0 - Release candidate**.
+Aplicación web (piloto) para guardar los recuerdos de una vida con la voz, el texto, fotos y vídeos, verlos en una línea de vida y obtener un resumen en distintos estilos. Versión **2.0.0 - Release candidate**.
 
 ## Qué hace
 

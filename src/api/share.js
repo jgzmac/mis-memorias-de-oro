@@ -70,10 +70,14 @@ function page(req, res) {
   if (!s) return res.status(404).send('<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><body style="font-family:sans-serif;padding:40px;text-align:center"><h2>Este enlace ya no está disponible</h2>');
   const ids = JSON.parse(s.memory_ids);
   let cards = '';
+  const owner = db.prepare('SELECT hide_age FROM users WHERE id = ?').get(s.user_id);
+  const priv = !!(owner && owner.hide_age);
   if (ids.length) {
     const mems = db.prepare(`SELECT id, title, content, date_happened, date_end, date_precision, place FROM memories WHERE user_id = ? AND id IN (${ids.map(() => '?').join(',')}) ORDER BY date_happened`).all(s.user_id, ...ids);
     cards = mems.map(m => {
-      const media = db.prepare('SELECT id, kind, mime FROM media WHERE memory_id = ? ORDER BY id').all(m.id).map(x => {
+      const rows = db.prepare('SELECT id, kind, mime FROM media WHERE memory_id = ? ORDER BY id').all(m.id);
+      // Modo privado del dueño: se enseña un candado en lugar de fotos, vídeos y audios
+      const media = priv ? (rows.length ? '<div class="lock" title="Contenido privado">&#128274;</div>' : '') : rows.map(x => {
         const u = `/c/${s.token}/media/${x.id}`;
         if (x.mime.startsWith('image/')) return `<img src="${u}" alt="" loading="lazy">`;
         if (x.mime.startsWith('video/') && x.kind !== 'audio') return `<video src="${u}" controls preload="metadata" playsinline></video>`;
@@ -83,7 +87,7 @@ function page(req, res) {
     }).join('');
   }
   res.send(`<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>${esc(s.title)}</title>
-<style>body{font-family:Georgia,serif;background:#f4f8fc;color:#0D1846;margin:0}main{max-width:720px;margin:0 auto;padding:24px 16px 60px}h1{font-size:1.6em}.sum{background:#fff;border-radius:14px;padding:18px;line-height:1.7;white-space:pre-wrap}article{background:#fff;border-radius:14px;padding:16px;margin:16px 0}article h3{margin:0 0 4px}.meta{color:#667;font-size:.9em;margin-bottom:8px}img,video{max-width:100%;border-radius:10px;margin-top:8px;display:block}audio{width:100%;margin-top:8px}h2{margin-top:28px}</style></head>
+<style>.lock{background:#EEF1EA;border-radius:10px;padding:16px;text-align:center;font-size:1.6em;margin-top:8px}body{font-family:Georgia,serif;background:#f4f8fc;color:#0D1846;margin:0}main{max-width:720px;margin:0 auto;padding:24px 16px 60px}h1{font-size:1.6em}.sum{background:#fff;border-radius:14px;padding:18px;line-height:1.7;white-space:pre-wrap}article{background:#fff;border-radius:14px;padding:16px;margin:16px 0}article h3{margin:0 0 4px}.meta{color:#667;font-size:.9em;margin-bottom:8px}img,video{max-width:100%;border-radius:10px;margin-top:8px;display:block}audio{width:100%;margin-top:8px}h2{margin-top:28px}</style></head>
 <body><main><h1>${esc(s.title)}</h1><div class="sum">${esc(s.text)}</div>${cards ? `<h2>Sus recuerdos</h2>${cards}` : ''}</main></body></html>`);
 }
 
@@ -94,6 +98,8 @@ function media(req, res) {
   const ids = JSON.parse(s.memory_ids);
   const m = db.prepare('SELECT * FROM media WHERE id = ? AND user_id = ?').get(req.params.id, s.user_id);
   if (!m || !ids.includes(m.memory_id)) return res.status(404).end();
+  const owner = db.prepare('SELECT hide_age FROM users WHERE id = ?').get(s.user_id);
+  if (owner && owner.hide_age) return res.status(404).end(); // modo privado: los archivos no se sirven por el enlace
   res.setHeader('X-Content-Type-Options', 'nosniff');
   res.setHeader('Cache-Control', 'private, max-age=600');
   res.sendFile(absPath(m.file_path), { headers: { 'Content-Type': m.mime } }, (err) => { if (err && !res.headersSent) res.status(404).end(); });

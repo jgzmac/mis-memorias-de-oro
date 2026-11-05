@@ -2,6 +2,14 @@
 
 Todos los cambios notables en este proyecto serán documentados en este archivo.
 
+## [2.0.0] - 2026-11-05 (Release candidate)
+
+### Added
+- Modo privado (sustituye a "Ocultar mi edad"): no muestra la edad y cambia fotos, vídeos y audios por un icono de candado en toda la app y en el resumen compartido (los archivos dejan de servirse por el enlace). Icono "i" con la explicación.
+
+### Changed
+- Saludo "Hola xxx" de Inicio más legible (verde oscuro sobre franja translúcida).
+
 ## [1.2.0] - 2026-11-04 (Release candidate)
 
 ### Added

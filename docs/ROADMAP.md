@@ -100,3 +100,6 @@ Actualizada: 2026-10-30. Orden propuesto (se puede cambiar).
 - Home: los recuerdos con vídeo muestran el primer fotograma.
 - Botón ojo propio para ver la contraseña en registro y cambio de contraseña.
 - 1.2.0: fecha del metadato prioritaria sobre el nombre del archivo; botón de registro habilitado solo con datos válidos; casilla de condiciones corregida; documentación y anexo técnico.
+
+## 2.0.0 (Release candidate)
+- Modo privado (candado en lugar de material audiovisual, también en el resumen compartido); saludo de Inicio más legible.
