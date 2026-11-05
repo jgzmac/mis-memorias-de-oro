@@ -2,6 +2,11 @@
 
 Todos los cambios notables en este proyecto serán documentados en este archivo.
 
+## [2.0.2] - 2026-11-05
+
+### Changed
+- Perfil: "Cambiar foto" y "Quitar foto" vuelven a un tamaño pequeño y con el mismo aspecto.
+
 ## [2.0.1] - 2026-11-05
 
 ### Changed

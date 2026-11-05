@@ -520,10 +520,9 @@
     .avatar.sm { width: 44px; height: 44px; font-size: 1.1em; border-width: 2px; }
     .avatar-row { display: flex; align-items: center; gap: 14px; margin: 8px 0 14px; flex-wrap: wrap; }
     .avatar-actions { display: flex; gap: 8px; flex-wrap: wrap; }
-    /* "Cambiar foto" y "Quitar foto" con el mismo aspecto */
-    .avatar-actions label.btn-file, .avatar-actions button { flex: 0 0 auto; display: inline-flex; align-items: center; justify-content: center; gap: 8px; margin: 0; min-height: 44px; padding: 10px 16px; border: 0; border-radius: 12px; background: var(--salvia-claro); color: var(--salvia-hover); font-size: .95em; font-weight: 700; line-height: 1; cursor: pointer; transition: background .2s; }
-    .avatar-actions label.btn-file:hover, .avatar-actions button:hover { background: #D3E4CB; }
-    .avatar-actions .i { width: 20px; height: 20px; }
+    /* "Quitar foto" con el mismo aspecto, pequeño, que "Cambiar foto" */
+    .avatar-actions label.btn-file, .avatar-actions button { flex: 0 0 auto; display: inline-flex; align-items: center; gap: 6px; margin: 0; min-height: 0; padding: 0; border: 0; border-radius: 0; background: none; color: #333; font-size: .9em; font-weight: 500; line-height: 1.2; cursor: pointer; }
+    .avatar-actions button:hover { background: none; color: var(--salvia-hover); }
     .tip-mic { width: 64px; height: 64px; margin: 0 auto 10px; border-radius: 50%; background: var(--fondo-1); color: var(--salvia-hover); display: flex; align-items: center; justify-content: center; animation: tipPulse 2s ease-in-out infinite; }
     @keyframes tipPulse { 0%,100% { box-shadow: 0 0 0 0 rgba(120,160,120,.45); } 50% { box-shadow: 0 0 0 14px rgba(120,160,120,0); } }
     @media (prefers-reduced-motion: reduce) { .tip-mic { animation: none; } }
