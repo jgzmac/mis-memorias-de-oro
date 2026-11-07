@@ -62,6 +62,22 @@ section{padding:clamp(64px,10vw,120px) 0}
 .truths h3{font-size:1.35rem;margin-bottom:4px}
 .truths p{color:var(--gris)}
 
+/* ===== Íntimo vs escaparate ===== */
+.intimate{background:var(--bruma)}
+.contrast{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:44px}
+.contrast>div{border-radius:20px;padding:clamp(22px,3.5vw,34px)}
+.contrast h3{font-size:1.6rem;margin-bottom:4px}
+.contrast .tag{font-style:italic;margin-bottom:20px}
+.contrast ul{list-style:none;display:grid;gap:12px}
+.contrast li{padding-left:22px;position:relative}
+.contrast li::before{content:"";position:absolute;left:0;top:.7em;width:8px;height:8px;border-radius:50%;background:currentColor;opacity:.55}
+.contrast .them{background:var(--bosque-2);color:#e6efe8}
+.contrast .them .tag{color:#b9cfc0}
+.contrast .us{background:#fff;border:1px solid #dbe6de}
+.contrast .us .tag{color:var(--salvia-f)}
+.intimate-note{margin-top:36px;font-family:var(--serif);font-style:italic;font-size:clamp(1.2rem,2.4vw,1.6rem);color:var(--bosque)}
+@media (max-width:860px){ .contrast{grid-template-columns:1fr} }
+
 /* ===== Propósito ===== */
 .purpose{background:var(--bosque);color:#fff}
 .purpose h2{color:#fff;max-width:20ch}
@@ -214,6 +230,21 @@ footer{background:var(--bosque);color:#8fa89a;padding:0 0 40px;font-size:.88rem}
       <div><h3>Todo está disperso</h3><p>Fotos en el móvil, vídeos en un cajón, historias solo en la memoria de quien las vivió.</p></div>
       <div><h3>Para la familia, es un legado</h3><p>Una historia bien contada es lo que se hereda y se vuelve a leer.</p></div>
     </div>
+  </div>
+</section>
+
+<!-- ===== ÍNTIMO FRENTE A ESCAPARATE ===== -->
+<section class="intimate">
+  <div class="wrap">
+    <h2>Un círculo íntimo, no un escaparate</h2>
+    <p class="lead">Las redes sociales se construyen sobre la exposición: enseñar lo mejor, buscar aprobación y compararse. Mi Círculo del Tiempo parte de lo contrario: guardar lo que de verdad importa, para uno mismo y para quienes uno elige.</p>
+    <div class="contrast">
+      <div class="them"><h3>Redes sociales</h3><p class="tag">Se vive de cara a los demás</p>
+        <ul><li>Muestras lo mejor de ti para gustar</li><li>Likes, seguidores y comparación con los demás</li><li>Lo de hoy tapa lo de ayer</li><li>Tus datos son el producto</li></ul></div>
+      <div class="us"><h3>Mi Círculo del Tiempo</h3><p class="tag">Se vive de cara a uno mismo</p>
+        <ul><li>Guardas lo que importa, aunque no luzca</li><li>Sin likes ni público: solo tu círculo de confianza</li><li>Toda una vida ordenada en el tiempo</li><li>Tus datos son tuyos</li></ul></div>
+    </div>
+    <p class="intimate-note">Las redes enseñan una vida; Mi Círculo la conserva.</p>
   </div>
 </section>
 

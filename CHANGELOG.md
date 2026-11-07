@@ -2,6 +2,16 @@
 
 Todos los cambios notables en este proyecto serán documentados en este archivo.
 
+## [2.1.2] - 2026-11-07 - Doc actualizada
+
+### Added
+- Presentación web y PowerPoint: nueva sección "Un círculo íntimo, no un escaparate", que contrasta el concepto de Mi Círculo del Tiempo con la lógica de exposición de las redes sociales.
+
+## [2.1.1] - 2026-11-07
+
+### Fixed
+- Scripts de arranque (`.command`): se restaura el permiso de ejecución.
+
 ## [2.1.0] - 2026-11-07 - Nuevo nombre
 
 ### Changed
