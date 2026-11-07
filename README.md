@@ -1,6 +1,6 @@
-# Mis Memorias de Oro
+# Mi Círculo del Tiempo
 
-Aplicación web (piloto) para guardar los recuerdos de una vida con la voz, el texto, fotos y vídeos, verlos en una línea de vida y obtener un resumen en distintos estilos. Versión **2.0.0 - Release candidate**.
+Aplicación web (piloto) para guardar los recuerdos de una vida con la voz, el texto, fotos y vídeos, verlos en una línea de vida y obtener un resumen en distintos estilos. Versión **2.1.0 - Nuevo nombre**.
 
 ## Qué hace
 

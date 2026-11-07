@@ -1,4 +1,4 @@
-# Guía de Instalación - Mis Memorias de Oro
+# Guía de Instalación - Mi Círculo del Tiempo
 
 ## Requisitos Previos
 

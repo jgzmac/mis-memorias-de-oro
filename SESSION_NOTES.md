@@ -1,7 +1,7 @@
 # Sesión de Trabajo - 2026-07-30
 
 ## 🎯 Objetivo Completado
-Instalar y configurar **Supabase + PostgreSQL** como base de datos para el proyecto Mis Memorias de Oro.
+Instalar y configurar **Supabase + PostgreSQL** como base de datos para el proyecto Mi Círculo del Tiempo.
 
 ## ✅ Trabajo Realizado
 

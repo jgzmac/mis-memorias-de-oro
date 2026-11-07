@@ -1,13 +1,13 @@
-# CLAUDE.md - Mis Memorias de Oro
+# CLAUDE.md - Mi Círculo del Tiempo
 
 ## Descripción del Proyecto
 
-**Mis Memorias de Oro** es una aplicación funcional en modo piloto que implementa funcionalidades de forma incremental con una interfaz de usuario integrada.
+**Mi Círculo del Tiempo** es una aplicación funcional en modo piloto que implementa funcionalidades de forma incremental con una interfaz de usuario integrada.
 
 ## Estructura del Proyecto
 
 ```
-Mis Memorias de Oro/
+Mi Círculo del Tiempo/
 ├── src/              # Código fuente principal
 │   ├── components/   # Componentes reutilizables (si aplica)
 │   ├── pages/        # Páginas principales (si aplica)

@@ -1,5 +1,5 @@
 -- ============================================
--- MIS MEMORIAS DE ORO - Schema Base
+-- MI CÍRCULO DEL TIEMPO - Schema Base
 -- Ejecuta este script en Supabase > SQL Editor
 -- ============================================
 

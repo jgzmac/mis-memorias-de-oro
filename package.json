@@ -1,6 +1,6 @@
 {
-  "name": "mis-memorias-de-oro",
-  "version": "2.0.2",
+  "name": "mi-circulo-del-tiempo",
+  "version": "2.1.0",
   "description": "Aplicación para gestionar y consultar recuerdos personales con timelines interactivas",
   "main": "src/server.js",
   "scripts": {

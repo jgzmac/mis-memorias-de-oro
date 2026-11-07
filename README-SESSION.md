@@ -1,4 +1,4 @@
-# 🎉 Mis Memorias de Oro - MVP Completado
+# 🎉 Mi Círculo del Tiempo - MVP Completado
 
 **Fecha:** 2026-09-08  
 **Estado:** ✅ Funcional
@@ -38,7 +38,7 @@ npm run dev
 
 ### Estructura del proyecto
 ```
-Mis Memorias de Oro/
+Mi Círculo del Tiempo/
 ├── src/
 │   ├── server.js           # Express app
 │   ├── db.js               # SQLite setup

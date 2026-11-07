@@ -1,5 +1,5 @@
 #!/bin/bash
-# Arranca Mis Memorias de Oro. No necesita permisos de administrador:
+# Arranca Mi Círculo del Tiempo. No necesita permisos de administrador:
 # si el Mac no tiene Node.js, lo descarga dentro de esta carpeta (.node/).
 # Ir siempre a la carpeta del proyecto, se ejecute como se ejecute
 CARPETA="/Users/jgomezz/Claude/Projects/Mis Memorias de Oro"

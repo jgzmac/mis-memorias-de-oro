@@ -1,6 +1,6 @@
 # 🤝 Guía de Contribución
 
-¡Gracias por tu interés en contribuir a **Mis Memorias de Oro**! 💛
+¡Gracias por tu interés en contribuir a **Mi Círculo del Tiempo**! 💛
 
 ## Cómo contribuir
 

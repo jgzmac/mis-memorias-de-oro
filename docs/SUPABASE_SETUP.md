@@ -1,4 +1,4 @@
-# Configuración de Supabase - Mis Memorias de Oro
+# Configuración de Supabase - Mi Círculo del Tiempo
 
 ## Paso 1: Crear Cuenta en Supabase
 
@@ -28,7 +28,7 @@
 
 ## Paso 4: Configurar el Proyecto Local
 
-1. En tu carpeta `Mis Memorias de Oro`, abre el archivo `.env`
+1. En tu carpeta `Mi Círculo del Tiempo`, abre el archivo `.env`
 2. Reemplaza los valores con las credenciales de Supabase:
    ```
    SUPABASE_URL=https://xxxxxxxxxxxxx.supabase.co

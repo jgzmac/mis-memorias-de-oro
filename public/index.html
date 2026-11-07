@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mis Memorias de Oro</title>
+  <title>Mi Círculo del Tiempo</title>
   <style>
     :root {
       /* Paleta "Hogar": verde salvia y crema (nombres antiguos conservados) */
@@ -439,6 +439,8 @@
     .tl-mark { position: absolute; top: 14px; height: 18px; min-width: 18px; border-radius: 9px; border: 2px solid white; box-shadow: 0 0 0 1px rgba(0,0,0,.2); cursor: pointer; }
     .tl-hist { position: absolute; top: 15px; width: 14px; height: 14px; margin-left: -7px; transform: rotate(45deg); background: var(--c-hist); border: 2px solid white; box-shadow: 0 0 0 1px rgba(0,0,0,.2); }
     .tl-sel { position: absolute; top: 28px; bottom: 0; background: rgba(95,138,85,.18); border-left: 2px solid var(--salvia-fuerte); pointer-events: none; min-width: 2px; }
+    .search-status { font-size: 0.9em; color: var(--gris); margin: 8px 4px 12px; line-height: 1.4; }
+    .search-status:empty { display: none; }
     .tl-hint { font-size: 0.82em; color: var(--gris); margin: 8px 2px; }
     .tl-detail { margin-top: 14px; }
     .tl-detail h3 { color: var(--salvia-hover); font-size: 1.05em; margin-bottom: 8px; }
@@ -799,7 +801,7 @@
 </defs></svg>
   <div class="container">
     <header>
-      <h1>Mis Memorias de Oro</h1>
+      <h1>Mi Círculo del Tiempo</h1>
       <p class="subtitle">Guarda tus recuerdos más preciosos</p>
     </header>
 
@@ -958,6 +960,7 @@
         <div class="adv" id="tlAdv"></div>
         <div class="sort-row"><span>Orden:</span><div class="seg-group" data-sort="tlSort"><button type="button" data-v="desc" aria-pressed="true">Recientes</button><button type="button" data-v="asc" aria-pressed="false">Antiguos</button></div><input type="hidden" id="tlSort" value="desc"></div>
       </div>
+      <p class="search-status" id="tlStatus" aria-live="polite"></p>
       <div id="tlBirth" class="tl-birth hidden"></div>
       <div id="tlMsg"></div>
       <div id="tlWrap" class="tl-wrap hidden">
@@ -978,6 +981,7 @@
           <div class="adv" id="memAdv"></div>
           <div class="sort-row"><span>Orden:</span><div class="seg-group" data-sort="memSort"><button type="button" data-v="desc" aria-pressed="true">Recientes</button><button type="button" data-v="asc" aria-pressed="false">Antiguos</button></div><input type="hidden" id="memSort" value="desc"></div>
         </div>
+        <p class="search-status" id="memStatus" aria-live="polite"></p>
         <div class="memories-list" id="memoriesList">
           <div class="empty-state">Aún no hay recuerdos. ¡Cuenta el primero!</div>
         </div>
@@ -1080,7 +1084,7 @@
       <div class="terms-body">
         <p class="hint">Versión piloto. Este texto es un borrador y debe revisarlo un profesional legal antes de abrir la aplicación al público.</p>
         <h3>Condiciones de uso</h3>
-        <p><strong>1. Qué es.</strong> Mis Memorias de Oro es una aplicación para guardar tus recuerdos (texto, voz, fotos y vídeos) y ordenarlos en tu línea de vida. Está en fase piloto: puede cambiar, fallar o dejar de estar disponible.</p>
+        <p><strong>1. Qué es.</strong> Mi Círculo del Tiempo es una aplicación para guardar tus recuerdos (texto, voz, fotos y vídeos) y ordenarlos en tu línea de vida. Está en fase piloto: puede cambiar, fallar o dejar de estar disponible.</p>
         <p><strong>2. Tu cuenta.</strong> Eres responsable de guardar tu contraseña y de lo que se haga con tu cuenta. Debes ser mayor de edad.</p>
         <p><strong>3. Tus contenidos.</strong> Los recuerdos, fotos, audios y vídeos son tuyos. Sube solo contenido que puedas compartir. Si aparecen otras personas, respeta su intimidad y no subas material ilegal, ofensivo o que vulnere derechos de terceros.</p>
         <p><strong>4. Copias de seguridad.</strong> Al ser una versión piloto, no se garantiza que los datos se conserven. Guarda copia de lo que no quieras perder.</p>
@@ -1546,6 +1550,25 @@
     }
     window.filterSort = filterSort;
 
+    // Frase que explica qué se está mostrando según búsqueda, filtros y orden
+    function describeView(what, total, shown, query, f, dir, scope) {
+      const parts = [];
+      const q = (query || '').trim();
+      if (q) parts.push(`que contienen «${q}»`);
+      f = f || {};
+      if (f.year) parts.push(`del año ${f.year}`);
+      if (f.type) parts.push(`con la etiqueta «${f.type}»`);
+      if (f.place) parts.push(`en ${f.place}`);
+      if (f.person) parts.push(`con ${f.person}`);
+      const order = dir === 'asc' ? 'del más antiguo al más reciente' : 'del más reciente al más antiguo';
+      const base = scope ? `${scope}: ` : '';
+      if (!parts.length) return `${base}Mostrando todos tus ${what} (${shown}), ${order}.`;
+      if (!shown) return `${base}No hay ${what} ${parts.join(', ')}.`;
+      return `${base}Mostrando ${shown} de ${total} ${what} ${parts.join(', ')}, ${order}.`;
+    }
+    window.describeView = describeView;
+
+
     // Filtros avanzados (año, tipo, lugar, persona): las opciones salen de los propios recuerdos
     function setupFilters(boxId, onChange) {
       const box = document.getElementById(boxId);
@@ -1599,12 +1622,14 @@
       renderHome();
       if (memories.length === 0) {
         memoriesList.innerHTML = '<div class="empty-state">Aún no hay recuerdos. ¡Cuenta el primero!</div>';
+        document.getElementById('memStatus').textContent = '';
         return;
       }
       if (!memFilters) memFilters = setupFilters('memAdv', () => renderMemories());
       else if (memFilters.sig !== memSig()) { memFilters.refresh(); }
       memFilters.sig = memSig();
       const shown = filterSort(memories, memSearch.value, memSort.value, memFilters.get());
+      document.getElementById('memStatus').textContent = describeView('recuerdos', memories.length, shown.length, memSearch.value, memFilters.get(), memSort.value);
       if (shown.length === 0) {
         memoriesList.innerHTML = '<div class="empty-state">No he encontrado ningún recuerdo con esa búsqueda.</div>';
         return;
@@ -2619,9 +2644,9 @@
               const c = document.createElement('canvas'); c.width = c.height = S;
               const x = c.getContext('2d'); x.fillStyle = '#fff'; x.fillRect(0, 0, S, S); x.drawImage(img, 0, 0, S, S);
               c.toBlob(async (blob) => {
-                const file = new File([blob], 'qr-mis-memorias.png', { type: 'image/png' });
+                const file = new File([blob], 'qr-mi-circulo-del-tiempo.png', { type: 'image/png' });
                 try {
-                  if (navigator.canShare && navigator.canShare({ files: [file] })) { await navigator.share({ files: [file], title: 'Mis memorias de oro' }); return; }
+                  if (navigator.canShare && navigator.canShare({ files: [file] })) { await navigator.share({ files: [file], title: 'Mi Círculo del Tiempo' }); return; }
                 } catch (e) { return; }
                 const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = file.name; a.click();
                 setTimeout(() => URL.revokeObjectURL(a.href), 2000);
@@ -2631,7 +2656,7 @@
             img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(xml);
           };
           $('shareUrl').onclick = () => $('shareUrl').select();
-          $('shareSend').onclick = async () => { try { if (navigator.share) await navigator.share({ title: 'Mis memorias de oro', url }); else { await navigator.clipboard.writeText(url); $('shareSend').textContent = 'Enlace copiado'; } } catch (e) { /* cancelado */ } };
+          $('shareSend').onclick = async () => { try { if (navigator.share) await navigator.share({ title: 'Mi Círculo del Tiempo', url }); else { await navigator.clipboard.writeText(url); $('shareSend').textContent = 'Enlace copiado'; } } catch (e) { /* cancelado */ } };
           $('shareCopy').onclick = async () => { try { await navigator.clipboard.writeText(url); $('shareCopy').textContent = 'Copiado'; } catch (e) { $('shareUrl').select(); } };
           $('shareOff').onclick = async () => { await fetch(`${API_URL}/share/${r.data.token}`, { method: 'DELETE' }); $('sumShareOut').innerHTML = '<div class="success">Enlace desactivado. Ya nadie puede verlo.</div>'; };
         } catch (e) { $('sumShareOut').innerHTML = '<div class="error">No se pudo crear el enlace.</div>'; }
@@ -2895,7 +2920,28 @@
         </div>`;
       }
 
+      function updateStatus() {
+        let scope = '';
+        if (sel) {
+          const st = sel.stageId ? stages.find(x => x.id == sel.stageId) : null;
+          const same = iso(sel.from) === iso(sel.to);
+          const when = same ? fmt(iso(sel.from)) : `${fmt(iso(sel.from))} – ${fmt(iso(sel.to))}`;
+          scope = st ? `Etapa «${st.title || KINDS[st.kind].label}${st.place ? ' · ' + st.place : ''}» (${when})` : `Periodo seleccionado (${when})`;
+        } else scope = 'Toda tu línea de vida';
+        const f = tlFilters ? tlFilters.get() : {};
+        let pool = memories, vis = visibleMems();
+        if (sel) {
+          const ms1 = sel.to + DAY - 1;
+          const inRange = (m) => m.date_happened && ms(m.date_happened) <= ms1 && ms(m.date_end || m.date_happened) >= sel.from;
+          pool = memories.filter(inRange); vis = vis.filter(inRange);
+        }
+        const total = pool.length, shown = vis.length;
+        $('tlStatus').textContent = describeView('recuerdos', total, shown, $('tlSearch').value, f, $('tlSort').value, scope)
+          + (sel ? '' : ' Toca un punto de la línea para ver una etapa o un periodo.');
+      }
+
       function drawDetail() {
+        updateStatus();
         const d = $('tlDetail');
         let html = '';
 

@@ -1,4 +1,4 @@
-# Hoja de ruta - Mis Memorias de Oro
+# Hoja de ruta - Mi Círculo del Tiempo
 
 Actualizada: 2026-10-30. Orden propuesto (se puede cambiar).
 
@@ -15,7 +15,7 @@ Actualizada: 2026-10-30. Orden propuesto (se puede cambiar).
 
 - Resumen de vida (B2): sección "Resumen" en el menú; 4 estilos positivos (literario, alegre, nostálgico-cálido, entusiasta); de toda la vida, un año o una persona; copiar y descargar. Redacción local con plantillas (gratis); proveedor intercambiable en `src/providers/summary.js`.
 - Filtros avanzados (año, tipo, lugar, persona) en Recuerdos y Línea de vida.
-- Presentación web para Dirección/patrocinadores: `docs/presentacion.html` (autocontenida, con demo de voz, línea de vida y resúmenes interactivos). También existe `docs/Mis-Memorias-de-Oro-presentacion.pptx`.
+- Presentación web para Dirección/patrocinadores: `docs/presentacion.html` (autocontenida, con demo de voz, línea de vida y resúmenes interactivos). También existe `docs/Mi-Circulo-del-Tiempo-presentacion.pptx`.
 - Onboarding (A0): hecho. 3 pantallas de presentación y "Empecemos con un recuerdo"; se puede saltar y volver a verlo desde Perfil. La fecha y el lugar de nacimiento se piden al crear la cuenta.
 - Compartir el resumen como web con enlace secreto (texto y fotos), desactivable. Estilos de resumen: literario, alegre, cálido, entusiasta y ejecutivo, con redacción narrativa.
 - Cámara directa (foto y vídeo), fecha futura bloqueada, lugares que se completan ("Madrid" pasa a "Madrid, España"), aviso de perfil incompleto en Inicio y en Perfil.
@@ -35,7 +35,7 @@ Actualizada: 2026-10-30. Orden propuesto (se puede cambiar).
 
 ## Tareas registradas (2026-10-30)
 - **Probar en el móvil** (pendiente del usuario): cámara y vídeo directos, menú e iconos, fecha futura y límite de 120 años, buscador y recuerdo del día en Inicio, lugares que se completan, alta con fecha de nacimiento, aviso de perfil, Compartir con fotos y vídeos. Todo se ha probado con simulación del navegador, no en pantalla real.
-- **Actualizar el PowerPoint y la web de presentación** (`docs/Mis-Memorias-de-Oro-presentacion.pptx` y `docs/presentacion.html`) cuando empecemos a tener versiones finales: nombre definitivo, look&feel, Compartir web, estilos de resumen (Cálido, Ejecutivo) y cámara directa. Ahora mismo muestran el estilo "Nostálgico-cálido" y el diseño anterior.
+- **Actualizar el PowerPoint y la web de presentación** (`docs/Mi-Circulo-del-Tiempo-presentacion.pptx` y `docs/presentacion.html`) cuando empecemos a tener versiones finales: nombre definitivo, look&feel, Compartir web, estilos de resumen (Cálido, Ejecutivo) y cámara directa. Ahora mismo muestran el estilo "Nostálgico-cálido" y el diseño anterior.
 - **Decidir el nombre de la app.** El look&feel ya es "Hogar" (elegido sobre la maqueta C); queda aplicarlo a las demás pantallas si el usuario lo pide.
 - **Quitar el token de GitHub del remoto** y revocar los antiguos.
 - **Publicar la app en internet** para que los enlaces de Compartir los abra otra persona.

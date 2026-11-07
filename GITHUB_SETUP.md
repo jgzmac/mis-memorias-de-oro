@@ -1,6 +1,6 @@
 # 📌 Instrucciones para Publicar en GitHub
 
-Este documento contiene las instrucciones para publicar **Mis Memorias de Oro** en GitHub.
+Este documento contiene las instrucciones para publicar **Mi Círculo del Tiempo** en GitHub.
 
 ## 1️⃣ Preparación
 
@@ -137,7 +137,7 @@ npm run dev
 
 ---
 
-**¡Gracias por usar Mis Memorias de Oro! 💛**
+**¡Gracias por usar Mi Círculo del Tiempo! 💛**
 ```
 
 ## 8️⃣ Proteger Branch Main

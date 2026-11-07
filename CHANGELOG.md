@@ -2,6 +2,12 @@
 
 Todos los cambios notables en este proyecto serán documentados en este archivo.
 
+## [2.1.0] - 2026-11-07 - Nuevo nombre
+
+### Changed
+- La aplicación pasa a llamarse **Mi Círculo del Tiempo** (app, presentación web, PowerPoint y documentación).
+- Debajo de cada buscador (Recuerdos y Línea de vida) aparece una frase que explica qué se está mostrando: búsqueda, filtros, orden y, en la línea de vida, la etapa o periodo seleccionado.
+
 ## [2.0.2] - 2026-11-05
 
 ### Changed

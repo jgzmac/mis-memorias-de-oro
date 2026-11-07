@@ -1,6 +1,6 @@
 > **Nota (1.2.0):** este documento recoge el diseño inicial y está desactualizado (el frontend es JavaScript sin framework y las tablas son más). La referencia vigente es [ANEXO-TECNICO.md](ANEXO-TECNICO.md).
 
-# Arquitectura - Mis Memorias de Oro
+# Arquitectura - Mi Círculo del Tiempo
 
 ## Descripción General
 

@@ -1,6 +1,6 @@
 ╔══════════════════════════════════════════════════════════════════════════════╗
 ║                                                                              ║
-║              ✨ MIS MEMORIAS DE ORO - PROYECTO COMPLETADO ✨                 ║
+║              ✨ MI CÍRCULO DEL TIEMPO - PROYECTO COMPLETADO ✨                 ║
 ║                                                                              ║
 ║                     📦 VERSIÓN LISTA PARA GITHUB 🚀                          ║
 ║                                                                              ║
