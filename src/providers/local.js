@@ -1,3 +1,4 @@
+// © 2026 Jorge Gómez Zardaín. Todos los derechos reservados. Software propietario; ver LICENSE.
 /**
  * local.js - Proveedor gratuito que funciona en el propio ordenador.
  * Voz a texto con Whisper (se descarga una sola vez); extracción con reglas.

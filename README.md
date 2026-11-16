@@ -33,4 +33,4 @@ Los datos se guardan en `data/` (base de datos SQLite, archivos y modelos de IA)
 
 ## Licencia
 
-MIT. Ver `LICENSE`.
+© 2026 Jorge Gómez Zardaín. Todos los derechos reservados. Software propietario: ver `LICENSE`, `NOTICE` (componentes de terceros) y [Propiedad intelectual](docs/PROPIEDAD-INTELECTUAL.md).

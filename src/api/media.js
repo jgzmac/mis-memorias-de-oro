@@ -1,3 +1,4 @@
+// © 2026 Jorge Gómez Zardaín. Todos los derechos reservados. Software propietario; ver LICENSE.
 /**
  * api/media.js - Archivos audiovisuales: guardado, enlace de acceso y borrado.
  * Los archivos viven en data/uploads/<usuario>/ y solo los puede abrir su dueño.

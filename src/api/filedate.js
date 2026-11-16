@@ -1,3 +1,4 @@
+// © 2026 Jorge Gómez Zardaín. Todos los derechos reservados. Software propietario; ver LICENSE.
 /**
  * api/filedate.js - Fecha de un recuerdo a partir de su archivo.
  *

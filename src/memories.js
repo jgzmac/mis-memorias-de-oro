@@ -1,3 +1,4 @@
+// © 2026 Jorge Gómez Zardaín. Todos los derechos reservados. Software propietario; ver LICENSE.
 /**
  * memories.js - Módulo de gestión de memorias usando Supabase
  */

@@ -1,3 +1,4 @@
+// © 2026 Jorge Gómez Zardaín. Todos los derechos reservados. Software propietario; ver LICENSE.
 /**
  * vision.js - Reconoce qué hay en una imagen, gratis y en el propio ordenador.
  * Usa CLIP (se descarga una sola vez a data/models y luego funciona sin internet):

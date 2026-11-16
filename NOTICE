@@ -1,0 +1,43 @@
+Mi Círculo del Tiempo
+Copyright (c) 2026 Jorge Gómez Zardaín. Todos los derechos reservados.
+
+Este producto utiliza componentes de terceros, que conservan sus propias
+licencias y a cuyos autores pertenecen sus derechos. Resumen (verificado con
+las versiones instaladas el 2026-11-16; revisar al actualizar dependencias):
+
+DEPENDENCIAS (npm)
+- @huggingface/transformers 4.3.2 ........ Apache-2.0
+- @supabase/supabase-js 2.111.0 .......... MIT
+- bcryptjs 2.4.3 ......................... MIT
+- better-sqlite3 13.0.3 .................. MIT
+- body-parser 1.20.x ..................... MIT
+- cors 2.8.x ............................. MIT
+- dotenv 16.6.1 .......................... BSD-2-Clause
+- exifr 7.1.3 ............................ MIT
+- express 4.22.x ......................... MIT
+- multer 2.5.0 ........................... MIT
+(Sus dependencias transitivas se rigen por sus licencias respectivas; se
+pueden listar con `npx license-checker --summary`.)
+
+CÓDIGO INCLUIDO EN public/
+- qrcode.js: QR Code Generator for JavaScript, Copyright (c) 2009 Kazuhiko Arase,
+  licencia MIT (http://www.opensource.org/licenses/mit-license.php).
+
+TIPOGRAFÍA
+- Nunito (public/fonts/): licencia SIL Open Font License 1.1; ver
+  public/fonts/LICENSE-Nunito.txt.
+
+MODELOS DE IA (se descargan y ejecutan en local; no se redistribuyen en el repositorio)
+- Xenova/whisper-small (conversión a ONNX del modelo Whisper de OpenAI):
+  licencia MIT (Whisper) / Apache-2.0 (conversión). Verificar en la ficha del modelo.
+- Xenova/clip-vit-base-patch32 (conversión a ONNX del modelo CLIP de OpenAI):
+  licencia MIT. Verificar en la ficha del modelo.
+
+DATOS
+- src/data/history.json y src/data/places.json: recopilación propia de hechos
+  históricos y lugares, redactada para esta aplicación. Los hechos puntuales
+  (fechas, nombres) son información factual; la selección, redacción y
+  estructura son obra del titular.
+
+Las marcas y nombres de terceros citados (OpenAI, Hugging Face, Supabase,
+StoryWorth, Remento, etc.) pertenecen a sus respectivos propietarios.

@@ -1,3 +1,4 @@
+// © 2026 Jorge Gómez Zardaín. Todos los derechos reservados. Software propietario; ver LICENSE.
 /**
  * providers/index.js - Elige el motor de IA según la variable AI_PROVIDER.
  * Cada proveedor ofrece: transcribe(float32Audio), extract(texto), warmUp(), getStatus().

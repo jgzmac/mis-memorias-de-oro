@@ -1,3 +1,4 @@
+// © 2026 Jorge Gómez Zardaín. Todos los derechos reservados. Software propietario; ver LICENSE.
 /**
  * api/life.js - Datos para la línea de vida: perfil (nacimiento), etapas y hechos históricos.
  * Todo es privado por usuario salvo los hechos históricos, que son un fichero común.

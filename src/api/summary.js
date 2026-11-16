@@ -1,3 +1,4 @@
+// © 2026 Jorge Gómez Zardaín. Todos los derechos reservados. Software propietario; ver LICENSE.
 /**
  * api/summary.js - Resumen de vida: de toda la vida, de un año o de una persona.
  */

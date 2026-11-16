@@ -2,6 +2,16 @@
 
 Todos los cambios notables en este proyecto serán documentados en este archivo.
 
+## [2.1.3] - 2026-11-16 - Propiedad intelectual
+
+### Changed
+- Licencia: de MIT (titular erróneo) a software propietario, todos los derechos reservados a Jorge Gómez Zardaín.
+- Avisos de copyright en cabeceras del código, app (Perfil), presentación web, package.json (`UNLICENSED`, privado) y README.
+
+### Added
+- `NOTICE` con licencias de componentes de terceros (dependencias, qrcode.js, Nunito, modelos Whisper/CLIP).
+- `docs/PROPIEDAD-INTELECTUAL.md`: guía de medidas y de registro.
+
 ## [2.1.2] - 2026-11-07 - Doc actualizada
 
 ### Added

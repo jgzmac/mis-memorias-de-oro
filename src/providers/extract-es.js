@@ -1,3 +1,4 @@
+// © 2026 Jorge Gómez Zardaín. Todos los derechos reservados. Software propietario; ver LICENSE.
 /**
  * extract-es.js - Extracción de datos de un recuerdo a partir de su texto (español).
  * Reglas sencillas y sin coste: fecha/periodo, personas y relación, lugar, tipo y ánimo.

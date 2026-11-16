@@ -1,3 +1,4 @@
+// © 2026 Jorge Gómez Zardaín. Todos los derechos reservados. Software propietario; ver LICENSE.
 /**
  * api/visual.js - Analiza fotos y vídeos: guarda el archivo, lee sus metadatos
  * (fecha, lugar GPS, cámara), reconoce qué aparece y, en vídeos, transcribe lo que se dice.

@@ -1,3 +1,4 @@
+// © 2026 Jorge Gómez Zardaín. Todos los derechos reservados. Software propietario; ver LICENSE.
 /**
  * providers/summary.js - Redacta el resumen de vida con plantillas locales (gratis, sin red).
  * Es narrativo: enlaza los años con transiciones, usa la edad, las personas con su relación,

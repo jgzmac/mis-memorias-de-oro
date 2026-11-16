@@ -1,3 +1,4 @@
+// © 2026 Jorge Gómez Zardaín. Todos los derechos reservados. Software propietario; ver LICENSE.
 /**
  * places.js - De coordenadas GPS a una ciudad cercana, sin internet.
  * Lista pequeña de ciudades habituales; si no hay ninguna a menos de 60 km se devuelve vacío.

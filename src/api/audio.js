@@ -1,3 +1,4 @@
+// © 2026 Jorge Gómez Zardaín. Todos los derechos reservados. Software propietario; ver LICENSE.
 /**
  * api/audio.js - Analiza un audio: lo guarda, lo transcribe y propone los datos del recuerdo.
  * El análisis puede tardar, así que se hace en segundo plano y el cliente consulta el estado.

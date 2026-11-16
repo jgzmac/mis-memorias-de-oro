@@ -1,21 +1,35 @@
-MIT License
+Copyright (c) 2026 Jorge Gómez Zardaín. Todos los derechos reservados.
+Copyright (c) 2026 Jorge Gómez Zardaín. All rights reserved.
 
-Copyright (c) 2026 Javier Gómez
+"Mi Círculo del Tiempo" (código fuente, diseño, textos, base de datos de hechos
+históricos curada, documentación, presentaciones y demás materiales de este
+repositorio) es obra original de Jorge Gómez Zardaín, desarrollada a título
+personal.
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+Este software es PROPIETARIO. No se concede ninguna licencia, expresa ni
+implícita, salvo autorización previa y por escrito del titular. Sin dicha
+autorización queda prohibido copiar, modificar, fusionar, publicar,
+distribuir, sublicenciar, vender, alojar como servicio, descompilar o crear
+obras derivadas del software o de cualquiera de sus partes, así como usarlo
+con fines comerciales.
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+Se permite únicamente su visualización y evaluación privada y no comercial por
+las personas a las que el titular haya dado acceso expreso.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+Los componentes de terceros incluidos o utilizados (bibliotecas, modelos de IA,
+tipografías) se rigen por sus propias licencias; véase el fichero NOTICE.
+Nada en esta licencia modifica los derechos del titular de dichos componentes.
+
+EL SOFTWARE SE ENTREGA "TAL CUAL", SIN GARANTÍA DE NINGÚN TIPO. EN NINGÚN CASO
+EL TITULAR SERÁ RESPONSABLE DE RECLAMACIONES O DAÑOS DERIVADOS DE SU USO.
+
+Para solicitar una licencia de uso: contactar con Jorge Gómez Zardaín.
+
+---
+
+This software is PROPRIETARY. All rights reserved by Jorge Gómez Zardaín. No
+license is granted except with prior written permission from the copyright
+holder. Copying, modification, distribution, sublicensing, hosting as a
+service, reverse engineering and commercial use are prohibited. Third-party
+components remain under their own licenses (see NOTICE). The software is
+provided "AS IS", without warranty of any kind.

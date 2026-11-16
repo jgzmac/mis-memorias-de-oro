@@ -1,3 +1,4 @@
+// © 2026 Jorge Gómez Zardaín. Todos los derechos reservados. Software propietario; ver LICENSE.
 /**
  * api/circle.js - "Círculo de personas": familia y amistades del usuario.
  * Nombre, parentesco y fecha de nacimiento son opcionales (basta con uno de los dos primeros).

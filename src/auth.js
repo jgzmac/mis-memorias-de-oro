@@ -1,3 +1,4 @@
+// © 2026 Jorge Gómez Zardaín. Todos los derechos reservados. Software propietario; ver LICENSE.
 /**
  * auth.js - Cuentas de usuario: registro, entrada, salida y protección de rutas.
  * Sesiones con cookie HttpOnly; en la BD solo se guarda el hash del token.

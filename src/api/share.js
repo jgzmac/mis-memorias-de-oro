@@ -1,3 +1,4 @@
+// © 2026 Jorge Gómez Zardaín. Todos los derechos reservados. Software propietario; ver LICENSE.
 /**
  * api/share.js - Compartir el resumen como una web con enlace secreto.
  * Cualquiera con el enlace puede verla; el dueño puede desactivarlo cuando quiera.
